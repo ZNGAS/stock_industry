@@ -1,5 +1,5 @@
 'use strict';
-/* 自選股盤後 — 前端。資料全部由本機 server.js 提供(官方 OpenAPI + FinMind + Google News)。 */
+/* 台股產業分析 — 前端。資料全部由本機 server.js 提供(官方 OpenAPI + FinMind + Google News)。 */
 
 /* ───────── 小工具 ───────── */
 const $ = (s, el = document) => el.querySelector(s);
@@ -65,8 +65,34 @@ function api(url, { fresh = false } = {}) {
 /* ───────── 狀態 ───────── */
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ignore */ } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ignore */ } syncPrefs(); },
 };
+// 自選股清單與偏好同時存在本機檔案(由伺服器保管),換瀏覽器、換網址或用桌面版都讀得到
+const PREF_KEYS = [['watch', 'tw.watch.v1'], ['hm', 'tw.hm'], ['sc', 'tw.sc']];
+let syncTimer;
+function syncPrefs() {
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => {
+    const body = {};
+    for (const [k, lk] of PREF_KEYS) { try { const v = localStorage.getItem(lk); if (v) body[k] = JSON.parse(v); } catch { /* ignore */ } }
+    try { const t = localStorage.getItem('tw.theme'); if (t) body.theme = t; } catch { /* ignore */ }
+    fetch('/api/prefs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).catch(() => {});
+  }, 400);
+}
+async function loadPrefs() {
+  let srv;
+  try { srv = await fetch('/api/prefs').then((r) => r.json()); } catch { return; }
+  let push = false;
+  for (const [k, lk] of PREF_KEYS) {
+    if (srv[k] !== undefined) { try { localStorage.setItem(lk, JSON.stringify(srv[k])); } catch { /* ignore */ } }
+    else if (localStorage.getItem(lk)) push = true;
+  }
+  if (srv.theme) { try { localStorage.setItem('tw.theme', srv.theme); } catch { /* ignore */ } document.documentElement.dataset.theme = srv.theme; }
+  else if (localStorage.getItem('tw.theme')) push = true;
+  S.watch = store.get('tw.watch.v1', []);
+  S.hm = undefined; S.sc = undefined;
+  if (push) syncPrefs();
+}
 const S = {
   watch: store.get('tw.watch.v1', []),
   rows: new Map(),
@@ -115,6 +141,12 @@ function showTip(html, x, y) {
   t.style.left = `${Math.max(8, left)}px`; t.style.top = `${top}px`;
 }
 const hideTip = () => { tipEl().hidden = true; };
+// 提示框只在方塊或圖表上才顯示;滑鼠快速移走、換頁、捲動、視窗失焦都要收起來
+document.addEventListener('pointerover', (e) => { if (!(e.target.closest && e.target.closest('.tm-tile, .hit'))) hideTip(); });
+document.addEventListener('pointerleave', hideTip);
+window.addEventListener('scroll', hideTip, { passive: true });
+window.addEventListener('blur', hideTip);
+window.addEventListener('hashchange', hideTip);
 
 /**
  * series: [{type:'bar'|'line'|'area'|'vbar', data, color:str|fn, axis:'l'|'r', name, fmt, width, dash, noTip}]
@@ -201,7 +233,8 @@ function mountChart(host, cfg) {
   drawChart(host, cfg);
   if (window.ResizeObserver) {
     let w = host.clientWidth;
-    new ResizeObserver(() => { if (Math.abs(host.clientWidth - w) > 2) { w = host.clientWidth; drawChart(host, cfg); } }).observe(host);
+    const ro = new ResizeObserver(() => { if (!host.isConnected) { ro.disconnect(); return; } if (Math.abs(host.clientWidth - w) > 2) { w = host.clientWidth; drawChart(host, cfg); } });
+    ro.observe(host);
   }
 }
 const legend = (items) => `<div class="legend">${items.map(([c, t, ln]) => `<span><i class="${ln ? 'ln' : ''}" style="background:${c}"></i>${esc(t)}</span>`).join('')}</div>`;
@@ -243,6 +276,7 @@ function parseHash() {
 }
 const indHref = (name) => `#/industry/${encodeURIComponent(name)}`;
 function route() {
+  hideTip();
   S.route = parseHash();
   const pg = S.route.page;
   $('.app').classList.toggle('no-rail', !['watch', 'stock'].includes(pg));
@@ -368,7 +402,7 @@ async function renderDetail(main, code, tab, id) {
         <div class="fact"><span class="k">最高</span><span class="v up">${price(sum.high)}</span></div>
         <div class="fact"><span class="k">最低</span><span class="v down">${price(sum.low)}</span></div>
         <div class="fact"><span class="k">昨收</span><span class="v">${price(sum.prevClose)}</span></div>
-        <div class="fact"><span class="k">成交量</span><span class="v">${fint(sum.volume)} 張</span></div>
+        <div class="fact" ${sum.volumeAll && sum.volumeAll !== sum.volume ? `title="一般整股成交量(與 Yahoo 同口徑)。證交所統計含零股、盤後定價、鉅額,合計 ${fint(sum.volumeAll)} 張"` : ''}><span class="k">成交量</span><span class="v">${fint(sum.volume)} 張</span></div>
         <div class="fact"><span class="k">成交值</span><span class="v">${money(sum.value)}</span></div>
         <div class="fact"><span class="k">本益比</span><span class="v">${fnum(sum.pe, 2)}</span></div>
         <div class="fact"><span class="k">股價淨值比</span><span class="v">${fnum(sum.pb, 2)}</span></div>
@@ -405,7 +439,7 @@ async function tabSummary(code, sum, host, id) {
       <div class="stack">
         <section class="panel"><h3>股價走勢<small>未還原股價</small><span class="seg" id="range-seg"><button data-n="22" aria-pressed="false">1月</button><button data-n="66" aria-pressed="true">3月</button><button data-n="130" aria-pressed="false">6月</button><button data-n="252" aria-pressed="false">1年</button></span></h3>
           <div id="price-chart" style="height:250px">${skeleton(5)}</div>
-          <div class="vol-cap">成交量<small>張(1 張 = 1,000 股)</small></div>
+          <div class="vol-cap">成交量<small>張(證交所口徑,含零股、盤後定價、鉅額)</small></div>
           <div id="vol-chart" style="height:96px"></div>
           <div id="price-extra"></div></section>
         <section class="panel" id="div-panel"><h3>股利</h3>${skeleton(3)}</section>
@@ -695,7 +729,7 @@ async function tabIndustry(code, sum, host, id) {
 }
 
 /* ── 新聞 ── */
-const newsList = (items) => `<ul class="news">${items.map((n) => `<li><a href="${esc(n.link)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a><div class="m">${esc(n.source || '')}${n.time ? ' · ' + esc(ago(n.time)) : ''}</div></li>`).join('')}</ul>`;
+const newsList = (items) => `<ul class="news">${items.map((n) => `<li><a href="${/^https?:\/\//.test(n.link) ? esc(n.link) : '#'}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a><div class="m">${esc(n.source || '')}${n.time ? ' · ' + esc(ago(n.time)) : ''}</div></li>`).join('')}</ul>`;
 async function tabNews(code, sum, host, id) {
   const n = await api(`/api/stock/${code}/news`);
   if (id !== S.renderId) return;
@@ -760,7 +794,8 @@ function mountTree(host, draw) {
   const run = () => { host.innerHTML = ''; draw(Math.max(320, host.clientWidth)); };
   run();
   let w = host.clientWidth;
-  new ResizeObserver(() => { if (Math.abs(host.clientWidth - w) > 3) { w = host.clientWidth; run(); } }).observe(host);
+  const ro = new ResizeObserver(() => { if (!host.isConnected) { ro.disconnect(); return; } if (Math.abs(host.clientWidth - w) > 3) { w = host.clientWidth; run(); } });
+  ro.observe(host);
 }
 /** 單層:一個方塊一個項目 */
 function treemapFlat(host, items, { scale, height, href, tip, extra }) {
@@ -777,13 +812,13 @@ function treemapGrouped(host, stocks, { by, scale, height }) {
   host.style.height = `${height}px`;
   const val = (s) => (by === 'value' ? s.v : by === 'sqrt' ? Math.sqrt(s.m) : s.m);
   const groups = new Map();
-  for (const s of stocks) { const v = val(s); if (!(v > 0)) continue; const g = groups.get(s.i) || { name: s.i, items: [], value: 0, wp: 0, wm: 0 }; g.items.push({ ...s, name: s.n, pct: s.p, value: v }); g.value += v; g.wp += s.m * s.p; g.wm += s.m; groups.set(s.i, g); }
+  for (const s of stocks) { const v = val(s); if (!(v > 0)) continue; const g = groups.get(s.i) || { name: s.i, items: [], value: 0, sp: 0, n: 0 }; g.items.push({ ...s, name: s.n, pct: s.p, value: v }); g.value += v; g.sp += s.p; g.n++; groups.set(s.i, g); }
   const glist = [...groups.values()].sort((a, b) => b.value - a.value);
   mountTree(host, (W) => {
     let html = '';
     const all = [];
     for (const r of squarify(glist, 0, 0, W, height)) {
-      const g = r.item, strip = r.h >= 44 && r.w >= 64 ? 18 : 0, gp = g.wm ? g.wp / g.wm : null;
+      const g = r.item, strip = r.h >= 44 && r.w >= 64 ? 18 : 0, gp = g.n ? g.sp / g.n : null;
       const inner = squarify(g.items.sort((a, b) => b.value - a.value), r.x, r.y + strip, r.w, r.h - strip);
       for (const t of inner) { const idx = all.length; all.push(t.item); html += tileHtml(t.item, t, scale, idx, `#/${t.item.c}`, t.item.x ? `${price(t.item.x)}` : ''); }
       if (strip) html += `<a class="tm-group" href="${indHref(g.name)}" title="查看 ${esc(g.name)} 的全部股票" style="left:${r.x.toFixed(1)}px;top:${r.y.toFixed(1)}px;width:${r.w.toFixed(1)}px;height:${strip}px">${esc(g.name)}<em style="color:${gp >= 0 ? '#ff9aa4' : '#7fe3b5'}">${fpct(gp, 2)}</em></a>`;
@@ -861,18 +896,49 @@ async function renderMarket(main, id) {
         <section class="panel"><h3>三大法人買賣超<small>金額,億元</small></h3><div class="tbl-wrap"><table><thead><tr><th class="l">市場</th><th>外資</th><th>投信</th><th>自營商</th><th>合計</th></tr></thead><tbody>${inst(d.twse.inst && { ...d.twse.inst, label: '上市' })}${inst(d.tpex.inst && { ...d.tpex.inst, label: '上櫃' })}</tbody></table></div></section>
       </div>
     </div>
-    <div class="grid even">
-      <section class="panel"><h3>強勢產業<small>市值加權漲跌</small></h3>${indBars(inds.slice(0, 8), true)}</section>
-      <section class="panel"><h3>弱勢產業<small>市值加權漲跌</small></h3>${indBars(inds.slice(-8).reverse(), false)}</section>
+    <div class="controls" style="margin:16px 0 0">
+      <span class="grp">強弱排行 ${segHtml('rk', [['sub', '產業類股'], ['industry', '產業別'], ['chain', '產業鏈'], ['concept', '概念股'], ['group', '集團股']], S.rankMode || 'sub')}</span>
+      <span class="muted" style="font-size:12.5px" id="rank-hint"></span>
     </div>
+    <div class="grid even" id="rank-grid" style="margin-top:12px"></div>
     <div class="grid even">
       <section class="panel"><h3>漲幅榜<small>成交值 5 千萬以上</small></h3>${rank(d.gainers, 'pct')}</section>
       <section class="panel"><h3>跌幅榜<small>成交值 5 千萬以上</small></h3>${rank(d.losers, 'pct')}</section>
       <section class="panel"><h3>成交值榜<small>個股</small></h3>${rank(d.byValue, 'value')}</section>
       <section class="panel"><h3>成交量榜<small>含 ETF,單位:張</small></h3>${rank(d.byVolume, 'volume')}</section>
     </div>
-    <p class="note">指數、成交值、法人金額取自證交所與櫃買中心;漲跌家數與排行由當日官方收盤行情統計;產業強弱以各產業成分股市值加權計算。</p>`;
+    <p class="note">指數、成交值、法人金額取自證交所與櫃買中心;漲跌家數與排行由當日官方收盤行情統計;產業強弱是各產業成分股今日漲跌幅的簡單平均(每檔權重相同,不受權值股影響)。</p>`;
   main.addEventListener('click', (e) => { const li = e.target.closest('.rank-list li'); if (li) location.hash = `#/${li.dataset.code}`; });
+  // 強弱排行:預設是「產業類股」(被動元件、PCB、面板業這種細分類),電子相關的大產業別以細分類取代
+  const ELEC_BIG = new Set(['半導體業', '電腦及週邊設備業', '光電業', '通信網路業', '電子零組件業', '電子通路業', '其他電子業', '資訊服務業']);
+  const HINT = { sub: 'Yahoo 電子產業細分 + 非電子的產業別', industry: '證交所、櫃買中心官方產業別', chain: '櫃買中心產業鏈', concept: 'Yahoo 概念股', group: 'Yahoo 集團股' };
+  const LABEL = { sub: '產業類股', industry: '產業', chain: '產業鏈', concept: '概念股', group: '集團' };
+  const rankList = async (mode) => {
+    const chainItems = (arr, min) => arr.filter((c) => c.traded >= min && isNum(c.pct)).map((c) => ({ name: c.name, count: c.traded, pct: c.pct, href: `#/chain/${c.ic}` }));
+    const indItems = (arr, skip) => arr.filter((g) => g.traded >= 3 && isNum(g.pct) && !(skip && skip.has(g.name))).map((g) => ({ name: g.name, count: g.traded, pct: g.pct, href: indHref(g.name) }));
+    if (mode === 'industry') return indItems((await api('/api/industries')).industries);
+    if (mode === 'sub') {
+      const [ey, ind] = await Promise.all([api('/api/chains?kind=ey').catch(() => null), api('/api/industries')]);
+      return [...(ey ? chainItems(ey.chains, 4) : []), ...indItems(ind.industries, ey ? ELEC_BIG : null)];
+    }
+    const kind = mode;
+    return chainItems((await api(`/api/chains?kind=${kind}`)).chains, kind === 'group' ? 3 : 4);
+  };
+  const drawRank = async () => {
+    const mode = S.rankMode || 'sub', grid = $('#rank-grid');
+    $('#rank-hint').textContent = HINT[mode];
+    grid.innerHTML = `<section class="panel">${skeleton(5)}</section><section class="panel">${skeleton(5)}</section>`;
+    let list;
+    try { list = await rankList(mode); } catch (e) { grid.innerHTML = `<section class="panel">${errBox('分類資料暫時無法取得:' + e.message)}</section>`; return; }
+    if (id !== S.renderId) return;
+    const sorted = list.sort((a, b) => b.pct - a.pct);
+    const mx = Math.max(1, ...sorted.map((x) => Math.abs(x.pct)));
+    const bars = (arr, up) => `<div class="bars">${arr.map((g) => `<a class="bar-row" href="${g.href}"><span class="nm">${esc(g.name)}<small>${g.count}檔</small></span><span class="track"><i class="fillb" style="left:0;width:${(Math.abs(g.pct) / mx) * 100}%;background:${up ? 'var(--up)' : 'var(--down)'};opacity:.8"></i></span><span class="val ${dir(g.pct)}">${fpct(g.pct)}</span></a>`).join('')}</div>`;
+    grid.innerHTML = `<section class="panel"><h3>強勢${LABEL[mode]}<small>成分股平均漲跌,至少 ${mode === 'group' ? 3 : mode === 'industry' ? 3 : 4} 檔</small></h3>${bars(sorted.slice(0, 10), true)}</section>
+      <section class="panel"><h3>弱勢${LABEL[mode]}<small>成分股平均漲跌</small></h3>${bars(sorted.slice(-10).reverse(), false)}</section>`;
+  };
+  bindSeg(main, (k, v) => { if (k === 'rk') { S.rankMode = v; drawRank(); } });
+  drawRank();
   const lab = tw.map((r) => r.date);
   const common = { labels: lab, xTicks: 6, xFmt: (x, i, full) => (full ? x : x.slice(5).replace('-', '/')) };
   mountChart($('#mk-idx'), { ...common, label: '加權指數', height: 230, noX: true, fmtL: (v) => fint(v),
@@ -929,7 +995,7 @@ async function renderSectors(main, id) {
   const hrefOf = (g) => (chain ? `#/chain/${encodeURIComponent(g.ic)}` : indHref(g.name));
   const inds = all.filter((g) => isNum(g.pct) && g.traded);
   main.innerHTML = `
-    <div class="page-head"><div><h1>產業熱力圖</h1><div class="sub">${inds.length} 個${MODE_NAME[mode]}${{ chain: '(櫃買中心產業鏈:被動元件、連接器、印刷電路板…)', ey: '(Yahoo 電子產業分類:LED、太陽能、PCB、面板業、光學元件…)', concept: '(Yahoo 概念股:AI、蘋果供應鏈、低軌衛星…)', group: '(Yahoo 集團股:鴻海、台塑、國巨…)', industry: '' }[mode]};同一檔股票可以屬於多個分類。顏色是成分股市值加權的今日漲跌,點方塊看旗下所有股票。</div></div><div class="asof">收盤資料 <b>${esc(dateLabel(d.date))}</b></div></div>
+    <div class="page-head"><div><h1>產業熱力圖</h1><div class="sub">${inds.length} 個${MODE_NAME[mode]}${{ chain: '(櫃買中心產業鏈:被動元件、連接器、印刷電路板…)', ey: '(Yahoo 電子產業分類:LED、太陽能、PCB、面板業、光學元件…)', concept: '(Yahoo 概念股:AI、蘋果供應鏈、低軌衛星…)', group: '(Yahoo 集團股:鴻海、台塑、國巨…)', industry: '' }[mode]};同一檔股票可以屬於多個分類。顏色是成分股今日漲跌幅的平均(每檔權重相同),點方塊看旗下所有股票。</div></div><div class="asof">收盤資料 <b>${esc(dateLabel(d.date))}</b></div></div>
     <div class="controls">
       <span class="grp">分類 ${segHtml('mode', [['industry', '產業別'], ['chain', '產業鏈'], ['ey', '電子細分'], ['concept', '概念股'], ['group', '集團股']], mode)}</span>
       <span class="grp">方塊大小 ${segHtml('by', [['mcap', '市值'], ['sqrt', '市值(壓縮)'], ['value', '成交值']], sc.by)}</span>
@@ -944,7 +1010,7 @@ async function renderSectors(main, id) {
     treemapFlat(host, inds.map((g) => ({ ...g, value: sc.by === 'value' ? g.value : sc.by === 'sqrt' ? Math.sqrt(g.mcap) : g.mcap })).filter((g) => g.value > 0), {
       scale: sc.scale, height: hmHeight(), href: hrefOf,
       extra: (g) => `${g.count} 檔`,
-      tip: (g) => `<b>${esc(g.name)}</b><div class="r"><span>市值加權漲跌</span><span class="${dir(g.pct)}">${fpct(g.pct)}</span></div><div class="r"><span>成分股</span><span>${g.count} 檔(漲 ${g.up} / 跌 ${g.down})</span></div><div class="r"><span>市值</span><span>${money(g.mcap)}</span></div><div class="r"><span>成交值</span><span>${money(g.value)}</span></div><div class="r"><span>外資買賣超</span><span class="${dir(g.foreign)}">${fsign(g.foreign)} 張</span></div><div class="r"><span>權值股</span><span>${g.top.map((t) => esc(t.name)).join('、')}</span></div>`,
+      tip: (g) => `<b>${esc(g.name)}</b><div class="r"><span>平均漲跌</span><span class="${dir(g.pct)}">${fpct(g.pct)}</span></div><div class="r"><span>成分股</span><span>${g.count} 檔(漲 ${g.up} / 跌 ${g.down})</span></div><div class="r"><span>市值</span><span>${money(g.mcap)}</span></div><div class="r"><span>成交值</span><span>${money(g.value)}</span></div><div class="r"><span>外資買賣超</span><span class="${dir(g.foreign)}">${fsign(g.foreign)} 張</span></div><div class="r"><span>權值股</span><span>${g.top.map((t) => esc(t.name)).join('、')}</span></div>`,
     });
   };
   drawMap();
@@ -959,7 +1025,7 @@ async function renderSectors(main, id) {
     { k: 'count', label: '家數', get: (g) => g.count, html: (g) => g.count },
     { k: 'mcap', label: '市值', get: (g) => g.mcap, html: (g) => money(g.mcap) },
     { k: 'value', label: '成交值', get: (g) => g.value, html: (g) => money(g.value) },
-    { k: 'pct', label: '加權漲跌', get: (g) => g.pct, html: (g) => pctSpan(g.pct) },
+    { k: 'pct', label: '平均漲跌', get: (g) => g.pct, html: (g) => pctSpan(g.pct) },
     { k: 'ud', label: '漲 / 跌', get: (g) => g.up - g.down, html: (g) => `<span class="up">${g.up}</span> / <span class="down">${g.down}</span>` },
     { k: 'rev', label: '月營收年增', get: (g) => g.revYoy, html: (g) => pctSpan(g.revYoy, 1) },
     { k: 'foreign', label: '外資(張)', get: (g) => g.foreign, html: (g) => span(g.foreign, fsign(g.foreign)) },
@@ -1006,7 +1072,7 @@ async function renderIndustryPage(main, name, id) {
     <div class="crumb"><a href="#/sectors">產業熱力圖</a><span>›</span><span>${esc(g.name)}</span></div>
     <div class="page-head"><div><h1>${esc(g.name)}</h1><div class="sub">共 ${g.count} 檔上市櫃公司,市值排名第 ${d.rank.byMcap} / ${d.rank.of} 個產業</div></div><div class="asof">收盤資料 <b>${esc(dateLabel(d.date))}</b></div></div>
     <section class="panel"><div class="tiles divided">
-      <div class="tile"><span class="k">市值加權漲跌</span><span class="v ${dir(g.pct)}">${fpct(g.pct)}</span><span class="s">中位數 ${fpct(g.medianPct)}</span></div>
+      <div class="tile"><span class="k">平均漲跌</span><span class="v ${dir(g.pct)}">${fpct(g.pct)}</span><span class="s">中位數 ${fpct(g.medianPct)} · 市值加權 ${fpct(g.pctCap)}</span></div>
       <div class="tile"><span class="k">漲 / 跌家數</span><span class="v"><span class="up">${g.up}</span> / <span class="down">${g.down}</span></span><span class="s">平盤 ${g.flat}</span></div>
       <div class="tile"><span class="k">市值</span><span class="v">${money(g.mcap)}</span></div>
       <div class="tile"><span class="k">成交值</span><span class="v">${money(g.value)}</span></div>
@@ -1087,7 +1153,7 @@ async function renderChainPage(main, ic, id) {
     <div class="crumb"><a href="#/sectors">產業熱力圖</a><span>›</span><span>${esc(d.chain.kindName || '產業鏈')}</span><span>›</span><span>${esc(d.chain.name)}</span></div>
     <div class="page-head"><div><h1>${esc(d.chain.name)}</h1><div class="sub">${esc(d.chain.kindName || '產業鏈')}共 ${d.stocks.length} 檔台股(含上市、上櫃、興櫃);資料來源:${esc(d.chain.source || '')}。同一檔股票可能同時屬於多個分類。</div></div><div class="asof">收盤資料 <b>${esc(dateLabel(d.date))}</b></div></div>
     ${g ? `<section class="panel"><div class="tiles divided">
-      <div class="tile"><span class="k">市值加權漲跌</span><span class="v ${dir(g.pct)}">${fpct(g.pct)}</span><span class="s">上市櫃 ${g.traded} 檔</span></div>
+      <div class="tile"><span class="k">平均漲跌</span><span class="v ${dir(g.pct)}">${fpct(g.pct)}</span><span class="s">上市櫃 ${g.traded} 檔 · 市值加權 ${fpct(g.pctCap)}</span></div>
       <div class="tile"><span class="k">漲 / 跌家數</span><span class="v"><span class="up">${g.up}</span> / <span class="down">${g.down}</span></span><span class="s">平盤 ${g.flat}</span></div>
       <div class="tile"><span class="k">市值</span><span class="v">${money(g.mcap)}</span></div>
       <div class="tile"><span class="k">成交值</span><span class="v">${money(g.value)}</span></div>
@@ -1231,9 +1297,11 @@ $('#btn-theme').onclick = () => {
   const next = cur === 'light' ? 'dark' : 'light';
   document.documentElement.dataset.theme = next;
   try { localStorage.setItem('tw.theme', next); } catch { /* ignore */ }
+  syncPrefs();
   route();
 };
 (async function boot() {
+  await loadPrefs();
   S.route = parseHash();
   renderRail();
   try { await loadRows(S.watch); } catch (e) { toast('載入行情失敗:' + e.message); }

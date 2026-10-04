@@ -1,4 +1,4 @@
-/* 自選股盤後 — 台股慣例:紅漲、綠跌 */
+/* 台股產業分析 — 台股慣例:紅漲、綠跌 */
 :root {
   --bg: #0d1117;
   --rail: #11161e;
@@ -397,7 +397,7 @@ tbody tr.row:hover .sticky-col { background: var(--panel2); }
 .rank-list .n { color: var(--text3); font-size: 12.5px; }
 .rank-list small { color: var(--text3); margin-left: 6px; }
 .bars { display: flex; flex-direction: column; gap: 5px; }
-.bar-row { display: grid; grid-template-columns: 120px 1fr 64px; gap: 10px; align-items: center; font-size: 13px; cursor: pointer; }
+.bar-row { display: grid; grid-template-columns: 170px 1fr 64px; gap: 10px; align-items: center; font-size: 13px; cursor: pointer; }
 .bar-row:hover .nm { color: var(--accent); }
 .bar-row .track { position: relative; height: 14px; background: var(--panel2); border-radius: 4px; }
 .bar-row .fillb { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
@@ -481,3 +481,6 @@ tr.sub td { background: var(--panel2); padding: 12px 14px 14px; white-space: nor
 .node-detail { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); }
 .node-detail .stkchips { margin-top: 8px; }
 .stkchip.me { border-color: var(--accent); background: var(--accent-bg); }
+
+.bar-row .nm small { color: var(--text3); margin-left: 6px; font-size: 11.5px; }
+.bar-row .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

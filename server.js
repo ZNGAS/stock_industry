@@ -1,6 +1,6 @@
 'use strict';
 /**
- * 台股自選股看盤 — 本機伺服器(零相依,Node 18+)
+ * 台股產業分析 — 本機伺服器(零相依,Node 18+)
  *
  * 資料來源
  *   官方:證交所 OpenAPI / 證交所 rwd / 櫃買中心 OpenAPI(行情、本益比、月營收、法人、融資券、重大訊息、財報 EPS、除權息)
@@ -18,7 +18,9 @@ const PUBLIC_DIR = path.join(__dirname, 'public');
 // 打包成執行檔時,程式內部是唯讀的,快取改放在執行檔旁邊
 const PACKED = !!process.pkg;
 const BASE_DIR = PACKED ? path.dirname(process.execPath) : __dirname;
-const CACHE_DIR = path.join(BASE_DIR, '.cache');
+const DATA_DIR = process.env.STOCK_DATA_DIR || BASE_DIR;
+const CACHE_DIR = path.join(DATA_DIR, '.cache');
+const PREFS_FILE = path.join(DATA_DIR, 'prefs.json');
 fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 const MIN = 60 * 1000, HOUR = 60 * MIN;
@@ -150,14 +152,14 @@ function kindOf(code, name) {
   return '其他';
 }
 // 台股升降單位;回傳漲停、跌停價
-const tickOf = (p) => (p < 10 ? 0.01 : p < 50 ? 0.05 : p < 100 ? 0.1 : p < 500 ? 0.5 : p < 1000 ? 1 : 5);
-function limitPrices(prev) {
-  const up = prev * 1.1, dn = prev * 0.9, tu = tickOf(up), td = tickOf(dn);
+const tickOf = (p, fund) => (fund ? (p < 50 ? 0.01 : 0.05) : p < 10 ? 0.01 : p < 50 ? 0.05 : p < 100 ? 0.1 : p < 500 ? 0.5 : p < 1000 ? 1 : 5);
+function limitPrices(prev, fund) {
+  const up = prev * 1.1, dn = prev * 0.9, tu = tickOf(up, fund), td = tickOf(dn, fund);
   return { up: Math.round(Math.floor(up / tu + 1e-9) * tu * 100) / 100, down: Math.round(Math.ceil(dn / td - 1e-9) * td * 100) / 100 };
 }
-const limitOf = (close, prev, market) => {
+const limitOf = (close, prev, market, fund) => {
   if (market === 'ESB' || !prev || close === null) return null;
-  const l = limitPrices(prev);
+  const l = limitPrices(prev, fund);
   if (Math.abs(close - l.up) < 0.004 && close > prev) return 'up';
   if (Math.abs(close - l.down) < 0.004 && close < prev) return 'down';
   return null;
@@ -211,7 +213,7 @@ function loadUniverse() {
         pe: null, pb: null, yield: null,
         profile: b || null,
       };
-      s.limit = limitOf(q.close, prev, market);
+      s.limit = limitOf(q.close, prev, market, !b);
       s.mcap = b && b.shares && q.close ? b.shares * q.close : null;
       stocks.set(code, s);
     };
@@ -409,29 +411,29 @@ async function resolveLines(lines) {
     const line = toHalf(raw).replace(/^﻿/, '').trim();
     if (!line || /^[#/;]/.test(line)) continue;
     const tokens = line.split(/[,\t;|、，\s]+/).filter(Boolean);
-    let hit = null, ambiguous = null, how = '';
-    // 1) 代號
+    const hits = [];
+    const addHit = (st, how) => { if (st && !hits.some((h) => h.s.code === st.code)) hits.push({ s: st, how }); };
+    // 1) 代號(含 .TW、TPE: 等寫法);2) 完整名稱
     for (const t of tokens) {
       const code = t.toUpperCase().replace(/^(TPE|TWSE|TPEX|TW|TWO)[:：]/, '').replace(/\.(TW|TWO)$/, '');
-      if (/^[0-9]{4,6}[A-Z]?$/.test(code) && stocks.has(code)) { hit = stocks.get(code); how = 'code'; break; }
-    }
-    // 2) 名稱:先完整比對,再唯一的部分比對
-    if (!hit) for (const t of tokens) {
+      if (/^[0-9]{4,6}[A-Z]?\d?$/.test(code) && stocks.has(code)) { addHit(stocks.get(code), 'code'); continue; }
       const n = norm(t);
-      const s = byName.get(n) || byFull.get(n);
-      if (s) { hit = s; how = 'name'; break; }
+      addHit(byName.get(n) || byFull.get(n), 'name');
     }
-    if (!hit) for (const t of tokens) {
+    // 3) 都沒有 → 唯一的部分比對;多個候選就請使用者選
+    let ambiguous = null;
+    if (!hits.length) for (const t of tokens) {
       const n = norm(t); if (n.length < 2) continue;
-      const c = [...stocks.values()].filter((s) => norm(s.name).includes(n) || norm(s.full).includes(n));
-      if (c.length === 1) { hit = c[0]; how = 'fuzzy'; break; }
-      if (c.length > 1) { ambiguous = c.sort((a, b) => (b.mcap || 0) - (a.mcap || 0)).slice(0, 6).map(brief); break; }
+      const c = [...stocks.values()].filter((st) => norm(st.name).includes(n) || norm(st.full).includes(n));
+      if (c.length === 1) { addHit(c[0], 'fuzzy'); break; }
+      if (c.length > 1) { ambiguous = c.sort((x, y) => (y.mcap || 0) - (x.mcap || 0)).slice(0, 6).map(brief); break; }
     }
-    if (hit) out.push({ line: raw.trim(), ok: true, how, stock: brief(hit) });
+    if (hits.length) { for (const h of hits) out.push({ line: raw.trim(), ok: true, how: h.how, stock: brief(h.s) }); }
     else out.push({ line: raw.trim(), ok: false, candidates: ambiguous || [] });
   }
   return out;
 }
+
 
 /* ───────── 總覽 ───────── */
 function stockRow(s, rev, margin, insti, annCount, exdiv) {
@@ -455,6 +457,7 @@ async function overview(codes) {
     const s = stocks.get(c); if (!s) continue;
     rows.push(stockRow(s, revenue.get(c), mg.map.get(c), ins.map.get(c), annCount.get(c) || 0, ex.get(c)));
   }
+  await applyYahooVolume(rows);
   return { quoteDate, instiDate: ins.twseDate, otcInstiDate: ins.otcDate, marginDate: mg.date, rows, fetchedAt: Date.now() };
 }
 
@@ -465,6 +468,7 @@ async function stockSummary(code) {
   if (!s) return null;
   const myAnn = ann.filter((a) => a.code === code);
   const row = stockRow(s, revenue.get(code), mg.map.get(code), ins.map.get(code), myAnn.length, ex.get(code));
+  await applyYahooVolume([row]);
   return {
     ...row, full: s.full, profile: s.profile, announcementList: myAnn, quoteDate, instiDate: s.market === 'TWSE' ? ins.twseDate : ins.otcDate,
     marginDate: mg.date, valDate: s.valDate || null, officialEps: eps.get(code) || null, chains: await loadChains().then((c) => c.memberOf.get(code) || []).catch(() => []),
@@ -772,7 +776,7 @@ async function industryNews(code) {
 /* ───────── 台股總覽 / 熱力圖 / 產業 ───────── */
 const isCompany = (s) => !!s.profile && !s.etf && s.market !== 'ESB';
 
-/** 各產業彙總:市值加權漲跌、家數、成交值、法人買賣超… */
+/** 各產業彙總:平均漲跌(成分股漲跌幅的簡單平均)、家數、成交值、法人買賣超… */
 async function industryTable() {
   const [{ stocks }, revenue, ins] = await Promise.all([loadUniverse(), loadRevenue(), loadInsti()]);
   const map = new Map();
@@ -797,7 +801,7 @@ async function industryTable() {
     const top = g.list.sort((a, b) => (b.mcap || 0) - (a.mcap || 0));
     return {
       name: g.name, count: g.count, traded: g.traded, mcap: g.mcap, value: g.value,
-      pct: g.prevMcap ? g.wsum / g.prevMcap : null, medianPct: median(g.pcts), up: g.up, down: g.down, flat: g.flat,
+      pct: g.pcts.length ? g.pcts.reduce((a, b) => a + b, 0) / g.pcts.length : null, pctCap: g.prevMcap ? g.wsum / g.prevMcap : null, medianPct: median(g.pcts), up: g.up, down: g.down, flat: g.flat,
       foreign: Math.round(g.foreign), trust: Math.round(g.trust), dealer: Math.round(g.dealer),
       revYoy: g.revLy ? ((g.revCur - g.revLy) / g.revLy) * 100 : null,
       top: top.slice(0, 3).map((s) => ({ code: s.code, name: s.name, pct: s.pct })),
@@ -827,11 +831,12 @@ async function industryDetail(name) {
   const rows = [...stocks.values()].filter((s) => isCompany(s) && s.industry === name).map((s) => {
     const r = revenue.get(s.code), i = ins.map.get(s.code);
     return {
-      ...brief(s), mcap: s.mcap, value: s.value, volume: s.volume !== null ? Math.round(s.volume / 1000) : null, pe: s.pe, pb: s.pb, yield: s.yield,
+      ...brief(s), date: s.date, mcap: s.mcap, value: s.value, volume: s.volume !== null ? Math.round(s.volume / 1000) : null, pe: s.pe, pb: s.pb, yield: s.yield,
       revYoy: r ? r.yoy : null, revYm: r ? r.ym : null, foreign: i ? i.foreign : null, trust: i ? i.trust : null,
       exdiv: ex.get(s.code) ? ex.get(s.code).date : null, listed: s.profile.listed,
     };
   }).sort((a, b) => (b.mcap || 0) - (a.mcap || 0));
+  await applyYahooVolume(rows);
   let chainsHere = [];
   try {
     const { chains } = await loadChains();
@@ -892,10 +897,10 @@ function loadMarket() {
     // 漲跌家數、排行(僅個股)
     const co = [...stocks.values()].filter((s) => isCompany(s) && s.close !== null && s.pct !== null);
     const breadth = (list) => ({ up: list.filter((s) => s.pct > 0).length, down: list.filter((s) => s.pct < 0).length, flat: list.filter((s) => s.pct === 0).length, limitUp: list.filter((s) => s.limit === 'up').length, limitDown: list.filter((s) => s.limit === 'down').length });
-    const rk = (s) => ({ code: s.code, name: s.name, market: s.market, close: s.close, limit: s.limit || null, pct: s.pct, change: s.change, volume: s.volume !== null ? Math.round(s.volume / 1000) : null, value: s.value, industry: s.industry });
+    const rk = (s) => ({ code: s.code, name: s.name, market: s.market, date: s.date, close: s.close, limit: s.limit || null, pct: s.pct, change: s.change, volume: s.volume !== null ? Math.round(s.volume / 1000) : null, value: s.value, industry: s.industry });
     const liquid = co.filter((s) => (s.value || 0) >= 5e7);
     const allTraded = [...stocks.values()].filter((s) => s.close !== null && s.volume);
-    return {
+    const out = {
       date: quoteDate,
       twse: { history: twHist.slice(-70), inst: twseInst },
       tpex: { history: otc, inst: otcInst },
@@ -906,6 +911,8 @@ function loadMarket() {
       byVolume: allTraded.sort((a, b) => b.volume - a.volume).slice(0, 10).map(rk),
       industries: table.map((g) => ({ name: g.name, pct: g.pct, mcap: g.mcap, value: g.value, up: g.up, down: g.down, foreign: g.foreign, count: g.count })),
     };
+    await applyYahooVolume([...out.gainers, ...out.losers, ...out.byValue, ...out.byVolume]);
+    return out;
   });
 }
 
@@ -967,6 +974,49 @@ async function yahooList(resource) {
   }
   return [...new Set(codes)];
 }
+/* ───────── 成交量口徑 ─────────
+ * 證交所/櫃買的「成交股數」含一般整股、盤中與盤後零股、盤後定價、鉅額(含股票組合),且組合鉅額沒有逐檔公布。
+ * Yahoo 奇摩股市與盤中即時行情顯示的是一般整股成交量。顯示個股時改用 Yahoo 的數字讓兩邊一致;抓不到才退回官方總量。 */
+const YH_Q = '?device=desktop&intl=tw&lang=zh-Hant-TW&region=TW&site=finance&tz=Asia/Taipei&returnMeta=true';
+const yahooQuoteCache = new Map();
+async function yahooQuotes(items) {
+  const out = new Map(), need = [];
+  for (const it of items) {
+    if (!it || it.market === 'ESB') continue;
+    const hit = yahooQuoteCache.get(it.code);
+    if (hit && Date.now() - hit.t < 5 * MIN) out.set(it.code, hit); else if (!need.some((n) => n.code === it.code)) need.push(it);
+  }
+  const chunks = [];
+  for (let i = 0; i < need.length; i += 50) chunks.push(need.slice(i, i + 50));
+  await Promise.all(chunks.map(async (ch) => {
+    try {
+      const syms = ch.map((x) => `${x.code}.${x.market === 'TWSE' ? 'TW' : 'TWO'}`).join(',');
+      const j = await fetchJson(`${YH_BASE}/_td-stock/api/resource/StockServices.stockList;symbols=${syms}${YH_Q}`, { timeout: 20000, headers: YH_HEADERS });
+      for (const x of j.data || []) {
+        const code = String(x.symbol || '').split('.')[0];
+        const vol = Number(x.volume), turn = Number(x.turnoverM) * 1e6;
+        const date = x.regularMarketTime ? new Date(new Date(x.regularMarketTime).getTime() + 8 * 3600e3).toISOString().slice(0, 10) : null;
+        const e = { t: Date.now(), date, vol: Number.isFinite(vol) && vol > 0 ? vol : null, turn: Number.isFinite(turn) && turn > 0 ? turn : null };
+        yahooQuoteCache.set(code, e); out.set(code, e);
+      }
+    } catch (e) { console.warn('[yahoo quotes]', e.message); }
+  }));
+  return out;
+}
+/** rows 需有 code、market、date、volume(張);成交值(value)若存在也一併換成同口徑 */
+async function applyYahooVolume(rows) {
+  const list = rows.filter(Boolean);
+  const ys = await yahooQuotes(list.map((r) => ({ code: r.code, market: r.market })));
+  for (const r of list) {
+    const y = ys.get(r.code);
+    if (!y || y.date !== r.date || y.vol === null) continue;
+    r.volumeAll = r.volume; r.volume = Math.round(y.vol / 1000);
+    if ('value' in r && y.turn !== null) { r.valueAll = r.value; r.value = y.turn; }
+    r.volSrc = 'yahoo';
+  }
+  return rows;
+}
+
 function loadYahooGroups() {
   return cached('yahooGroups', 6 * HOUR, async () => {
     const d = await diskCached('yahoo_groups_v1', 24 * HOUR, async () => {
@@ -1065,7 +1115,7 @@ async function chainTable() {
     }
     const top = [...co].sort((a, b) => (b.mcap || 0) - (a.mcap || 0)).slice(0, 3);
     return {
-      ic: c.ic, name: c.name, kind: c.kind || 'chain', kindName: KIND_NAME[c.kind || 'chain'], count: list.length, traded: co.length, mcap, value, pct: w ? ws / w : null,
+      ic: c.ic, name: c.name, kind: c.kind || 'chain', kindName: KIND_NAME[c.kind || 'chain'], count: list.length, traded: co.length, mcap, value, pct: co.length ? co.reduce((a, s) => a + s.pct, 0) / co.length : null, pctCap: w ? ws / w : null,
       up: co.filter((s) => s.pct > 0).length, down: co.filter((s) => s.pct < 0).length, flat: co.filter((s) => s.pct === 0).length,
       foreign: Math.round(foreign), revYoy: revLy ? ((revCur - revLy) / revLy) * 100 : null,
       top: top.map((s) => ({ code: s.code, name: s.name, pct: s.pct })),
@@ -1090,10 +1140,11 @@ async function chainDetail(ic) {
     const s = stocks.get(code); if (!s) return null;
     const r = revenue.get(code), i = ins.map.get(code);
     return {
-      ...brief(s), mcap: s.mcap, value: s.value, volume: s.volume !== null ? Math.round(s.volume / 1000) : null, pe: s.pe, pb: s.pb, yield: s.yield,
+      ...brief(s), date: s.date, mcap: s.mcap, value: s.value, volume: s.volume !== null ? Math.round(s.volume / 1000) : null, pe: s.pe, pb: s.pb, yield: s.yield,
       revYoy: r ? r.yoy : null, foreign: i ? i.foreign : null, nodes: nodesOf.get(code),
     };
   }).filter(Boolean).sort((a, b) => (b.mcap || 0) - (a.mcap || 0));
+  await applyYahooVolume(rows);
   return { date: quoteDate, chain: { ic: c.ic, name: c.name, kind: c.kind || 'chain', kindName: KIND_NAME[c.kind || 'chain'], source: c.source || (c.ic === 'OPTO' ? '櫃買中心產業價值鏈資訊平台(合併)' : '櫃買中心產業價值鏈資訊平台') }, agg: table.find((x) => x.ic === ic) || null, streams, stocks: rows };
 }
 
@@ -1124,6 +1175,19 @@ const send = (res, status, body, type = 'application/json; charset=utf-8') => {
   res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' });
   res.end(typeof body === 'string' || Buffer.isBuffer(body) ? body : JSON.stringify(body));
 };
+/* ───────── 使用者偏好(自選股清單、主題、熱力圖設定)存在本機檔案,瀏覽器版與桌面版共用 ───────── */
+const readPrefs = () => { try { return JSON.parse(fs.readFileSync(PREFS_FILE, 'utf8')); } catch { return {}; } };
+function writePrefs(input) {
+  const cur = readPrefs();
+  if (Array.isArray(input.watch)) cur.watch = [...new Set(input.watch.map(String).filter((c) => /^[0-9A-Za-z]{4,6}$/.test(c)))].slice(0, 500);
+  if (input.theme === 'light' || input.theme === 'dark') cur.theme = input.theme;
+  for (const k of ['hm', 'sc']) if (input[k] && typeof input[k] === 'object' && JSON.stringify(input[k]).length < 2000) cur[k] = input[k];
+  const tmp = PREFS_FILE + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(cur));
+  fs.renameSync(tmp, PREFS_FILE);
+  return cur;
+}
+
 const readBody = (req) => new Promise((resolve, reject) => {
   let s = ''; req.on('data', (c) => { s += c; if (s.length > 2e6) { reject(new Error('body too large')); req.destroy(); } });
   req.on('end', () => resolve(s)); req.on('error', reject);
@@ -1149,14 +1213,24 @@ const routes = [
   [/^\/api\/status$/, async () => { const u = await loadUniverse(); return { quoteDate: u.quoteDate, count: u.stocks.size, finmindToken: !!FINMIND_TOKEN }; }],
 ];
 
-const server = http.createServer(async (req, res) => {
+const handler = async (req, res) => {
   try {
     const u = new URL(req.url, `http://${req.headers.host}`);
+    if (u.pathname === '/api/prefs') {
+      if (req.method === 'GET') return send(res, 200, readPrefs());
+      if (req.method === 'POST') {
+        if (!/^application\/json/i.test(req.headers['content-type'] || '')) return send(res, 415, { error: 'need json' });
+        return send(res, 200, writePrefs(JSON.parse((await readBody(req)) || '{}')));
+      }
+    }
     if (req.method === 'POST' && u.pathname === '/api/resolve') {
+      if (!/^application\/json/i.test(req.headers['content-type'] || '')) return send(res, 415, { error: 'need json' });
       const body = JSON.parse((await readBody(req)) || '{}');
       return send(res, 200, { results: await resolveLines(Array.isArray(body.lines) ? body.lines.slice(0, 500) : []) });
     }
     if (u.pathname.startsWith('/api/')) {
+      const sm = u.pathname.match(/^\/api\/stock\/([\w]+)/);
+      if (sm && !(await loadUniverse()).stocks.has(sm[1].toUpperCase())) return send(res, 404, { error: '找不到這檔股票' });
       for (const [re, fn] of routes) {
         const m = u.pathname.match(re);
         if (m) {
@@ -1179,24 +1253,47 @@ const server = http.createServer(async (req, res) => {
     console.error(req.url, e.message);
     send(res, 502, { error: '資料來源暫時無法連線,請稍後再試', detail: e.message });
   }
-});
+};
+const server = http.createServer(handler);
+const server6 = http.createServer(handler); // ::1,讓 localhost 在 IPv6 優先的環境也連得上
 
-const openBrowser = () => {
+/** 啟動伺服器;port 傳 0 代表由系統挑一個可用的連接埠(桌面應用使用) */
+function startServer(opts = {}) {
+  const port = opts.port !== undefined ? opts.port : PORT;
+  return new Promise((resolve, reject) => {
+    server.once('error', reject);
+    server.listen(port, '127.0.0.1', () => {
+      server.removeListener('error', reject);
+      const actual = server.address().port;
+      server6.on('error', () => {});
+      if (port !== 0) server6.listen(actual, '::1');
+      loadUniverse().then((u) => console.log(`  行情資料日期 ${u.quoteDate},共 ${u.stocks.size} 檔`)).catch((e) => console.warn('  預載失敗:', e.message));
+      loadChains().then((c) => console.log(`  產業鏈 ${c.chains.length} 條`)).catch((e) => console.warn('  產業鏈預載失敗:', e.message));
+      resolve({ port: actual, server });
+    });
+  });
+}
+
+const openBrowser = (port) => {
   if (!PACKED || process.env.NO_OPEN === '1') return;
-  const cmd = process.platform === 'win32' ? `start "" http://localhost:${PORT}` : process.platform === 'darwin' ? `open http://localhost:${PORT}` : `xdg-open http://localhost:${PORT}`;
+  const url = `http://localhost:${port}`;
+  const cmd = process.platform === 'win32' ? `start "" ${url}` : process.platform === 'darwin' ? `open ${url}` : `xdg-open ${url}`;
   require('child_process').exec(cmd, () => {});
 };
-if (PACKED && process.platform === 'win32') { try { require('child_process').execSync('chcp 65001', { stdio: 'ignore' }); } catch { /* 主控台編碼維持預設 */ } }
-server.on('error', (e) => {
-  if (e.code === 'EADDRINUSE') {
-    console.log(`\n  連接埠 ${PORT} 已被使用,可能已經有一份在執行。直接開啟 http://localhost:${PORT}\n`);
-    openBrowser();
-    setTimeout(() => process.exit(0), 4000);
-  } else { console.error(e); setTimeout(() => process.exit(1), 8000); }
-});
-server.listen(PORT, () => {
-  console.log(`\n  台股自選股看盤已啟動 → http://localhost:${PORT}\n  (關閉這個視窗就會停止)\n`);
-  openBrowser();
-  loadUniverse().then((u) => console.log(`  行情資料日期 ${u.quoteDate},共 ${u.stocks.size} 檔`)).catch((e) => console.warn('  預載失敗:', e.message));
-  loadChains().then((c) => console.log(`  產業鏈 ${c.chains.length} 條`)).catch((e) => console.warn('  產業鏈預載失敗:', e.message));
-});
+
+module.exports = { startServer };
+
+// 直接執行(node server.js 或打包的執行檔)才自動啟動;被桌面應用 require 時由它呼叫 startServer
+if (require.main === module || PACKED) {
+  if (PACKED && process.platform === 'win32') { try { require('child_process').execSync('chcp 65001', { stdio: 'ignore' }); } catch { /* 主控台編碼維持預設 */ } }
+  startServer({ port: PORT }).then(({ port }) => {
+    console.log(`\n  台股產業分析已啟動 → http://localhost:${port}\n  (關閉這個視窗就會停止)\n`);
+    openBrowser(port);
+  }).catch((e) => {
+    if (e.code === 'EADDRINUSE') {
+      console.log(`\n  連接埠 ${PORT} 已被使用,可能已經有一份在執行。直接開啟 http://localhost:${PORT}\n`);
+      openBrowser(PORT);
+      setTimeout(() => process.exit(0), 4000);
+    } else { console.error(e); setTimeout(() => process.exit(1), 8000); }
+  });
+}
