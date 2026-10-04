@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>自選股盤後</title>
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e1218'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' fill='none' stroke='%23ff5d5d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+  // 先套用主題,避免閃爍
+  try { const t = localStorage.getItem('tw.theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <a class="brand" href="#/" aria-label="回到總覽">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect width="32" height="32" rx="8" class="brand-bg"/><path d="M6 22l6-7 5 4 9-11" fill="none" stroke="var(--up)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>自選股盤後</span>
+    </a>
+    <nav class="mainnav" aria-label="主選單">
+      <a href="#/" data-page="watch">自選股</a>
+      <a href="#/market" data-page="market">台股總覽</a>
+      <a href="#/heatmap" data-page="heatmap">市值熱力圖</a>
+      <a href="#/sectors" data-page="sectors">產業熱力圖</a>
+    </nav>
+    <div class="search" role="search">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 14l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input id="q" type="text" autocomplete="off" spellcheck="false" placeholder="輸入代號或名稱,例如 2330、台積電" aria-label="搜尋股票" aria-controls="sugg" aria-autocomplete="list">
+      <ul id="sugg" class="sugg" role="listbox" hidden></ul>
+    </div>
+    <div class="top-actions">
+      <button class="btn" id="btn-import" type="button">匯入清單</button>
+      <button class="btn ghost" id="btn-export" type="button" title="下載目前清單(一行一檔)">匯出</button>
+      <button class="btn ghost icon" id="btn-theme" type="button" aria-label="切換深淺色">
+        <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M10 3a7 7 0 100 14V3z" fill="currentColor"/><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <aside class="rail" aria-label="自選股清單">
+    <div class="rail-head">
+      <a class="rail-all" href="#/" id="rail-all">總覽</a>
+      <span class="rail-count" id="rail-count"></span>
+    </div>
+    <div class="rail-list" id="rail-list"></div>
+  </aside>
+
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+
+<div class="tip" id="tip" role="tooltip" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<dialog id="dlg-import" class="dlg">
+  <form method="dialog" class="dlg-box" id="import-form">
+    <div class="dlg-head">
+      <h2>匯入自選股</h2>
+      <button class="btn ghost icon" value="cancel" aria-label="關閉">✕</button>
+    </div>
+    <p class="dlg-hint">一行一檔,可寫代號或名稱,也可以兩個一起寫(例:<span class="nowrap">2330 台積電</span>)。上傳 .txt / .csv,或直接貼上。</p>
+    <div class="drop" id="drop">
+      <textarea id="import-text" rows="8" spellcheck="false" placeholder="2330&#10;2317&#10;聯發科&#10;0050"></textarea>
+      <div class="drop-row">
+        <label class="btn" for="import-file">選擇文字檔</label>
+        <input id="import-file" type="file" accept=".txt,.csv,.tsv,text/plain,text/csv" hidden>
+        <span class="drop-note">也可以把檔案拖進這個視窗</span>
+      </div>
+    </div>
+    <div id="import-result" class="import-result" hidden></div>
+    <div class="dlg-foot">
+      <button class="btn" id="import-parse" type="button">解析</button>
+      <span class="grow"></span>
+      <button class="btn" id="import-replace" type="button" hidden>取代目前清單</button>
+      <button class="btn primary" id="import-add" type="button" hidden>加入清單</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
