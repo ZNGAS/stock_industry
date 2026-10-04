@@ -15,7 +15,10 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { execFileSync } = require('child_process');
+const http = require('http');
+const { execFileSync: execRaw, spawn } = require('child_process');
+// 沒有主控台視窗,子程序也不要閃出黑色視窗
+const execFileSync = (f, a, o = {}) => execRaw(f, a, { windowsHide: true, ...o });
 
 const REPO = process.env.SI_REPO || 'ZNGAS/stock_industry';
 const BRANCH = process.env.SI_BRANCH || 'main';
@@ -29,7 +32,14 @@ const DATA = path.join(ROOT, 'data');
 const STATE = path.join(DATA, 'launcher.json');
 const args = process.argv.slice(2);
 
-const log = (m) => console.log(`  ${m}`);
+const LOG = path.join(DATA, 'launcher.log');
+const status = { state: 'work', msg: '啟動中…', url: '' };
+const log = (m) => {
+  status.msg = String(m).replace(/^\(|\)$/g, '');
+  try { console.log(`  ${m}`); } catch { /* 沒有主控台 */ }
+  try { fs.appendFileSync(LOG, `${new Date().toISOString()} ${m}
+`); } catch { /* ignore */ }
+};
 const readText = (f) => { try { return fs.readFileSync(f, 'utf8'); } catch { return ''; } };
 const rmrf = (p) => { try { fs.rmSync(p, { recursive: true, force: true }); } catch { /* ignore */ } };
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -146,24 +156,59 @@ function ensureShortcut() {
   } catch (e) { log(`建立桌面捷徑失敗(可忽略):${e.message.split('\n')[0]}`); }
 }
 
-(async () => {
-  if (process.platform === 'win32') { try { execFileSync('chcp', ['65001'], { stdio: 'ignore', shell: true }); } catch { /* 維持預設編碼 */ } }
-  process.stdout.write(`\x1b]0;${NAME}\x07`);
-  console.log(`\n  ${NAME}\n`);
-  fs.mkdirSync(DATA, { recursive: true });
-  await update();
-  if (!fs.existsSync(path.join(APP, 'server.js'))) {
-    log('找不到程式檔(app 資料夾是空的)。請連上網路後重新開啟,或重新下載完整的資料夾。');
-    await pause(15000); process.exit(1);
-  }
-  ensureShortcut();
-  log('啟動中…\n');
-  process.env.STOCK_DATA_DIR = DATA;
-  const mod = require(path.join(APP, 'server.js'));
-  if (!process.pkg && mod.startServer) {
-    // 開發測試(node launcher.js):server.js 不會自己啟動
-    mod.startServer({ port: Number(process.env.PORT) || 3000 }).then(({ port }) => console.log(`\n  已啟動 → http://localhost:${port}\n`));
-  }
-})().catch(async (e) => { console.error(`\n  發生錯誤:${e.stack || e.message}`); await pause(20000); process.exit(1); });
+// ---- 視窗:用系統內建的 Edge(或 Chrome)的「應用程式模式」開一個獨立視窗,沒有網址列與分頁 ----
+function findBrowser() {
+  const pf = process.env.ProgramFiles || 'C:\Program Files', pf86 = process.env['ProgramFiles(x86)'] || 'C:\Program Files (x86)', la = process.env.LOCALAPPDATA || '';
+  return [process.env.SI_BROWSER,
+    path.join(pf86, 'Microsoft', 'Edge', 'Application', 'msedge.exe'), path.join(pf, 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
+    path.join(pf, 'Google', 'Chrome', 'Application', 'chrome.exe'), path.join(pf86, 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    la && path.join(la, 'Google', 'Chrome', 'Application', 'chrome.exe')].find((x) => x && fs.existsSync(x));
+}
+function openWindow(url) {
+  const exe = findBrowser();
+  if (!exe) { try { execRaw('cmd', ['/c', 'start', '', url], { stdio: 'ignore', windowsHide: true }); } catch { /* ignore */ } return null; }
+  // 獨立的設定資料夾 → 這個視窗是獨立的程序,關掉視窗它才會結束
+  const child = spawn(exe, [`--app=${url}`, `--user-data-dir=${path.join(DATA, 'window')}`, '--window-size=1440,920',
+    '--no-first-run', '--no-default-browser-check', '--disable-sync', '--disable-extensions', '--disable-features=Translate,msEdgeWelcomePage,msEdgeSignIn'], { stdio: 'ignore' });
+  child.on('error', () => {});
+  child.on('exit', () => process.exit(0));
+  return child;
+}
 
-process.on('uncaughtException', async (e) => { console.error(`\n  發生錯誤:${e.stack || e.message}`); await pause(20000); process.exit(1); });
+const SPLASH = `<!doctype html><meta charset="utf-8"><title>台股產業分析</title><style>
+html,body{height:100%;margin:0;background:#0d1117;color:#e6edf3;font:15px "Microsoft JhengHei",system-ui,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
+h1{font-size:22px;margin:0;font-weight:600}.sp{width:30px;height:30px;border:3px solid #2d3949;border-top-color:#ff5d5d;border-radius:50%;animation:r 0.9s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}#m{color:#8b98a9;max-width:80vw;text-align:center;line-height:1.6}.err .sp{display:none}.err #m{color:#ff7b72}</style>
+<h1>台股產業分析</h1><div class="sp"></div><div id="m">啟動中…</div>
+<script>setInterval(async()=>{try{const s=await(await fetch('/status')).json();document.getElementById('m').textContent=s.msg;
+document.body.className=s.state==='error'?'err':'';if(s.url)location.replace(s.url)}catch{}},400)</script>`;
+function startSplash() {
+  return new Promise((resolve) => {
+    const srv = http.createServer((req, res) => {
+      if (req.url === '/status') { res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(status)); return; }
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); res.end(SPLASH);
+    });
+    srv.listen(0, '127.0.0.1', () => resolve(srv.address().port));
+  });
+}
+const fail = (m) => { status.state = 'error'; status.msg = m; try { fs.appendFileSync(LOG, `${new Date().toISOString()} ERROR ${m}\n`); } catch { /* ignore */ } };
+
+(async () => {
+  fs.mkdirSync(DATA, { recursive: true });
+  try { fs.writeFileSync(LOG, ''); } catch { /* ignore */ }
+  const splashPort = await startSplash();
+  openWindow(`http://127.0.0.1:${splashPort}/`); // 先開視窗,檢查更新時使用者看得到進度
+  await update();
+  if (!fs.existsSync(path.join(APP, 'server.js'))) { fail('第一次使用需要連上網路下載程式檔。請連上網路後重新開啟。'); return; }
+  ensureShortcut();
+  log('啟動中…');
+  process.env.STOCK_DATA_DIR = DATA;
+  process.env.SI_EMBEDDED = '1'; // 由啟動器開視窗,server.js 不要自己開瀏覽器
+  const mod = require(path.join(APP, 'server.js'));
+  const { port } = await mod.startServer({ port: 0 });
+  status.state = 'ready'; status.url = `http://127.0.0.1:${port}/`;
+  log(`已啟動 ${status.url}`);
+})().catch((e) => fail(`發生錯誤:${e.message}`));
+
+process.on('uncaughtException', (e) => fail(`發生錯誤:${e.message}`));

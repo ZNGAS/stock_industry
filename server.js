@@ -1284,7 +1284,7 @@ const openBrowser = (port) => {
 module.exports = { startServer };
 
 // 直接執行(node server.js 或打包的執行檔)才自動啟動;被桌面應用 require 時由它呼叫 startServer
-if (require.main === module || PACKED) {
+if ((require.main === module || PACKED) && process.env.SI_EMBEDDED !== '1') {
   if (PACKED && process.platform === 'win32') { try { require('child_process').execSync('chcp 65001', { stdio: 'ignore' }); } catch { /* 主控台編碼維持預設 */ } }
   startServer({ port: PORT }).then(({ port }) => {
     console.log(`\n  台股產業分析已啟動 → http://localhost:${port}\n  (關閉這個視窗就會停止)\n`);
