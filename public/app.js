@@ -373,8 +373,8 @@ async function renderDetail(main, code, tab, id) {
         <div class="fact"><span class="k">本益比</span><span class="v">${fnum(sum.pe, 2)}</span></div>
         <div class="fact"><span class="k">股價淨值比</span><span class="v">${fnum(sum.pb, 2)}</span></div>
       </div>
+      ${classPanel(sum)}
     </section>
-    ${classPanel(sum)}
     <nav class="tabs" aria-label="資料分頁">${tabs.map(([k, t]) => `<a href="#/${code}/${k}" class="${k === tab ? 'on' : ''}" ${k === tab ? 'aria-current="page"' : ''}>${t}</a>`).join('')}</nav>
     <div id="tab-body"></div>`;
   main.addEventListener('click', (e) => {
@@ -386,9 +386,8 @@ async function renderDetail(main, code, tab, id) {
     const el = $('#about-biz'); if (!el) return;
     if (a && a.business) {
       el.className = ''; el.textContent = a.business;
-      el.insertAdjacentHTML('afterend', `<small class="muted" style="display:block;margin-top:2px">${esc(a.source || '')}</small>`);
-    } else { const dd = el.closest('dd'); if (dd) { dd.previousElementSibling.remove(); dd.remove(); } }
-  }).catch(() => { const el = $('#about-biz'); if (el) { const dd = el.closest('dd'); dd.previousElementSibling.remove(); dd.remove(); } });
+    } else $('#about-biz-wrap') && $('#about-biz-wrap').remove();
+  }).catch(() => { const w = $('#about-biz-wrap'); if (w) w.remove(); });
   $('#toggle-watch').onclick = async () => { if (inList) removeCode(code); else { await addCodes([code]); toast(`已加入 ${sum.name}`); } };
   const host = $('#tab-body');
   host.innerHTML = `<div class="panel">${skeleton(6)}</div>`;
@@ -1041,8 +1040,8 @@ function classPanel(sum) {
   const tag = (href, label, sub, cls = '') => `<a class="tag ${cls}" href="${href}">${esc(label)}${sub ? `<small>${esc(sub)}</small>` : ''}</a>`;
   const more = (arr, n = 14) => (arr.length > n ? `${arr.slice(0, n).join('')}<span class="more-wrap" hidden>${arr.slice(n).join('')}</span><button type="button" class="btn sm more-btn">展開全部 ${arr.length} 個</button>` : arr.join(''));
   const rows = [];
-  if (!sum.etf) rows.push([mktName(sum.market), tag(indHref(sum.industry), sum.industry, '', 'main')]);
-  else rows.push([mktName(sum.market), `<span class="tag">${esc(sum.kind || 'ETF')}</span>`]);
+  const biz = '<div class="biz" id="about-biz-wrap"><span class="muted" id="about-biz">載入中…</span></div>';
+  rows.push([mktName(sum.market), (sum.etf ? `<span class="tag">${esc(sum.kind || 'ETF')}</span>` : tag(indHref(sum.industry), sum.industry, '', 'main')) + biz]);
   const ey = by('ey'), off = by('chain');
   const eyNames = new Set(ey.map((c) => c.name));
   const seenChain = new Set();
@@ -1056,8 +1055,7 @@ function classPanel(sum) {
   if (grp.length) rows.push(['集團股', grp.map((c) => tag(`#/chain/${c.ic}`, c.name, '', 'main')).join('')]);
   const cc = by('concept');
   if (cc.length) rows.push(['題材', more(cc.map((c) => tag(`#/chain/${c.ic}`, c.name)), 14)]);
-  rows.push(['主要業務', '<span class="muted" id="about-biz">載入中…</span>']);
-  return `<section class="panel classes" aria-label="分類與題材"><dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>`;
+  return `<div class="classes classes-in" aria-label="分類與題材"><dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></div>`;
 }
 
 async function renderChainPage(main, ic, id) {

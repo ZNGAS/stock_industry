@@ -457,3 +457,7 @@ tr.sub td { background: var(--panel2); padding: 12px 14px 14px; white-space: nor
 .tag.main { background: var(--accent-bg); border-color: transparent; font-weight: 600; }
 .more-btn { margin-left: 4px; }
 .flow-node.hl { outline: 2px solid var(--accent); }
+
+.classes-in { grid-column: 1 / -1; margin-top: 4px; padding: 6px 0 0; border-top: 1px solid var(--line); }
+.quote .classes-in dl { grid-template-columns: 70px minmax(0, 1fr); }
+.biz { margin-top: 8px; font-size: 14px; line-height: 1.65; color: var(--text); }
