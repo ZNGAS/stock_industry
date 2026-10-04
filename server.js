@@ -15,7 +15,10 @@ const path = require('path');
 const PORT = Number(process.env.PORT) || 3000;
 const FINMIND_TOKEN = process.env.FINMIND_TOKEN || '';
 const PUBLIC_DIR = path.join(__dirname, 'public');
-const CACHE_DIR = path.join(__dirname, '.cache');
+// 打包成執行檔時,程式內部是唯讀的,快取改放在執行檔旁邊
+const PACKED = !!process.pkg;
+const BASE_DIR = PACKED ? path.dirname(process.execPath) : __dirname;
+const CACHE_DIR = path.join(BASE_DIR, '.cache');
 fs.mkdirSync(CACHE_DIR, { recursive: true });
 
 const MIN = 60 * 1000, HOUR = 60 * MIN;
@@ -1178,8 +1181,22 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
+const openBrowser = () => {
+  if (!PACKED || process.env.NO_OPEN === '1') return;
+  const cmd = process.platform === 'win32' ? `start "" http://localhost:${PORT}` : process.platform === 'darwin' ? `open http://localhost:${PORT}` : `xdg-open http://localhost:${PORT}`;
+  require('child_process').exec(cmd, () => {});
+};
+if (PACKED && process.platform === 'win32') { try { require('child_process').execSync('chcp 65001', { stdio: 'ignore' }); } catch { /* 主控台編碼維持預設 */ } }
+server.on('error', (e) => {
+  if (e.code === 'EADDRINUSE') {
+    console.log(`\n  連接埠 ${PORT} 已被使用,可能已經有一份在執行。直接開啟 http://localhost:${PORT}\n`);
+    openBrowser();
+    setTimeout(() => process.exit(0), 4000);
+  } else { console.error(e); setTimeout(() => process.exit(1), 8000); }
+});
 server.listen(PORT, () => {
-  console.log(`\n  台股自選股看盤已啟動 → http://localhost:${PORT}\n`);
+  console.log(`\n  台股自選股看盤已啟動 → http://localhost:${PORT}\n  (關閉這個視窗就會停止)\n`);
+  openBrowser();
   loadUniverse().then((u) => console.log(`  行情資料日期 ${u.quoteDate},共 ${u.stocks.size} 檔`)).catch((e) => console.warn('  預載失敗:', e.message));
   loadChains().then((c) => console.log(`  產業鏈 ${c.chains.length} 條`)).catch((e) => console.warn('  產業鏈預載失敗:', e.message));
 });

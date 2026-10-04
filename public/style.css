@@ -461,3 +461,23 @@ tr.sub td { background: var(--panel2); padding: 12px 14px 14px; white-space: nor
 .classes-in { grid-column: 1 / -1; margin-top: 4px; padding: 6px 0 0; border-top: 1px solid var(--line); }
 .quote .classes-in dl { grid-template-columns: 70px minmax(0, 1fr); }
 .biz { margin-top: 8px; font-size: 14px; line-height: 1.65; color: var(--text); }
+
+.pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill { border: 1px solid var(--line2); border-radius: 99px; padding: 7px 18px; background: transparent; color: var(--text2); cursor: pointer; font-size: 15px; }
+.pill:hover { border-color: var(--accent); color: var(--text); }
+.pill[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); font-weight: 600; }
+.chain-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.chain-head .btn { margin-left: auto; }
+.chain-head b { font-size: 15px; }
+.ntitle { margin: 20px 0 8px; color: var(--text2); font-weight: 600; }
+.ntiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.ntile { position: relative; border: 0; border-radius: 10px; color: #fff; padding: 12px 8px 10px; text-align: center; cursor: pointer; display: flex; flex-direction: column; gap: 2px; align-items: center; text-shadow: 0 1px 2px rgba(0, 0, 0, .35); font-family: inherit; }
+.ntile b { font-weight: 600; font-size: 15px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ntile span { font-variant-numeric: tabular-nums; font-size: 15px; }
+.ntile small { opacity: .8; font-size: 11.5px; }
+.ntile:hover { filter: brightness(1.1); }
+.ntile.sel { outline: 2px solid #fff; outline-offset: -2px; }
+.ntile.mine::before { content: ""; position: absolute; left: 0; top: 0; border-style: solid; border-width: 16px 16px 0 0; border-color: #2aa8ff transparent transparent transparent; border-top-left-radius: 10px; }
+.node-detail { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); }
+.node-detail .stkchips { margin-top: 8px; }
+.stkchip.me { border-color: var(--accent); background: var(--accent-bg); }

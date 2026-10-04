@@ -646,14 +646,17 @@ async function tabChips(code, sum, host, id) {
 
 /* ── 產業 ── */
 async function tabIndustry(code, sum, host, id) {
-  const [d, news] = await Promise.all([api(`/api/stock/${code}/industry`), api(`/api/stock/${code}/news`).catch(() => null)]);
+  const [d, news] = await Promise.all([api(`/api/stock/${code}/industry`).catch(() => null), api(`/api/stock/${code}/news`).catch(() => null)]);
   if (id !== S.renderId) return;
-  if (!d) { host.innerHTML = '<div class="panel"><p class="note">查無產業資料。</p></div>'; return; }
-  const mine = d.peers.find((r) => r.code === code);
-  const rk = (r, label) => (r ? `<span class="chip accent">${label}第 ${r.pos} / ${r.of}</span>` : '');
+  // 這檔股票所屬的產業鏈(櫃買)優先,其次是電子產業細分
+  const pills = [], seen = new Set();
+  for (const k of ['chain', 'ey']) for (const c of (sum.chains || []).filter((x) => x.kind === k)) if (!seen.has(c.ic)) { seen.add(c.ic); pills.push({ ic: c.ic, name: c.name, kind: k }); }
   const vs = (a, b, unit = '', dec = 1) => (isNum(a) && isNum(b) ? `<span class="s">產業中位數 ${fnum(b, dec)}${unit}</span>` : '');
+  const mine = d && d.peers.find((r) => r.code === code);
   host.innerHTML = `
-    <section class="panel"><h3>${esc(d.industry)}<small>上市櫃共 ${d.count} 檔(有行情者)</small><a class="btn sm" style="margin-left:auto" href="${indHref(d.industry)}">查看全部 ${d.count} 檔成分股</a></h3>
+    ${pills.length ? `<section class="panel"><div class="pills" id="chain-pills" role="tablist">${pills.map((c, i) => `<button type="button" class="pill" role="tab" data-ic="${esc(c.ic)}" aria-pressed="${i === 0}">${esc(c.name)}</button>`).join('')}</div><div id="chain-body" style="margin-top:14px"></div></section>`
+      : `<section class="panel"><p class="note">這檔沒有收錄在任何產業鏈或細分類裡。</p></section>`}
+    ${d ? `<section class="panel"><h3>${esc(d.industry)}<small>上市櫃共 ${d.count} 檔(有行情者)</small><a class="btn sm" style="margin-left:auto" href="${indHref(d.industry)}">查看全部 ${d.count} 檔成分股</a></h3>
       <div class="tiles divided">
         <div class="tile"><span class="k">今日漲跌家數</span><span class="v"><span class="up">${d.up}</span> / <span class="down">${d.down}</span></span><span class="s">中位數漲跌 ${pctSpan(d.medianPct)}</span></div>
         <div class="tile"><span class="k">本益比</span><span class="v">${mine ? fnum(mine.pe, 1) : '—'}</span>${vs(mine && mine.pe, d.medianPe)}</div>
@@ -661,19 +664,34 @@ async function tabIndustry(code, sum, host, id) {
         <div class="tile"><span class="k">殖利率</span><span class="v">${mine && isNum(mine.yield) ? fnum(mine.yield, 2) + '%' : '—'}</span>${vs(mine && mine.yield, d.medianYield, '%', 2)}</div>
         <div class="tile"><span class="k">月營收年增</span><span class="v">${mine ? pctSpan(mine.revYoy, 1) : '—'}</span><span class="s">產業中位數 ${fpct(d.medianRevYoy, 1)}</span></div>
       </div>
-      <p class="note" style="margin-top:14px">產業整體月營收年增 <b class="${dir(d.aggRevYoy)}">${fpct(d.aggRevYoy, 1)}</b>(全部公司加總);${d.revYoyCount} 檔有申報的公司中,${d.revYoyPositive} 檔年增為正。外資今日對本產業合計 ${span(d.foreignNet, fsign(Math.round(d.foreignNet)))} 張。</p>
-      <p style="margin:6px 0 0">${rk(d.ranks.mcap, '市值')} ${rk(d.ranks.revYoy, '營收年增')} ${rk(d.ranks.pe, '本益比(低到高)')} ${rk(d.ranks.yield, '殖利率')}</p>
-    </section>
-    <section class="panel"><h3>同產業市值前 ${d.peers.length > 12 ? 12 : d.peers.length} 名<small>點列可查看該檔</small></h3>
-      <div class="tbl-wrap"><table><thead><tr><th class="l">股票</th><th>收盤</th><th>漲跌幅</th><th>市值</th><th>本益比</th><th>淨值比</th><th>殖利率</th><th>月營收年增</th><th>外資(張)</th><th></th></tr></thead>
-      <tbody>${d.peers.map((r) => `<tr class="row ${r.code === code ? 'me' : ''}" data-code="${r.code}"><td class="l stk"><b>${esc(r.name)}</b><small>${esc(r.code)}<span class="mkt">${mktName(r.market)}</span></small></td><td>${pxTag(r.close, r.limit, dir(r.pct))}</td><td>${pctSpan(r.pct)}</td><td>${money(r.mcap)}</td><td>${fnum(r.pe, 1)}</td><td>${fnum(r.pb, 2)}</td><td>${isNum(r.yield) ? fnum(r.yield, 2) + '%' : '—'}</td><td>${pctSpan(r.revYoy, 1)}</td><td>${span(r.foreign, fsign(r.foreign))}</td><td>${S.watch.includes(r.code) ? '<span class="muted">已加入</span>' : `<button class="btn sm" data-add="${r.code}">加入</button>`}</td></tr>`).join('')}</tbody></table></div>
-      <p class="note">產業分類採證交所/櫃買中心的產業別;本益比為負或無資料者不列入中位數。</p></section>
+      <p class="note" style="margin-top:14px">產業整體月營收年增 <b class="${dir(d.aggRevYoy)}">${fpct(d.aggRevYoy, 1)}</b>(全部公司加總);${d.revYoyCount} 檔有申報的公司中,${d.revYoyPositive} 檔年增為正。外資今日對本產業合計 ${span(d.foreignNet, fsign(Math.round(d.foreignNet)))} 張。</p></section>` : ''}
     ${news && news.industry && news.industry.items.length ? `<section class="panel"><h3>產業新聞<small>近 14 天 · ${esc(news.industry.industry)}</small></h3>${newsList(news.industry.items.slice(0, 10))}</section>` : ''}`;
-  host.addEventListener('click', async (e) => {
-    const add = e.target.closest('[data-add]');
-    if (add) { e.stopPropagation(); await addCodes([add.dataset.add]); toast('已加入自選股'); add.replaceWith(Object.assign(document.createElement('span'), { className: 'muted', textContent: '已加入' })); return; }
-    const tr = e.target.closest('tr.row'); if (tr) location.hash = `#/${tr.dataset.code}/industry`;
-  });
+  const body = $('#chain-body');
+  if (!body) return;
+  const avg = (stocks) => { const v = stocks.filter((s) => isNum(s.pct) && s.market !== 'ESB').map((s) => s.pct); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+  const show = async (ic) => {
+    body.innerHTML = skeleton(4);
+    let c;
+    try { c = await api(`/api/chain/${encodeURIComponent(ic)}`); } catch (e) { body.innerHTML = errBox('載入失敗:' + e.message); return; }
+    if (id !== S.renderId) return;
+    const flat = c.streams.flatMap((st) => st.nodes);
+    body.innerHTML = `
+      <div class="chain-head"><h3 style="margin:0">${esc(c.chain.kind === 'chain' ? '產業鏈' : c.chain.kindName)}-${esc(c.chain.name)}</h3><a class="btn sm" href="#/chain/${esc(ic)}">完整產業鏈與成分股</a></div>
+      ${c.streams.map((st) => `<div class="ntitle">${esc(st.name)}</div><div class="ntiles">${st.nodes.map((n) => { const a = avg(n.stocks), me = n.stocks.some((s) => s.code === code); return `<button type="button" class="ntile ${me ? 'mine' : ''}" data-node="${esc(n.id)}" style="background:${heatColor(a, 3)}" title="${esc(n.name)}"><b>${esc(n.name)}</b><span>${fpct(a)}</span><small>${n.stocks.length} 檔</small></button>`; }).join('')}</div>`).join('')}
+      <p class="note">方塊顏色是該環節個股今日平均漲跌(紅漲綠跌);左上角藍標是這檔股票所在的環節。點方塊看該環節的股票。</p>
+      <div id="node-detail" class="node-detail"></div>`;
+    const detail = (nid) => {
+      const n = flat.find((x) => x.id === nid), el = $('#node-detail');
+      $$('.ntile', body).forEach((b) => b.classList.toggle('sel', b.dataset.node === nid));
+      if (!n) { el.innerHTML = ''; return; }
+      el.innerHTML = `<div class="chain-head"><b>${esc(n.name)}</b><span class="muted">${n.stocks.length} 檔 · 平均 ${pctSpan(avg(n.stocks))}</span><a class="btn sm" href="#/chain/${esc(ic)}/${esc(n.id)}">在產業鏈頁開啟</a></div>${n.desc ? `<div class="flow-desc">${esc(n.desc)}</div>` : ''}<div class="stkchips">${n.stocks.map((s) => `<a class="stkchip ${dir(s.pct)} ${s.code === code ? 'me' : ''}" href="#/${esc(s.code)}"><b>${esc(s.name)}</b>${s.market === 'ESB' ? '<small>興櫃</small>' : ''}<span>${isNum(s.pct) ? fpct(s.pct) : ''}</span></a>`).join('')}</div>`;
+    };
+    body.querySelectorAll('.ntile').forEach((b) => (b.onclick = () => detail(b.dataset.node)));
+    const first = flat.find((n) => n.stocks.some((s) => s.code === code));
+    if (first) detail(first.id);
+  };
+  $$('.pill', host).forEach((b) => (b.onclick = () => { $$('.pill', host).forEach((x) => x.setAttribute('aria-pressed', x === b)); show(b.dataset.ic); }));
+  if (pills.length) show(pills[0].ic);
 }
 
 /* ── 新聞 ── */

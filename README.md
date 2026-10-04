@@ -2,6 +2,15 @@
 
 台股自選股盤後閱讀網頁:基本面、營收、籌碼、新聞、產業與熱力圖。只支援台股(上市、上櫃、興櫃、ETF、特別股等)。
 
+## 下載執行檔(Windows)
+
+不想安裝 Node.js 的話,到 [Releases](https://github.com/ZNGAS/stock_industry/releases) 下載 `stock-industry.exe`,雙擊即可,會自動開啟瀏覽器。
+
+- 第一次執行時,Windows SmartScreen 可能顯示「Windows 已保護您的電腦」(執行檔沒有數位簽章):點「其他資訊」再點「仍要執行」。部分防毒軟體對打包的執行檔也可能誤報。
+- 關閉執行檔的視窗就會停止。抓過的資料快取放在執行檔旁的 `.cache/` 資料夾。
+- 預設連接埠 3000;可用環境變數 `PORT` 更改,`FINMIND_TOKEN` 設定 FinMind token。
+- 自行打包:`npm run build:win`(用 [@yao-pkg/pkg](https://github.com/yao-pkg/pkg),輸出在 `dist/`)。
+
 ## 啟動
 
 需要 Node.js 18 以上,不需要安裝任何套件。
