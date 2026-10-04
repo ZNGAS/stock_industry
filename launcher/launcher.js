@@ -186,11 +186,25 @@ function findBrowser() {
     path.join(pf, 'Google', 'Chrome', 'Application', 'chrome.exe'), path.join(pf86, 'Google', 'Chrome', 'Application', 'chrome.exe'),
     la && path.join(la, 'Google', 'Chrome', 'Application', 'chrome.exe')].find((x) => x && fs.existsSync(x));
 }
+function cleanStaleProfiles() { // 上次沒清乾淨的暫存設定,以及舊版放在 data/window 的設定
+  rmrf(path.join(DATA, 'window'));
+  const alive = (pid) => { try { process.kill(pid, 0); return true; } catch (e) { return e.code === 'EPERM'; } };
+  try {
+    for (const n of fs.readdirSync(os.tmpdir())) {
+      const m = /^stock-industry-win-(\d+)$/.exec(n);
+      if (m && Number(m[1]) !== process.pid && !alive(Number(m[1]))) rmrf(path.join(os.tmpdir(), n)); // 別份還在跑的不動
+    }
+  } catch { /* ignore */ }
+}
 function openWindow(url) {
   const exe = findBrowser();
   if (!exe) { try { execRaw('cmd', ['/c', 'start', '', url], { stdio: 'ignore', windowsHide: true }); } catch { /* ignore */ } return null; }
-  // 獨立的設定資料夾 → 這個視窗是獨立的程序,關掉視窗它才會結束
-  const child = spawn(exe, [`--app=${url}`, `--user-data-dir=${path.join(DATA, 'window')}`, '--window-size=1440,920',
+  // 每次開啟用自己的暫存設定資料夾:視窗是獨立的程序,關掉視窗它才會結束;
+  // 同時開兩份也不會被併到同一個 Edge 而讓其中一個視窗找不到伺服器(設定都存在 data/,不需要保留瀏覽器設定)
+  const profile = path.join(os.tmpdir(), `stock-industry-win-${process.pid}`);
+  const cleanup = () => rmrf(profile);
+  process.on('exit', cleanup);
+  const child = spawn(exe, [`--app=${url}`, `--user-data-dir=${profile}`, '--window-size=1440,920',
     '--no-first-run', '--no-default-browser-check', '--disable-sync', '--disable-extensions', '--disable-features=Translate,msEdgeWelcomePage,msEdgeSignIn'], { stdio: 'ignore' });
   child.on('error', () => {});
   child.on('exit', () => process.exit(0));
@@ -219,6 +233,7 @@ const fail = (m) => { status.state = 'error'; status.msg = m; try { fs.appendFil
 (async () => {
   fs.mkdirSync(DATA, { recursive: true });
   try { fs.writeFileSync(LOG, ''); } catch { /* ignore */ }
+  cleanStaleProfiles();
   const splashPort = await startSplash();
   openWindow(`http://127.0.0.1:${splashPort}/`); // 先開視窗,檢查更新時使用者看得到進度
   await update();
