@@ -1213,9 +1213,12 @@ const routes = [
   [/^\/api\/status$/, async () => { const u = await loadUniverse(); return { quoteDate: u.quoteDate, count: u.stocks.size, finmindToken: !!FINMIND_TOKEN }; }],
 ];
 
+let lastActivity = Date.now(); // 最近一次收到請求的時間(桌面版啟動器靠它判斷視窗還開著)
 const handler = async (req, res) => {
   try {
+    lastActivity = Date.now();
     const u = new URL(req.url, `http://${req.headers.host}`);
+    if (u.pathname === '/api/ping') { res.writeHead(204, { 'Cache-Control': 'no-store' }); return res.end(); }
     if (u.pathname === '/api/prefs') {
       if (req.method === 'GET') return send(res, 200, readPrefs());
       if (req.method === 'POST') {
@@ -1281,7 +1284,7 @@ const openBrowser = (port) => {
   require('child_process').exec(cmd, () => {});
 };
 
-module.exports = { startServer };
+module.exports = { startServer, lastActivity: () => lastActivity };
 
 // 直接執行(node server.js 或打包的執行檔)才自動啟動;被桌面應用 require 時由它呼叫 startServer
 if ((require.main === module || PACKED) && process.env.SI_EMBEDDED !== '1') {

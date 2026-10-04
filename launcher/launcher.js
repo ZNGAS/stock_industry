@@ -206,8 +206,13 @@ function openWindow(url) {
   process.on('exit', cleanup);
   const child = spawn(exe, [`--app=${url}`, `--user-data-dir=${profile}`, '--window-size=1440,920',
     '--no-first-run', '--no-default-browser-check', '--disable-sync', '--disable-extensions', '--disable-features=Translate,msEdgeWelcomePage,msEdgeSignIn'], { stdio: 'ignore' });
-  child.on('error', () => {});
-  child.on('exit', () => process.exit(0));
+  const t0 = Date.now();
+  child.on('error', (e) => log(`視窗程序啟動失敗:${e.message}`));
+  child.on('exit', (code) => {
+    const secs = Math.round((Date.now() - t0) / 1000);
+    if (secs < 20) { log(`視窗程序在 ${secs} 秒後就結束了(代碼 ${code}),可能已併入其他視窗,改用心跳判斷視窗是否還開著`); return; }
+    quit(`視窗已關閉(${secs} 秒,代碼 ${code})`);
+  });
   return child;
 }
 
@@ -219,10 +224,25 @@ h1{font-size:22px;margin:0;font-weight:600}.sp{width:30px;height:30px;border:3px
 <h1>台股產業分析</h1><div class="sp"></div><div id="m">啟動中…</div>
 <script>setInterval(async()=>{try{const s=await(await fetch('/status')).json();document.getElementById('m').textContent=s.msg;
 document.body.className=s.state==='error'?'err':'';if(s.url)location.replace(s.url)}catch{}},400)</script>`;
+let appActivity = () => 0; // 載入 server.js 後換成它的 lastActivity
+let splashSeen = Date.now();
+function quit(why) { try { fs.appendFileSync(LOG, `${new Date().toISOString()} 結束:${why}
+`); } catch { /* ignore */ } process.exit(0); }
+/** 視窗(啟動畫面或主畫面)每幾秒會回報一次;很久沒有任何動靜就視為已關閉。電腦睡眠醒來時先重新計時,不會誤判。 */
+function watchWindow() {
+  let tick = Date.now();
+  setInterval(() => {
+    const now = Date.now();
+    if (now - tick > 30000) { splashSeen = now; } // 剛從睡眠醒來
+    tick = now;
+    const last = Math.max(splashSeen, appActivity());
+    if (now - last > 150000) quit('超過 150 秒沒有收到視窗的回報');
+  }, 5000).unref();
+}
 function startSplash() {
   return new Promise((resolve) => {
     const srv = http.createServer((req, res) => {
-      if (req.url === '/status') { res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(status)); return; }
+      if (req.url === '/status') { splashSeen = Date.now(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(status)); return; }
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); res.end(SPLASH);
     });
     srv.listen(0, '127.0.0.1', () => resolve(srv.address().port));
@@ -236,6 +256,7 @@ const fail = (m) => { status.state = 'error'; status.msg = m; try { fs.appendFil
   cleanStaleProfiles();
   const splashPort = await startSplash();
   openWindow(`http://127.0.0.1:${splashPort}/`); // 先開視窗,檢查更新時使用者看得到進度
+  watchWindow();
   await update();
   if (!fs.existsSync(path.join(APP, 'server.js'))) { fail('第一次使用需要連上網路下載程式檔。請連上網路後重新開啟。'); return; }
   ensureShortcut();
@@ -244,6 +265,7 @@ const fail = (m) => { status.state = 'error'; status.msg = m; try { fs.appendFil
   process.env.SI_EMBEDDED = '1'; // 由啟動器開視窗,server.js 不要自己開瀏覽器
   const mod = require(path.join(APP, 'server.js'));
   const { port } = await mod.startServer({ port: 0 });
+  appActivity = mod.lastActivity || (() => Date.now()); // 舊版 server.js 沒有回報功能時,不做閒置判斷
   status.state = 'ready'; status.url = `http://127.0.0.1:${port}/`;
   log(`已啟動 ${status.url}`);
 })().catch((e) => fail(`發生錯誤:${e.message}`));

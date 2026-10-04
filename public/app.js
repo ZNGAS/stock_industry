@@ -1300,6 +1300,7 @@ $('#btn-theme').onclick = () => {
   syncPrefs();
   route();
 };
+setInterval(() => { fetch('/api/ping', { cache: 'no-store' }).catch(() => {}); }, 10000); // 讓桌面版知道視窗還開著
 (async function boot() {
   await loadPrefs();
   S.route = parseHash();
