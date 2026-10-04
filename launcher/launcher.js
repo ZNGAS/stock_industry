@@ -2,15 +2,16 @@
 /**
  * 台股產業分析 啟動器
  *
- * 每次打開都會先到 GitHub 檢查有沒有新版,有就自動下載並替換程式檔,然後啟動本機網頁。
+ * 每次打開都會先到 GitHub 檢查有沒有新版,有就自動下載並更新這個資料夾裡的程式檔(包含這支 exe 本身),
+ * 然後在獨立視窗中啟動。
  *
- * 資料夾結構(發佈版):
+ * 資料夾結構(就是 GitHub 倉庫本身):
  *   stock-industry.exe   這支啟動器
- *   app/                 程式檔(server.js、public/…),更新時整個替換
+ *   server.js、public/、assets/…   程式檔,更新時會被替換
  *   data/                自選股清單與快取,更新不會動到
  *
  * 參數:--no-update 不檢查更新;--shortcut 重新建立桌面捷徑
- * 環境變數:SI_REPO 指定更新來源(預設 ZNGAS/stock_industry)、SI_BRANCH、NO_SHORTCUT=1、NO_OPEN=1、PORT
+ * 環境變數:SI_REPO 指定更新來源(預設 ZNGAS/stock_industry)、SI_BRANCH、NO_SHORTCUT=1、NO_UPDATE=1
  */
 const fs = require('fs');
 const os = require('os');
@@ -25,9 +26,9 @@ const BRANCH = process.env.SI_BRANCH || 'main';
 const NAME = '台股產業分析';
 const UPDATE_ITEMS = ['server.js', 'public', 'assets', 'package.json', 'README.md'];
 
-// 打包成 exe 時,資料夾就是 exe 所在位置;直接用 node 跑(開發測試)則用 dist/stock-industry
-const ROOT = process.pkg ? path.dirname(process.execPath) : path.resolve(__dirname, '..', 'dist', 'stock-industry');
-const APP = path.join(ROOT, 'app');
+// 打包成 exe 時,資料夾就是 exe 所在位置;直接用 node 跑(開發測試)則是倉庫根目錄(可用 SI_ROOT 指定別的資料夾)
+const ROOT = process.pkg ? path.dirname(process.execPath) : (process.env.SI_ROOT || path.resolve(__dirname, '..'));
+const APP = ROOT; // 程式檔就放在 exe 旁邊
 const DATA = path.join(ROOT, 'data');
 const STATE = path.join(DATA, 'launcher.json');
 const args = process.argv.slice(2);
@@ -95,16 +96,44 @@ function extractZip(zip, dest) {
     { stdio: 'ignore', timeout: 180000, env: { ...process.env, SI_ZIP: zip, SI_DEST: dest } });
 }
 
+const loadState = () => { try { return JSON.parse(readText(STATE) || '{}'); } catch { return {}; } };
+const saveState = (o) => { try { fs.writeFileSync(STATE, JSON.stringify(o)); } catch { /* ignore */ } };
+const sha256 = (f) => require('crypto').createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+
+/** 用下載到的新版替換資料夾裡的程式檔(目錄先備份,失敗就還原) */
+function applyFiles(top) {
+  for (const it of UPDATE_ITEMS) {
+    const src = path.join(top, it), dst = path.join(APP, it);
+    if (!fs.existsSync(src)) continue;
+    if (!fs.statSync(src).isDirectory()) { fs.copyFileSync(src, dst); continue; }
+    const bak = `${dst}.old`;
+    rmrf(bak);
+    if (fs.existsSync(dst)) fs.renameSync(dst, bak);
+    try { fs.cpSync(src, dst, { recursive: true }); rmrf(bak); } catch (e) { rmrf(dst); if (fs.existsSync(bak)) fs.renameSync(bak, dst); throw e; }
+  }
+}
+/** 倉庫裡的 stock-industry.exe 跟正在執行的不同就換掉(執行中的 exe 可以改名但不能覆蓋,下次開啟生效) */
+function applyExe(top) {
+  if (!process.pkg) return;
+  const src = path.join(top, 'stock-industry.exe'), me = process.execPath;
+  if (!fs.existsSync(src) || fs.statSync(src).size < 5e6) return;
+  if (fs.statSync(src).size === fs.statSync(me).size && sha256(src) === sha256(me)) return;
+  const old = `${me}.old`;
+  rmrf(old);
+  fs.renameSync(me, old);
+  try { fs.copyFileSync(src, me); log('啟動器也已更新,下次開啟生效'); } catch (e) { rmrf(me); fs.renameSync(old, me); throw e; }
+}
+
 async function update() {
+  if (process.pkg) rmrf(`${process.execPath}.old`); // 上次更新留下的舊啟動器
   if (args.includes('--no-update') || process.env.NO_UPDATE === '1') { log('略過檢查更新'); return; }
-  const local = readText(path.join(APP, '.version')).trim();
+  const local = loadState().version || '';
   log('檢查更新…');
   const remote = await remoteSha();
   if (!remote) { log('無法檢查更新(沒有網路或 GitHub 暫時連不上),使用目前的版本'); return; }
   if (remote === local) { log(`已是最新版(${remote.slice(0, 7)})`); return; }
   log(`發現新版本 ${local ? local.slice(0, 7) : '(未知)'} → ${remote.slice(0, 7)},下載中…`);
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'stock-industry-'));
-  const next = `${APP}.new`, old = `${APP}.old`;
   try {
     // 私人倉庫要走 API 的 zipball(會轉址到帶臨時授權的下載網址);公開倉庫用 codeload
     const r = await gh(TOKEN ? `https://api.github.com/repos/${REPO}/zipball/${remote}` : `https://codeload.github.com/${REPO}/zip/${remote}`, {}, 120000);
@@ -115,18 +144,11 @@ async function update() {
     extractZip(zip, out);
     const top = fs.readdirSync(out).map((n) => path.join(out, n)).find((p) => fs.statSync(p).isDirectory());
     if (!top || !fs.existsSync(path.join(top, 'server.js')) || !fs.existsSync(path.join(top, 'public', 'index.html'))) throw new Error('下載的檔案不完整');
-    rmrf(next); fs.mkdirSync(next, { recursive: true });
-    for (const it of UPDATE_ITEMS) if (fs.existsSync(path.join(top, it))) fs.cpSync(path.join(top, it), path.join(next, it), { recursive: true });
-    fs.writeFileSync(path.join(next, '.version'), remote);
-    // 替換:出錯就還原,不會留下半套程式
-    rmrf(old);
-    if (fs.existsSync(APP)) fs.renameSync(APP, old);
-    try { fs.renameSync(next, APP); } catch (e) { if (fs.existsSync(old)) fs.renameSync(old, APP); throw e; }
-    rmrf(old);
+    applyFiles(top);
+    const st = loadState(); st.version = remote; saveState(st);
+    try { applyExe(top); } catch (e) { log(`啟動器更新失敗(可忽略):${e.message}`); }
     log('更新完成');
   } catch (e) {
-    rmrf(next);
-    if (!fs.existsSync(APP) && fs.existsSync(old)) fs.renameSync(old, APP);
     log(`更新失敗,繼續使用目前的版本:${e.message}`);
   } finally { rmrf(tmp); }
 }
@@ -147,11 +169,11 @@ function makeShortcut() {
 }
 function ensureShortcut() {
   if (process.platform !== 'win32' || process.env.NO_SHORTCUT === '1' || (!process.pkg && !process.env.SI_DESKTOP)) return;
-  let st = {}; try { st = JSON.parse(readText(STATE) || '{}'); } catch { /* ignore */ }
+  const st = loadState();
   if (st.shortcut && !args.includes('--shortcut')) return;
   try {
     const f = makeShortcut();
-    st.shortcut = true; fs.writeFileSync(STATE, JSON.stringify(st));
+    st.shortcut = true; saveState(st);
     log(`已在桌面建立捷徑:${path.basename(f)}`);
   } catch (e) { log(`建立桌面捷徑失敗(可忽略):${e.message.split('\n')[0]}`); }
 }

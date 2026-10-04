@@ -2,25 +2,25 @@
 
 台股產業分析:自選股盤後閱讀、基本面、營收、籌碼、新聞、產業與熱力圖。只支援台股(上市、上櫃、興櫃、ETF、特別股等)。
 
-## Windows 免安裝版(單一 exe + 自動更新)
+## Windows 免安裝版(一個資料夾 + 一個 exe)
 
-只要一個 `stock-industry.exe`,不需要安裝 Node.js,在獨立的應用程式視窗中執行(沿用 Windows 內建的 Edge,沒有網址列與分頁)。到 [Releases](../../releases) 下載 `stock-industry.exe`,放在任何資料夾後雙擊即可:
+這個倉庫本身就是可以直接用的資料夾:下載後解壓縮(GitHub 頁面 Code → Download ZIP,或 `git clone`),雙擊最外層的 **`stock-industry.exe`** 即可,不需要安裝 Node.js。
 
 ```
-stock-industry/            (放 exe 的資料夾)
-  stock-industry.exe       啟動器
-  app/                     程式檔(第一次執行自動下載,之後自動更新)
-  data/                    自選股清單、設定、資料快取(更新不會動到)
+台股產業分析/
+  stock-industry.exe    啟動器(雙擊這個)
+  server.js、public/、assets/、…    程式檔
+  data/                 自選股清單、設定、資料快取(第一次執行時建立,更新不會動到)
 ```
 
-- 第一次開啟需要連上網路,會自動從 GitHub 下載程式檔,並在桌面建立「台股產業分析」捷徑,之後從捷徑開啟即可。
-- 每次開啟都會先到 GitHub 檢查有沒有新版(比對最新 commit),有就自動下載並替換 `app/`,同時在視窗中顯示進度。沒有網路時直接用目前的版本。
-- 關閉視窗就會結束程式。想略過檢查更新或重建捷徑,可在捷徑目標後加上 `--no-update`、`--shortcut`。
+- 在獨立的應用程式視窗中執行(沿用 Windows 內建的 Edge,沒有網址列與分頁),關閉視窗就會結束程式。
+- 第一次開啟會在桌面建立「台股產業分析」捷徑,之後從捷徑開啟即可。
+- 每次開啟都會先到 GitHub 檢查有沒有新版(比對最新 commit),有就自動下載並更新資料夾裡的程式檔(包含 exe 本身,新的啟動器下次開啟生效),進度會顯示在視窗中。沒有網路時直接用目前的版本。
+- 想略過檢查更新或重建捷徑,可在捷徑目標後加上 `--no-update`、`--shortcut`。
 - 啟動紀錄在 `data/launcher.log`;若視窗顯示錯誤,可以把這個檔案附上回報。
-- 這個 GitHub 倉庫如果是**私人**的,啟動器在公開連不上時,會改用這台電腦上 git 已登入的 GitHub 憑證(也可設環境變數 `SI_TOKEN`,或把 token 放在 `data/github-token.txt`)。要分享給別人使用,倉庫需設為公開。
-- 第一次執行時 Windows SmartScreen 可能顯示「Windows 已保護您的電腦」(執行檔沒有數位簽章):點「其他資訊」再點「仍要執行」。部分防毒軟體對打包的執行檔也可能誤報。
-- 啟動器本身(`stock-industry.exe`)不會自動更新,只有 `app/` 裡的程式會。
-- 自行組出這個資料夾:先把程式碼推上 GitHub,再執行 `npm run build:dist`(輸出在 `dist/`,另有 `stock-industry-win.zip`)。
+- 第一次執行時 Windows SmartScreen 可能顯示「Windows 已保護您的電腦」(執行檔沒有數位簽章):點「其他資訊」再點「仍要執行」。部分防毒軟體對打包的執行檔也可能誤報。不要放在 `C:\Program Files` 這類需要管理員權限的位置。
+- 倉庫如果是**私人**的,啟動器在公開連不上時,會改用這台電腦上 git 已登入的 GitHub 憑證(也可設環境變數 `SI_TOKEN`,或把 token 放在 `data/github-token.txt`)。要分享給別人使用,倉庫需設為公開。
+- 開發者:改了 `launcher/launcher.js` 才需要執行 `npm run build:exe` 重新打包,並把新的 `stock-industry.exe` 一起提交;只改程式檔不用動 exe。
 
 ## 啟動
 
