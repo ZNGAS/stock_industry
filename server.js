@@ -137,6 +137,33 @@ async function diskCached(key, ttl, loader, { swr = false } = {}) {
   }); }
 }
 
+/**
+ * 每日更新的官方資料(融資券、法人、重大訊息、除權息…):照常向來源查詢,但證交所/櫃買的 OpenAPI 有時要好幾秒,
+ * 超過 waitMs 還沒回來就先用上次存在磁碟的快照,查詢繼續在背景進行,完成後更新快照與記憶體快取。
+ * 用法與 cached() 相同;沒有快照(第一次使用)時就等到查完。
+ */
+const snapReplacer = (k, v) => (v instanceof Map ? { __map: [...v] } : v);
+const snapReviver = (k, v) => (v && typeof v === 'object' && Array.isArray(v.__map) ? new Map(v.__map) : v);
+const snapOk = (d) => (d instanceof Map ? d.size > 0 : Array.isArray(d) ? d.length > 0 : d && d.map instanceof Map ? d.map.size > 0 : !!d);
+function snapshotCached(key, ttl, loader, waitMs = 2500) {
+  return cached(key, ttl, async () => {
+    const file = path.join(CACHE_DIR, `snap_${key}.json`);
+    let saved = null;
+    try { saved = JSON.parse(fs.readFileSync(file, 'utf8'), snapReviver); } catch { /* 沒有快照 */ }
+    const fresh = loader().then((data) => {
+      if (snapOk(data)) { try { fs.writeFileSync(file, JSON.stringify({ t: Date.now(), data }, snapReplacer)); } catch { /* ignore */ } return data; }
+      if (saved) { console.warn(`[snapshot] ${key}: 來源沒有資料,沿用上次的`); return saved.data; } // 來源失敗但被吞掉、回傳空資料
+      return data;
+    });
+    if (!saved) return fresh;
+    fresh.catch(() => {});
+    return Promise.race([
+      fresh.catch((e) => { console.warn(`[snapshot] ${key}: ${e.message},沿用上次的`); return saved.data; }),
+      new Promise((r) => setTimeout(() => r(saved.data), waitMs)),
+    ]);
+  });
+}
+
 async function finmind(dataset, id, start, end) {
   let url = `https://api.finmindtrade.com/api/v4/data?dataset=${dataset}&data_id=${id}&start_date=${start}`;
   if (end) url += `&end_date=${end}`;
@@ -202,27 +229,48 @@ async function twseDailyFromSite(iso) {
   return { rows, pe };
 }
 
+/** 往回找最近一個有收盤資料的交易日(週末、假日官網會回「沒有資料」,每次只要幾十毫秒);今天 14:00 前不查今天 */
+async function twseLatestDaily() {
+  const now = new Date(Date.now() + 8 * 3600e3); // 台北時間
+  for (let i = 0; i < 8; i++) {
+    if (i === 0 && now.getUTCHours() < 14) continue;
+    const day = addDays(now, -i), wd = day.getUTCDay();
+    if (wd === 0 || wd === 6) continue;
+    const r = await twseDailyFromSite(isoDate(day)).catch(() => null);
+    if (r && r.rows.length > 500) return r;
+  }
+  return null;
+}
+
 /** 全市場個股:基本資料 + 收盤行情 + 本益比/淨值比/殖利率 */
 function loadUniverse() {
   return cached('universe', 5 * MIN, async () => {
-    const [b1, b2, q1raw, q2, v1, v2, b3, q3] = await Promise.all([
-      fetchJson(`${TW}/opendata/t187ap03_L`),
-      fetchJson(`${OT}/mopsfin_t187ap03_O`),
-      fetchJson(`${TW}/exchangeReport/STOCK_DAY_ALL`),
+    // 公司基本資料(名稱、產業別、股本…)很少變動,但證交所這支 API 常要 5~7 秒:存磁碟,3 小時內直接用,過期先用舊的、背景更新
+    const basicRaw = () => diskCached('basic_v1', 3 * HOUR, async () => {
+      const [b1, b2, b3] = await Promise.all([
+        fetchJson(`${TW}/opendata/t187ap03_L`),
+        fetchJson(`${OT}/mopsfin_t187ap03_O`),
+        fetchJson(`${OT}/mopsfin_t187ap03_R`).catch(() => []),
+      ]);
+      // 只留用得到的欄位,檔案小很多
+      const pick = (keys) => (r) => Object.fromEntries(keys.map((k) => [k, r[k]]));
+      const twK = ['公司代號', '公司名稱', '公司簡稱', '產業別', '董事長', '總經理', '成立日期', '上市日期', '實收資本額', '已發行普通股數或TDR原股發行股數', '網址', '住址', '英文簡稱'];
+      const otK = ['SecuritiesCompanyCode', 'CompanyName', 'CompanyAbbreviation', 'SecuritiesIndustryCode', 'Chairman', 'GeneralManager', 'DateOfIncorporation', 'DateOfListing', 'Paidin.Capital.NTDollars', 'IssueShares', 'WebAddress', 'Address', 'Symbol'];
+      return { b1: b1.map(pick(twK)), b2: b2.map(pick(otK)), b3: b3.map(pick(otK)) };
+    }, { swr: true });
+    // 上市收盤行情:證交所官網(rwd)又快(幾十毫秒)又比 OpenAPI 早更新,優先用;官網沒資料或失敗才等 OpenAPI(它有時要好幾秒)
+    // 本益比/淨值比/殖利率:資料一天才換一次,存磁碟,過期先用舊的、背景更新
+    const bwibbu = () => diskCached('bwibbu_v1', 30 * MIN, async () => ({ rows: await fetchJson(`${TW}/exchangeReport/BWIBBU_ALL`) }), { swr: true });
+    const [{ b1, b2, b3 }, site, q2, { rows: v1 }, v2, q3] = await Promise.all([
+      basicRaw(),
+      twseLatestDaily().catch(() => null),
       fetchJson(`${OT}/tpex_mainboard_daily_close_quotes`),
-      fetchJson(`${TW}/exchangeReport/BWIBBU_ALL`),
+      bwibbu(),
       fetchJson(`${OT}/tpex_mainboard_peratio_analysis`),
-      fetchJson(`${OT}/mopsfin_t187ap03_R`).catch(() => []),
       fetchJson(`${OT}/tpex_esb_latest_statistics`).catch(() => []),
     ]);
-    // 證交所 OpenAPI 比官網晚更新:上櫃已是新的一天、上市還停在前一天時,上市行情改用官網當天資料
-    const latest = (rows, f) => rows.reduce((m, r) => { const d = rocToIso(f(r)); return d && (!m || d > m) ? d : m; }, null);
-    let q1 = q1raw, twPe = null;
-    const twDate0 = latest(q1raw, (r) => r.Date), otcDate0 = latest(q2, (r) => r.Date);
-    if (otcDate0 && (!twDate0 || otcDate0 > twDate0)) {
-      const alt = await twseDailyFromSite(otcDate0).catch(() => null);
-      if (alt && alt.rows.length > 500) { q1 = alt.rows; twPe = alt.pe; }
-    }
+    const q1 = site ? site.rows : await fetchJson(`${TW}/exchangeReport/STOCK_DAY_ALL`);
+    const twPe = site ? site.pe : null;
     const stocks = new Map();
     const basic = new Map();
     for (const r of b1) basic.set(r['公司代號'], {
@@ -308,9 +356,15 @@ function loadUniverse() {
 /** 最新月營收(官方,單位:千元) */
 function loadRevenue() {
   return cached('revenue', 30 * MIN, async () => {
-    const [a, b, c] = await Promise.all([fetchJson(`${TW}/opendata/t187ap05_L`), fetchJson(`${OT}/mopsfin_t187ap05_O`), fetchJson(`${OT}/t187ap05_R`).catch(() => [])]);
+    // 月營收每月才換一次,但這三支 API 常要 3 秒以上:存磁碟(只留用到的欄位),過期先用舊的、背景更新
+    const KEYS = ['公司代號', '資料年月', '產業別', '營業收入-當月營收', '營業收入-上月營收', '營業收入-去年當月營收', '營業收入-上月比較增減(%)', '營業收入-去年同月增減(%)',
+      '累計營業收入-當月累計營收', '累計營業收入-去年累計營收', '累計營業收入-前期比較增減(%)', '備註', '出表日期'];
+    const { rows } = await diskCached('revenue_v1', 30 * MIN, async () => {
+      const [a, b, c] = await Promise.all([fetchJson(`${TW}/opendata/t187ap05_L`), fetchJson(`${OT}/mopsfin_t187ap05_O`), fetchJson(`${OT}/t187ap05_R`).catch(() => [])]);
+      return { rows: [...a, ...b, ...c].map((r) => Object.fromEntries(KEYS.map((k) => [k, r[k]]))) };
+    }, { swr: true });
     const map = new Map();
-    for (const r of [...a, ...b, ...c]) {
+    for (const r of rows) {
       map.set(r['公司代號'], {
         ym: ymFromRoc(r['資料年月']), industry: r['產業別'],
         rev: num(r['營業收入-當月營收']), prev: num(r['營業收入-上月營收']), ly: num(r['營業收入-去年當月營收']),
@@ -325,7 +379,7 @@ function loadRevenue() {
 
 /** 融資融券(官方,單位:張) */
 function loadMargin() {
-  return cached('margin', 10 * MIN, async () => {
+  return snapshotCached('margin', 10 * MIN, async () => {
     const [a, b] = await Promise.all([fetchJson(`${TW}/exchangeReport/MI_MARGN`), fetchJson(`${OT}/tpex_mainboard_margin_balance`)]);
     const map = new Map();
     for (const r of a) {
@@ -344,7 +398,7 @@ function loadMargin() {
 
 /** 三大法人買賣超(官方;上市取證交所 T86,上櫃取櫃買;單位換算為張) */
 function loadInsti() {
-  return cached('insti', 10 * MIN, async () => {
+  return snapshotCached('insti', 10 * MIN, async () => {
     const { quoteDate } = await loadUniverse();
     const map = new Map();
     let twseDate = null;
@@ -382,7 +436,7 @@ function loadInsti() {
 
 /** 今日重大訊息(官方) */
 function loadAnnouncements() {
-  return cached('ann', 10 * MIN, async () => {
+  return snapshotCached('ann', 10 * MIN, async () => {
     const [a, b] = await Promise.all([
       fetchJson(`${TW}/opendata/t187ap04_L`).catch(() => []),
       fetchJson(`${OT}/mopsfin_t187ap04_O`).catch(() => []),
@@ -397,7 +451,7 @@ function loadAnnouncements() {
 
 /** 官方累計 EPS(用來核對 FinMind 的季 EPS) */
 function loadOfficialEps() {
-  return cached('officialEps', 6 * HOUR, async () => {
+  return snapshotCached('officialEps', 6 * HOUR, async () => {
     const [a, b] = await Promise.all([
       fetchJson(`${TW}/opendata/t187ap14_L`).catch(() => []),
       fetchJson(`${OT}/mopsfin_t187ap06_O_ciA`).catch(() => []),
@@ -411,7 +465,7 @@ function loadOfficialEps() {
 
 /** 除權息預告(官方) */
 function loadExDiv() {
-  return cached('exdiv', 2 * HOUR, async () => {
+  return snapshotCached('exdiv', 2 * HOUR, async () => {
     const [a, b] = await Promise.all([
       fetchJson(`${TW}/exchangeReport/TWT48U_ALL`).catch(() => []),
       fetchJson(`${OT}/tpex_exright_prepost`).catch(() => []),
@@ -1051,7 +1105,8 @@ async function yahooQuotes(items) {
       for (const x of j.data || []) {
         const code = String(x.symbol || '').split('.')[0];
         const vol = Number(x.volume), turn = Number(x.turnoverM) * 1e6;
-        const date = x.regularMarketTime ? new Date(new Date(x.regularMarketTime).getTime() + 8 * 3600e3).toISOString().slice(0, 10) : null;
+        const tm = x.regularMarketTime ? new Date(x.regularMarketTime).getTime() : NaN;
+        const date = Number.isFinite(tm) ? new Date(tm + 8 * 3600e3).toISOString().slice(0, 10) : null;
         const e = { t: Date.now(), date, vol: Number.isFinite(vol) && vol > 0 ? vol : null, turn: Number.isFinite(turn) && turn > 0 ? turn : null };
         yahooQuoteCache.set(code, e); out.set(code, e);
       }
