@@ -22,6 +22,11 @@ const DATA_DIR = process.env.STOCK_DATA_DIR || BASE_DIR;
 const CACHE_DIR = path.join(DATA_DIR, '.cache');
 const PREFS_FILE = path.join(DATA_DIR, 'prefs.json');
 fs.mkdirSync(CACHE_DIR, { recursive: true });
+// 很少變動的資料(產業價值鏈、Yahoo 分類)隨程式附一份,第一次開啟不用等幾十秒從網路逐頁抓;之後在背景更新
+try {
+  const seedDir = path.join(__dirname, 'assets', 'seed');
+  for (const f of fs.readdirSync(seedDir)) if (!fs.existsSync(path.join(CACHE_DIR, f))) fs.copyFileSync(path.join(seedDir, f), path.join(CACHE_DIR, f));
+} catch { /* 沒有附檔就照舊從網路抓 */ }
 
 const MIN = 60 * 1000, HOUR = 60 * MIN;
 const UA = 'Mozilla/5.0 (TWStockWatchlist/1.0)';
@@ -112,12 +117,15 @@ async function cached(key, ttl, loader) {
 }
 
 /** 磁碟快取(FinMind 等較慢、有額度限制的來源);抓不到時回傳過期資料並標示 stale */
-async function diskCached(key, ttl, loader) {
+async function diskCached(key, ttl, loader, { swr = false } = {}) {
   const file = path.join(CACHE_DIR, key.replace(/[^\w.-]/g, '_') + '.json');
   let saved = null;
   try { saved = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { /* none */ }
   if (saved && Date.now() - saved.t < ttl) return saved.data;
-  return cached('disk:' + key, 0, async () => {
+  // swr:有舊資料就先用舊的,過期的在背景更新(更新失敗就繼續用舊的),不讓使用者等
+  if (saved && swr) { refresh().catch(() => {}); return saved.data; }
+  return refresh();
+  function refresh() { return cached('disk:' + key, 0, async () => {
     try {
       const data = await loader();
       fs.writeFileSync(file, JSON.stringify({ t: Date.now(), data }));
@@ -126,7 +134,7 @@ async function diskCached(key, ttl, loader) {
       if (saved) { console.warn(`[stale] ${key}: ${e.message}`); return { ...saved.data, _stale: true, _staleSince: new Date(saved.t).toISOString() }; }
       throw e;
     }
-  });
+  }); }
 }
 
 async function finmind(dataset, id, start, end) {
@@ -1081,7 +1089,7 @@ function loadYahooGroups() {
         }
       }));
       return { groups: cats.filter((c) => c.codes.length) };
-    });
+    }, { swr: true });
     return d.groups;
   });
 }
@@ -1104,7 +1112,7 @@ function loadChains() {
       const order = new Map(opts.map((o, k) => [o[0], k]));
       out.sort((a, b) => order.get(a.ic) - order.get(b.ic));
       return { chains: out };
-    });
+    }, { swr: true });
     const memberOf = new Map(); // code -> [{ic,name,stream,node}]
     for (const c of d.chains) for (const st of c.streams) for (const n of st.nodes) for (const code of n.codes) {
       const arr = memberOf.get(code) || [];
