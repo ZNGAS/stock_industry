@@ -961,6 +961,17 @@ function loadMarket() {
   });
 }
 
+/** 全部個股的漲跌幅與成交值(不含 ETF),台股總覽「展開看全部」用 */
+function movers() {
+  return cached('movers', 5 * MIN, async () => {
+    const { stocks, quoteDate } = await loadUniverse();
+    const rows = [...stocks.values()].filter((s) => isCompany(s) && s.close !== null && s.pct !== null)
+      .sort((a, b) => b.pct - a.pct)
+      .map((s) => ({ code: s.code, name: s.name, market: s.market, close: s.close, limit: s.limit || null, pct: s.pct, value: s.value, industry: s.industry }));
+    return { date: quoteDate, rows };
+  });
+}
+
 /* ───────── 產業鏈(櫃買中心「產業價值鏈資訊平台」) ─────────
  * 官方產業別只有一層(例:電子零組件業)。細分(被動元件、連接器、印刷電路板…)取自櫃買中心的產業鏈:
  * 每條產業鏈分上游/中游/下游的環節,每個環節列出相關的上市、上櫃、興櫃公司。一檔股票可能屬於多條產業鏈。 */
@@ -1250,6 +1261,7 @@ const routes = [
   [/^\/api\/stock\/([\w]+)\/industry$/, (u, m) => stockIndustry(m[1].toUpperCase())],
   [/^\/api\/stock\/([\w]+)\/news$/, async (u, m) => ({ stock: await stockNews(m[1].toUpperCase()), industry: await industryNews(m[1].toUpperCase()).catch(() => null) })],
   [/^\/api\/market$/, () => loadMarket()],
+  [/^\/api\/movers$/, () => movers()],
   [/^\/api\/heatmap$/, (u) => heatmap(u.searchParams.get('scope') || 'all', Number(u.searchParams.get('n')) || 200, u.searchParams.get('by') === 'value' ? 'value' : 'mcap')],
   [/^\/api\/chains$/, async (u) => { const kind = u.searchParams.get('kind'); const all = await chainTable(); return { chains: kind ? all.filter((c) => c.kind === kind) : all, date: (await loadUniverse()).quoteDate }; }],
   [/^\/api\/chain\/(\w+)$/, (u, m) => chainDetail(m[1])],

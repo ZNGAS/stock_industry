@@ -861,6 +861,49 @@ function dataTable(host, cols, rows, { href, sort } = {}) {
 const stockCell = (r) => `<b>${esc(r.name)}</b><small>${esc(r.code)}<span class="mkt">${mktName(r.market)}</span></small>`;
 const addCell = (r) => (S.watch.includes(r.code) ? '<span class="muted">已加入</span>' : `<button class="btn sm" data-add="${r.code}">加入</button>`);
 
+/* ───────── 展開看全部(彈出視窗) ───────── */
+const EXPAND_SVG = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg>';
+const expandBtn = (what) => `<button class="expand-btn" data-expand="${what}" title="展開看全部" aria-label="展開看全部">${EXPAND_SVG}</button>`;
+function closeModal() { const m = document.getElementById('modal'); if (m) m.remove(); document.body.classList.remove('modal-open'); }
+function openModal(title, sub, html) {
+  closeModal();
+  const el = document.createElement('div');
+  el.className = 'modal-back'; el.id = 'modal';
+  el.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="modal-head"><h3>${esc(title)}<small>${esc(sub)}</small></h3><button class="modal-x" aria-label="關閉">✕</button></div><div class="modal-body">${html}</div></div>`;
+  document.body.appendChild(el);
+  document.body.classList.add('modal-open');
+  el.addEventListener('click', (e) => { if (e.target === el || e.target.closest('.modal-x')) closeModal(); });
+  el.querySelector('.modal-x').focus();
+  return el.querySelector('.modal-body');
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+window.addEventListener('hashchange', closeModal);
+
+/** 漲幅榜 / 跌幅榜:列出全部個股;預設只算成交值 5 千萬以上(跟榜單一致),可勾選包含全部 */
+async function openMovers(kind) {
+  const up = kind === 'gainers';
+  const body = openModal(up ? '漲幅榜' : '跌幅榜', '全部個股,不含 ETF', skeleton(8));
+  let d;
+  try { d = await api('/api/movers'); } catch (e) { body.innerHTML = errBox('資料暫時無法取得:' + e.message); return; }
+  let all = false;
+  const draw = () => {
+    const rows = d.rows.filter((r) => (up ? r.pct > 0 : r.pct < 0) && (all || (r.value || 0) >= 5e7));
+    const list = up ? rows : rows.reverse();
+    body.innerHTML = `<div class="modal-tools"><label class="chk"><input type="checkbox" id="mv-all" ${all ? 'checked' : ''}> 包含成交值不足 5 千萬的股票</label><span class="muted">共 ${list.length} 檔 · 收盤 ${esc(dateLabel(d.date))}</span></div>
+      <ol class="rank-list">${list.map((r, i) => `<li data-code="${esc(r.code)}"><span class="n">${i + 1}</span><span><b>${esc(r.name)}</b><small>${esc(r.code)} · ${esc(r.industry)} · 成交值 ${money(r.value)}</small></span>${pxTag(r.close, r.limit, dir(r.pct))}<span>${pctSpan(r.pct)}</span></li>`).join('') || '<li class="muted">沒有符合的股票</li>'}</ol>`;
+    body.querySelector('#mv-all').onchange = (e) => { all = e.target.checked; draw(); };
+  };
+  draw();
+  body.addEventListener('click', (e) => { const li = e.target.closest('.rank-list li[data-code]'); if (li) location.hash = `#/${li.dataset.code}`; });
+}
+/** 強勢 / 弱勢類股:列出全部分類 */
+function openStrength(up) {
+  const f = S.rankFull;
+  if (!f) return;
+  const list = up ? f.sorted : [...f.sorted].reverse();
+  openModal(`${up ? '強勢' : '弱勢'}${f.label}`, `共 ${list.length} 個,成分股平均漲跌`, f.bars(list, up));
+}
+
 /* ───────── 台股總覽 ───────── */
 async function renderMarket(main, id) {
   main.innerHTML = `<div class="panel">${skeleton(9)}</div>`;
@@ -902,13 +945,17 @@ async function renderMarket(main, id) {
     </div>
     <div class="grid even" id="rank-grid" style="margin-top:12px"></div>
     <div class="grid even">
-      <section class="panel"><h3>漲幅榜<small>成交值 5 千萬以上</small></h3>${rank(d.gainers, 'pct')}</section>
-      <section class="panel"><h3>跌幅榜<small>成交值 5 千萬以上</small></h3>${rank(d.losers, 'pct')}</section>
+      <section class="panel has-expand">${expandBtn('gainers')}<h3>漲幅榜<small>成交值 5 千萬以上</small></h3>${rank(d.gainers, 'pct')}</section>
+      <section class="panel has-expand">${expandBtn('losers')}<h3>跌幅榜<small>成交值 5 千萬以上</small></h3>${rank(d.losers, 'pct')}</section>
       <section class="panel"><h3>成交值榜<small>個股</small></h3>${rank(d.byValue, 'value')}</section>
       <section class="panel"><h3>成交量榜<small>含 ETF,單位:張</small></h3>${rank(d.byVolume, 'volume')}</section>
     </div>
     <p class="note">指數、成交值、法人金額取自證交所與櫃買中心;漲跌家數與排行由當日官方收盤行情統計;產業強弱是各產業成分股今日漲跌幅的簡單平均(每檔權重相同,不受權值股影響)。</p>`;
-  main.addEventListener('click', (e) => { const li = e.target.closest('.rank-list li'); if (li) location.hash = `#/${li.dataset.code}`; });
+  main.addEventListener('click', (e) => {
+    const ex = e.target.closest('[data-expand]');
+    if (ex) { const w = ex.dataset.expand; if (w === 'gainers' || w === 'losers') openMovers(w); else openStrength(w === 'strong'); return; }
+    const li = e.target.closest('.rank-list li'); if (li) location.hash = `#/${li.dataset.code}`;
+  });
   // 強弱排行:預設是「產業類股」(被動元件、PCB、面板業這種細分類),電子相關的大產業別以細分類取代
   const ELEC_BIG = new Set(['半導體業', '電腦及週邊設備業', '光電業', '通信網路業', '電子零組件業', '電子通路業', '其他電子業', '資訊服務業']);
   const HINT = { sub: 'Yahoo 電子產業細分 + 非電子的產業別', industry: '證交所、櫃買中心官方產業別', chain: '櫃買中心產業鏈', concept: 'Yahoo 概念股', group: 'Yahoo 集團股' };
@@ -934,8 +981,9 @@ async function renderMarket(main, id) {
     const sorted = list.sort((a, b) => b.pct - a.pct);
     const mx = Math.max(1, ...sorted.map((x) => Math.abs(x.pct)));
     const bars = (arr, up) => `<div class="bars">${arr.map((g) => `<a class="bar-row" href="${g.href}"><span class="nm">${esc(g.name)}<small>${g.count}檔</small></span><span class="track"><i class="fillb" style="left:0;width:${(Math.abs(g.pct) / mx) * 100}%;background:${up ? 'var(--up)' : 'var(--down)'};opacity:.8"></i></span><span class="val ${dir(g.pct)}">${fpct(g.pct)}</span></a>`).join('')}</div>`;
-    grid.innerHTML = `<section class="panel"><h3>強勢${LABEL[mode]}<small>成分股平均漲跌,至少 ${mode === 'group' ? 3 : mode === 'industry' ? 3 : 4} 檔</small></h3>${bars(sorted.slice(0, 10), true)}</section>
-      <section class="panel"><h3>弱勢${LABEL[mode]}<small>成分股平均漲跌</small></h3>${bars(sorted.slice(-10).reverse(), false)}</section>`;
+    S.rankFull = { sorted, bars, label: LABEL[mode] };
+    grid.innerHTML = `<section class="panel has-expand">${expandBtn('strong')}<h3>強勢${LABEL[mode]}<small>成分股平均漲跌,至少 ${mode === 'group' ? 3 : mode === 'industry' ? 3 : 4} 檔</small></h3>${bars(sorted.slice(0, 10), true)}</section>
+      <section class="panel has-expand">${expandBtn('weak')}<h3>弱勢${LABEL[mode]}<small>成分股平均漲跌</small></h3>${bars(sorted.slice(-10).reverse(), false)}</section>`;
   };
   bindSeg(main, (k, v) => { if (k === 'rk') { S.rankMode = v; drawRank(); } });
   drawRank();
