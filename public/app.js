@@ -569,6 +569,74 @@ async function tabRevenue(code, sum, host, id) {
 
 /* ── 財報 ── */
 async function tabFinancials(code, sum, host, id) {
+  const mode = S.finMode || 'q';
+  host.innerHTML = `<div class="controls" style="margin:0 0 12px"><span class="grp">期間 ${segHtml('fm', [['q', '季'], ['m', '月']], mode)}</span>${mode === 'm' ? '<span class="muted" style="font-size:12.5px">公司只公布月營收,獲利、EPS 等要等季報</span>' : ''}</div><div id="fin-body"><div class="panel">${skeleton(6)}</div></div>`;
+  bindSeg(host, (k, v) => {
+    if (k !== 'fm') return;
+    S.finMode = v;
+    tabFinancials(code, sum, host, id).catch((e) => { if (id === S.renderId) host.innerHTML = errBox(`載入失敗:${e.message}`); });
+  });
+  const body = host.querySelector('#fin-body');
+  try { await (mode === 'm' ? finMonthly : finQuarter)(code, sum, body, id); }
+  catch (e) { if (id !== S.renderId) return; body.innerHTML = errBox(`載入失敗:${e.message}`, true); body.querySelector('[data-retry]').onclick = () => { apiCache.clear(); route(); }; }
+}
+
+/** 財報「月」:公司只公布月營收,這裡把月營收整理成財報角度的檢視(近 12 個月合計、本季累計對上季/去年同期、逐月明細) */
+async function finMonthly(code, sum, host, id) {
+  const d = await api(`/api/stock/${code}/revenue`);
+  if (id !== S.renderId) return;
+  const rows = d.rows;
+  if (!rows.length) { host.innerHTML = '<div class="panel"><p class="note">查無月營收資料。</p></div>'; return; }
+  const last = rows[rows.length - 1];
+  const byYm = new Map(rows.map((r) => [r.ym, r]));
+  const ymAdd = (ym, n) => { const [y, m] = ym.split('-').map(Number); const t = y * 12 + (m - 1) + n; return `${Math.floor(t / 12)}-${String((t % 12) + 1).padStart(2, '0')}`; };
+  const sumRange = (endYm, n) => { let t = 0; for (let i = 0; i < n; i++) { const r = byYm.get(ymAdd(endYm, -i)); if (!r || !isNum(r.rev)) return null; t += r.rev; } return t; };
+  const growth = (a, b) => (isNum(a) && isNum(b) && b ? (a / b - 1) * 100 : null);
+  const ttm = sumRange(last.ym, 12), ttmYoy = growth(ttm, sumRange(ymAdd(last.ym, -12), 12));
+  // 本季累計:該季已公布的月數,對照上一季整季與去年同期同月數
+  const [ly, lm] = last.ym.split('-').map(Number);
+  const qMonth = Math.floor((lm - 1) / 3) * 3 + 1, n = lm - qMonth + 1, qNo = (qMonth - 1) / 3 + 1;
+  const cur = sumRange(last.ym, n), prevQ = sumRange(ymAdd(`${ly}-${String(qMonth).padStart(2, '0')}`, -1), 3), lastYear = sumRange(ymAdd(last.ym, -12), n);
+  const vsPrev = isNum(cur) && prevQ ? (cur / prevQ) * 100 : null;
+  const m12 = rows.slice(-12), c24 = rows.slice(-24);
+  const R = (label, get, fmt, tone) => ({ label, get, fmt, tone });
+  const defs = [
+    R('營收(億)', (r) => r.rev, (v) => fnum(v / 1e8, 2)),
+    R('月增', (r) => r.mom, (v) => fpct(v, 1), 1),
+    R('年增', (r) => r.yoy, (v) => fpct(v, 1), 1),
+    R('累計營收(億)', (r) => r.cum, (v) => fnum(v / 1e8, 1)),
+    R('累計年增', (r) => r.cumYoy, (v) => fpct(v, 1), 1),
+  ];
+  host.innerHTML = `
+    <section class="panel"><h3>${last.ym.replace('-', ' 年 ')} 月營收<small>公司每月 10 日前申報</small></h3>
+      <div class="tiles divided">
+        <div class="tile"><span class="k">當月營收</span><span class="v">${yi(last.rev)}</span><span class="s">年增 <span class="${dir(last.yoy)}">${fpct(last.yoy, 1)}</span> · 月增 <span class="${dir(last.mom)}">${fpct(last.mom, 1)}</span></span></div>
+        <div class="tile"><span class="k">本年累計營收</span><span class="v">${yi(last.cum)}</span><span class="s">累計年增 <span class="${dir(last.cumYoy)}">${fpct(last.cumYoy, 1)}</span></span></div>
+        <div class="tile"><span class="k">近 12 個月營收</span><span class="v">${isNum(ttm) ? yi(ttm) : '—'}</span><span class="s">較前 12 個月 <span class="${dir(ttmYoy)}">${fpct(ttmYoy, 1)}</span></span></div>
+        <div class="tile"><span class="k">${ly} Q${qNo} 累計營收${n < 3 ? `(已公布 ${n}/3 個月)` : ''}</span><span class="v">${isNum(cur) ? yi(cur) : '—'}</span><span class="s">去年同期 <span class="${dir(growth(cur, lastYear))}">${fpct(growth(cur, lastYear), 1)}</span></span></div>
+        <div class="tile"><span class="k">${n < 3 ? '已達上季營收' : '較上季營收'}</span><span class="v ${n < 3 ? '' : dir(vsPrev === null ? null : vsPrev - 100)}">${vsPrev === null ? '—' : n < 3 ? `${fnum(vsPrev, 0)}%` : fpct(vsPrev - 100, 1)}</span><span class="s">上季整季 ${isNum(prevQ) ? yi(prevQ) : '—'}</span></div>
+      </div>
+    </section>
+    <section class="panel"><h3>近 24 個月營收與年增率</h3>
+      ${legend([[ACC, '月營收(億元)'], [WARN, '年增率', 1]])}
+      <div id="fin-m-chart" style="height:260px"></div></section>
+    <section class="panel"><h3>近 12 個月明細</h3>
+      <div class="tbl-wrap"><table><thead><tr><th class="l sticky-col">項目</th>${m12.map((r) => `<th>${esc(r.ym)}</th>`).join('')}</tr></thead>
+      <tbody>${defs.map((df) => `<tr><td class="l sticky-col">${df.label}</td>${m12.map((r) => { const v = df.get(r); return `<td>${isNum(v) ? (df.tone ? span(v, df.fmt(v)) : df.fmt(v)) : '—'}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>
+      ${d.check ? (d.check.match === false ? `<p class="note warn">${esc(d.check.month)} 官方月營收 ${yi(d.check.official, 2)} 與 FinMind ${yi(d.check.finmind, 2)} 不一致,本頁以官方數字為準。</p>` : `<p class="note ok">${esc(d.check.month)} 月營收已與證交所/櫃買官方申報資料核對${d.check.match ? '一致' : '(官方資料較新,以官方為準)'}。</p>`) : ''}
+      <p class="note">公司只公布月營收,沒有月份的獲利與 EPS,獲利請切回「季」看季報。「已達上季營收」是本季已公布月份的合計除以上一季整季營收。營收說明與歷史新高標示在「<a href="#/${code}/revenue">營收</a>」分頁。</p>
+      ${staleNote(d)}</section>`;
+  mountChart($('#fin-m-chart'), {
+    label: '月營收與年增率', height: 260, labels: c24.map((r) => r.ym), xTicks: 8,
+    xFmt: (l) => l.slice(2).replace('-', '/'), fmtL: (v) => fint(v / 1e8), fmtR: (v) => `${fnum(v, 0)}%`,
+    series: [
+      { type: 'bar', axis: 'l', data: c24.map((r) => r.rev), color: ACC, name: '營收', fmt: (v) => yi(v), dim: (v, i) => i !== c24.length - 1 },
+      { type: 'line', axis: 'r', data: c24.map((r) => r.yoy), color: WARN, name: '年增率', fmt: (v) => fpct(v, 1) },
+    ],
+  });
+}
+
+async function finQuarter(code, sum, host, id) {
   const f = await api(`/api/stock/${code}/financials`);
   if (id !== S.renderId) return;
   const q = f.quarters;
