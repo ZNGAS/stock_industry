@@ -166,10 +166,38 @@ const limitOf = (close, prev, market, fund) => {
 };
 const isStockCode = (code) => /^\d{4}$/.test(code);
 
+/**
+ * 證交所官網的「每日收盤行情」(MI_INDEX)。收盤後很快就有資料,比 OpenAPI 早;
+ * OpenAPI 還停在前一個交易日時,用它補上當天行情,避免上市與上櫃的日期對不上。
+ * 回傳格式轉成與 OpenAPI STOCK_DAY_ALL 相同的欄位;還沒有當天資料時回傳 null。
+ */
+async function twseDailyFromSite(iso) {
+  const j = await fetchJson(`https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=${iso.replace(/-/g, '')}&type=ALLBUT0999&response=json`);
+  if (!j || j.stat !== 'OK') return null;
+  const t = (j.tables || []).find((x) => /每日收盤行情/.test(x.title || '') && (x.data || []).length);
+  if (!t) return null;
+  const I = Object.fromEntries(['證券代號', '證券名稱', '成交股數', '成交筆數', '成交金額', '開盤價', '最高價', '最低價', '收盤價', '漲跌(+/-)', '漲跌價差', '本益比'].map((f) => [f, t.fields.indexOf(f)]));
+  if (Object.values(I).some((i) => i < 0)) return null;
+  const roc = `${+iso.slice(0, 4) - 1911}${iso.slice(5, 7)}${iso.slice(8, 10)}`;
+  const pe = new Map();
+  const rows = t.data.map((d) => {
+    const mark = String(d[I['漲跌(+/-)']]).replace(/<[^>]*>/g, '').trim();
+    const diff = num(d[I['漲跌價差']]);
+    // 漲跌欄:「+」漲、「-」跌、「X」除權息(參考價已調整,不顯示漲跌)
+    const change = diff === null || !/^[+-]?$/.test(mark) ? null : (mark === '-' ? -diff : diff);
+    pe.set(d[I['證券代號']], num(d[I['本益比']]));
+    return {
+      Date: roc, Code: d[I['證券代號']], Name: d[I['證券名稱']], TradeVolume: d[I['成交股數']], Transaction: d[I['成交筆數']], TradeValue: d[I['成交金額']],
+      OpeningPrice: d[I['開盤價']], HighestPrice: d[I['最高價']], LowestPrice: d[I['最低價']], ClosingPrice: d[I['收盤價']], Change: change === null ? '' : String(change),
+    };
+  });
+  return { rows, pe };
+}
+
 /** 全市場個股:基本資料 + 收盤行情 + 本益比/淨值比/殖利率 */
 function loadUniverse() {
   return cached('universe', 5 * MIN, async () => {
-    const [b1, b2, q1, q2, v1, v2, b3, q3] = await Promise.all([
+    const [b1, b2, q1raw, q2, v1, v2, b3, q3] = await Promise.all([
       fetchJson(`${TW}/opendata/t187ap03_L`),
       fetchJson(`${OT}/mopsfin_t187ap03_O`),
       fetchJson(`${TW}/exchangeReport/STOCK_DAY_ALL`),
@@ -179,6 +207,14 @@ function loadUniverse() {
       fetchJson(`${OT}/mopsfin_t187ap03_R`).catch(() => []),
       fetchJson(`${OT}/tpex_esb_latest_statistics`).catch(() => []),
     ]);
+    // 證交所 OpenAPI 比官網晚更新:上櫃已是新的一天、上市還停在前一天時,上市行情改用官網當天資料
+    const latest = (rows, f) => rows.reduce((m, r) => { const d = rocToIso(f(r)); return d && (!m || d > m) ? d : m; }, null);
+    let q1 = q1raw, twPe = null;
+    const twDate0 = latest(q1raw, (r) => r.Date), otcDate0 = latest(q2, (r) => r.Date);
+    if (otcDate0 && (!twDate0 || otcDate0 > twDate0)) {
+      const alt = await twseDailyFromSite(otcDate0).catch(() => null);
+      if (alt && alt.rows.length > 500) { q1 = alt.rows; twPe = alt.pe; }
+    }
     const stocks = new Map();
     const basic = new Map();
     for (const r of b1) basic.set(r['公司代號'], {
@@ -247,6 +283,7 @@ function loadUniverse() {
       });
     }
     for (const r of v1) { const s = stocks.get(r.Code); if (s) { s.pe = num(r.PEratio); s.pb = num(r.PBratio); s.yield = num(r.DividendYield); s.valDate = rocToIso(r.Date); } }
+    if (twPe) for (const [code, pe] of twPe) { const s = stocks.get(code); if (s && s.market === 'TWSE' && pe !== null) s.pe = pe; } // 官網當天的本益比
     for (const r of v2) { const s = stocks.get(r.SecuritiesCompanyCode); if (s) { s.pe = num(r.PriceEarningRatio); s.pb = num(r.PriceBookRatio); s.yield = num(r.YieldRatio); s.valDate = rocToIso(r.Date); } }
     // 停牌/無成交的股票也要能搜尋到:補上沒有行情的上市櫃公司
     for (const [code, b] of basic) {
