@@ -1006,15 +1006,30 @@ async function renderSupplyTheme(main, tid, id) {
     if (!wide) return;
     const box = sc.getBoundingClientRect();
     svg.setAttribute('width', box.width); svg.setAttribute('height', box.height);
-    const root = sc.querySelector('.sc-node.root').getBoundingClientRect();
-    const x1 = root.right - box.left, y1 = root.top + root.height / 2 - box.top;
-    let paths = '';
-    sc.querySelectorAll('.sc-branch').forEach((br) => {
-      const n = br.querySelector('.sc-node.branch').getBoundingClientRect();
-      const x2 = n.left - box.left, y2 = n.top + n.height / 2 - box.top, dx = (x2 - x1) * 0.5;
-      paths += `<path d="M${x1} ${y1} C${x1 + dx} ${y1},${x2 - dx} ${y2},${x2} ${y2}"/>`;
-    });
-    svg.innerHTML = paths;
+    const rel = (el) => { const r = el.getBoundingClientRect(); return { l: r.left - box.left, r: r.right - box.left, t: r.top - box.top, m: r.top + r.height / 2 - box.top, b: r.bottom - box.top }; };
+    const root = rel(sc.querySelector('.sc-node.root'));
+    const nodes = [...sc.querySelectorAll('.sc-branch')].map((br) => ({ br, n: rel(br.querySelector('.sc-node.branch')) }));
+    if (!nodes.length) { svg.innerHTML = ''; return; }
+    let k = '', l = '', dots = '';
+    // 根 → 主幹 → 每個環節(骨幹加樹枝)
+    const trunkX = Math.round((root.r + nodes[0].n.l) / 2);
+    k += `M${root.r} ${root.m}H${trunkX}`;
+    k += `M${trunkX} ${root.m}V${nodes[nodes.length - 1].n.m}`;
+    for (const { n } of nodes) { k += `M${trunkX} ${n.m}H${n.l - 1}`; dots += `<circle cx="${n.l - 1}" cy="${n.m}" r="3.5" class="k"/>`; }
+    dots += `<circle cx="${root.r}" cy="${root.m}" r="3.5" class="k"/>`;
+    // 環節 → 自己的小主幹 → 每一家公司
+    for (const { br, n } of nodes) {
+      const lv = br.querySelector('.sc-leaves');
+      if (lv.hidden) continue;
+      const cos = [...lv.querySelectorAll(':scope > .sc-co')].map(rel);
+      if (!cos.length) continue;
+      const spineX = Math.round(rel(lv).l - 14);
+      const top = Math.min(n.m, cos[0].m), bot = Math.max(n.m, cos[cos.length - 1].m);
+      l += `M${n.r + 1} ${n.m}H${spineX}M${spineX} ${top}V${bot}`;
+      for (const c of cos) { l += `M${spineX} ${c.m}H${c.l - 1}`; dots += `<circle cx="${c.l - 1}" cy="${c.m}" r="2.6" class="l"/>`; }
+      dots += `<circle cx="${n.r + 1}" cy="${n.m}" r="3.2" class="l"/>`;
+    }
+    svg.innerHTML = `<path class="k" d="${k}"/><path class="l" d="${l}"/>${dots}`;
   };
   draw();
   if (window.ResizeObserver) { S.scRO = new ResizeObserver(draw); S.scRO.observe(sc); }

@@ -521,7 +521,11 @@ body.modal-open { overflow: hidden; }
 .sc-chip .new, .sc-co-h .yb { font-size: 11px; line-height: 1; padding: 2px 5px; border-radius: 4px; background: var(--accent); color: #fff; }
 .sc { position: relative; display: grid; grid-template-columns: 190px 1fr; gap: 0 64px; align-items: center; margin: 6px 0 18px; }
 .sc-lines { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
-.sc-lines path { fill: none; stroke: var(--line2); stroke-width: 1.6; }
+.sc-lines path { fill: none; stroke-width: 1.8; stroke-linecap: round; }
+.sc-lines path.k { stroke: color-mix(in srgb, var(--accent) 75%, transparent); stroke-width: 2.2; }
+.sc-lines path.l { stroke: color-mix(in srgb, var(--text3) 80%, transparent); }
+.sc-lines circle.k { fill: var(--accent); }
+.sc-lines circle.l { fill: var(--text3); }
 .sc-rootcol { align-self: start; padding-top: 4px; z-index: 1; }
 .sc-node { display: block; text-align: left; border: 1px solid var(--line2); border-radius: 12px; background: var(--panel); color: var(--text); font: inherit; }
 .sc-node.root { padding: 16px 16px; text-align: center; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
@@ -538,15 +542,14 @@ body.modal-open { overflow: hidden; }
 .sc-node.branch .chev { width: 8px; height: 8px; border-right: 2px solid var(--text3); border-bottom: 2px solid var(--text3); transform: rotate(-45deg); transition: transform .15s; flex: none; }
 .sc-node.branch[aria-expanded="true"] .chev { transform: rotate(45deg); }
 .sc-branch.others .sc-node.branch { border-style: dashed; }
-.sc-leaves { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 8px; padding-left: 18px; border-left: 2px solid var(--line2); border-radius: 0 0 0 10px; }
+.sc-leaves { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding-left: 28px; }
 .sc-leaves[hidden] { display: none; }
 .sc-co { border: 1px solid var(--line); border-left: 3px solid var(--line2); border-radius: 9px; background: var(--panel2); min-width: 0; }
 .sc-co.sc-up { border-left-color: var(--up); }
 .sc-co.sc-down { border-left-color: var(--down); }
 .sc-co.sc-up .sc-co-h .nm b { color: var(--up); }
 .sc-co.sc-down .sc-co-h .nm b { color: var(--down); }
-.sc-co.open { grid-column: 1 / -1; }
-.sc-co-h { all: unset; box-sizing: border-box; display: grid; grid-template-columns: minmax(84px, auto) 1fr auto auto; gap: 4px 10px; align-items: baseline; width: 100%; padding: 8px 11px; cursor: pointer; }
+.sc-co-h { all: unset; box-sizing: border-box; display: grid; grid-template-columns: minmax(120px, auto) 1fr 90px 76px; gap: 4px 10px; align-items: baseline; width: 100%; padding: 8px 11px; cursor: pointer; }
 .sc-co-h:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 8px; }
 .sc-co-h:hover .nm b { color: var(--accent); }
 .sc-co-h .nm small { margin-left: 6px; color: var(--text3); }
@@ -560,7 +563,7 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 859px) {
   .sc { grid-template-columns: 1fr; gap: 12px; }
   .sc-branch { grid-template-columns: 1fr; gap: 8px; }
-  .sc-leaves { grid-template-columns: 1fr; padding-left: 12px; }
+  .sc-leaves { grid-template-columns: 1fr; padding-left: 12px; border-left: 2px solid var(--line2); }
   .sc-co-h { grid-template-columns: 1fr auto auto; }
   .sc-co-h .role { grid-column: 1 / -1; grid-row: 2; }
 }
