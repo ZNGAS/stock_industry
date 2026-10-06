@@ -1002,8 +1002,10 @@ async function renderSupplyTheme(main, tid, id) {
   const avg = traded.length ? traded.reduce((a, c) => a + c.pct, 0) / traded.length : null;
   const upN = traded.filter((c) => c.pct > 0).length, dnN = traded.filter((c) => c.pct < 0).length;
   const tint = (p) => (isNum(p) && p !== 0 ? `background:color-mix(in srgb, var(${p > 0 ? '--up' : '--down'}) ${Math.round(6 + Math.min(1, Math.abs(p) / 6) * 20)}%, var(--panel2))` : '');
-  const coHtml = (c) => `<div class="sc-co${c.official ? ' extra' : ''} ${isNum(c.pct) && c.pct > 0 ? 'sc-up' : isNum(c.pct) && c.pct < 0 ? 'sc-down' : ''}" data-code="${esc(c.code)}" style="${tint(c.pct)}"${c.official ? ' hidden' : ''}>
-      <button type="button" class="sc-co-h" aria-expanded="false"><span class="nm"><b>${esc(c.name)}</b><small>${esc(c.code)}</small>${c.auto ? '<em class="auto" title="依 Yahoo 概念股與產業細分自動歸類,說明是它所屬的產業細分,不是人工整理的角色">自動</em>' : ''}${c.official ? '<em class="auto" title="櫃買中心官方產業鏈同一個環節的公司,說明是它在產業鏈的位置">官方</em>' : ''}</span><span class="role">${esc(c.role || '')}</span><span class="px">${pxTag(c.close, c.limit, dir(c.pct))}</span><span class="pc">${pctSpan(c.pct)}</span></button>
+  const coHtml = (c) => `<div class="sc-co${c.official ? ' extra' : ''} ${isNum(c.pct) && c.pct > 0 ? 'sc-up' : isNum(c.pct) && c.pct < 0 ? 'sc-down' : ''}" data-code="${esc(c.code)}" style="${tint(c.pct)}"${c.official ? ' hidden' : ''} title="${esc(`${c.name} ${c.code}・${c.role || ''}・收盤 ${isNum(c.close) ? c.close : '—'}・市值 ${isNum(c.mcap) ? (c.mcap / 1e8).toFixed(0) + ' 億' : '—'}`)}">
+      <div class="cotop"><a class="nm" href="#/${esc(c.code)}"><b>${esc(c.name)}</b><small>${esc(c.code)}</small></a>${c.auto ? '<em class="auto" title="依 Yahoo 概念股與產業細分自動歸類,說明是它所屬的產業細分,不是人工整理的角色">自動</em>' : ''}${c.official ? '<em class="auto" title="櫃買中心官方產業鏈同一個環節的公司,說明是它在產業鏈的位置">官方</em>' : ''}<span class="pc">${pctSpan(c.pct)}</span></div>
+      <div class="role">${esc(c.role || '')}</div>
+      <button type="button" class="sc-nb" aria-expanded="false" title="看這家公司跟這個題材有關的新聞">新聞</button>
       <div class="sc-co-b" hidden></div></div>`;
   const brHtml = (b, i) => {
     const t = b.companies.filter((c) => isNum(c.pct)); const a = t.length ? t.reduce((s, c) => s + c.pct, 0) / t.length : null;
@@ -1022,7 +1024,7 @@ async function renderSupplyTheme(main, tid, id) {
       ${d.coverage ? `<div class="tile"><span class="k">Yahoo 概念股也列入</span><span class="v">${d.coverage.inYahoo}<small> / ${d.coverage.total}</small></span><span class="s">${esc((d.crossCheck || []).join('、'))} · 另有 ${d.coverage.auto} 家自動歸類</span></div>` : ''}
     </div>
     ${d.kind === 'curated' ? `<p class="note" style="margin-top:12px"><b>怎麼來的</b>:沒有標記的是我依產業知識整理的重點,角色說明是概括描述、非官方資料(NVIDIA 沒有公布供應商名單);標「自動」的是 Yahoo 概念股列入、依產業細分歸類;「官方」是櫃買中心官方產業鏈同一環節的其他公司(完整但不一定與此題材直接相關),預設收合,按各環節底下的「＋」展開。整理日期 ${esc(d.updated || '')},僅供參考。</p>` : `<p class="note" style="margin-top:12px">${esc(d.desc)} 公司旁的說明是它在櫃買中心產業鏈裡的位置。</p>`}</section>
-    <div class="controls" style="margin:14px 0 6px"><button class="btn sm" id="sc-all">全部展開</button><button class="btn sm" id="sc-none">全部收合</button>${branches.some((b) => b.companies.some((c) => c.official)) ? '<button class="btn sm" id="sc-extra">顯示官方同環節公司</button>' : ''}<span class="muted" style="font-size:12.5px">點環節收合 / 展開;點公司看角色與最新新聞</span></div>
+    <div class="controls" style="margin:14px 0 6px"><button class="btn sm" id="sc-all">全部展開</button><button class="btn sm" id="sc-none">全部收合</button>${branches.some((b) => b.companies.some((c) => c.official)) ? '<button class="btn sm" id="sc-extra">顯示官方同環節公司</button>' : ''}<span class="muted" style="font-size:12.5px">點環節收合 / 展開;點公司名稱到個股頁,點「新聞」看相關新聞;依公司市值由大到小排</span></div>
     <div class="sc" id="sc"><svg class="sc-lines" id="sc-lines" aria-hidden="true"></svg>
       <div class="sc-rootcol"><div class="sc-node root"><b>${esc(d.anchor)}</b><small>${esc(d.name)}</small></div></div>
       <div class="sc-branches">${branches.map((b, i) => `${b.stream && (i === 0 || branches[i - 1].stream !== b.stream) ? `<div class="sc-stream"><span>${esc(b.stream)}</span></div>` : ''}${brHtml(b, i)}`).join('')}</div></div>
@@ -1051,12 +1053,15 @@ async function renderSupplyTheme(main, tid, id) {
     for (const { br, n } of nodes) {
       const lv = br.querySelector('.sc-leaves');
       if (lv.hidden) continue;
-      const cos = [...lv.querySelectorAll(':scope > .sc-co:not([hidden])')].map(rel);
-      if (!cos.length) continue;
+      const all = [...lv.querySelectorAll(':scope > .sc-co:not([hidden])')].map(rel);
+      if (!all.length) continue;
+      // 一排放很多張卡片:每一排最左邊那張接一條樹枝(同一排的用上緣判斷)
+      const minL = Math.min(...all.map((c) => c.l));
+      const cos = all.filter((c) => c.l - minL < 4);
       const spineX = Math.round(rel(lv).l - 14);
-      const top = Math.min(n.m, cos[0].m), bot = Math.max(n.m, cos[cos.length - 1].m);
+      const top = Math.min(n.m, cos[0].t + 18), bot = Math.max(n.m, cos[cos.length - 1].t + 18);
       l += `M${n.r + 1} ${n.m}H${spineX}M${spineX} ${top}V${bot}`;
-      for (const c of cos) { l += `M${spineX} ${c.m}H${c.l - 1}`; dots += `<circle cx="${c.l - 1}" cy="${c.m}" r="2.6" class="l"/>`; }
+      for (const c of cos) { const y = c.t + 18; l += `M${spineX} ${y}H${c.l - 1}`; dots += `<circle cx="${c.l - 1}" cy="${y}" r="2.6" class="l"/>`; }
       dots += `<circle cx="${n.r + 1}" cy="${n.m}" r="3.2" class="l"/>`;
     }
     svg.innerHTML = `<path class="k" d="${k}"/><path class="l" d="${l}"/>${dots}`;
@@ -1065,14 +1070,14 @@ async function renderSupplyTheme(main, tid, id) {
   if (window.ResizeObserver) { S.scRO = new ResizeObserver(draw); S.scRO.observe(sc); }
 
   const toggleCo = async (co) => {
-    const h = co.querySelector('.sc-co-h'), body = co.querySelector('.sc-co-b');
+    const h = co.querySelector('.sc-nb'), body = co.querySelector('.sc-co-b');
     const open = h.getAttribute('aria-expanded') !== 'true';
     h.setAttribute('aria-expanded', open); body.hidden = !open; co.classList.toggle('open', open);
     if (!open || body.dataset.ready) { draw(); return; }
     body.dataset.ready = '1';
     const code = co.dataset.code;
     const c = branches.flatMap((b) => b.companies).find((x) => x.code === code);
-    body.innerHTML = `<div class="sc-co-i"><div class="r"><span class="k">角色</span><span>${esc(c.role || '—')}</span></div>
+    body.innerHTML = `<div class="sc-co-i">
       <div class="r"><span class="k">行情</span><span>收盤 ${pxTag(c.close, c.limit, dir(c.pct))} ${pctSpan(c.pct)} · 成交值 ${money(c.value)} · 市值 ${money(c.mcap)} · ${esc(c.industry)}</span></div>
       <div class="r"><span class="k">近期新聞</span><span class="sc-news muted">載入中…</span></div>
       <div class="acts"><a class="btn sm" href="#/${esc(code)}">看個股頁</a>${S.watch.includes(code) ? '<span class="muted">已在自選股</span>' : `<button class="btn sm" data-add="${esc(code)}">加入自選股</button>`}</div></div>`;
@@ -1103,7 +1108,7 @@ async function renderSupplyTheme(main, tid, id) {
     if (more) { const lv = more.parentElement; setExtra(lv, !!lv.querySelector(':scope > .sc-co.extra[hidden]')); draw(); return; }
     const bn = e.target.closest('.sc-node.branch');
     if (bn) { const open = bn.getAttribute('aria-expanded') !== 'true'; bn.setAttribute('aria-expanded', open); bn.parentElement.querySelector('.sc-leaves').hidden = !open; draw(); return; }
-    const hd = e.target.closest('.sc-co-h');
+    const hd = e.target.closest('.sc-nb');
     if (hd) toggleCo(hd.closest('.sc-co'));
   });
   if (focus) {

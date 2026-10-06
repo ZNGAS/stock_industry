@@ -1131,8 +1131,7 @@ async function supplyDetail(id) {
       const r = row(code); if (!r || !HW.has(r.industry)) continue;
       const eys = eyOf.get(code) || [];
       const hit = eys.find((e) => rules[e]);
-      const m = (memberOf.get(code) || []).find((e) => e.kind === 'chain');
-      const role = `${eys[0] ? `電子產業細分:${eys[0]}` : r.industry}${m ? `(${m.name}・${m.node})` : ''}`;
+      const role = eys[0] ? `電子產業細分:${eys[0]}` : r.industry;
       const entry = { ...r, role, y: true, auto: true };
       const target = hit ? rules[eys.find((e) => rules[e])] : null;
       const br = target && branches.find((x) => x.name === target);
@@ -1152,8 +1151,8 @@ async function supplyDetail(id) {
         const r = row(code); if (!r) continue;
         have.add(code); br.companies.push({ ...r, role: via, y: true, official: true });
       }
-      const tier = (c) => (c.official ? 2 : c.auto ? 1 : 0);
-      br.companies.sort((a, b2) => tier(a) - tier(b2) || (tier(a) ? (b2.mcap || 0) - (a.mcap || 0) : 0));
+      const tier = (c) => (c.official ? 1 : 0);
+      br.companies.sort((a, b2) => tier(a) - tier(b2) || (b2.mcap || 0) - (a.mcap || 0)); // 依公司市值由大到小;官方同環節的接在後面
     }
     const otherBranches = other.length ? [{ name: fallbackName, desc: 'Yahoo 概念股有列入,但沒有對應到上面的環節(說明是所屬產業細分)', others: true, companies: other.sort((a, b2) => (b2.mcap || 0) - (a.mcap || 0)) }] : [];
     return {
