@@ -996,21 +996,21 @@ async function renderSupplyTheme(main, tid, id) {
   const focus = S.route.focus || null;
   const branches = d.branches.map((b) => ({ ...b }));
   for (const ob of d.otherBranches || []) branches.push(ob);
-  const main7 = d.branches.flatMap((b) => b.companies);
+  const main7 = d.branches.flatMap((b) => b.companies).filter((c) => d.kind !== 'curated' || (!c.official && !c.auto));
   const uniq = [...new Map(main7.map((c) => [c.code, c])).values()];
   const traded = uniq.filter((c) => isNum(c.pct));
   const avg = traded.length ? traded.reduce((a, c) => a + c.pct, 0) / traded.length : null;
   const upN = traded.filter((c) => c.pct > 0).length, dnN = traded.filter((c) => c.pct < 0).length;
   const tint = (p) => (isNum(p) && p !== 0 ? `background:color-mix(in srgb, var(${p > 0 ? '--up' : '--down'}) ${Math.round(6 + Math.min(1, Math.abs(p) / 6) * 20)}%, var(--panel2))` : '');
-  const coHtml = (c) => `<div class="sc-co ${isNum(c.pct) && c.pct > 0 ? 'sc-up' : isNum(c.pct) && c.pct < 0 ? 'sc-down' : ''}" data-code="${esc(c.code)}" style="${tint(c.pct)}">
-      <button type="button" class="sc-co-h" aria-expanded="false"><span class="nm"><b>${esc(c.name)}</b><small>${esc(c.code)}</small>${c.auto ? '<em class="auto" title="依 Yahoo 概念股與產業細分自動歸類,說明是它所屬的產業細分,不是人工整理的角色">自動</em>' : ''}</span><span class="role">${esc(c.role || '')}</span><span class="px">${pxTag(c.close, c.limit, dir(c.pct))}</span><span class="pc">${pctSpan(c.pct)}</span></button>
+  const coHtml = (c) => `<div class="sc-co${c.official ? ' extra' : ''} ${isNum(c.pct) && c.pct > 0 ? 'sc-up' : isNum(c.pct) && c.pct < 0 ? 'sc-down' : ''}" data-code="${esc(c.code)}" style="${tint(c.pct)}"${c.official ? ' hidden' : ''}>
+      <button type="button" class="sc-co-h" aria-expanded="false"><span class="nm"><b>${esc(c.name)}</b><small>${esc(c.code)}</small>${c.auto ? '<em class="auto" title="依 Yahoo 概念股與產業細分自動歸類,說明是它所屬的產業細分,不是人工整理的角色">自動</em>' : ''}${c.official ? '<em class="auto" title="櫃買中心官方產業鏈同一個環節的公司,說明是它在產業鏈的位置">官方</em>' : ''}</span><span class="role">${esc(c.role || '')}</span><span class="px">${pxTag(c.close, c.limit, dir(c.pct))}</span><span class="pc">${pctSpan(c.pct)}</span></button>
       <div class="sc-co-b" hidden></div></div>`;
   const brHtml = (b, i) => {
     const t = b.companies.filter((c) => isNum(c.pct)); const a = t.length ? t.reduce((s, c) => s + c.pct, 0) / t.length : null;
     const open = !b.others;
     return `<section class="sc-branch${b.others ? ' others' : ''}" data-i="${i}" data-bid="${esc(b.id || '')}">
       <button type="button" class="sc-node branch" aria-expanded="${open}"><span class="bn">${b.stream ? `<em class="stp">${esc(b.stream)}</em>` : ''}<b>${esc(b.name)}</b>${b.desc ? `<small>${esc(b.desc)}</small>` : ''}</span><span class="bm">${b.companies.length} 家 · 平均 ${pctSpan(a)}</span><i class="chev" aria-hidden="true"></i></button>
-      <div class="sc-leaves"${open ? '' : ' hidden'}>${b.companies.map(coHtml).join('')}</div></section>`;
+      <div class="sc-leaves"${open ? '' : ' hidden'}>${b.companies.map(coHtml).join('')}${b.companies.some((c) => c.official) ? `<button type="button" class="sc-more" data-n="${b.companies.filter((c) => c.official).length}">＋ 官方產業鏈同環節另外 ${b.companies.filter((c) => c.official).length} 家</button>` : ''}</div></section>`;
   };
   main.innerHTML = `
     <div class="crumb"><a href="#/supply">供應鏈</a><span>›</span><span>${esc(d.name)}</span></div>
@@ -1021,11 +1021,11 @@ async function renderSupplyTheme(main, tid, id) {
       <div class="tile"><span class="k">漲 / 跌家數</span><span class="v"><span class="up">${upN}</span> / <span class="down">${dnN}</span></span><span class="s">共 ${traded.length} 檔有行情</span></div>
       ${d.coverage ? `<div class="tile"><span class="k">Yahoo 概念股也列入</span><span class="v">${d.coverage.inYahoo}<small> / ${d.coverage.total}</small></span><span class="s">${esc((d.crossCheck || []).join('、'))} · 另有 ${d.coverage.auto} 家自動歸類</span></div>` : ''}
     </div>
-    ${d.kind === 'curated' ? `<p class="note" style="margin-top:12px">整理資料(${esc(d.updated || '')}),角色說明是概括描述、非官方資料,僅供參考。${esc(d.note || '').replace(/^整理自公開資訊與產業報導,角色說明為概括描述,非官方資料,僅供參考。/, '')}</p>` : `<p class="note" style="margin-top:12px">${esc(d.desc)} 公司旁的說明是它在櫃買中心產業鏈裡的位置。</p>`}</section>
-    <div class="controls" style="margin:14px 0 6px"><button class="btn sm" id="sc-all">全部展開</button><button class="btn sm" id="sc-none">全部收合</button><span class="muted" style="font-size:12.5px">點環節收合 / 展開;點公司看角色與最新新聞</span></div>
+    ${d.kind === 'curated' ? `<p class="note" style="margin-top:12px"><b>怎麼來的</b>:沒有標記的是我依產業知識整理的重點,角色說明是概括描述、非官方資料(NVIDIA 沒有公布供應商名單);標「自動」的是 Yahoo 概念股列入、依產業細分歸類;「官方」是櫃買中心官方產業鏈同一環節的其他公司(完整但不一定與此題材直接相關),預設收合,按各環節底下的「＋」展開。整理日期 ${esc(d.updated || '')},僅供參考。</p>` : `<p class="note" style="margin-top:12px">${esc(d.desc)} 公司旁的說明是它在櫃買中心產業鏈裡的位置。</p>`}</section>
+    <div class="controls" style="margin:14px 0 6px"><button class="btn sm" id="sc-all">全部展開</button><button class="btn sm" id="sc-none">全部收合</button>${branches.some((b) => b.companies.some((c) => c.official)) ? '<button class="btn sm" id="sc-extra">顯示官方同環節公司</button>' : ''}<span class="muted" style="font-size:12.5px">點環節收合 / 展開;點公司看角色與最新新聞</span></div>
     <div class="sc" id="sc"><svg class="sc-lines" id="sc-lines" aria-hidden="true"></svg>
       <div class="sc-rootcol"><div class="sc-node root"><b>${esc(d.anchor)}</b><small>${esc(d.name)}</small></div></div>
-      <div class="sc-branches">${branches.map(brHtml).join('')}</div></div>
+      <div class="sc-branches">${branches.map((b, i) => `${b.stream && (i === 0 || branches[i - 1].stream !== b.stream) ? `<div class="sc-stream"><span>${esc(b.stream)}</span></div>` : ''}${brHtml(b, i)}`).join('')}</div></div>
     <p class="note">新聞取自 Google 新聞,以「公司名稱 + 題材關鍵字」搜尋近 90 天,僅供參考;顏色紅漲綠跌,漲跌幅為最近一個交易日。</p>`;
 
   const sc = $('#sc'), svg = $('#sc-lines');
@@ -1051,7 +1051,7 @@ async function renderSupplyTheme(main, tid, id) {
     for (const { br, n } of nodes) {
       const lv = br.querySelector('.sc-leaves');
       if (lv.hidden) continue;
-      const cos = [...lv.querySelectorAll(':scope > .sc-co')].map(rel);
+      const cos = [...lv.querySelectorAll(':scope > .sc-co:not([hidden])')].map(rel);
       if (!cos.length) continue;
       const spineX = Math.round(rel(lv).l - 14);
       const top = Math.min(n.m, cos[0].m), bot = Math.max(n.m, cos[cos.length - 1].m);
@@ -1092,10 +1092,15 @@ async function renderSupplyTheme(main, tid, id) {
   };
   $('#sc-all').onclick = () => setAll(true);
   $('#sc-none').onclick = () => setAll(false);
+  const setExtra = (lv, show) => { lv.querySelectorAll(':scope > .sc-co.extra').forEach((x) => { x.hidden = !show; }); const m = lv.querySelector(':scope > .sc-more'); if (m) m.textContent = show ? '－ 收合官方同環節公司' : `＋ 官方產業鏈同環節另外 ${m.dataset.n} 家`; };
+  const ex = $('#sc-extra');
+  if (ex) ex.onclick = () => { const show = ex.dataset.on !== '1'; ex.dataset.on = show ? '1' : ''; ex.textContent = show ? '隱藏官方同環節公司' : '顯示官方同環節公司'; $$('#sc .sc-leaves').forEach((lv) => { if (!lv.hidden) setExtra(lv, show); }); draw(); };
   sc.addEventListener('click', async (e) => {
     const add = e.target.closest('[data-add]');
     if (add) { await addCodes([add.dataset.add]); toast('已加入自選股'); add.replaceWith(Object.assign(document.createElement('span'), { className: 'muted', textContent: '已在自選股' })); return; }
     if (e.target.closest('a')) return;
+    const more = e.target.closest('.sc-more');
+    if (more) { const lv = more.parentElement; setExtra(lv, !!lv.querySelector(':scope > .sc-co.extra[hidden]')); draw(); return; }
     const bn = e.target.closest('.sc-node.branch');
     if (bn) { const open = bn.getAttribute('aria-expanded') !== 'true'; bn.setAttribute('aria-expanded', open); bn.parentElement.querySelector('.sc-leaves').hidden = !open; draw(); return; }
     const hd = e.target.closest('.sc-co-h');
@@ -1105,6 +1110,7 @@ async function renderSupplyTheme(main, tid, id) {
     const br = [...sc.querySelectorAll('.sc-branch')].find((x) => x.dataset.bid && x.dataset.bid === focus);
     if (br) { br.classList.add('flash'); br.scrollIntoView({ block: 'start' }); window.scrollBy(0, -80); setTimeout(() => br.classList.remove('flash'), 2400); }
     const co = sc.querySelector(`.sc-co[data-code="${CSS.escape(focus)}"]`);
+    if (co && co.hidden) co.hidden = false;
     if (co) { const lv = co.closest('.sc-leaves'); if (lv.hidden) { lv.hidden = false; lv.parentElement.querySelector('.sc-node.branch').setAttribute('aria-expanded', 'true'); } toggleCo(co); co.scrollIntoView({ block: 'center' }); }
   }
 }

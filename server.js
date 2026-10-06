@@ -1116,9 +1116,9 @@ async function supplyDetail(id) {
     for (const g of yahoo) if (g.kind === 'concept' && (t.crossCheck || []).includes(g.name)) g.codes.forEach((c) => cross.add(c));
     const used = new Set();
     const branches = t.branches.map((b) => ({
-      name: b.name, desc: b.desc,
+      name: b.name, desc: b.desc, stream: b.stream || null, chainNodes: b.chainNodes || [],
       companies: b.companies.map((c) => { const r = row(c.code); if (!r) return null; used.add(c.code); return { ...r, role: c.role, y: cross.has(c.code) }; }).filter(Boolean),
-    })).filter((b) => b.companies.length);
+    })).filter((b) => b.companies.length || b.chainNodes.length);
     // Yahoo 概念股列入、但還沒整理角色的公司:只收硬體(電子類)產業,避免 AI 理財、軟體、金融等混進供應鏈;
     // 依「電子產業細分」歸到對應環節(規則在 themes.json 的 autoBuckets),對不上的放「其他硬體相關」並收合
     const HW = new Set(['半導體業', '電腦及週邊設備業', '光電業', '通信網路業', '電子零組件業', '電子通路業', '其他電子業']);
@@ -1138,7 +1138,23 @@ async function supplyDetail(id) {
       const br = target && branches.find((x) => x.name === target);
       if (br) br.companies.push(entry); else if (fallbackName) other.push(entry);
     }
-    for (const br of branches) br.companies.sort((a, b2) => (b2.auto ? 0 : 1) - (a.auto ? 0 : 1) || 0);
+    // 官方產業鏈同環節的其他公司:完整、有出處,接在整理的重點與自動歸類後面(畫面預設收合)
+    const nodeCodes = (cn, nn) => {
+      const c = chainData && chainData.chains.find((x) => x.kind === 'chain' && x.name === cn);
+      const out = [];
+      if (c) for (const st of c.streams) for (const n of st.nodes) if (n.name === nn) for (const code of n.codes) out.push({ code, via: `${cn}・${st.name}・${nn}` });
+      return out;
+    };
+    for (const br of branches) {
+      const have = new Set(br.companies.map((c) => c.code));
+      for (const [cn, nn] of br.chainNodes || []) for (const { code, via } of nodeCodes(cn, nn)) {
+        if (have.has(code)) continue;
+        const r = row(code); if (!r) continue;
+        have.add(code); br.companies.push({ ...r, role: via, y: true, official: true });
+      }
+      const tier = (c) => (c.official ? 2 : c.auto ? 1 : 0);
+      br.companies.sort((a, b2) => tier(a) - tier(b2) || (tier(a) ? (b2.mcap || 0) - (a.mcap || 0) : 0));
+    }
     const otherBranches = other.length ? [{ name: fallbackName, desc: 'Yahoo 概念股有列入,但沒有對應到上面的環節(說明是所屬產業細分)', others: true, companies: other.sort((a, b2) => (b2.mcap || 0) - (a.mcap || 0)) }] : [];
     return {
       kind: 'curated', id, name: t.name, anchor: t.anchor, desc: t.desc, updated: cfg.updated, note: cfg.note, date: quoteDate,
