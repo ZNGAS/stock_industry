@@ -1003,7 +1003,7 @@ async function renderSupplyTheme(main, tid, id) {
   const upN = traded.filter((c) => c.pct > 0).length, dnN = traded.filter((c) => c.pct < 0).length;
   const tint = (p) => (isNum(p) && p !== 0 ? `background:color-mix(in srgb, var(${p > 0 ? '--up' : '--down'}) ${Math.round(6 + Math.min(1, Math.abs(p) / 6) * 20)}%, var(--panel2))` : '');
   const coHtml = (c) => `<div class="sc-co ${isNum(c.pct) && c.pct > 0 ? 'sc-up' : isNum(c.pct) && c.pct < 0 ? 'sc-down' : ''}" data-code="${esc(c.code)}" style="${tint(c.pct)}">
-      <button type="button" class="sc-co-h" aria-expanded="false"><span class="nm"><b>${esc(c.name)}</b><small>${esc(c.code)}</small></span><span class="role">${esc(c.role || '')}</span><span class="px">${pxTag(c.close, c.limit, dir(c.pct))}</span><span class="pc">${pctSpan(c.pct)}</span></button>
+      <button type="button" class="sc-co-h" aria-expanded="false"><span class="nm"><b>${esc(c.name)}</b><small>${esc(c.code)}</small>${c.auto ? '<em class="auto" title="依 Yahoo 概念股與產業細分自動歸類,說明是它所屬的產業細分,不是人工整理的角色">自動</em>' : ''}</span><span class="role">${esc(c.role || '')}</span><span class="px">${pxTag(c.close, c.limit, dir(c.pct))}</span><span class="pc">${pctSpan(c.pct)}</span></button>
       <div class="sc-co-b" hidden></div></div>`;
   const brHtml = (b, i) => {
     const t = b.companies.filter((c) => isNum(c.pct)); const a = t.length ? t.reduce((s, c) => s + c.pct, 0) / t.length : null;
@@ -1019,7 +1019,7 @@ async function renderSupplyTheme(main, tid, id) {
       <div class="tile"><span class="k">${{ curated: '整理的公司', chain: '產業鏈公司', none: '公司' }[d.kind] || '分類成員'}</span><span class="v">${uniq.length}<small> 家</small></span><span class="s">${d.branches.length} 個${d.kind === 'curated' || d.kind === 'chain' ? '環節' : '分類'}</span></div>
       <div class="tile"><span class="k">平均漲跌</span><span class="v ${dir(avg)}">${fpct(avg)}</span><span class="s">每檔權重相同</span></div>
       <div class="tile"><span class="k">漲 / 跌家數</span><span class="v"><span class="up">${upN}</span> / <span class="down">${dnN}</span></span><span class="s">共 ${traded.length} 檔有行情</span></div>
-      ${d.coverage ? `<div class="tile"><span class="k">Yahoo 概念股也列入</span><span class="v">${d.coverage.inYahoo}<small> / ${d.coverage.total}</small></span><span class="s">${esc((d.crossCheck || []).join('、'))}</span></div>` : ''}
+      ${d.coverage ? `<div class="tile"><span class="k">Yahoo 概念股也列入</span><span class="v">${d.coverage.inYahoo}<small> / ${d.coverage.total}</small></span><span class="s">${esc((d.crossCheck || []).join('、'))} · 另有 ${d.coverage.auto} 家自動歸類</span></div>` : ''}
     </div>
     ${d.kind === 'curated' ? `<p class="note" style="margin-top:12px">整理資料(${esc(d.updated || '')}),角色說明是概括描述、非官方資料,僅供參考。${esc(d.note || '').replace(/^整理自公開資訊與產業報導,角色說明為概括描述,非官方資料,僅供參考。/, '')}</p>` : `<p class="note" style="margin-top:12px">${esc(d.desc)} 公司旁的說明是它在櫃買中心產業鏈裡的位置。</p>`}</section>
     <div class="controls" style="margin:14px 0 6px"><button class="btn sm" id="sc-all">全部展開</button><button class="btn sm" id="sc-none">全部收合</button><span class="muted" style="font-size:12.5px">點環節收合 / 展開;點公司看角色與最新新聞</span></div>

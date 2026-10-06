@@ -229,6 +229,37 @@ async function twseDailyFromSite(iso) {
   return { rows, pe };
 }
 
+/**
+ * 櫃買中心官網的「上櫃股票每日收盤行情」。OpenAPI 那份包含權證、債券等一萬兩千多筆,檔案很大、下載時快時慢(有時要 20 秒以上),
+ * 官網版只有股票與 ETF(約一千筆、140 KB)。轉成與 OpenAPI 相同的欄位;沒有當天資料時回傳 null。
+ */
+async function tpexDailyFromSite(iso) {
+  const j = await fetchJson(`https://www.tpex.org.tw/www/zh-tw/afterTrading/otc?date=${encodeURIComponent(iso.replace(/-/g, '/'))}&type=EW&response=json`);
+  const t = j && j.tables && j.tables[0];
+  if (!t || !t.data || !t.data.length) return null;
+  const f = t.fields.map((x) => String(x).replace(/<[^>]*>/g, '').trim());
+  const I = Object.fromEntries(['代號', '名稱', '收盤', '漲跌', '開盤', '最高', '最低', '成交股數', '成交金額(元)', '成交筆數'].map((k) => [k, f.indexOf(k)]));
+  if (Object.values(I).some((i) => i < 0)) return null;
+  const roc = `${+iso.slice(0, 4) - 1911}${iso.slice(5, 7)}${iso.slice(8, 10)}`;
+  return t.data.map((d) => ({
+    Date: roc, SecuritiesCompanyCode: d[I['代號']], CompanyName: d[I['名稱']], Close: d[I['收盤']], Change: d[I['漲跌']], Open: d[I['開盤']], High: d[I['最高']], Low: d[I['最低']],
+    TradingShares: d[I['成交股數']], TransactionAmount: d[I['成交金額(元)']], TransactionNumber: d[I['成交筆數']],
+  }));
+}
+/** 往回找最近一個有資料的交易日(週末、假日官網會回「沒有資料」,每次只要幾十毫秒);今天 14:00 前不查今天 */
+async function latestSiteDaily(fetchDay, minRows) {
+  const now = new Date(Date.now() + 8 * 3600e3); // 台北時間
+  for (let i = 0; i < 8; i++) {
+    if (i === 0 && now.getUTCHours() < 14) continue;
+    const day = addDays(now, -i), wd = day.getUTCDay();
+    if (wd === 0 || wd === 6) continue;
+    const r = await fetchDay(isoDate(day)).catch(() => null);
+    if (r && (r.rows ? r.rows.length : r.length) > minRows) return r;
+  }
+  return null;
+}
+const tpexLatestDaily = () => latestSiteDaily(tpexDailyFromSite, 300);
+
 /** 往回找最近一個有收盤資料的交易日(週末、假日官網會回「沒有資料」,每次只要幾十毫秒);今天 14:00 前不查今天 */
 async function twseLatestDaily() {
   const now = new Date(Date.now() + 8 * 3600e3); // 台北時間
@@ -244,7 +275,7 @@ async function twseLatestDaily() {
 
 /** 全市場個股:基本資料 + 收盤行情 + 本益比/淨值比/殖利率 */
 function loadUniverse() {
-  return cached('universe', 5 * MIN, async () => {
+  return snapshotCached('universe', 5 * MIN, async () => {
     // 公司基本資料(名稱、產業別、股本…)很少變動,但證交所這支 API 常要 5~7 秒:存磁碟,3 小時內直接用,過期先用舊的、背景更新
     const basicRaw = () => diskCached('basic_v1', 3 * HOUR, async () => {
       const [b1, b2, b3] = await Promise.all([
@@ -261,15 +292,16 @@ function loadUniverse() {
     // 上市收盤行情:證交所官網(rwd)又快(幾十毫秒)又比 OpenAPI 早更新,優先用;官網沒資料或失敗才等 OpenAPI(它有時要好幾秒)
     // 本益比/淨值比/殖利率:資料一天才換一次,存磁碟,過期先用舊的、背景更新
     const bwibbu = () => diskCached('bwibbu_v1', 30 * MIN, async () => ({ rows: await fetchJson(`${TW}/exchangeReport/BWIBBU_ALL`) }), { swr: true });
-    const [{ b1, b2, b3 }, site, q2, { rows: v1 }, v2, q3] = await Promise.all([
+    const [{ b1, b2, b3 }, site, q2site, { rows: v1 }, v2, q3] = await Promise.all([
       basicRaw(),
       twseLatestDaily().catch(() => null),
-      fetchJson(`${OT}/tpex_mainboard_daily_close_quotes`),
+      tpexLatestDaily().catch(() => null),
       bwibbu(),
       fetchJson(`${OT}/tpex_mainboard_peratio_analysis`),
       fetchJson(`${OT}/tpex_esb_latest_statistics`).catch(() => []),
     ]);
     const q1 = site ? site.rows : await fetchJson(`${TW}/exchangeReport/STOCK_DAY_ALL`);
+    const q2 = q2site || await fetchJson(`${OT}/tpex_mainboard_daily_close_quotes`); // 官網沒資料或失敗才用 OpenAPI(很大、可能很慢)
     const twPe = site ? site.pe : null;
     const stocks = new Map();
     const basic = new Map();
@@ -1087,21 +1119,30 @@ async function supplyDetail(id) {
       name: b.name, desc: b.desc,
       companies: b.companies.map((c) => { const r = row(c.code); if (!r) return null; used.add(c.code); return { ...r, role: c.role, y: cross.has(c.code) }; }).filter(Boolean),
     })).filter((b) => b.companies.length);
-    // 其他相關:Yahoo 概念股有列入、但還沒整理角色的公司,依所屬產業鏈分組(收合)
-    const otherMap = new Map();
+    // Yahoo 概念股列入、但還沒整理角色的公司:只收硬體(電子類)產業,避免 AI 理財、軟體、金融等混進供應鏈;
+    // 依「電子產業細分」歸到對應環節(規則在 themes.json 的 autoBuckets),對不上的放「其他硬體相關」並收合
+    const HW = new Set(['半導體業', '電腦及週邊設備業', '光電業', '通信網路業', '電子零組件業', '電子通路業', '其他電子業']);
+    const eyOf = new Map();
+    for (const g of yahoo) if (g.kind === 'ey') for (const c of g.codes) (eyOf.get(c) || eyOf.set(c, []).get(c)).push(g.name);
+    const rules = (t.autoBuckets && t.autoBuckets.ey) || {};
+    const fallbackName = t.autoBuckets ? t.autoBuckets.fallback : null; // 沒設定就不收對不上環節的
+    const other = [];
     for (const code of [...cross].filter((c) => !used.has(c))) {
-      const r = row(code); if (!r) continue;
+      const r = row(code); if (!r || !HW.has(r.industry)) continue;
+      const eys = eyOf.get(code) || [];
+      const hit = eys.find((e) => rules[e]);
       const m = (memberOf.get(code) || []).find((e) => e.kind === 'chain');
-      const key = m ? m.name : r.industry;
-      const arr = otherMap.get(key) || [];
-      arr.push({ ...r, role: m ? `${m.stream}・${m.node}` : `官方產業別:${r.industry}`, y: true });
-      otherMap.set(key, arr);
+      const role = `${eys[0] ? `電子產業細分:${eys[0]}` : r.industry}${m ? `(${m.name}・${m.node})` : ''}`;
+      const entry = { ...r, role, y: true, auto: true };
+      const target = hit ? rules[eys.find((e) => rules[e])] : null;
+      const br = target && branches.find((x) => x.name === target);
+      if (br) br.companies.push(entry); else if (fallbackName) other.push(entry);
     }
-    const otherBranches = [...otherMap.entries()].map(([name, companies]) => ({ name: `其他相關・${name}`, desc: 'Yahoo 概念股有列入,尚未整理角色(說明是所屬產業鏈環節)', others: true, companies: companies.sort((a, b) => (b.mcap || 0) - (a.mcap || 0)) }))
-      .sort((a, b) => b.companies.length - a.companies.length);
+    for (const br of branches) br.companies.sort((a, b2) => (b2.auto ? 0 : 1) - (a.auto ? 0 : 1) || 0);
+    const otherBranches = other.length ? [{ name: fallbackName, desc: 'Yahoo 概念股有列入,但沒有對應到上面的環節(說明是所屬產業細分)', others: true, companies: other.sort((a, b2) => (b2.mcap || 0) - (a.mcap || 0)) }] : [];
     return {
       kind: 'curated', id, name: t.name, anchor: t.anchor, desc: t.desc, updated: cfg.updated, note: cfg.note, date: quoteDate,
-      crossCheck: t.crossCheck || [], branches, otherBranches, coverage: { total: used.size, inYahoo: [...used].filter((c) => cross.has(c)).length },
+      crossCheck: t.crossCheck || [], branches, otherBranches, coverage: (t.crossCheck || []).length ? { total: used.size, inYahoo: [...used].filter((c) => cross.has(c)).length, auto: branches.reduce((n, b) => n + b.companies.filter((c) => c.auto).length, 0) + other.length } : null,
     };
   }
   // 櫃買官方產業鏈:直接用官方的上游、中游、下游與環節
