@@ -1604,6 +1604,21 @@ $('#btn-export').onclick = () => {
 };
 
 /* ───────── 主題 / 啟動 ───────── */
+// 桌面版視窗(WebView2)的標題列要跟著主題:把目前背景色回報給視窗程式
+function reportChrome() {
+  try {
+    if (!(window.chrome && window.chrome.webview)) return;
+    const c = getComputedStyle(document.body).backgroundColor.match(/\d+/g);
+    if (!c) return;
+    const [r, g, b] = c.map(Number);
+    window.chrome.webview.postMessage(`${r},${g},${b},${(r * 299 + g * 587 + b * 114) / 1000 < 128 ? 1 : 0}`);
+  } catch { /* 不是桌面版視窗 */ }
+}
+const reportChromeSoon = () => { reportChrome(); setTimeout(reportChrome, 400); };
+new MutationObserver(reportChromeSoon).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+try { matchMedia('(prefers-color-scheme: light)').addEventListener('change', reportChromeSoon); } catch { /* ignore */ }
+window.addEventListener('load', reportChromeSoon);
+reportChromeSoon();
 $('#btn-theme').onclick = () => {
   const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   const next = cur === 'light' ? 'dark' : 'light';

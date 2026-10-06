@@ -24,7 +24,7 @@ const execFileSync = (f, a, o = {}) => execRaw(f, a, { windowsHide: true, ...o }
 const REPO = process.env.SI_REPO || 'ZNGAS/stock_industry';
 const BRANCH = process.env.SI_BRANCH || 'main';
 const NAME = '台股產業分析';
-const UPDATE_ITEMS = ['server.js', 'public', 'assets', 'package.json', 'README.md'];
+const UPDATE_ITEMS = ['server.js', 'public', 'assets', 'shell', 'package.json', 'README.md'];
 
 // 打包成 exe 時,資料夾就是 exe 所在位置;直接用 node 跑(開發測試)則是倉庫根目錄(可用 SI_ROOT 指定別的資料夾)
 const ROOT = process.pkg ? path.dirname(process.execPath) : (process.env.SI_ROOT || path.resolve(__dirname, '..'));
@@ -131,8 +131,11 @@ async function update() {
   log('檢查更新…');
   const remote = await remoteSha();
   if (!remote) { log('無法檢查更新(沒有網路或 GitHub 暫時連不上),使用目前的版本'); return; }
-  if (remote === local) { log(`已是最新版(${remote.slice(0, 7)})`); return; }
-  log(`發現新版本 ${local ? local.slice(0, 7) : '(未知)'} → ${remote.slice(0, 7)},下載中…`);
+  // 版本一樣但缺少必要檔案(例如舊版啟動器更新後沒有 shell/)也要補下載
+  const missing = UPDATE_ITEMS.filter((it) => !fs.existsSync(path.join(APP, it)));
+  if (remote === local && !missing.length) { log(`已是最新版(${remote.slice(0, 7)})`); return; }
+  if (remote === local) log(`缺少 ${missing.join('、')},重新下載`);
+  else log(`發現新版本 ${local ? local.slice(0, 7) : '(未知)'} → ${remote.slice(0, 7)},下載中…`);
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'stock-industry-'));
   try {
     // 私人倉庫要走 API 的 zipball(會轉址到帶臨時授權的下載網址);公開倉庫用 codeload
@@ -191,12 +194,12 @@ function cleanStaleProfiles() { // 上次沒清乾淨的暫存設定,以及舊�
   const alive = (pid) => { try { process.kill(pid, 0); return true; } catch (e) { return e.code === 'EPERM'; } };
   try {
     for (const n of fs.readdirSync(os.tmpdir())) {
-      const m = /^stock-industry-win-(\d+)$/.exec(n);
+      const m = /^stock-industry-(?:win|wv2)-(\d+)$/.exec(n);
       if (m && Number(m[1]) !== process.pid && !alive(Number(m[1]))) rmrf(path.join(os.tmpdir(), n)); // 別份還在跑的不動
     }
   } catch { /* ignore */ }
 }
-function openWindow(url) {
+function openEdge(url) {
   const exe = findBrowser();
   if (!exe) { try { execRaw('cmd', ['/c', 'start', '', url], { stdio: 'ignore', windowsHide: true }); } catch { /* ignore */ } return null; }
   // 每次開啟用自己的暫存設定資料夾:視窗是獨立的程序,關掉視窗它才會結束;
@@ -214,6 +217,29 @@ function openWindow(url) {
     quit(`視窗已關閉(${secs} 秒,代碼 ${code})`);
   });
   return child;
+}
+
+/** 優先用 Windows 內建的 WebView2 開自己的視窗(shell/window.js,可隨程式更新);不能用時退回 Edge 應用程式模式 */
+function openWindow(url) {
+  try {
+    const m = require(path.join(APP, 'shell', 'window.js'));
+    const child = m.open(url, { tmpdir: os.tmpdir(), title: NAME, icon: path.join(APP, 'assets', 'icon.ico') });
+    if (child) {
+      const t0 = Date.now();
+      try { fs.appendFileSync(LOG, `${new Date().toISOString()} 使用 WebView2 視窗
+`); } catch { /* ignore */ }
+      process.on('exit', () => rmrf(child.profile));
+      child.on('error', (e) => { log(`WebView2 視窗啟動失敗:${e.message},改用 Edge 視窗`); openEdge(url); });
+      child.on('exit', (code) => {
+        const secs = Math.round((Date.now() - t0) / 1000);
+        if (code === 3 && secs < 30) { log('WebView2 無法啟動,改用 Edge 視窗'); openEdge(url); return; }
+        quit(`視窗已關閉(WebView2,${secs} 秒,代碼 ${code})`);
+      });
+      return child;
+    }
+  } catch (e) { try { fs.appendFileSync(LOG, `${new Date().toISOString()} WebView2 視窗無法使用:${e.message}
+`); } catch { /* ignore */ } }
+  return openEdge(url);
 }
 
 const SPLASH = `<!doctype html><meta charset="utf-8"><title>台股產業分析</title><style>
