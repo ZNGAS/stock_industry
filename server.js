@@ -1115,9 +1115,15 @@ async function supplyDetail(id) {
     const cross = new Set();
     for (const g of yahoo) if (g.kind === 'concept' && (t.crossCheck || []).includes(g.name)) g.codes.forEach((c) => cross.add(c));
     const used = new Set();
+    const evAll = readEvidence();
+    const evT = evAll && evAll.themes && evAll.themes[id] ? evAll.themes[id].companies : null;
     const branches = t.branches.map((b) => ({
       name: b.name, desc: b.desc, stream: b.stream || null, chainNodes: b.chainNodes || [],
-      companies: b.companies.map((c) => { const r = row(c.code); if (!r) return null; used.add(c.code); return { ...r, role: c.role, y: cross.has(c.code) }; }).filter(Boolean),
+      companies: b.companies.map((c) => {
+        const r = row(c.code); if (!r) return null; used.add(c.code);
+        const e = evT && evT[c.code], st = evStatus(e);
+        return { ...r, role: c.role, y: cross.has(c.code), ev: e ? { strong: e.strong, weak: e.weak, items: e.items } : undefined, evStatus: st, unverified: st === 'none' };
+      }).filter(Boolean),
     })).filter((b) => b.companies.length || b.chainNodes.length);
     // Yahoo 概念股列入、但還沒整理角色的公司:只收硬體(電子類)產業,避免 AI 理財、軟體、金融等混進供應鏈;
     // 依「電子產業細分」歸到對應環節(規則在 themes.json 的 autoBuckets),對不上的放「其他硬體相關」並收合
@@ -1151,12 +1157,13 @@ async function supplyDetail(id) {
         const r = row(code); if (!r) continue;
         have.add(code); br.companies.push({ ...r, role: via, y: true, official: true });
       }
-      const tier = (c) => (c.official ? 1 : 0);
+      const tier = (c) => (c.official || c.unverified ? 1 : 0);
       br.companies.sort((a, b2) => tier(a) - tier(b2) || (b2.mcap || 0) - (a.mcap || 0)); // 依公司市值由大到小;官方同環節的接在後面
     }
     const otherBranches = other.length ? [{ name: fallbackName, desc: 'Yahoo 概念股有列入,但沒有對應到上面的環節(說明是所屬產業細分)', others: true, companies: other.sort((a, b2) => (b2.mcap || 0) - (a.mcap || 0)) }] : [];
     return {
       kind: 'curated', id, name: t.name, anchor: t.anchor, desc: t.desc, updated: cfg.updated, note: cfg.note, date: quoteDate,
+      evidenceDate: evT ? evAll.updated : null, evidenceNote: t.evidence ? t.evidence.anchor : null,
       crossCheck: t.crossCheck || [], branches, otherBranches, coverage: (t.crossCheck || []).length ? { total: used.size, inYahoo: [...used].filter((c) => cross.has(c)).length, auto: branches.reduce((n, b) => n + b.companies.filter((c) => c.auto).length, 0) + other.length } : null,
     };
   }
@@ -1219,6 +1226,19 @@ async function supplyNews(id, code) {
   const items = [...data.items.filter((i) => i.title.includes(s.name)), ...data.items.filter((i) => !i.title.includes(s.name))].slice(0, 4);
   return { items, keyword: kw, stale: !!data._stale };
 }
+/** 供應鏈證據(scripts/verify-supply.js 產生):每家公司近一年有沒有報導把它列入該題材 */
+let evCache = { m: 0, data: null };
+function readEvidence() {
+  const f = path.join(__dirname, 'assets', 'supply', 'evidence.json');
+  try {
+    const st = fs.statSync(f);
+    if (!evCache.data || evCache.m !== st.mtimeMs) evCache = { m: st.mtimeMs, data: JSON.parse(fs.readFileSync(f, 'utf8')) };
+    return evCache.data;
+  } catch { return null; }
+}
+/** confirmed:≥2 則報導把它列為供應商;theme:有 1 則供應鏈報導,或 ≥3 則把它和題材一起提;none:沒找到 */
+const evStatus = (e) => (!e ? null : e.strong >= 2 ? 'confirmed' : (e.strong === 1 || e.weak >= 3) ? 'theme' : 'none');
+
 /** 這檔股票在整理的供應鏈題材裡的位置(個股頁的分類區用) */
 function supplyOf(code) {
   const out = [];

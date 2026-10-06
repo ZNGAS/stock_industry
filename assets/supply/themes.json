@@ -9,6 +9,7 @@
       "desc": "從 GPU 晶圓代工、先進封裝,到伺服器組裝、散熱、電源與 PCB,台灣廠商在 AI 伺服器供應鏈各環節的位置。",
       "newsKey": "NVIDIA 輝達",
       "crossCheck": ["AI人工智慧", "雲伺服器"],
+      "evidence": {"anchor": "輝達|NVIDIA|GB200|GB300|Blackwell|NVL72|NVL36|Rubin|H100|H200|B200|B300|黃仁勳", "query": "輝達 OR NVIDIA OR GB200 OR GB300 OR Blackwell OR NVL72"},
       "autoBuckets": {"ey": {"IC設計服務": "晶片設計與矽智財", "IC生產製造": "晶圓代工與先進封裝", "設備或廠務工程": "資料中心電力與廠務工程", "組裝代工": "AI 伺服器與機櫃組裝", "主機板": "AI 伺服器與機櫃組裝", "PC/NB/平板": "AI 伺服器與機櫃組裝", "工業電腦": "AI 伺服器與機櫃組裝", "電池或電源": "電源與備援電池", "PCB": "PCB、銅箔基板與載板", "電子連接相關": "連接與機構件", "機殼": "連接與機構件", "網通設備組件": "網通設備與交換器", "其他網通": "網通設備與交換器", "電腦週邊配件": "記憶體與儲存", "其他電腦週邊": "記憶體與儲存", "被動元件": "被動元件"}, "fallback": null},
       "branches": [
         { "name": "半導體材料與設備", "stream": "上游", "desc": "半導體上游的材料、設備與檢測", "chainNodes": [["半導體", "光罩"], ["半導體", "化學品"]], "companies": [
@@ -159,6 +160,7 @@
       "desc": "資料中心走向 800G、1.6T,光收發模組、光纖連接與矽光子 / CPO 封裝的台灣供應鏈。",
       "newsKey": "光通訊 矽光子 CPO",
       "crossCheck": [],
+      "evidence": {"anchor": "CPO|矽光子|共同封裝光學|光通訊|光收發|光模組|800G|1\\.6T|輝達|NVIDIA", "query": "CPO OR 矽光子 OR 光通訊 OR 光收發 OR 800G OR 1.6T"},
       "autoBuckets": {"ey": {}, "fallback": null},
       "branches": [
         { "name": "磊晶與雷射晶片", "stream": "上游", "desc": "光通訊用的 InP、GaAs 磊晶片與雷射晶片", "chainNodes": [], "companies": [
@@ -197,6 +199,7 @@
       "desc": "衛星通訊的地面設備、衛星板、射頻元件與電信服務,台灣廠商的位置。",
       "newsKey": "低軌衛星",
       "crossCheck": ["低軌衛星"],
+      "evidence": {"anchor": "低軌衛星|SpaceX|Starlink|星鏈|OneWeb|Kuiper|衛星", "query": "低軌衛星 OR SpaceX OR Starlink OR 星鏈 OR OneWeb OR Kuiper"},
       "autoBuckets": {"ey": {"網通設備組件": "地面設備與衛星終端", "其他網通": "地面設備與衛星終端", "電信服務": "電信服務", "PCB": "衛星用 PCB 與基板", "IC設計服務": "射頻與半導體元件", "IC生產製造": "射頻與半導體元件"}, "fallback": "Yahoo 低軌衛星概念股(其他)"},
       "branches": [
         { "name": "衛星用 PCB 與基板", "stream": "上游", "desc": "衛星與終端使用的 HDI、軟板與陶瓷基板", "chainNodes": [], "companies": [

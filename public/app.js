@@ -996,14 +996,16 @@ async function renderSupplyTheme(main, tid, id) {
   const focus = S.route.focus || null;
   const branches = d.branches.map((b) => ({ ...b }));
   for (const ob of d.otherBranches || []) branches.push(ob);
-  const main7 = d.branches.flatMap((b) => b.companies).filter((c) => d.kind !== 'curated' || (!c.official && !c.auto));
+  const main7 = d.branches.flatMap((b) => b.companies).filter((c) => d.kind !== 'curated' || (!c.official && !c.auto && !c.unverified));
   const uniq = [...new Map(main7.map((c) => [c.code, c])).values()];
   const traded = uniq.filter((c) => isNum(c.pct));
   const avg = traded.length ? traded.reduce((a, c) => a + c.pct, 0) / traded.length : null;
   const upN = traded.filter((c) => c.pct > 0).length, dnN = traded.filter((c) => c.pct < 0).length;
   const tint = (p) => (isNum(p) && p !== 0 ? `background:color-mix(in srgb, var(${p > 0 ? '--up' : '--down'}) ${Math.round(6 + Math.min(1, Math.abs(p) / 6) * 20)}%, var(--panel2))` : '');
-  const coHtml = (c) => `<div class="sc-co${c.official ? ' extra' : ''} ${isNum(c.pct) && c.pct > 0 ? 'sc-up' : isNum(c.pct) && c.pct < 0 ? 'sc-down' : ''}" data-code="${esc(c.code)}" style="${tint(c.pct)}"${c.official ? ' hidden' : ''} title="${esc(`${c.name} ${c.code}・${c.role || ''}・收盤 ${isNum(c.close) ? c.close : '—'}・市值 ${isNum(c.mcap) ? (c.mcap / 1e8).toFixed(0) + ' 億' : '—'}`)}">
-      <div class="cotop"><a class="nm" href="#/${esc(c.code)}"><b>${esc(c.name)}</b><small>${esc(c.code)}</small></a>${c.auto ? '<em class="auto" title="依 Yahoo 概念股與產業細分自動歸類,說明是它所屬的產業細分,不是人工整理的角色">自動</em>' : ''}${c.official ? '<em class="auto" title="櫃買中心官方產業鏈同一個環節的公司,說明是它在產業鏈的位置">官方</em>' : ''}<span class="pc">${pctSpan(c.pct)}</span></div>
+  const hid = (c) => c.official || c.unverified;
+  const evTip = (c) => (c.ev ? (c.evStatus === 'confirmed' ? `近一年有 ${c.ev.strong} 則報導把它列為這條供應鏈(標題同時有公司名稱、題材字眼與供貨、打入、認證等字眼)` : `有報導把它和這個題材一起提(供應鏈報導 ${c.ev.strong} 則、題材報導 ${c.ev.weak} 則),但沒有足夠明確的供應商報導`) : '');
+  const coHtml = (c) => `<div class="sc-co${hid(c) ? ' extra' : ''} ${isNum(c.pct) && c.pct > 0 ? 'sc-up' : isNum(c.pct) && c.pct < 0 ? 'sc-down' : ''}" data-code="${esc(c.code)}" style="${tint(c.pct)}"${hid(c) ? ' hidden' : ''} title="${esc(`${c.name} ${c.code}・${c.role || ''}・收盤 ${isNum(c.close) ? c.close : '—'}・市值 ${isNum(c.mcap) ? (c.mcap / 1e8).toFixed(0) + ' 億' : '—'}`)}">
+      <div class="cotop"><a class="nm" href="#/${esc(c.code)}"><b>${esc(c.name)}</b><small>${esc(c.code)}</small></a>${c.auto ? '<em class="auto" title="依 Yahoo 概念股與產業細分自動歸類,說明是它所屬的產業細分,不是人工整理的角色">自動</em>' : ''}${c.official ? '<em class="auto" title="櫃買中心官方產業鏈同一個環節的公司,說明是它在產業鏈的位置;不代表已證實屬於這個題材">官方</em>' : ''}${c.unverified ? '<em class="auto" title="近一年沒有找到報導把它列入這個題材,先收合">未證實</em>' : ''}${c.evStatus === 'confirmed' ? `<em class="ev ok" title="${esc(evTip(c))}">供應鏈</em>` : c.evStatus === 'theme' ? `<em class="ev th" title="${esc(evTip(c))}">題材</em>` : ''}<span class="pc">${pctSpan(c.pct)}</span></div>
       <div class="role">${esc(c.role || '')}</div>
       <button type="button" class="sc-nb" aria-expanded="false" title="看這家公司跟這個題材有關的新聞">新聞</button>
       <div class="sc-co-b" hidden></div></div>`;
@@ -1012,19 +1014,19 @@ async function renderSupplyTheme(main, tid, id) {
     const open = !b.others;
     return `<section class="sc-branch${b.others ? ' others' : ''}" data-i="${i}" data-bid="${esc(b.id || '')}">
       <button type="button" class="sc-node branch" aria-expanded="${open}"><span class="bn">${b.stream ? `<em class="stp">${esc(b.stream)}</em>` : ''}<b>${esc(b.name)}</b>${b.desc ? `<small>${esc(b.desc)}</small>` : ''}</span><span class="bm">${b.companies.length} 家 · 平均 ${pctSpan(a)}</span><i class="chev" aria-hidden="true"></i></button>
-      <div class="sc-leaves"${open ? '' : ' hidden'}>${b.companies.map(coHtml).join('')}${b.companies.some((c) => c.official) ? `<button type="button" class="sc-more" data-n="${b.companies.filter((c) => c.official).length}">＋ 官方產業鏈同環節另外 ${b.companies.filter((c) => c.official).length} 家</button>` : ''}</div></section>`;
+      <div class="sc-leaves"${open ? '' : ' hidden'}>${b.companies.map(coHtml).join('')}${b.companies.some(hid) ? `<button type="button" class="sc-more" data-n="${b.companies.filter(hid).length}">＋ 另外 ${b.companies.filter(hid).length} 家(官方產業鏈同環節、未找到報導)</button>` : ''}</div></section>`;
   };
   main.innerHTML = `
     <div class="crumb"><a href="#/supply">供應鏈</a><span>›</span><span>${esc(d.name)}</span></div>
     <div class="page-head"><div><h1>${esc(d.name)}</h1><div class="sub">${esc(d.desc)}</div></div><div class="asof">收盤資料 <b>${esc(dateLabel(d.date))}</b>${d.kind === 'chain' || d.kind === 'auto' ? `<br><a href="#/chain/${esc(d.id)}" class="chip accent">看熱力圖與明細</a>` : ''}</div></div>
     <section class="panel"><div class="tiles divided">
-      <div class="tile"><span class="k">${{ curated: '整理的公司', chain: '產業鏈公司', none: '公司' }[d.kind] || '分類成員'}</span><span class="v">${uniq.length}<small> 家</small></span><span class="s">${d.branches.length} 個${d.kind === 'curated' || d.kind === 'chain' ? '環節' : '分類'}</span></div>
+      <div class="tile"><span class="k">${{ curated: '整理的公司', chain: '產業鏈公司', none: '公司' }[d.kind] || '分類成員'}</span><span class="v">${uniq.length}<small> 家</small></span><span class="s">${d.kind === 'curated' && d.evidenceDate ? (() => { const all = [...new Map(d.branches.flatMap((b) => b.companies).filter((c) => !c.official && !c.auto).map((c) => [c.code, c])).values()]; return `供應鏈 ${all.filter((c) => c.evStatus === 'confirmed').length} · 題材 ${all.filter((c) => c.evStatus === 'theme').length} · 未證實 ${all.filter((c) => c.unverified).length}`; })() : `${d.branches.length} 個${d.kind === 'curated' || d.kind === 'chain' ? '環節' : '分類'}`}</span></div>
       <div class="tile"><span class="k">平均漲跌</span><span class="v ${dir(avg)}">${fpct(avg)}</span><span class="s">每檔權重相同</span></div>
       <div class="tile"><span class="k">漲 / 跌家數</span><span class="v"><span class="up">${upN}</span> / <span class="down">${dnN}</span></span><span class="s">共 ${traded.length} 檔有行情</span></div>
       ${d.coverage ? `<div class="tile"><span class="k">Yahoo 概念股也列入</span><span class="v">${d.coverage.inYahoo}<small> / ${d.coverage.total}</small></span><span class="s">${esc((d.crossCheck || []).join('、'))} · 另有 ${d.coverage.auto} 家自動歸類</span></div>` : ''}
     </div>
-    ${d.kind === 'curated' ? `<p class="note" style="margin-top:12px"><b>怎麼來的</b>:沒有標記的是我依產業知識整理的重點,角色說明是概括描述、非官方資料(NVIDIA 沒有公布供應商名單);標「自動」的是 Yahoo 概念股列入、依產業細分歸類;「官方」是櫃買中心官方產業鏈同一環節的其他公司(完整但不一定與此題材直接相關),預設收合,按各環節底下的「＋」展開。整理日期 ${esc(d.updated || '')},僅供參考。</p>` : `<p class="note" style="margin-top:12px">${esc(d.desc)} 公司旁的說明是它在櫃買中心產業鏈裡的位置。</p>`}</section>
-    <div class="controls" style="margin:14px 0 6px"><button class="btn sm" id="sc-all">全部展開</button><button class="btn sm" id="sc-none">全部收合</button>${branches.some((b) => b.companies.some((c) => c.official)) ? '<button class="btn sm" id="sc-extra">顯示官方同環節公司</button>' : ''}<span class="muted" style="font-size:12.5px">點環節收合 / 展開;點公司名稱到個股頁,點「新聞」看相關新聞;依公司市值由大到小排</span></div>
+    ${d.kind === 'curated' ? `<p class="note" style="margin-top:12px"><b>怎麼驗證的</b>:整理的每家公司都查了近一年的新聞標題(${esc(d.evidenceDate || '尚未驗證')})。「供應鏈」= 至少 2 則報導的標題同時有公司名稱、題材字眼和供貨 / 打入 / 認證 / 訂單等字眼;「題材」= 有報導把它和這個題材一起提,但沒有明確說是供應商;找不到報導的標「未證實」並收合。這是公開報導的證據(滑過標記看說明、點「新聞」看證據標題),不是官方認證名單;角色說明是我的概括描述。「自動」是 Yahoo 概念股列入再依產業細分歸類,「官方」是櫃買中心官方產業鏈同環節的其他公司,都不代表已證實,預設收合。整理日期 ${esc(d.updated || '')}。</p>` : `<p class="note" style="margin-top:12px">${esc(d.desc)} 公司旁的說明是它在櫃買中心產業鏈裡的位置。</p>`}</section>
+    <div class="controls" style="margin:14px 0 6px"><button class="btn sm" id="sc-all">全部展開</button><button class="btn sm" id="sc-none">全部收合</button>${branches.some((b) => b.companies.some(hid)) ? '<button class="btn sm" id="sc-extra">顯示收合的公司</button>' : ''}<span class="muted" style="font-size:12.5px">點環節收合 / 展開;點公司名稱到個股頁,點「新聞」看相關新聞;依公司市值由大到小排</span></div>
     <div class="sc" id="sc"><svg class="sc-lines" id="sc-lines" aria-hidden="true"></svg>
       <div class="sc-rootcol"><div class="sc-node root"><b>${esc(d.anchor)}</b><small>${esc(d.name)}</small></div></div>
       <div class="sc-branches">${branches.map((b, i) => `${b.stream && (i === 0 || branches[i - 1].stream !== b.stream) ? `<div class="sc-stream"><span>${esc(b.stream)}</span></div>` : ''}${brHtml(b, i)}`).join('')}</div></div>
@@ -1079,6 +1081,7 @@ async function renderSupplyTheme(main, tid, id) {
     const c = branches.flatMap((b) => b.companies).find((x) => x.code === code);
     body.innerHTML = `<div class="sc-co-i">
       <div class="r"><span class="k">行情</span><span>收盤 ${pxTag(c.close, c.limit, dir(c.pct))} ${pctSpan(c.pct)} · 成交值 ${money(c.value)} · 市值 ${money(c.mcap)} · ${esc(c.industry)}</span></div>
+      ${c.ev && c.ev.items && c.ev.items.length ? `<div class="r"><span class="k">報導證據</span><span>${newsList(c.ev.items)}<span class="muted" style="font-size:12px">${esc(evTip(c) || '近一年的報導')}</span></span></div>` : (c.ev ? '<div class="r"><span class="k">報導證據</span><span class="muted">近一年沒有找到把它列入這個題材的報導</span></div>' : '')}
       <div class="r"><span class="k">近期新聞</span><span class="sc-news muted">載入中…</span></div>
       <div class="acts"><a class="btn sm" href="#/${esc(code)}">看個股頁</a>${S.watch.includes(code) ? '<span class="muted">已在自選股</span>' : `<button class="btn sm" data-add="${esc(code)}">加入自選股</button>`}</div></div>`;
     draw();
@@ -1097,9 +1100,9 @@ async function renderSupplyTheme(main, tid, id) {
   };
   $('#sc-all').onclick = () => setAll(true);
   $('#sc-none').onclick = () => setAll(false);
-  const setExtra = (lv, show) => { lv.querySelectorAll(':scope > .sc-co.extra').forEach((x) => { x.hidden = !show; }); const m = lv.querySelector(':scope > .sc-more'); if (m) m.textContent = show ? '－ 收合官方同環節公司' : `＋ 官方產業鏈同環節另外 ${m.dataset.n} 家`; };
+  const setExtra = (lv, show) => { lv.querySelectorAll(':scope > .sc-co.extra').forEach((x) => { x.hidden = !show; }); const m = lv.querySelector(':scope > .sc-more'); if (m) m.textContent = show ? '－ 收合' : `＋ 另外 ${m.dataset.n} 家(官方產業鏈同環節、未找到報導)`; };
   const ex = $('#sc-extra');
-  if (ex) ex.onclick = () => { const show = ex.dataset.on !== '1'; ex.dataset.on = show ? '1' : ''; ex.textContent = show ? '隱藏官方同環節公司' : '顯示官方同環節公司'; $$('#sc .sc-leaves').forEach((lv) => { if (!lv.hidden) setExtra(lv, show); }); draw(); };
+  if (ex) ex.onclick = () => { const show = ex.dataset.on !== '1'; ex.dataset.on = show ? '1' : ''; ex.textContent = show ? '隱藏收合的公司' : '顯示收合的公司'; $$('#sc .sc-leaves').forEach((lv) => { if (!lv.hidden) setExtra(lv, show); }); draw(); };
   sc.addEventListener('click', async (e) => {
     const add = e.target.closest('[data-add]');
     if (add) { await addCodes([add.dataset.add]); toast('已加入自選股'); add.replaceWith(Object.assign(document.createElement('span'), { className: 'muted', textContent: '已在自選股' })); return; }

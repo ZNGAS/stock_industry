@@ -1,0 +1,2913 @@
+{
+ "updated": "2026-10-06",
+ "themes": {
+  "nvda": {
+   "query": "輝達 OR NVIDIA OR GB200 OR GB300 OR Blackwell OR NVL72",
+   "anchor": "輝達|NVIDIA|GB200|GB300|Blackwell|NVL72|NVL36|Rubin|H100|H200|B200|B300|黃仁勳",
+   "companies": {
+    "1303": {
+     "name": "南亞",
+     "strong": 2,
+     "weak": 6,
+     "items": [
+      {
+       "title": "南亞亮燈漲停有原因！高階材料打入NVIDIA供應鏈 爆量9.5萬張躋身成交榜",
+       "link": "https://news.google.com/rss/articles/CBMirgNBVV95cUxQQzZYa2xNa3hwd0R3LUY3c1NobTdBVmwydDhnNjkySHJPbURoemw5eUtwdlVyS21LRzdFcDdtLVN5SHpzR19oTVF2VGpWOHJjUHVNeGI5VU5PSlhJWXRBNHVYUFN0RENtaWR0SWdlSjNNbXY3YnRUUzVmZjdkc1NqaC01QnU3VHhXRl81d1ptVVMteHpvckQ5elhSbGNMM1d5aF9EUnVIYmR1QjVCSGQxVHlEM2h0VmpXX2MtbHVMTEU5UzdHcFNlS3VOMWE4MWtkdGFIZmZDMEs1YjJWbmNTZVJCZm1XUXJrc1laTzVUZktiTXVPVTlyTEhWQlVQOHQ1bEgzd1p1SVJva1h0UG9KdnRDd191VktnNkh0bzh4bTRZa2hocXZuV2xVMG8zUDBTSmFJLUN0M0dRWDRJcHFldllydWd1Q0FjZjlOVWYtMV9abGhPb0hmY1hNZ01GQzVEQWNTejRyUDZCOGhUeWNiNWFBZjV4Ylo2QnZGcVYwOVQ2VXBXTThrSk5xX0REMGJIM2ZoX1BsQjlsb2NXbnp5U3ktby01aDF1OXppa2RR?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-07-07T07:00:00.000Z"
+      },
+      {
+       "title": "南亞挖到石油？短短六天飆漲超過50%、產能被輝達供應鏈全包",
+       "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9RcGVTZl8zTG9wRExaWUtBQzdvWHNsZ3RBNHE5a0xfZnBVeVB2S3VKNGRqSXpObTZJTTByREpQNXlpN1p4bHhxbXd5ZEtsaGZm0gFWQVVfeXFMTk43dHpOSDN0dTR5UHVBQVEwSmZwQjZMV2I1WG1GNVlZV2w4aU9nU3I3RDNNeUJYaE9QOXR6SmFNM2VZX3VWSXZ6Sm1kTUNnR1BrU3IySHc?oc=5",
+       "source": "UDN",
+       "time": "2026-06-22T07:00:00.000Z"
+      },
+      {
+       "title": "南亞靠「這技術」擠進輝達朋友圈？ 小摩：目標價上看200元",
+       "link": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxQbDhVbUMzZHZMT3VlUV80dXNrOG1ESjhicnV3aG5HTkgtYUpkb3FMOGxiZkdiSklmVU9kNWdqVUR2em1HLU80NVVEdTlvQ2xGbmMxTXhfVDZUOTRPUFVHUl9HMTNBV1Z6Mmx1VE5rOXZFQ0lpOHpFVHJSaGRBRm56ODdXcmp6NlJOME9hV05jSnI5WTNKY3hrR01uM2txMGQ4VmNGeVRGUUZkaEEtN1Vnd1IwZ2RES1FyX2lpd0JmYWRpRUJ0akFFbDFrRUU4a1FDbF9JaktDZmFsSDU3Z3VRSWlJTzVvc0pnUjJWT2x4bVBMS0dreHBPSTBvcGF4TnY4OWdWQlhSUnFyb3ZsNzZsdUZEZzBORkQ4dmk2QUVja3BfNF83M2RKbmhIN2hzZE5PcDEyVkg1b1BBTEpubThpNGMtOEt2RkZFeGR2T0Q1UFhjdTJlYm5UUGRmYnN4TE9D?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-21T07:00:00.000Z"
+      }
+     ]
+    },
+    "1503": {
+     "name": "士電",
+     "strong": 1,
+     "weak": 0,
+     "items": [
+      {
+       "title": "輝達800V革命來了！士電與「這1檔」EPS飆高、提前卡位狂吃HVDC大商機 訂單已滿到2029年",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBWTEFUUHVKOTIxZHJrM1l5aE1mUVdsNjBBcTVRMGhyQlJmS3c0Q3U3Q1VfSWRnS3RxcWFJN2lTT1YwMThFMEtWZEltVQ?oc=5",
+       "source": "FTNN",
+       "time": "2026-05-28T07:00:00.000Z"
+      }
+     ]
+    },
+    "1513": {
+     "name": "中興電",
+     "strong": 1,
+     "weak": 6,
+     "items": [
+      {
+       "title": "輝達擬在台導入氫燃料電池 台達電、中興電、康舒迎商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA5SEIyX0phdVZQeXJrV09RbVJuMERaem12UWRTazVlVTVkWWZGa3VZUGVEZ0daNldPSHhpUk9IUFF1U0x4eWlDcTY2d2FScE1fRy1KZUVVOXIwd9IBX0FVX3lxTE9kOGl5QlJZbXMwYWJuWXNWT1BtUUpTYnFDb01vaFh2bXBkMUVvY3RETzU0M2JUVnJBY0JZb0pRY3pBMHZOUjFjRkMwUnZoWmdCb0dBWXhZQXNTR29RMEVv?oc=5",
+       "source": "經濟日報",
+       "time": "2025-11-18T08:00:00.000Z"
+      },
+      {
+       "title": "熱門股》輝達喊要能源 中興電亮燈",
+       "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE54YVJ4S1Zzc2p6R0I4NFhxWEMwRThmS002MmU3MklTakRuVnR1Qlk5QnJvMFN1NFhhejNELUFnWFJSeG5SN3JRdWtaeVZoaTF3SGV3QkZsUnE?oc=5",
+       "source": "自由時報",
+       "time": "2026-09-26T14:25:44.000Z"
+      }
+     ]
+    },
+    "1519": {
+     "name": "華城",
+     "strong": 1,
+     "weak": 5,
+     "items": [
+      {
+       "title": "目標價給到152元！「重電四雄」訂單排到2027年、華城狂吞150億稱王 亞力奪輝達單...還有40%上漲空間全面引爆",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1GRUE1LVRfcTF5UzY4ckJJTENKU0VJVENoZEtvSlhRVmF1M0JNcWV4SnBUMUlQcE85b1pyVnFzamJFSWdOcUE4em94Yw?oc=5",
+       "source": "FTNN",
+       "time": "2026-04-16T07:00:00.000Z"
+      },
+      {
+       "title": "黃仁勳喊 AI 時代電力好重要 大同、華城、中興電迎大商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1xSk8xR1dPSXlXaW44TEhsSXVma2tpT0FQU1lfS2tnZERTaVdOeFpTSk9aVklTa1UxQ2FuYjFreUVLMnppWTE2dGN0SWhhTktydDVjZkNDeHk1QdIBX0FVX3lxTE83SGNuc3lzUUVOSkJpeU4tR0pfSDJxY0VacDZPOUF5MUpXaHFHRHAxZ2NZeXJuMjJzY04tOGE2RFd0QWJxUTM3c2N1VUF3WnlTaUNMMVV2aEFSVGR2SHBn?oc=5",
+       "source": "經濟日報",
+       "time": "2026-04-17T07:00:00.000Z"
+      }
+     ]
+    },
+    "1560": {
+     "name": "中砂",
+     "strong": 1,
+     "weak": 1,
+     "items": [
+      {
+       "title": "CES 來了 輝達再掀電力革命 中砂、昇陽半等受惠",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5FQlVMRm1ZZTByT1Z2bFJCN0kxZEFmVFdFRDktSWdSZmhPeXpkTHhlYTFoQWxSaE9rU1BSRTVhcFFRMDZIOS03Tm5NaHhSR0dZcFlxY2ljaVRhZ9IBX0FVX3lxTE1LU0FFRWxFUHlCYnJDcmFJVnRLclVpY01LTnRXR0prRHZENzlEYjZMOVg5ckRzcXp5LVJmeUItYkFjMVhMQ21TUkNlRDEzQVpJbEFzSGhDb3lwMDdNOWd3?oc=5",
+       "source": "經濟日報",
+       "time": "2026-01-06T08:00:00.000Z"
+      },
+      {
+       "title": "輝達下一代CPU黑科技傳採台積2奈米＋A16 中砂、昇陽半、頌勝前景看俏- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5OQnVfX1JYcXFyd1FFY1drWU82VFc1M3NQdTMzZEtGT1k2V3EwYlpZelNFNGVTelZqMkoxc2hITlZkeHhHRUNZclZST3ZxV2x0eG1ObTUyRVJoZDhRNnkw?oc=5",
+       "source": "工商時報",
+       "time": "2026-07-09T07:00:00.000Z"
+      }
+     ]
+    },
+    "1815": {
+     "name": "富喬",
+     "strong": 1,
+     "weak": 3,
+     "items": [
+      {
+       "title": "輝達Groq 3 LPX全面量產台系材料受惠股大盤點台光電、富喬都上榜- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9Sa3ZKX1dpdG9EbTRXMGFLcHBLQ1pwdHZJUnZkOWxOWU5lRXJoS0tmUnVKUi0tYjdqSDYtYVIwTVZZVHR3SWJRa29YQ3ZLT29jUTY1aGg3WnlCMV82Q2w0?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-26T07:00:00.000Z"
+      },
+      {
+       "title": "蘋果、輝達搶料無功而返！富喬高階玻纖布有望逐季放量 量增價揚5.91%",
+       "link": "https://news.google.com/rss/articles/CBMiqANBVV95cUxQYTJFUjRMVWZ6VjhkZWVKVkFQNUFSQ3VCU2xaWGtRcWlwdERSVi1xYVVrRkZmb2libENSaGVyR003a0RrR01GMXp5b3ZCNlF1LTc5X21rOFBQLTZvamNrdnV6cFVxZVVldHhXbE1PbDJfcjFjOUdBQjJibFhCc2FLc0p4aWwyQW9XMTlrRHdjMHRxNTFOQWZ4eDRDeWpZd1NIU21fUDZQTmpSaTJrUS1tOXphd1FjcTcyTlJwTGRQVnMyNjBoenNUNFhEWDBKZDhqTjJSZnZiSGRpQjAyQTFyS2d1bENnZlBUTWVLUUR2Qjdlak9GY0ZXNkt2QUNmc1Zqb1lYTVhJeVFMUUpKbGZKdWhzT2t4TkJhMTNuVFVLd0dDTzRIRHRFZjRlbF9vUFZfbWlxeXlvVVI1bERIekVaZlRrdzQ2U2U4ZV94UHNFUWFOdndfWTc0enNVYWRuaEdTYTExY3AxbU5pZ1VBdi1kU0tXRHBlb2VVUkU4Ukd0bUQ5V2V6VEY5TGc1b1NIM3VXUU8xakh5Zm5JdzQzbk9FQ0VtZUVzX2ZV?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-01-14T08:00:00.000Z"
+      }
+     ]
+    },
+    "2059": {
+     "name": "川湖",
+     "strong": 3,
+     "weak": 13,
+     "items": [
+      {
+       "title": "不是川湖！「滑軌大廠」上半年獲利暴漲5倍、EPS達6.47元 切輝達供應鏈股價飆漲停",
+       "link": "https://news.google.com/rss/articles/CBMiwgJBVV95cUxPU2YxV2pXdElObWVwcEx6WEo4R0MxR09Vbkt3V3JuTnVhNlFpd0JZcV9hX3haOGpYUFkzbXFLOEtoeVVHa0VnQWVQbzNBT2M1Z0FGcVhqYmhuU0JSbTM2YnBTTWZReGZjMVM5NzlVX19WOWtjci1wWW5DdUxEb3E1ZE5kLU5rV2pEYUZOM1VYblR2MHhqV3hJYkJ2VGV5aXEyb0NTdkNpQkFrdFE3bDZTM0FrbXRoQnZuMFRYSWtlU1U2UHB4by1pdmhSb1lmejNPaWI2UVE3VTZVdTluZThLSmdMQlNZem9CV3BKcVR4YUxiaHBCQ3NJRFJ3WGs4WV9lb0lCaUdqY2NuRVRIR1h2ZWhKZzIxd3UxZFU1LU13X093MzVlbnlJVGZkWWFubFBsUURQWFdjMWNlY0g5TzNoVnh3?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-12T07:00:00.000Z"
+      },
+      {
+       "title": "川湖從家具五金到EPS贏台積電！夫妻檔如何靠一條滑軌稱霸輝達供應鏈？",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE0tS2JodVowakdzV0lMcVhYdGVQVXVxd0JqVDNMUnlfSk5tM1FTOFQ2TWZQNVlxOVhrSWJvdldXdjZ4V1lOT3FFbWg1OVg4QQ?oc=5",
+       "source": "天下雜誌",
+       "time": "2026-05-11T07:00:00.000Z"
+      },
+      {
+       "title": "林聰吉靠「2根鐵條」登台灣首富！傳輝達想扶植二供應商川湖實力難撼動- 財經",
+       "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE4tcjd0YlFXMFVVVlBZU1JXZnc1QnRnM0pmSVVMaXFpZnFIZkE2ZG5vYkp4YThKYlY4Vm9IcGt1RFZQOE5xUWlFWEpmRG95MlhyVU53dVZlSmlwNnNlOGp2NXhfYjVVZ0dUUTBvNmx3?oc=5",
+       "source": "中時新聞網",
+       "time": "2026-08-13T07:00:00.000Z"
+      },
+      {
+       "title": "AI 伺服器導軌專利連輝達也重視！川湖去年大賺 76%毛利率直追半導體",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE03OW9wTXQteXBPSzRDVmp6Q1k4SW5jODdkcjZLbEJteTlYbXoxYUlxbGlfdWhEcHdrb244bUp5RER4OVhER3E1ZUJudzJqWmhBcS1pVWRPSVlyd9IBX0FVX3lxTE5OZmJfV0dOOEVCa0JTbmxHbGRUc2Nkekg2QzJwRWFuLVlkbEVkcERFWW1fVlUycGlINVoxaWh1aHJMZEthTVhZNjU5VmNqSngzYUhoUkxraTBxQnZKX3BJ?oc=5",
+       "source": "經濟日報",
+       "time": "2026-02-24T08:00:00.000Z"
+      }
+     ]
+    },
+    "2301": {
+     "name": "光寶科",
+     "strong": 5,
+     "weak": 15,
+     "items": [
+      {
+       "title": "輝達揭800VDC發展藍圖 供應鏈逐步成形 台達電、光寶科出貨進度到哪？",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBkdHNIcDJtZDhSTFJrUDIyTnhjWkVmUGd3UkVsYWpNdFRvT0xHQmpibUJSdmdqYjNHcHowdDB6QTNmRko1aXQzNE1zTUxWQnlmcWpmWWg3OVJVdmx5SWVF?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-18T07:00:00.000Z"
+      },
+      {
+       "title": "〈COMPUTEX〉光寶科迎輝達Vera Rubin出貨潮 110 KW高階機櫃下半年放量",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9ualNlWi1ncWUxdElDazZvQTcxRGZ5UlZxdGNDZmFlVHhWOFUxajIwdDl3Q2F1d2RKZ3daazdiR2lSd3YwWVc0MmJLWnh3akk?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-06-02T07:00:00.000Z"
+      },
+      {
+       "title": "下一波倍數行情啟動！輝達800VDC電力大革命受惠股 台達電、光寶科、貿聯之外還有誰",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBGQ3FnRWY5aDA4UVZuNkRzUG9DeHhXU055MFhjU2FyNlViRTJzVDZZbVFrT1phZGZtZzVycjFqY1V5aHVRVFZ1N2JjYnN5ektKSTJXQ0dVX0xqODZNeTl4NlNvTW1fX3NNRDJhTUJyRQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-09-01T07:00:00.000Z"
+      },
+      {
+       "title": "輝達AI伺服器傳漲逾15％！台鏈提前暴衝 光寶科亮燈、10檔逆勢吸金",
+       "link": "https://news.google.com/rss/articles/CBMihwNBVV95cUxQUEV3ajJfXzdTQlNYaE00bGVHUDR5Qnpxem9tcW9JajlKN0FyNGc5TUNlQUJTNDV5dkkwWTVXY2E4c2paamlIV2RwdElvSUNaOGRvX3NVaFFhRk9CRlp5ckFUMlo0UzA1eTNtYVppRzZrSmplczNfYmNuX1lURWhqcmZTLXFTaDFNQlY0Qk1MWDNIdVMwTjE2U3pNMC1YQ21aYmdpdjBFdmJyV1J3bXJ4WGo4alZLMDZPNllCV3BLTU5QLVl3bENpN0xKMUR3T1BmNnp4aXBUaFpaeHpxVG5BVHBmOTY2NjVGMGRCcy1KTnB2UzczRzRwZlI5VF9uN2puX1N5bV9KWV9kZ3RzZ0FQWktuVlNlTW1JTzhyeDdxSEUyWGs2T0QyUVlvazJHYTFwTnRWOWV4TzRIVlNDRHhhRWJpbVY1QTh2cDV3UXhhTV9lZVlQRjBGakRZQUliUGFMWHd5LTJBVkZfa0g1cU8wUXZEX004ZHRLSHV5T2VfYmlFQmtBQmZr?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-24T07:00:00.000Z"
+      }
+     ]
+    },
+    "2303": {
+     "name": "聯電",
+     "strong": 6,
+     "weak": 17,
+     "items": [
+      {
+       "title": "聯電打入輝達光通訊鏈 搶食 AI 超高速傳輸龐大商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9TNl9Ib25PSUc2dEo5SkwybUVzSk5DZ0RaZmRMVVpXa1JIdldoWmFZYVBqSEJiblhKVU44T0o3YmxSbVJfTEJ3NHNBX3ZtV1pZc3hqUlBiSWRXUdIBX0FVX3lxTE9HemdxTGx1N1lCV251eFlKZnA1eFoydDh3YkFaMUxRYk1IQVhxZU45RnMyQU9qVXNycjBNbnpETUpQZTFoWFo1SUp2QV9BakI2ejVGMlRDeGNicjJ0MnNn?oc=5",
+       "source": "經濟日報",
+       "time": "2026-03-13T07:00:00.000Z"
+      },
+      {
+       "title": "打入輝達Vera Rubin供應鏈！「電供大廠」股價攻頂國家隊調節3513張 再脫手聯電抱回34億元",
+       "link": "https://news.google.com/rss/articles/CBMi3ANBVV95cUxOSWtCU0R0eGRacGN6LWJzbEN6V1lWRTgyaVdiMjJPSGJQZ1ptazBkQzNqYThCYm5BU20tVXJxY3lMZktzM2dJNG0tUWVUUGJRdllYNGZMd1Y0NmdZbnJRYWRFOWpSemVoNkxxWFloTHQxZjVkRFJDdVlSTjFwZk1icGpUUTRSNUNzdUo3MlZueTRrM3VKU19TWGxLcWg0THFzMXNEWTlJUU9qcGlUaEgzQjRTQllqa2VxT196T1JqaUFaOFNMQjFjcVlaR09GQUZDSVNyVHktMXR3M0JPQUJZM1AzT1VrSEtnN095cU00a3FIMXR1RWFLRUg3MVdUV2loZnF0a0dWaDZ3YnpwRzl1eTZPMzdLQzEydndPZG1JOUNGcG45Wk5aTFFhQjBqU2FsbU1Fd1YxMFJzMEtqZHQxM3IwTW10X1M2Njl5YWlDRDZrNDRWTFRWUGEtUTRVMURhaDd1NGVjZmVqSFc0U1dWTWpqelFnTlpYbWRsNGdsM2ZiV1BpRURfeS1PeFJLMmVybVozLVdxWFlLRlZta2FPNm13T0JaOF9XR2IyVmhYazFpLXZlVTF1YTBHOElBWHItX0FxZVlMcTlIVEdsRFpqVzVoOVgzUk5PeTF4dA?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-03T07:00:00.000Z"
+      },
+      {
+       "title": "老AI股翻身！黃仁勳一句話連拉「這檔」3根漲停…外資連砸251億追捧聯電獲大摩列入輝達供應鏈同步吸金",
+       "link": "https://news.google.com/rss/articles/CBMipAJBVV95cUxNcWYwT0NIbGhaTmRubXZ1VXB2bThVa3VBZ01MbG5jajExdUxLWHFHdjNFVFhaazNHTGtRQ3J2MkxCQnBrQ3Z5UHJBdE1CWUlUckViYngyc2loXy03XzdDSGJLNW9qYTNJdzBQaFdGUVpSREp3R3EzSWRzcGtyZW03TDFKS0dvQzMtTmlGUFVaZldpTXplaVY1VWd5QUdYcUtfRGptaW1uVko0Ujktal9Ob1c0SVJlMVVOeE8xN19PSHFNX1UyWnZVRW5iMVVpd2ZWYmhhS3ZhcXY2NEE5U2F3QkwwdnpDNUFUVXk3SkZWbkV3X2xiZUVLb0pPWEJLYWk5d0pRV3MyLURPLWNEcl9sV09yU2xJOTNfcXNyVVZ2R19YWkdx?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-02T07:00:00.000Z"
+      },
+      {
+       "title": "聯電亮燈！電子權值穩盤 輝達財報支撐台股穩站4萬6大關",
+       "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE41TG9ESEFTV1BYcElYOUhFNzlVODRaQXVOekZqQkdBdTV5cFp2UEFMZ2YyYlRISWNLRGU2RU9aTl9aQWp5eWFWb0dhY1pjSy1PdzJPLU5pcw?oc=5",
+       "source": "台視新聞網",
+       "time": "2026-08-28T07:00:00.000Z"
+      }
+     ]
+    },
+    "2308": {
+     "name": "台達電",
+     "strong": 9,
+     "weak": 17,
+     "items": [
+      {
+       "title": "NVIDIA開始定義AI Factory怎麼蓋！DSX供應鏈浮現，台達電(2308)從中壓一路做到800V與液冷",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE03clpjZXJPcGNiZ1dKRkpqeENXWkR1X05zTjcxMFpLRGdKZWQ0N3ZSdEYya05mMkU2QUk2UnFEQzU2Y0pBeG1OTFV2VmlEbEk?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-09-29T07:00:07.000Z"
+      },
+      {
+       "title": "輝達釋出 AI 工廠認證規範點火儲能商機 有望釋單台達電、光寶",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5sQ0dLRXFaVEZEWmtaUEFVYVljTDU4SjQ5MGE4bUV6S3QzeDE3WWpXOTF5Q0M1QnRkLXk5ajNweENQZXBnT2ROTVo0MnRsVTR4SjhJMjFoV2JEd9IBX0FVX3lxTE02VWlBbXotX0dOc2pBdnJPOFRFLTNCT3BxVnU2Slg1WEhoN3pXSzAtLVBQYzh0a1paVVRyNV9KUFUtWVZTR05kS3VyN3dKOXpZS1Nja2lfT3ZKalFKck5v?oc=5",
+       "source": "經濟日報",
+       "time": "2026-09-28T18:23:35.000Z"
+      },
+      {
+       "title": "台達電卡位AI PC 輝達DGX/RTX Spark電源供應到手 - 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOS2JVYVZKNk9vSFpmaHRmVWZwRXFuQklLUE8zNS1TZ3hnalJjTkM5THMxWFVuX0dfQ2ZSN1J0RzJvV0luVzFkRDdyaTZndzd1Y0lNRzJXUE03bGgyVGN2NkZJOFdhWnh1NnBOSVpKWE1qQWN3VEJYNWJUUmtQaGhHQkxhNlR5SmMtUkEwMlcyWTB5QQ?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-06-03T07:00:00.000Z"
+      },
+      {
+       "title": "台達電成輝達AI基建大贏家！除了800VDC，還有兩大新武器進攻「灰區」",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5MQnFmdnNEbmd0a0t5bHBKNjZFbXhrVzdTdEY1Ylp4WlU1bHNaQmZlSTFQZXNrTjFvQXo4cF9QVWV4b21KUnBqTWtYUjY2QQ?oc=5",
+       "source": "天下雜誌",
+       "time": "2026-07-21T07:00:00.000Z"
+      }
+     ]
+    },
+    "2313": {
+     "name": "華通",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "蘋果＋輝達伺服器點火！這「代工大廠」爆量12萬張登量價雙增王 華通、大同強勢入榜",
+       "link": "https://news.google.com/rss/articles/CBMi6wJBVV95cUxORlJFSnJHMUV3S3lhN1pySVNrTC1ZZzJwOWwweFhzeVJaYjNyMmdSTF93WWpjR3VJUGJ6Tk5YWjV6LTdJcVlQMHU5SV8zSTF0NTBSVVhwUC1nWFg2LXBtdlA0d1RtRldDQ19fVjlDUEtUVXMydUF6TjFhb3EzcDlhTkV3OFhGZGhnX1YtLVpYcHhtSlN0ck9WYXczQUQ5N1VRaTJwWkRYd1hZY1ZXWnlNNmpfbkpjaDFta0c0QmhoNDQzVFpWT1ZaQXRxT2tfeTh4WnhZUEs2bUZwVlpobTBDa1dQdjN4d0ZiWGNTdEJEYUJ3dDRVRTQ4UGl1eF9TMlVFdFRzWXQxVW1Vc19vRW5qZUJ6enNLVFVJR09INzRET01RMU83N3NkbU1sekZCeW45UVdNUTBXR0FjQnhMLVo1MUpPcXdIQmJxcWRYQTVqRDZnTFpnZjFRRGc5Sm9VTmdvRmFaRzN1eGxTckE?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-10-21T07:00:00.000Z"
+      }
+     ]
+    },
+    "2316": {
+     "name": "楠梓電",
+     "strong": 1,
+     "weak": 0,
+     "items": [
+      {
+       "title": "楠梓電 (2316) 突破百元大關！受惠滬電、輝達 LPU、Rubin、Feynman 供應鏈題材",
+       "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1BSHhjUGdFcVhnQ2w1UUFFTHFKTWRaN0pCOEMyb1lOeGpxR0RLWmRkTkdKYVQ5ZThEVFBzd25odFF5ZGFDY1VtUEFZSzctM2ZXTGg3V01vdVY3Y00?oc=5",
+       "source": "鏈新聞 ABMedia",
+       "time": "2026-03-17T07:00:00.000Z"
+      }
+     ]
+    },
+    "2317": {
+     "name": "鴻海",
+     "strong": 16,
+     "weak": 40,
+     "items": [
+      {
+       "title": "NVIDIA、鴻海科技集團與台灣各大醫療中心 將代理型 AI 與物理 AI 導入「健康台灣深耕計畫」",
+       "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNMFRsSzBYZEt3Nm1Xa3hQUGR4a2JNbEVMNGs5YXBsUDd5RzZSRE9ZaU5kdHJzT25vMUlqaGRObURuUlM2NTBwWS1lVlVFZXczNUVnb1FnMVBhby12NUhzZVF4SHpNUHIzVENlRWVNSXBPeUdqTzNjcEhiVm0teGFlUnMyT0s2WFVOdDlnRmt0WUlFYzVMckFIM0xmMC1IcmRLNWlnRzVjZ3R2UnphNExUdnN5M3hEcHFJYVZ6NXY4d0Q?oc=5",
+       "source": "NVIDIA",
+       "time": "2026-06-01T07:00:00.000Z"
+      },
+      {
+       "title": "輝達鴻海合作自動化機器人組裝提升GB300成功率| 產經",
+       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE41aGlRN3c5VlVrQlFXMEpHenkzSG1mSVJ0YWJrWTBXd1pzYmthRXdycGdSZlNEOU1iRWdHWUNGTGQ4ZkEtMmlZVXotZEdlSWFPZ2tYZ2F6UHZYMUdORWc?oc=5",
+       "source": "中央社 CNA",
+       "time": "2026-10-04T11:53:00.000Z"
+      },
+      {
+       "title": "下半年輝達伺服器大量出貨 鴻海、技嘉、緯創大啖商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE43TURYd2FDQ0RXaXQ1cXIxVVE3Y0JpMDhEOFY4MDQ3VWhIOGlzanUzM2JOSlpfcW1VZGNONXU1Tm0xREpKYXoxTUJWYnpnRUhBcVMxODgzSVBYd9IBX0FVX3lxTE44am1PSjAzblVfU2dMYkNMYS1MVEtzSlBlcmJEaWtpMWhlNm1uVVFwY2l3dmV0Ynd2OWtJSW1SRkdHcHMzV2xnc1ViUmtNWWs1dWdYdG4zbmNKYmV6Mnhn?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-30T07:00:00.000Z"
+      },
+      {
+       "title": "輝達攜手鴻海攻 AI 機器人幫大忙 有望帶動相關廠商接單動能 | 產業熱點 | 產業",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1Jb3UzbDF4SHFVNVE4bjFWQW4teVlWekxjbGpjNlVuRThZQ3lJUTZNWnB0R1Y1QXIzMXA0VVZXV0RuN21LV0JJcGp2TEhyUFJfbTk4NXZHQ0pldw?oc=5",
+       "source": "經濟日報",
+       "time": "2026-10-04T18:10:28.000Z"
+      }
+     ]
+    },
+    "2324": {
+     "name": "仁寶",
+     "strong": 11,
+     "weak": 30,
+     "items": [
+      {
+       "title": "全球首例！輝達發表量子模型 金寶、仁寶躋身第一梯隊夥伴",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9kNk9EOUJnSmFMS1N4RDloeU5MSlNmYTlsbmIxRXFpQTUtYU8yNV8wai1BTHBNRzlPNThFVzMwSzNoZ3VUWjJ1Z1BwU0w3R201Zk9iMV92a0dwd9IBX0FVX3lxTFA1eWVSd2J5Z0ltbmpfZmRuQmx5eXFJRDQ4UVF6cHhmX1JGU2V1blRQVDZJRC1sUENDV3djbG5WTm9xV0NFVDBtbC0xZUcwR2l3dW5qM0l0UjFtS0QyYXd3?oc=5",
+       "source": "經濟日報",
+       "time": "2026-04-16T07:00:00.000Z"
+      },
+      {
+       "title": "輝達財報可期法人卡位15檔輝煌概念股仁寶大敲13萬張「這檔」獲利旺- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1zNm5OYjQ0dDlxU1ZMR01CbkZUTjFoc3NzaWx0ck5acGYwZ2hSRnBlTEFTNEs3dDZXLWRaRGhZN2Z1OC1ZZ1liQWlqSTRVX1pIZ1AtaXA1elpEc0taRGtv?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-24T07:00:00.000Z"
+      },
+      {
+       "title": "仁寶拿下AI大單！日商斥516億日圓買635台伺服器 搭載5080顆輝達GPU",
+       "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1kRzR6bmJ3ZklKNG5TWmRwOGZwbEg3M1NkZXFtVnNRVHVweDF6cWRlZGVDYjJqMlEtZUZMM3JjdkdJZ1NLQXBHSlM3LUpuZFlydDlZUTJVZlZvQ3lhRGZjN3pIdDFVSkd5?oc=5",
+       "source": "科技島",
+       "time": "2026-05-08T07:00:00.000Z"
+      },
+      {
+       "title": "仁寶喜迎AI大單！日企砸百億元訂638台伺服器　含5080個輝達GPU",
+       "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9KWGR4RzBWdnRJOHNtX2toQi1vcVBCblV6OFZfSS02Z0dkcmdxTTdiYTNyMkRJaXdJVXZmS0F1d2dlcFhjWldLUTc4NmR3MUNLMVHSAVBBVV95cUxPYjZDQjRiODM3c1RGZ0lZS1ZINF9FeDhYQmN0TnZTV3VQNmFwZzJNaXc5Zjl0WFR1dXMzRVJxYUM2VF9tWXd4eWlZcVlxMXdIWg?oc=5",
+       "source": "finance.ettoday.net",
+       "time": "2026-05-07T07:00:00.000Z"
+      }
+     ]
+    },
+    "2327": {
+     "name": "國巨*",
+     "strong": 5,
+     "weak": 12,
+     "items": [
+      {
+       "title": "國巨股價飆破700！台灣新首富陳泰銘，談讓輝達放心合作靠這點",
+       "link": "https://news.google.com/rss/articles/CBMihgNBVV95cUxNaWZjOEZJU1RCbUl4Q3l2RnNJVF9Zb3FMTC0zLXZjdndGQkxUYnlVX2FETm44eEtxb0ZNMVJsV1Q5Wm1CbG1LNEpZZFgyUDA3czNHSEpNTEEzTTZrY01hSDAtZXlhOWRaaWRQSlhrT1lWdDZtbFc0UnNWeXhwdFZkYm1GMFpoYVU4WVJtOUd1dE5SRU1aZ0Z5ZHdmTVR1alJjemNnN29MSlBtSTZXUTY0V2dKVW5KejhmRk5PZy1RN3FEbHdlZGxheFpoNm9kYW5ZVklCMjRuUmJaSzI3cjVYb3hhUHFuSmw1ZmN2OVRjb1V3YnFOZDB5dGdna0R5cDVFQXJUVVFYVExpYjJyaWZGQzdseGZDMXVVcXByZ3VxX0Z0allVaER4SG56eVJPLTNPVE1UVjd0dURGeW5uekZKNDRtRk5USjBCTW1seDlxNnNyUHYtTjFnQ2FqM0xaR3U0Tl9PRlpkcFBVN2RhMklPbG1URkZudjB3S3RKWG5PeGJyS0x6V2c?oc=5",
+       "source": "Yahoo新聞",
+       "time": "2026-05-30T07:00:00.000Z"
+      },
+      {
+       "title": "不是國巨！「這被動元件大廠」搶下輝達獨家訂單 明年EPS上看26.15元",
+       "link": "https://news.google.com/rss/articles/CBMiogNBVV95cUxNaGlzR1lfLUR0N01nc0liZjFOTkZhdFFMV1RYQWdJblpFUTFpS2NJeTVybUNnMkFGS0c3QzFSUUVKdUM4eVh3UEhtTnNEWHRwVDU0T0VocmdDb2JnamdURUd4V290UzBwZTlLcWVpcHpXNDIzYnBVN2lnbVNQUUtmYU5OUkVrSnNQZWEwMjktckRZMndWd2p1RmRvcWJQeUhBYktFS3RMYzc1MXBfU255ZzBUczMtM09CbE50a2hYMWJwSndEZ2ZJLTdHZ1FMaWw0cGJCMmFXWHpqaU1TZ3lVMFByUE5OY3c1b25JS3Zfb2JOQmFSamRsTTJjZEh4VkR5S2c4eF9nYl9jVjYwZVhRR095R0k4YkZnNTdhX3VPVHY5YmZxS1dnaU41bVA3eEpvWlQ5T0w3X256V2FBTjRpLVVqYzF2S1N5Q2kxZDEwcmNXdWpiemZSYlhRckQ1RmM1TUtjMW1tSGZIRkgyOGtZZmM1ekE4WjJXVlh1WDJoS21zdnVOcVZsNDFxWDUzOU5Ia0twZHM2LTVjNjMxU1dqMkpn?oc=5",
+       "source": "Yahoo新聞",
+       "time": "2026-05-31T07:00:00.000Z"
+      },
+      {
+       "title": "南亞科創新高、國巨還在半山腰！謝金河尋找新一輪強棒出擊：輝達財報為供應鏈添柴火",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1RQUNMbDkzUlBaTExmOVUzSUJLS0tWRjNCTG9uMGgxUWg2UUgwcFVmSmpFMzh1elFRYXd0eG52c0pQMzQtQU1BeUlsbWhsZkNoNFBscmRRU2l5Z9IBX0FVX3lxTE5STndiZFlyenBzSEVpTXkwek1zNW1WcnJ3M1lkalFtdnkxNnBqcHJzMU95ZVp0SEN5ZGVZLU9tM0xHYkdoOEdET2ZHamo2R0wxZ3VEY3Z2TmdxTHpSR21V?oc=5",
+       "source": "經濟日報",
+       "time": "2026-09-04T07:00:00.000Z"
+      },
+      {
+       "title": "輝達、台達電帶飛國巨、鈺邦、臺慶科等被動元件廠營收飆高音- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE15N1JIOTkzNzJjZ2JiZjgtLXN3LVZDeGd2dE9MenBJMU1SU20wZTZ0akJvazVLdEZoeC1QLTVJcXQtRXo2YlJMb0VyZ3lRaFIxOG5fWGRHQnlKcExTRFk0?oc=5",
+       "source": "工商時報",
+       "time": "2026-01-12T08:00:00.000Z"
+      }
+     ]
+    },
+    "2330": {
+     "name": "台積電",
+     "strong": 14,
+     "weak": 76,
+     "items": [
+      {
+       "title": "台積電、輝達擴大AI投資　背後這家台廠默默受惠：超級循環看到2028年",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE93SEduRWg1cWdfb0twcWY0Vzl0bDZramtUWFo3Sm9KZ2NqSnAwR3JOV0lTLXhtNlZZcGNvZTZBVmN6UFBtMlE1S0N3OE1leVFhSHZhanUwWkVEZ9IBX0FVX3lxTE9lWjUtQlNFazU0NUR5cThWdmtyRlhzX2xUOG9yVEVfcHBZTUxKRTJ0WHFia3hLU0U5X1ltdFEwX1RzNUJvR0prSm0wVzRjQTZnbm9qMGdnOHkzSEhZZ2N3?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-06T07:00:00.000Z"
+      },
+      {
+       "title": "美國製造輝達AI晶片真的快來了！台積電亞利桑那廠4奈米試產成功，連鴻海、緯創都已在德州卡位接應",
+       "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1ZVUJtaUdnaW9sdWdRSmFhMXZtUXVxdmtZYjB6Z200eHFLMU1nZzZ0a0dDbW1jVzhtZVdXQXhseWItS0I4V3hTVWlJMnNDeEliYTNTaG56Wk5rNUJrb1JXN1dhVWdad2VmRlduaDBudHVMRzEtVFoycw?oc=5",
+       "source": "techbang.com",
+       "time": "2026-07-30T07:00:00.000Z"
+      },
+      {
+       "title": "傳輝達棄台積電COUPE方案轉NPO方案，受惠與受害台股一次看",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5VQ0x4ZXB0VHJBVmxTVS1DbjhlTVhfNFpUMTVTMDExZ214emxFbzgzWlBILUFVOEM2bDFvM3hHTHZzN3Y0MWNPOFd3Y0kxWkdCU0FxaWpFNUxvRUo3Q0ZzckZVR09xYlhlQ2pTT0JmRQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-07-14T07:00:00.000Z"
+      },
+      {
+       "title": "台積電、NVIDIA毫不畏懼「泡沫論」？ 主權AI世界盃正要開始",
+       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNTWVYZnpFYm1LQUk5d0hVd2t0VTNjVlVfMlowY3Y1VlRRTWc3dEw1YlFTcWJsVWNnT0ZiRHd5dHlYcHZIdHo1TUtwRTNac01HNVV0TEtPRWNjbkxJWUxaT3p0cmd0aTMyaENSRHVkdGlENGdTVkh5Mkt5aEh5MGdYV3pZZFNvYVU5YmV5NmJ3?oc=5",
+       "source": "DIGITIMES",
+       "time": "2026-07-06T07:00:00.000Z"
+      }
+     ]
+    },
+    "2337": {
+     "name": "旺宏",
+     "strong": 7,
+     "weak": 1,
+     "items": [
+      {
+       "title": "躋身輝達合作夥伴！營邦開盤即收第3顆紅燈 旺宏連拉5根、這檔「8天飆59%」同列36檔漲停股",
+       "link": "https://news.google.com/rss/articles/CBMiqwNBVV95cUxNTHB0RVJVeHNCVW1qeUR4RFlOMUNiMmpSZG1RTzgyd0E0ZlQ5MjBweFhmOER5Z1RXN09lQ2R0ZUhSdUpjZG4yZ1lWZGdiNTdZMWVhNVBBc3paMFRMNWQ2Qmhma0I3R0pTbHd5dFk1Yk4wRDNDTllkdXJlNTU4T0UtbDMyX05vRnNFeGVXNEpkQ05EcDllRUtMYm1tZ2VKRzFRemxUXzQxakR0YWVSZjNHemYtUkVRajFoazh6emJLTFY0b25qamZ2eWwtRnBKcElZVC1GTzNtOUF1TlpxcGNkNjlnX3VsQU5lMFdJc3lPa3F4TVR2Nmd5S2FPekdacDF4cURyZldwNUo5blB3RTJHU3liRHZlYXhQN1RqSkZmNjVjUW5EcUxyWk1jVVVMV1VJUFV5dmxnZmdFbVBKZGNseVdJOG8tSGJaZmJkLTZMV29ndEY0OThEYXV3b1JiM0JwaHdqTkZtZWgzX3hDUmVIQjRkcTFZaEZQTWUyMUlKTWRUQ1MxQTIxai1lWjIyV1pkRnc2VGhIU05EcTVlMFNiQ25XMXBnak1SSjRv?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-01-08T08:00:00.000Z"
+      },
+      {
+       "title": "南亞科、華邦電、旺宏都是客戶，這檔受惠輝達導入SiC，券資比拉高至18%，軋空行情可期？",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1WNEJXMWJJQ0VVZjktcWYtOUJ5b1hXbkxBMm9EaktaU1dUN0VJdDNtZHc2LXBMTUp0aEhBQ3VmZWRMVGQ5VHdudGc0ZXh4N2tWRnpxX2djNTlVUdIBX0FVX3lxTFBBNzZQZGhtbjZjVENrQ1BlY0dla3JoWm9LbDZxb0F0Vks2Sl9TRWtGS0k2MVMtUk4xSWFjcldBUHJETE5qYTJmX3hjVWc1ZXRzNTJrZlpzZldON1pEQjZZ?oc=5",
+       "source": "經濟日報",
+       "time": "2025-10-12T07:00:00.000Z"
+      },
+      {
+       "title": "「輝達點名」供應鏈曝光！外資喊買「旺宏」飆220元目標價",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE8tZTFTNnAxdEswb0RaaUZJMVZjX2U2WGlLYkdpZTFhYUZiOFFyR0dSd2RGcGpRVUE2NDU2dEZ2emNHOWRJejAtZU12bVNIalE?oc=5",
+       "source": "TVBS新聞網",
+       "time": "2026-09-04T07:00:00.000Z"
+      },
+      {
+       "title": "目標價喊上65元！大摩讚旺宏「比想像中還強」、緯創GB300飆至1.5萬櫃中信按讚「遭低估ETF等級標的」",
+       "link": "https://news.google.com/rss/articles/CBMigANBVV95cUxNeTNrbGhCeGxReUJhTlFhOFhKRXpSZWt1enRBVWpXX19IY2t5ck0zTUxwT3lNRURFcDhBRjhVSF8yTXptVG1MZ3phVHIzN253SGhtMTltcXdycm5UMlJJQkNHVHBYSEJPN2t1WWNsVy1sdVVkNVJmY1lhcHI2b1dadUhfQ1FGVUF6eE03UU5GU2w4RkV5aXpkSXJsZUFUOWtFemJDRXl0NWd5QzZhMU01dnRxaGpOWi1HQmpMZ3hpaGdFWHhoUGxVZmxJS1JHb1d6QVNTNlR1TzdrT0dzSXpZOEdyYzQycFdVeTZ2RGh2eWFTcEZuektRVkRaWE5UVlB2RGlucE1OUklnOXlwZ1Y1bk9pcjdTTk5aam1YbUVPWFFMTjZyR0t3WXZwSXlJMTI4M2ZGMndrZWhVMmxXeEJqblpzRDg5ZWFuT0FZajhRbURDT0FFUERxRWNPWEhsN05CNWwzNjdiY0d1N182ODFFOG1tS0RfNGlVV2oyUGVzX1o?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-11-13T08:00:00.000Z"
+      }
+     ]
+    },
+    "2344": {
+     "name": "華邦電",
+     "strong": 9,
+     "weak": 9,
+     "items": [
+      {
+       "title": "（獨家）華邦電NOR Flash首度打入NVIDIA供應鏈 挑戰奪5成市佔",
+       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQT1ZzbDI5VHhWdVFfQmQ5NVJOOHhUcDFLZTFyMXg1N09ta0ctRkItU0QyVlUxcVJGcXhmWERNRVN4SFFNNDVrRVlhUVFLZzBUWVdTRERPMGhjUldmZXF4R2k5bEN3RXlUa3ZYVzhOOHRFcUZKbEpxNWRKSmF1Y3ByM3FBemRzMW5NWDFKVDBR?oc=5",
+       "source": "DIGITIMES",
+       "time": "2026-06-18T07:00:00.000Z"
+      },
+      {
+       "title": "傳打入輝達供應鏈！華邦電狂噴8% 股價創新高",
+       "link": "https://news.google.com/rss/articles/CBMitwJBVV95cUxOY0kzZEQtYnVzZ2dNcXhUbGpEZjI4SHJjalBEQWpDclRpbEI5emN6T0pxU2t2Z2tGVWJzNTB0ZmlDLUM3VG8ydFFxaFZIUzljNTJZMzVoVDhuemcydkg3QzQ5eTJZOTVBbGk5NVg0NzVzbXJKN2cwcDdYYXNBQXdoQllucXp0VUlXU0JoOURRc3lNYkdqbHBQV3phYkh5ZnBqdVdWQzV1Q2pFcTYtaHZGalJlSjlGaGZLeWFZZElVYWdHcV9hTnJpLVk0UlFVeEU4LVBvRk1ZNko2N3JMd3lPZG5IOGxPaUJXYXR1X2xEVE5iNUE5bHZMTzlzZ0QzZXBvdTZKY3ZMeU1lT0plMU9Ya3lJZ05yLVBzc1FDOUVVQ0ZiUmU1WERCMFlXUlFwZURwc1NXOWh2WQ?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-17T07:00:00.000Z"
+      },
+      {
+       "title": "輝達Vera Rubin供應鏈洗牌 華邦電NOR Flash傳搶單美光 外資趁漲停反手大賣1.9萬張",
+       "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5sNWFVMnIyQjVnTGFNS3BDNV9YTjdOdFVzRmVMWjdFWEpodHAyY0cyZHpPT0Uwbk9MYzZucXpreTVwZ3F2RVdDbHRXVll3RGNUYW5jTDZzU0xMU1U3U01iTVhmYTUwNDdtbUZ0Z0tGOHBESVlxSEl3ZEdB?oc=5",
+       "source": "BigGo 財經",
+       "time": "2026-06-19T07:00:00.000Z"
+      },
+      {
+       "title": "黃仁勳喊輝達明年晶片銷量翻倍！外資搶買15檔聯電、華邦電最吸金- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBUdTktVlpsSXlvSzZIZEY4ZGNmNUZ1Z19kSVZpMU9USWJCMmZROWFqdzQ0Y0xUSXpVWWtlSExIZkNzLUlCeHpSWU9TWlJKckNreXJkMTd6SEFPZG1WS1E4?oc=5",
+       "source": "工商時報",
+       "time": "2026-09-19T07:00:00.000Z"
+      }
+     ]
+    },
+    "2345": {
+     "name": "智邦",
+     "strong": 4,
+     "weak": 10,
+     "items": [
+      {
+       "title": "智邦卡位NVIDIA、博通CPO生態系 驗證階段拚轉出貨動能",
+       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPMjRMYTl5RWM0Y2FsRWN3ejhkRi1xZ3lzS2JwRmgySVAyb1JVMFp6OXhZVm5FWHFIUkZRUnJFMEM2cVQ5TEVWUHExTGdNVE4zQ0tVcVB2SjdZZHNhczFEekZXX2lRV2NCN1pNS0ZOazFRU2dUMFZDb1d3Q0Q4MGxDNFhBVWtHWml2RHlUOXB3?oc=5",
+       "source": "DIGITIMES",
+       "time": "2026-06-12T07:00:00.000Z"
+      },
+      {
+       "title": "輝達AI-RAN卡位6G　基地台變身AI伺服器 榮群、互動、智邦迎商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0yRDliSjlGYW5HaGNwN0ZzWFV0QVFOeVZNa0ZEV2R2YXpMcWJ6MlZRMTBDTGRqX29DeHFMUGlHX3g3Zl9xZk1rNmE4Q2p6SzRxQ09ndXJQcFl2UdIBX0FVX3lxTE16aTlZalk1SlBTSlJ2MDlkNEVpSWV5RUcxSVljbk1EQWhBUm5FWjFCRWZLcHdhX1BvZjJUZ24ydlZpSC16QjQyRDRaWEg0c2ROQVFKZmZvWW1WSlkySnRn?oc=5",
+       "source": "經濟日報",
+       "time": "2026-07-24T07:00:00.000Z"
+      },
+      {
+       "title": "黃仁勳「兆元宴」新寵都起飛了？智邦與「這散熱大廠」訂單能見度滿到2028年大盤重挫400點照樣逆風噴",
+       "link": "https://news.google.com/rss/articles/CBMi0AJBVV95cUxQcXh2SkhzMTZ0aC1VTVJ1TFRlYV9XY1AwUFprT2Vya01hd2ZZeHFSZ0RkbHlBSjVobmlxaXhISnhhcGdDZWh6VUJLOGszREI4MkhYb3pIUWwybzktbHliSVNUUXp5T1VHSVV3RFhldWU2MGJLZDZvV1NqWUdoNXhKSWJqaE5hclJjTHppSjNlSzVwNTVGSVB0MTV4TVVveGVkSFpaa3NEaXVyNHN5ay1OQ0V0NEsyaHFFOTZWU3I1TnZrUmsxbGttb1VKUGZQSEVCOXEySzV0akVmWlZCLWxYeDQ4NEQxem1hV2x2cktEd3psUmFKbjVtbW53Tk9CZjZBdV91NTFRVzVlbE5HZXVUVlNpcUM3TDJUQVV1bmhvOVNqR1FuamRRYWMyYmlJMmZoOHZPQUUzajRoRE1FYXRaSXZRb0pJc1FRWlNXaTJ1ZWU?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-02-02T08:00:00.000Z"
+      },
+      {
+       "title": "兆元宴賓客+1 智邦領跑AI 800G浪潮！獲輝達黃仁勳點名肯定",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5CRUsyVVZndWI2WldsdDQxZEZkcnQ5bXdXbFBTbWVCZ0xqVHg3UE5mRzlBdGt3WjMwcW5CY0ZpSnpBMjFSS2gzWlR2T1hLMnBlU1dmMVBVY21oR2NJWkI5YzVnN2xsd1ZfZUwzVzNKNA?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-02-03T08:00:00.000Z"
+      }
+     ]
+    },
+    "2356": {
+     "name": "英業達",
+     "strong": 1,
+     "weak": 11,
+     "items": [
+      {
+       "title": "輝達財報點火！51檔背板股衝刺「英業達、波若威、微星」飆漲停黃仁勳預告：台灣供應鏈下半年會很忙",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9keFZUNVBmZFlUMU9MWUZpR0xiY2c1b0pnaXFmVHZuTFF0XzJENk44OFdRR0hWak02SHl1S3hIUnNYYXZiTUw0ZFVnSQ?oc=5",
+       "source": "FTNN",
+       "time": "2026-05-24T07:00:00.000Z"
+      },
+      {
+       "title": "焦點股》英業達：黃仁勳點燃AI熱火 漲停攻近3年新高",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5YMC1rd043bTRsQjdjQ3VBUG1Ia0FOSlNLWWM2WDhsWEVURWc4YV9wT1R6Slk2NHZjQUQtd0xUQU15STB6c2Q0bFVDUkpFS3VXV1paM3I5cUV1dV9tUHNv0gFkQVVfeXFMUEwwR0I0MDRUb0UyNldvbEljZENCcGozRk9vcmYxOWVadGNDem1ibGV4Q0t4dHZ5MWxBbEpIR3JCTi1ONEZZR3M4a3lKTFpCRWlDZExmeHBvZ29ibWtpN1dleEJpeA?oc=5",
+       "source": "自由財經",
+       "time": "2026-05-25T07:00:00.000Z"
+      }
+     ]
+    },
+    "2357": {
+     "name": "華碩",
+     "strong": 9,
+     "weak": 45,
+     "items": [
+      {
+       "title": "華碩受惠輝達新品及VR200下半年出貨 雙箭齊發力抗記憶體漲價潮",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1NVHRob29xdjJGVGo1LURkUXhFSUJUQmRtcHB1Mkx6clItcWo4aFV0T2NCYjhvSzFHcjdOMHdKel93dlpEQmJuZXd6NW9HWkE?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-06-17T07:00:00.000Z"
+      },
+      {
+       "title": "PC族群紅光滿面！宏碁、華碩列輝達RTX Spark首波合作廠直衝漲停 「兆元宴4檔」也同步攻頂",
+       "link": "https://news.google.com/rss/articles/CBMipwNBVV95cUxPZzh2UG5FXzhzVE81c3dLVzY2RnVmSmxNSWxmWXBXSG1WOXprdTRkQTNjZVphc1p3T1VXai1DbG1GSUd4Zld0U3Jxb2hxeVJ2TDl0U0xmQktlRUtTVzVFRFBRdlVTakREazVDSzcxZjExNFNhRDBXZVlGaE8zZGxFQmUyTXlpeWkwcmFINVE3cVd4QkZENEpKWVhweEwtVDByMzdVTThWVnI2R2FOcjgxSTRneVNMbTFHTjd5N1g3bERuRG84YXlFMDZOYktLRGszXzlhdHpndjNibkJUWlNubWp3RGdrMG1tZGUyT19JZ3lHcnVDdEpBQV9kUmdMejZIcm4yazlfUEdUZGxDc0xZT3VuWElqVkw5NFVQbHFBa09ZVlM2VUNHLWNIckF1Mm5NZ1F6SWRNdzl4THdLUGgzNzF6ZHVfUHFyelB3eXFtS0FVaTF1dnR5YWVnYlc1ZXN4aDJLLTZNX2ZOczNqUnA4WUN2VmpQUmdhUUFTc19NNjh3TUpfWF9zX05vM2ZtbFdWRk9qOXZhVnBBNlBwblVKWWdoQy1OS1U?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-01T07:00:00.000Z"
+      },
+      {
+       "title": "輝達RTX Spark訂購熱！華碩、微星訂單再加碼| 產經",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE13Y3YzUHp5Qm12SjVGV0liYmZ5dWhaOUh4aXRCb3J4ZURyV0otUW14SGoweUlkaGxBUkFCbEUyZk0tTkZrRHFoOFB0OGFRcXQ4Q1o3eGNBY3ktZ2E3Yjhj?oc=5",
+       "source": "非凡新聞台",
+       "time": "2026-07-29T07:00:00.000Z"
+      },
+      {
+       "title": "輝達伺服器也要過這關! 華碩AI Lab\"健檢\"首曝光| 其他",
+       "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0zVEpkZ0pZQ0ZXN2pkSmp2ZGJNR1FFTUF1WmlYU09wYm5OT0VUMThwNXdJeEg2MjVPalQtZzJlSW1qUnYwajBNMUtZZ2RBb0ZjcWRLV0JpRGlna00?oc=5",
+       "source": "非凡新聞台",
+       "time": "2026-06-03T07:00:00.000Z"
+      }
+     ]
+    },
+    "2368": {
+     "name": "金像電",
+     "strong": 0,
+     "weak": 3,
+     "items": [
+      {
+       "title": "雙虎發威！金像電目標價喊破800、台光電M9供輝達平台 外資看迎來2026成長大周期",
+       "link": "https://news.google.com/rss/articles/CBMi0wNBVV95cUxNN1YtOUdkTEgyODlSd2pNS19xNlhmUEZtSU5kemRlMXZVY3d1dXVmTWJwQUFfRFBncGoxdFBnNGFpVnBxUUtFMkJNbURaR19UQnRXTGJLTmNPTTdTcTlDRWZOXzV0Mzl4RDZiQ093eXdmdkswcmVvSDBjc21YYTJ5VVhCWWlGUE1WSW1FRGxVMGxjU0pjRnpqTlFRRmpLYTR1UFNGeDIxLUJ6dmdqaHNPeXdxN2Joc2tFY3ZLaHlBbnFvTGo0WThfNHUwc1JWWTlSeHQwZ2tWNUZTRHhVN3A5REVWNXRwbU1ua25iS1B5eFZuNnl5ZU1oSlp4U3JKNklQTjZiWEpid0VUbi1ZQTZ5c0cwVkJXRVVPMXBxY1J0cXVua3hLcE50RHBySTk1QzhjeS0tMnNWX0luVDFINldja0lNaWVIZUJMamlXV2VKVi1DY0FqazN0YjNNQVhyU0s0X2hfZGR5N3VQRFJIUjBaTV93TVItVnh0SmFBZzE4SGlzTkFWX3Bsa3lELURYOVRxRFVZU3VUdjZOaGl5Uk1Md3E4RlJZODlCSzFpek95b2tfVm5QN1hFdFlyQXA2UGU0WDZHWTlMb1hiZHJlNzFycUdNOA?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-12-04T08:00:00.000Z"
+      }
+     ]
+    },
+    "2375": {
+     "name": "凱美",
+     "strong": 1,
+     "weak": 0,
+     "items": [
+      {
+       "title": "輝達 GB300 效應 五類 AI 受惠股法人卡位 凱美、台虹等後市值得留意 | 市場焦點 | 證券",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5hOG5mU2lkaG10NDMyWVByUGJTSjcyS1ZKS2JmODlfN3pVSDBMdHFRamFLN1ZVaWVuLXFnSVlvdGE0VDRRQTJaLWR1TkczaWhIbEswTmVwY2I4QQ?oc=5",
+       "source": "經濟日報",
+       "time": "2026-06-22T07:00:00.000Z"
+      }
+     ]
+    },
+    "2376": {
+     "name": "技嘉",
+     "strong": 10,
+     "weak": 28,
+     "items": [
+      {
+       "title": "你以為技嘉只做主機板？在 AI 伺服器市場，它早就成為輝達點名的全球兩大供應商之一",
+       "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9sVmVuaVZmMlV4NGtjSnR3ZDVvV21id1NFZGpzbm5zUDFwSG9haTdhVmVwTk1TdmRrM21idDZjdlhNb1d2ZGVqSW9EalpsSHBtMzVlSVFxMnk0MklvcVNQcg?oc=5",
+       "source": "managertoday.com.tw",
+       "time": "2026-03-24T07:00:00.000Z"
+      },
+      {
+       "title": "還以為技嘉只是主機板商？它其實早就是輝達點名的 AI 伺服器供應商",
+       "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOUExnMjA5aFVlRXIzelNoLV81XzhFWl9pVXU0QjhQSDA1YzJGNGFqajhrWGlRV3h5MlNuNlBmd0luMXhuUTI3LW5qRFRBelhoYlh4ZmhJM2QwTWVwSV9weENCd19iQ0g2aVhHTVB1OTFfNFkwZWlaWTF5RnBjcTB1MC1TRlNmbHN6XzdRMUhDLURtM3Y4NlE?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2026-03-28T07:00:00.000Z"
+      },
+      {
+       "title": "下半年輝達伺服器大量出貨 鴻海、技嘉、緯創大啖商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE43TURYd2FDQ0RXaXQ1cXIxVVE3Y0JpMDhEOFY4MDQ3VWhIOGlzanUzM2JOSlpfcW1VZGNONXU1Tm0xREpKYXoxTUJWYnpnRUhBcVMxODgzSVBYd9IBX0FVX3lxTE44am1PSjAzblVfU2dMYkNMYS1MVEtzSlBlcmJEaWtpMWhlNm1uVVFwY2l3dmV0Ynd2OWtJSW1SRkdHcHMzV2xnc1ViUmtNWWs1dWdYdG4zbmNKYmV6Mnhn?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-30T07:00:00.000Z"
+      },
+      {
+       "title": "技嘉發表搭載 Nvidia GB300 Ultra 晶片的超級桌電，辦公室也能變資料中心",
+       "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE9pTS12bHFWMmw3emxVRkdpaXdnTmd6REtlSWFBVkU3bG9DZVNRMWtBSVhNNm9keS1DYnFhWDdRX1lHbk9pTEJsd2E5QmNSQUpicDEwRFY0a1dwV0oxNWY5WUFKMkRfZ1c2SDdyRDEwc3JDZw?oc=5",
+       "source": "鏈新聞 ABMedia",
+       "time": "2026-08-21T07:00:00.000Z"
+      }
+     ]
+    },
+    "2377": {
+     "name": "微星",
+     "strong": 14,
+     "weak": 37,
+     "items": [
+      {
+       "title": "輝達RTX Spark訂購熱！華碩、微星訂單再加碼| 產經",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE13Y3YzUHp5Qm12SjVGV0liYmZ5dWhaOUh4aXRCb3J4ZURyV0otUW14SGoweUlkaGxBUkFCbEUyZk0tTkZrRHFoOFB0OGFRcXQ4Q1o3eGNBY3ktZ2E3Yjhj?oc=5",
+       "source": "非凡新聞台",
+       "time": "2026-07-29T07:00:00.000Z"
+      },
+      {
+       "title": "微星攜手輝達 導入 XpertStation WS300與 EdgeXpert 平台",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9XQjJlUUxqMHlJaXFmTnVGYWhaTGJaM3pOOVFJRWc2RFNxd0FCVkdWdEMtUm5LM3NUUDh0ZWtSTzJ3SHZNNjN3cmt3UkZ3bmlidjZhbGR4V0FUd9IBX0FVX3lxTE0yNk05eEh3aE1NdkpKUDN0QU9haVViNHpxR1FGTGgtZEp6QWRmSVUtdFlRUjUwNTJJTk1KSVV3RFZ3bHNTTXU1THZ1RFN0TVNRQzFkRHBZWXZKbFU1Vl80?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-12T07:00:00.000Z"
+      },
+      {
+       "title": "焦點股》微星：輝達新品出貨 拉逾半根漲停",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1qR00wRHNOUUVUSU9WNmV1TmJISFBzQUVEV1JFZE5DLUlJVGE4YjNLWHB0NFRIOW1ZSG45LXltMXFpWExGTFFiYVdZZ1lXcGF2Z2hKMUhmMFZQR3plNUNZ0gFkQVVfeXFMUGp4S0s5TW5scG5Tbk85anFGVWpWN2g5SFhjZTdaY08tcUZEX2lsYS1GUUpTSzA1aHJ1RTFYZ20ybmthZW84ZDJEWHYyRjRMbHlTNUtjSXRISUVNZkZQRkRoWmtVOA?oc=5",
+       "source": "自由財經",
+       "time": "2026-09-04T07:00:00.000Z"
+      },
+      {
+       "title": "「MPG 272QRF X36 G-SYNC Pulsar Gaming Monitor」上市！微星與NVIDIA聯手打造的遊戲螢幕",
+       "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPaDljTmQwVjBpSF9zMW9SN2xGM1AyandDQ1FKZEJFUkROTTBLSEFpT0xtTjdmcEpjZDZZS1JBSmotb1BxNW5iNlpQZ29YZlRtdkVRWldZUVk3V1NoT2VFQVZTVzdYa01OU3gyYkVaQklQTE4tTHFSN09yOFN3cHZFNVE5ZldFbUR3VVdXOGRsWXlnQURrc3NUSNIBngFBVV95cUxNS05FVlFVNzdmMkp0ZVp4b3VXVF9tUnYtV2h6THdqaXE5eEhRMWNKZHpqR2FrRGtsRi10NVJHemZXaWFrdENYa19qZmljWVhuUEEzTldpNkVLekFfcDR0clJVWEhKNllRZEYzV3JFUTVsYWU2NEZHTWNyV29EeDFBS0ZnV2xsbDl5WGtmU05zNjJGTEF2WGZfcEhGNkw4dw?oc=5",
+       "source": "Saiga NAK",
+       "time": "2026-01-07T08:00:00.000Z"
+      }
+     ]
+    },
+    "2379": {
+     "name": "瑞昱",
+     "strong": 12,
+     "weak": 7,
+     "items": [
+      {
+       "title": "瑞昱打入輝達記憶體鏈，市場形容「群聯第二」",
+       "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1vc1gxWjRFb2hub0FxZDd5UWNGNXJTSi1EQ0ZoSkVaZURjY3FJUWkyU21QcGVvYzBFRU9XcGJkWlpkVWZMbE9YRVdHWGs4UWV5T21ZdzQtV0kzd1RNZGhyRg?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2026-01-14T08:00:00.000Z"
+      },
+      {
+       "title": "瑞昱報捷 打入輝達鏈",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5rajFtRThyMW9rVm1QTTBkQTUyWkliQ2M4YzNiQm1vaVdwN0NhM2NHTFdvWnRfVTN1TG5hdkFnUHFoX0RDaHlDb1dMUWFGck9oR2NrWDhNUEx5Z9IBX0FVX3lxTE0ybGFoZ1g5Z2l1MGhIUFRvOGRtUjdkOHQzSkNwRm0tWWZsajJYaG1KY1lJaktEZVVMbGRDc3V5LVlvb3V3SEJBeS14U242MzN6SXZ4cUY3RE9iRzc1ZlNv?oc=5",
+       "source": "經濟日報",
+       "time": "2026-09-08T07:00:00.000Z"
+      },
+      {
+       "title": "瑞昱打入NVIDIA資料中心！ 股價飆漲",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1iOTlQV0FfVWc4Y2VtdWtpblBxSGgwMy1vZWl3aDA5R1E4N1lSMXZhTl9hZVAza1pQWEotWGtQdXJKdFRfQWFnVDJNdEk1VkNhRXJmcUdEdDdwVFVEdEZ3TlR1M2F6RzJpMl9sbFFSZw?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-01-13T08:00:00.000Z"
+      },
+      {
+       "title": "算力新創獲輝達青睞 創辦人是瑞昱第二代",
+       "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5xd1NSNGhobnBiRnpMTWM4TFdhS0xjbW5EYTFwaDJnemdpTkRvSU9VSndCSEN4MF9fbmxMSUJMbjJILXlySmxpV044U183Q0RvbU9LajJ3QUxKOGtoOEItdlo3T3VSd0ZGVXRyM09ZNWxtYndWWG1wejlBSQ?oc=5",
+       "source": "財訊",
+       "time": "2026-02-26T08:00:00.000Z"
+      }
+     ]
+    },
+    "2382": {
+     "name": "廣達",
+     "strong": 11,
+     "weak": 21,
+     "items": [
+      {
+       "title": "黃仁勳為何Computex先來這裡？一個月出貨等於以前一年！廣達訂單看到2028",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBmbFRWSG5IZ2V0RjF5TmVIdHppQUNSZE9PaGxfb1Jub2wxcndFT191T0xESFZjak9zZ0JrcWoyV3g5bmpodUw3bTlwRWNxdw?oc=5",
+       "source": "天下雜誌",
+       "time": "2026-06-01T07:00:00.000Z"
+      },
+      {
+       "title": "輝達合作夥伴廣達電腦尋求發行全球存託股票籌資不超22億美元",
+       "link": "https://news.google.com/rss/articles/CBMipANBVV95cUxNSDBzY0ZDOHQtU0FqS3ljOG1iY2xjak1kWjJyVl92dFI4UnpNeWZsbWhEY2pCT05RdUYzNVhRbkN2MVpNZnpQT2g5TjlRMGt5bFZSWjlUYm9KQnFCTzFteXhiNWhwMGdoU1FBVU5ycHVjQklaSzJiZkI3eEgyUkhBd2lYX3ZlTDBYWXE3VEtMWmZ3VWpOSEhIbm9qWExhUndIaG5DNUZObGxlYTlGblBWQlh6NktiVXVDMERCVlpDa0RTYzE2d1pFbGY4MXRmenA3ai1fcUNSdUpvZjBSZllQYjFjUWFLZ205SjVLbXJHNWRXNWRCZkw5U3BteDliRHY4a2dKZWVyc0h4dEx0MV9jLTZEbTRXYnNIMWwwcFRHYTBuaWN2bkd0ZGRMazhUMnc0VVdoekhuMlV2TnF0clRqcXNsTUx2dGpvZXdleW91YnBzV1BHSDR2R1hQR3ZTbi1sTDlHanpVUlZvQmRBdGwxUVJWdDhqbFdkaXJUa2NfajJYRUZSdEk4TGszM2w4YTFhYUN0SU9SVlpkbzh3MHIyblNlQVQ?oc=5",
+       "source": "Yahoo 財經",
+       "time": "2026-07-29T07:00:00.000Z"
+      },
+      {
+       "title": "大摩看好輝達機櫃平台今年出貨成長翻倍，代工廠緯創優於鴻海、廣達",
+       "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNdkJQVEVoSFdRMVI3SEt0X0J1dC1lQ1VvMUp4TWNCOWNXZXYybFZDTGx6dGtPSnR5WWUtU25uNE5WdzlKWHNBTFZPdi1Wek5ud2NzTFFIbEdXdnhsSlZhZG84QXBtX1JyTldQSTBIUWh6RmVMMFRwRUl1SnYtSHdWU3dhUmVSTlc1bVJNLTFkamV3RW9lY3lXX2x1UU12VkZOQmpDLTFHQTFOWlFwYmRPWl8td25NeGRyZGFxYldPbVFEdnVDZVVuSUtsT2laZw?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2026-09-10T07:00:00.000Z"
+      },
+      {
+       "title": "輝達VR平台 帶旺台系鏈 挹注鴻海、廣達下半年營運",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1Wc01GMFl6bEdiaDh6WDBOejhCalM3UjNfQkF0dWdlRU5uMkt2ejRmS1VCa0ZtMl85bElIcm1xc0dDeEZveWM1MEN2V1Brc2lqUVB4SGpRZ2xoUdIBX0FVX3lxTFA4Qk5LMHVuMnBqMUtzRjNibGptUG0xaS0zTFBUcUxfbWhTSGZSX0k5dXBJNjFiVl9DV1MwdzhvTS05NXdLLUVDcDVEdXpCQllrenBvY3puYllNbHd0UGpr?oc=5",
+       "source": "經濟日報",
+       "time": "2026-07-23T07:00:00.000Z"
+      }
+     ]
+    },
+    "2383": {
+     "name": "台光電",
+     "strong": 15,
+     "weak": 8,
+     "items": [
+      {
+       "title": "NVIDIA CCL供應鏈洗牌台光電可望躍居最大供應商- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxONXdHNGpISkpybUc3REpJZGp3aXo4T1k5YXU5WHdRZy1vS0tpVjZfSWFzN0w4UUNiaXgtcFRZcEY0LWU1LXgtWE5ob3dVX2FQWV84emlRNW1DSjk0dkpiVjh1bW5vM1o0bFYxNjVUd3FkemY0S3lpUUJjSVo2eXpRSlhMLVVfZTluUl9ZN2NYbGFqUQ?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-07-03T07:00:00.000Z"
+      },
+      {
+       "title": "焦點股》台光電：取得更多訂單 超越斗山成為輝達最大供應商",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9kWmxhcW5CRlEyRzh0N0V6NVFFQ0pVdUdicmxYd2dZZGc1SW5BbFM4QXpjaEQ0d2VpbXZhbklfN0ZSeHd5ekg4ODE5YXVON3FoaWp1bEpkTUZHZzZtc2pJ0gFkQVVfeXFMUENMcm4yQXhkNGQxYXVKNmEwSVdFZTgzTjB6SlZXRVU0T29TR0k0RFhsNm1QeGR1N0F5VnJYQU1CbVA0TmNfeDhRNGI3SEo4Z0E5UzNVY0Vsai1DV0ZyeHRXV1dkTw?oc=5",
+       "source": "自由財經",
+       "time": "2026-07-03T07:00:00.000Z"
+      },
+      {
+       "title": "AI熱潮燒到CCL界！「銅箔基板三雄」營收飆上高點 台光電奪輝達認證、產能擴張衝向760萬張",
+       "link": "https://news.google.com/rss/articles/CBMi9wNBVV95cUxNeUplaXhJNzNpeGxqMVJIVWtNeDNWcXNTNGU0NHRuZjZmUHE3OUNEV2h0bHRWakExMm5HTUdmRU9XMWh0ZTRVNTVkZmRPbHVlU3pNV1lhR3oyUDlIaFVka2VxWW4yYW1pNDdHVGlSTHgtaWJVeW1fT2JnSzRqNnZJa21McC1KcTByOVZURURSek1DS1ZMNEozcVBmckVvQmxRSzFPWlJXejRWdkotMVdkeUMzM2E3c0JQcWRjSktMTmpMbW4xMFM1dWpqbzBZa3ZpWHBsNmxuN3c5eEhvQmg2eGxOMXJQa0xlb2Zlcm8zTXhEUlU1NWJFanliX01Va19wRHJHZHI5NGEzc0lXeDNzSEpaTVlVajlKTUg0UzUwV1VBaDJhc2RIbnNjRTdLV1JFX2E4YlRfS20td3NFMWc1c0JpRjl5Rl9lbGM2S3dtb1ZHaF84dm8tRnpZbnZNbHZkN1lsb3IzUnNxRC1hRVBJRzU5U2hKT0xWcVg3VUpxUXlIRDlZYlkwV1EzUnNNYWpsNXlLZU91aFFZQVRZdFJFd1FLcFYzX1ZwSTUyR041UWpUWkxaU2VLTHdJTVhfNlFyZF9IRnVwR25GTDdyUnlkc3lQZEY2QS1NMHRXXzZMN3llU0NpRUgwTVJiSWRVUE1jTzRyWi1sSQ?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-11-07T08:00:00.000Z"
+      },
+      {
+       "title": "台光電(2383)股價1500→2450元還能追嗎？輝達GTC大會亮底牌！明年EPS衝100元、3000元目標價浮現...想上車先看這指標",
+       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1aX2NZdU1zcXF5b1NGOUZSRkxOaE54cHo0WlphMGh5bDBmN3ZrWWVtVnFmOGNzS3hrVUJUWlBTcDEzZTNraW5GczVaa2I1UUh6Qm9nc2hn?oc=5",
+       "source": "優分析UAnalyze",
+       "time": "2026-03-11T07:00:00.000Z"
+      }
+     ]
+    },
+    "2404": {
+     "name": "漢唐",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "谷歌、輝達都有份！美AI版曼哈頓計畫台積成核心漢唐等台系廠務業吃香- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9DOU1TMUdsMk1DdG56cTh3YmdfWGJRck1iZU1fVWJTYzRlOUR4aTU3aDJ5eE9zeGN0dW9hR2dwZUhwaEFkeUtxSDZYLTNLQTM5N0NMTTFCaHZVNVNyR0F3?oc=5",
+       "source": "工商時報",
+       "time": "2025-12-22T08:00:00.000Z"
+      }
+     ]
+    },
+    "2408": {
+     "name": "南亞科",
+     "strong": 23,
+     "weak": 22,
+     "items": [
+      {
+       "title": "南亞科供貨輝達 Vera Rubin 快了 LPDDR 在台積美國廠驗證 即將出貨",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBVOW52VXRlQnpzUkJNQzc1MU9YemRaM1pwTHpaQ3VCbGIyOTM3SkFSNDE1TlI4UkRpLVB0OTY2cDBmTG5JREJUTXgtYU5abTMxSkVVUl92Z0VGZ9IBX0FVX3lxTE5vdUtudTdscm9OODdUMk1zR2dhcndEaWdqLTBWN0Q2M291WXhQeWhHTWFOS2JvTk9lblVfZ3ZCeDhIcVpkUS16VFdFZWZCLW5mZjZ4MnZzX0loYUc4bGN3?oc=5",
+       "source": "經濟日報",
+       "time": "2026-05-21T07:00:00.000Z"
+      },
+      {
+       "title": "南亞科大勝利！成為台灣首家為輝達Vera Rubin供應記憶體廠商",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBRTjdYbGlJaThFMEJuNl9oWUVxYWFTQl9BQ29PeHhYRVd2SmhOTVd5a1lHWlpzeUs5LTRsRXh5TjYyLVY2bnNOQ1JCeGJMUjdYeXdxeG1DUDAwRV8zMHZN0gFkQVVfeXFMTnRPOHZIWl9xMWlxdzRFVzJibHpYUk1LS2NkQTRhcVg4U180TU9oVXFmeXJGLTlYY2g0aFpZWHdwdTVtSzNmWkk3Nng4SXlnSi0zTmZqLUZTNVo5aUMzNUxPRDVVMA?oc=5",
+       "source": "自由財經",
+       "time": "2026-04-27T07:00:00.000Z"
+      },
+      {
+       "title": "台灣第一家！南亞科打入輝達記憶體供應鏈 毛利率衝七成",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9yLTBpRHJyWllzX2JIY25YcS1lbmhyMHlHTUdVdzlUZkJzaENSeVQxMUdYNjk0UldvT0pWRVNxNzM0aWpPNU00QlhBdTZMOGNCYk1TN1JydDFFUdIBX0FVX3lxTE5SUXJxcVg5em9KN1pIaUt6aTBYRF96UHBpS01KNk5pZ0hjUklsbTYyWm9aZVZxWE9QaTJtNzdFMlh1LU1JNXZiX0tMSzF5WjF2UTRVVHRpWlFjMGN6eWJV?oc=5",
+       "source": "經濟日報",
+       "time": "2026-04-26T07:00:00.000Z"
+      },
+      {
+       "title": "台廠首度打進輝達次世代AI核心！南亞科搶下Vera Rubin關鍵席位毛利率直衝70%震撼記憶體版圖",
+       "link": "https://news.google.com/rss/articles/CBMiigRBVV95cUxOY1ZXMUpROHhwT0FQd0EyZHM2S3F4TXdrekJ1UlZUaEZQZGxEUTBSLVhtS3V2Snh0c05jQkxlRTV2dXEwZzAyZnM2LU5ENFRMbmtSeFJnNUs0X0hOTmNJUUhDeENGZzE3U21QM2JxVTg5VWQwZHFKUUw5d2pjbXNZeERBV0lreENsUnJBSHNCWnBFY0lHUjlCcGJFb21uOVdNYUFkVGpOb1dRY0RZUkt1MWozUXJEaFdlNnpzSDhYSWNRRlNfdlNOUUV1VUc1SEY5YUZ3MjhyQzdJaWwwTzdJYVh6NjJtUzNmb1hlYzZLa19iN0V5VUF4Q1lralYwM3pneHdVaVZteTVWa2NSU2RGbHNfNnNrMFJaZTlhanJ5S0hFWWozaWhVWk9wdjF3Vl9ERzBiby1rZk9JbmNiQjEyTzM5UEloc2RVVUZSdEdWMHJOcU04OG1TcHIyQUs3NFo5enB2VGMtRWVsY3owMElvdDJBQ2RXcjdqdGlNRWZLdnRLUVVBYnkxdEF6Y25LbFNVZWQwM2RlaWZZTTBxU2x2RXRrcmFNRlJBT1JVTE84dTNyLXRHU0lIcHBuMkRrLTI5aFlVLWk0ZHNudWdJaTdBS0c4UF9iaFk0TERrRXJ0bURTMk5Gcy1qeDdZOHdlel9fU2hxa1VkVHdzWmN6VGpwT25pV1hCOUhnc0E?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-04-26T07:00:00.000Z"
+      }
+     ]
+    },
+    "2421": {
+     "name": "建準",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "建準Q3每股賺2.55元；擁GB300動能/水冷明年量產- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQeUg1eDhzR2FsdDhLblNBdlBfcmJCbmhQQzE5VXAzSGttTFlUZEhtY0RacDlpSS1aVnRUaldNbFZwdVZMQV9oTjJ0ZmpUTnBNWDQ1N0xTT0oxQnVGTVl0SlRDR241ejFzUGVoODBxVWlaSXc2c2tzeGNQckQ1UjlHN2tBTDBpSUtuOGdRME5VdW81UQ?oc=5",
+       "source": "MoneyDJ",
+       "time": "2025-11-06T08:00:00.000Z"
+      }
+     ]
+    },
+    "2449": {
+     "name": "京元電子",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "2454": {
+     "name": "聯發科",
+     "strong": 23,
+     "weak": 71,
+     "items": [
+      {
+       "title": "台灣首例！輝達「準入股」聯發科揭十年產品路線圖合作版圖、模式細節一次看- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFByVnVZVGFaSm53OWxNRkwycGl3TGhkMUhtLXlKSDlpV1JEREx5aWZfT1ZHUkZ4SFhKblo2eTFGbm12VnVTeVdIRVlPS2Y0VkFMOXlxYXlyckRJOW1vQXNB?oc=5",
+       "source": "工商時報",
+       "time": "2026-09-01T07:00:00.000Z"
+      },
+      {
+       "title": "輝達首度砸錢入股台灣公司！1100億豪押聯發科 黃仁勳揭「10年合作版圖」",
+       "link": "https://news.google.com/rss/articles/CBMiqwNBVV95cUxORHc3U090UE1wSzhvNVNEU3JsOUJnY1BwVkUwVmtTeHRQQ0RXZ3I5UVZCZElmUHFjMUxEWUxQTFBFby1ENmtBeHFJRG1sX1I4UWVXeE1VRm5kSWh2RGFiOVRCMmdyd2Y2YXd0aG5uZ1JDbmVNcU1jRjBhMVNPOGFLbmh3UDE1OW5hY0V5aU91VTRNbFJJVmNNSjQ5dW1EZ1lXUHB4Z3NGbFliZFNaeTFXLUM3cG1NOTROaXB4NFF3UzVYSGxPQ1lUYUFScFluNDMtSC1GSEZfTGY1ZXduMTRLRkJPLUtqVTktZUZQRGprVDlhTnQ0X2ExVUpuam5nRENuLTNfWUVYNldYdDg4MjhvRlY1V0VMT3JTdHFEbTNxYy11XzUtNmRFeW9ST2RkOXM2UnB4OVhHQ2dxNndjUFpHMzQtbUMzOHRTZVc2NkpTWG5lQ3BXWXhCREVERVNCaWZQY0pLcU5Fb3lsaG96cXl2QXZSMnBpLTV1Qng0NkgyN2Z4czNTOV82LW1lSHBNQUJVZ2lrT18zRTYyOG9jNGpISllzRE55R3NpVUNz?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-31T07:00:00.000Z"
+      },
+      {
+       "title": "輝達聯發科深化合作，黃仁勳、蔡力行揭密 35 億美元投資與全方位改寫 AI 產業規則邏輯",
+       "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPTTRrck1lbk0xcldZM3RzRkVYZFpTcGJ3Rm5hemRObjdiLVVqdHREWU5VVGQ2Rm5hUzVDc1FCZUFXZGEtZW1Ib2RTUWRLam40emgxQ0F0MmJRSGJlQUJCMmVTWGx3dkl1eFkxWi1XcWhEazZJRzZJcTNLdVJuVHBZRnhwdU4?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2026-09-01T07:00:00.000Z"
+      },
+      {
+       "title": "輝達為何砸千億投資聯發科，認購海外可轉債？7個關鍵問題看懂黃仁勳盤算",
+       "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOaGdlcFNselczX1puLWo1b0J6TGtjdV9NQ3hZbmpmOEd4U0ZBRVByMDJPcE1VbWNzUjU4WXBXcy1adlNyWmdlek9ubDBaVFFYNUNESTRnWTdCeW1ka0Y2aGNONHR2NW1TUFdVTmxCYlB4M2M5Y1FyUE9IQ2FPSUR6LVdVZHZEa0RmTGc?oc=5",
+       "source": "數位時代",
+       "time": "2026-08-31T07:00:00.000Z"
+      }
+     ]
+    },
+    "2457": {
+     "name": "飛宏",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "2465": {
+     "name": "麗臺",
+     "strong": 3,
+     "weak": 9,
+     "items": [
+      {
+       "title": "輝達新款 GPU 擴增記憶體容量，麗臺入列首波合作廠商",
+       "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQTFVqZjVVaDN4cVQ5R2xLU2ZtSE16RUtsSzdyTjBrY0s3d19YLVpyVlE5R1FQbmgzblJidUdvUXN3eVJfLThuWmlvbnB4ajQ5Z1hKODhmRmg4VEJDWG9jOEdIVnVuVXlBcTdQOTFOck5OM3o2SzY3a1plc09uLXEzUzdsMVV6NVRYS2U2TEJubWgwLXpqaG13cU9LQUNVTzRZMGhRNVpEcTBXSE1UMGdOTDdOd0x1TUU?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2025-12-19T08:00:00.000Z"
+      },
+      {
+       "title": "麗臺科技攜手佛光大學 導入NVIDIA DLI認證課程",
+       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1kZWFqemtuTEUxWXNyX3Q4RFFtTm0tMHJiMmtPNV8xMER4Zk1EY1I4UmFOQ1paUlNlRjNjaFpnS3VnOVlxWFdYSFNZb1gtQldMS2xiZ0t3?oc=5",
+       "source": "中央社 CNA",
+       "time": "2026-05-14T07:00:00.000Z"
+      },
+      {
+       "title": "〈麗臺法說〉緊密合作輝達Blackwell商機 擁高記憶體優勢 不擔心記憶體漲價缺貨潮",
+       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1Nd1ZoZnlhOW1xRVlmdEpYcmJWRFAxTENaLS03NFhhRThNaWdCSk9Qc3lfV29ma3IxMUNLZl85dkpPMUFWWXk1ODdpN2VVZHJFa3RWbUJ3?oc=5",
+       "source": "優分析UAnalyze",
+       "time": "2025-12-19T08:00:00.000Z"
+      },
+      {
+       "title": "物理 AI 時代降臨！麗臺科技正式代理 NVIDIA IGX Thor 系列開發套件",
+       "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNS0c0UXVlc2p5Nk1BSTdUS2hKWVJjbkdYMlk1X0Vfc2txOEVXM1dlc3RDSGY4NDRLeEIyOW4wWFQ3RWJlOGVZRGJaN3BFZnRTVHNObXQwMHpvSmhXZHp0a2licHlEMlVlTEhZV0dCZW5NT2w3ZmUtd3pOVkpNdUk5VlVULXhhd0N5UDJaeGNaTUZPQVBYYmp1SlpsQlhvalVTRDFUcHZnMGM2bXk0RTZhS2d3T3M4TW1iUjg4MUI4R2UyMC02RXVIR0djdy1HeS1KQnM1cGxJMzhGaDJMbUpn?oc=5",
+       "source": "XFastest News",
+       "time": "2026-03-17T07:00:00.000Z"
+      }
+     ]
+    },
+    "2467": {
+     "name": "志聖",
+     "strong": 2,
+     "weak": 1,
+     "items": [
+      {
+       "title": "如何打入台積電供應鏈、榮登輝達背板？志聖梁又文揭密「沒人要做」哲學",
+       "link": "https://news.google.com/rss/articles/CBMitANBVV95cUxOQm45NV84b0I2MURRaF9ydEQxTW54SnlLQVZQWEEtcjdHbkhoUGFOQnBZbENlQVh5VDcwVXRXdHE1c0RIZDdzSExVam9YT3k0aVYwRGJMYmRxczlRTjVQQXhUWWIwaU55eEJWQlhVaWI2TFhtdjREcGFtbmZIZEY5d1NSTlljQ1pzZmZGOUtfNzBIQWhlY21CdVdLbUY3NjlLcEpqdm9sRnVqeDhrYTVmNGJXZGlMRGkyU3B1c2ZjLU12cFRXS2o1RFVPeW1ndDAwVTljbTAycFhCNmNla1Z6M3psRzhOdG1pZzFpd3Q3TFNtWDc2bElEb2FXMmxPVjVVMjl1TW9yTFNTNEl6LXRIQXhWcU1UZ0lTVmNRNUw2S2dEdmRwcVluNndScU10NHdKcm5JM19KbUljYzRIMGtXdEgwV3drc3RSSTNSX0JFOU5CNjVibEtSY0s4YzJYcDBMNS1BLUVHcnNBSGdFTnpQZmNRc3M2MjdlWmloZVRpdEhJclJ1Y0lwUHFoWmxrM1JzZTlSbEJ2cExfdFk5VE41MzJvVy1SUlZQXzV5aC13UTl0QmtB?oc=5",
+       "source": "Yahoo新聞",
+       "time": "2026-07-29T07:00:00.000Z"
+      },
+      {
+       "title": "志聖帶頭 G2C+ 聯盟 攜輝達分享半導體設備開發突破",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE4tcnBSUDBGQUp4Z0hjMjg0azFacVFKWEJaQWZVSDFTbjR6Z0F1bGd2LWVUTlZEZl8wWHdIYmpaSTVHM3d1RFJPbkRuMTZRV0UxMC1ueEk2NHR6Z9IBX0FVX3lxTE1rQ0IxbFFhV2Y3ek5yZUl6NkZtdjJtdkdVeEhzUndzRzNIMWVrMndDMFhzeXQzdzFfM2RnSTA1aElmMm4tYVJhQzFfdFpNbFBwVEhjWWtNYkJHck1tMXdV?oc=5",
+       "source": "經濟日報",
+       "time": "2026-06-05T07:00:00.000Z"
+      }
+     ]
+    },
+    "2472": {
+     "name": "立隆電",
+     "strong": 2,
+     "weak": 0,
+     "items": [
+      {
+       "title": "《DJ獨家》立隆電成輝達GB300主要供應商，估6-7月放量- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQVDJKY1c2OEtxY0puRXlvMm9SYjVLOGM0SjBjenRsM2hPelUxR1R4ZDBNWUlpbTlKMHhWWlNqQkVkRE1pcDNBLXFIMG1pdTNHVlU5NDh1Wk1DbVg5NEl4d1R1SlBDTzlDSENERXU2V3FpM0xGMldlVjB5M0hxM1dlVW14czNyekUzaW52VUhmNVd6Zw?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-03-13T07:00:00.000Z"
+      },
+      {
+       "title": "《電零組》立隆電切入Rubin關鍵供應鏈 法人喊買上286元",
+       "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPNUliVmNFVnlfWmt4dzA5b3dwS0h1MW1nOGtIN0RIaHVGSk40bWFVc0hiNk1MLUhXQmdvWGNYdXpkNTBGTkRKNVlzLW1jMkF0WVA3Q2Nid2VSQkFWa29VeUt2eVctUUUyVHRVU3ZPd3RCZEdBV3lYNlBTcXYwS2V3RTY3OGtQUEV2?oc=5",
+       "source": "富聯網",
+       "time": "2026-05-12T07:00:00.000Z"
+      }
+     ]
+    },
+    "2478": {
+     "name": "大毅",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "2484": {
+     "name": "希華",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "2492": {
+     "name": "華新科",
+     "strong": 1,
+     "weak": 3,
+     "items": [
+      {
+       "title": "不是國巨、華新科！「被動元件廠」目標價上看650元 獨家供應輝達Rubin毛利爆發EPS戰2股本",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBFRFR1bXJWcTlFTURBaHlMOFF1eXZNTGl2cHFySXZHTTRZa1AtTHpUMGhIaWRZelc1eHNaaHhIc29HQVlzY1VNcDZDdw?oc=5",
+       "source": "FTNN",
+       "time": "2026-05-25T07:00:00.000Z"
+      },
+      {
+       "title": "MLCC漲勢確立！華新科調價開台廠第一槍輝達Vera Rubin推一把- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9RbW9PVHhvYXFFcGRUcUsxWHpzOVI5SzN4WmpsaEF3R1ZEUW1LVTFKQ3lqQV92dVVRcHh4OVBrUXh0U3YwRjJIamI1SjhGdWpmTmJiaTZxQ1dHR2c2dUpR?oc=5",
+       "source": "工商時報",
+       "time": "2026-06-02T07:00:00.000Z"
+      }
+     ]
+    },
+    "3013": {
+     "name": "晟銘電",
+     "strong": 2,
+     "weak": 0,
+     "items": [
+      {
+       "title": "焦點股》晟銘電：GB300機櫃持續出貨 營運正向",
+       "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5PQnpjdW9BNERpd1R6S3ExWDlBTS1zSXA3M2FILXptcTNNdVAtVzNCWGxENEdvUWRqanZzNVVsRlFmYlQ4TG9oMWFYb1hYcE1hczMtZXJDLUI?oc=5",
+       "source": "自由時報",
+       "time": "2025-12-28T08:00:00.000Z"
+      }
+     ]
+    },
+    "3015": {
+     "name": "全漢",
+     "strong": 1,
+     "weak": 0,
+     "items": [
+      {
+       "title": "全漢FSP參與 NVIDIA《RTX AI PC DAY》活動 最佳電源合作夥伴重磅登場 展示 AI 趨勢電源產品",
+       "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQNW1LZFI0b1hhQzF3ZURvNEpxOC15dV9INHYwUm5Qbmp2V2VNVUJXZVk5RXZJVDlrU204VnFDV0tGQWtuRzNwYVFWelVPbzU5bHJCZ2F5VnpGN2lsNzQtdTdOQ0YwYzd4aFg3Szl1TGZnSnZrT0dWVTNkWDF5dU0tRy1pT1luZEN0Mkw4N0VKa05wNm9IMWVuQS1RUVdGTVNuRHI1NWRoUUdrSVZoQWVDcUVBSnI4ZmtsYjM1MmNXLUdjSy1JV0E?oc=5",
+       "source": "XFastest News",
+       "time": "2026-01-15T08:00:00.000Z"
+      }
+     ]
+    },
+    "3017": {
+     "name": "奇鋐",
+     "strong": 13,
+     "weak": 7,
+     "items": [
+      {
+       "title": "焦點股／輝達散熱認證台廠缺席！奇鋐、雙鴻雙雙跌逾5% 健策反創新高| 產經",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5ZMkFWNkNjZGNhRy1Ga0tLb3JXbHYxOUlTU2VyZ05Gel96MW5IOUpzRjNmWFBfN3BQY1lOQ1ZRa0tBclJwanB3dFQ0Y0JsNmlMU2RkNWNmQUlSYjRnQXJn?oc=5",
+       "source": "非凡新聞台",
+       "time": "2026-09-29T05:11:00.000Z"
+      },
+      {
+       "title": "新架構革命未停 健策扛非戰之罪、奇鋐遭錯殺 輝達降規趕出貨 散熱族群前景解析",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPM0JYUTV4R3hETXRncWdJbWYxQ2FtZlJxVVdKTVRNSk1wSXpkeExjbjVxWXBMWmxGdVl4dWlDWHU2OUduV3pkc0QzZmdIOThkSFVxenI3VldKU3d5ZlV1cmYyV2c5T1lqRERpU0hHZkMwTTlkQ2F6aXJpMWdCVXNKOQ?oc=5",
+       "source": "今周刊",
+       "time": "2026-05-13T07:00:00.000Z"
+      },
+      {
+       "title": "輝達Rubin傳改散熱設計！投信出貨奇鋐回收25億 「金融股這檔」遭清倉4.3萬張、連挨17刀",
+       "link": "https://news.google.com/rss/articles/CBMisANBVV95cUxQUVdpczJId3BfUnRFcjBKdXRJcWdUamdfMXo1a1U0aXBpelFKMWcwUHFGWDN6ZktaUWRkRkxJNk5Vek9HbEhSOGlPS21EY25wZkk4Slp1YkFYMDZGZ2Z6d1k2QXZxNjBxTE9YOGxDcGpGdTMyT1RtelVRWjE4Z2lqdjkzRC1XbG91MG5qNFBDSC02cGlRM21oM3NidG1kcXJicTFlTmxKZWY2SkhxVXBhcjVNVUVBWVN5YUx4azhjQmRBZFJ1YlhIRmtsXzVHQ1Bxc0c0eU45cTB2V2hhcWNyR213TENWUkVlblRtNWJ6X1lHNFB6ODg2WmVKT096eERrOXFjVDRLZnlLVFZuTzFEN3dNS0tJdUNkbllQTmNYQ200c25ROHI5dU1HRi1NQ3VTQUZLNlBYc3B1RWJaVXZ4RklNeFBKeGVDNlMzYXRKSTlNRmsyNDRlbmhWZk1NamowWHJ1ZkhIQk5KdGVzS1lIcTBIV2JHSXM2MzgzQnkzR1pnR3FhRzlabFJONGRzVFNxQXNWQ2F3ZDI3dmxYTmRUekMzLUJYejl3NFp5TTllcUo?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-05-07T07:00:00.000Z"
+      },
+      {
+       "title": "NVIDIA、Google、Amazon誰贏重要嗎？AI晶片打得越兇，奇鋐反而越忙",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9BbWxUNzVQNjFyQ1dNSjM0b1BuTnNMdHoyd1BWV1M3TjJEZUpGU28zbGVXeDlKWlNkOUQxRHB3a0l2THB5TU9WNzB1eTBOSlVpWmRZMXRmSDFFSEdHVUJFTFJ1MXVvN21HWkJIREgzMA?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-09-09T07:00:00.000Z"
+      }
+     ]
+    },
+    "3023": {
+     "name": "信邦",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3026": {
+     "name": "禾伸堂",
+     "strong": 1,
+     "weak": 4,
+     "items": [
+      {
+       "title": "禾伸堂打入輝達鏈",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9FcU80dVBRN1g1N2hvV3lWVDU3YXdWZzdhLWZqa0NtSG9KbVJXckxCUXhtc3RuM0FCbk5GeDBJNHBkVjVtOTZVNXI5TVpaSTlFdHptVTQ0enk0UdIBX0FVX3lxTE9RUDU5NUhSREtqU0p4ckk5bnF5WXk1UGZEa0xBYzBOU1VkZzJScmNtOFp2cW1qbDlVZzBjTzBGTE1KNHFDZlpjaEcxdmFzZUlvXzBTRjhOeWJHLVQ2VExr?oc=5",
+       "source": "經濟日報",
+       "time": "2025-11-20T08:00:00.000Z"
+      },
+      {
+       "title": "立隆、禾伸堂...輝達Vera Rubin帶動被動元件起飛 台廠迎第二波AI紅利",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBQVkpYZ1JBV3VFZm1iclFtQzVUUnp0YmFlM1VpZ2RKUkc1aVJ1M1BlZ0pKbkI5TDJGQjdURDVRSHZxVHN5MFY1cDFsQWgyTlNXOHFUSE9jcE1oczFpcVFB?oc=5",
+       "source": "工商時報",
+       "time": "2026-04-27T07:00:00.000Z"
+      }
+     ]
+    },
+    "3030": {
+     "name": "德律",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "輝達財報優預期！黃仁勳55檔「背板概念股」32家連袂勁揚 德律鎖漲停 川湖飆逾5%",
+       "link": "https://news.google.com/rss/articles/CBMi8ANBVV95cUxPLUo3cUpzTVRzM0F0bUwtU3VXVTBBbnhLVDU5MDhFN0paMlVXdlRqc3lDUDhaeEJyd1dSUk1UbUJNTzk2bVpnX3JROTRkTEd3VnE0UVVmV2tKX09PeGV5UlluR2hPZV9wcWtsVHVHcEJuZ2tOUmVmV3dFdm1lcWdzWS16YzJEWTZsak15Xy04YVdCOFdwNzBPTGR5YmRIQjUwZjhWWmRGUVh6R1NLOTJ1OU9RcUYxM25lN0xFZmh0SElYdUNCSlI2LTJ5eWZodmdzUjBCaUw5ejhtQThUalJ2VTF0NXU4TDhwSFpJUmFfQzJnalFRMC03UGR5Ujdac01zY25QcGRhcGg5bUNrY1dhRWt2bk9TdFpZS3k0RGMyb3gtbkliaGFGOTllRUE5YWVTNWlWZmtVOV9CRVpWQkM4ekIyQW4ySjRHQ0NCa2NtVXNzajd2cDgzM2M4UHZMakcxUnlpVkhGcjdLR0paTFl1LVY5Ti1yMWRXUi1rZ2tZbGU0bmJ1Yks1aHVMdC1SSG94UVBDQXJuM0VweDU0MFV6LUE5MEViR2I2MjdabFRNeC1CSXJWYWZkRDFOa2F1UVhCbWwwVGs4TUFqM2NHUW1qRXFodjZkYUxKcUJXem1tNHY0cjZudTJsTjlvWUhYS1R5?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-02-25T08:00:00.000Z"
+      }
+     ]
+    },
+    "3035": {
+     "name": "智原",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "AI把礦主變包租公！比特幣崩跌難止，輝達、創意、智原才是真贏家！",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9qVVVZaVFsSFhZNFlFSVRWdkkyeUU1UnU2S0JZMGpzR2lJQVg3elNpSS1sOTVLR0lCRlUtQ2pjdVRHYWcweXFNY3JIVDByOVVzc3hzc29xaEVDSmtfOFl4enZSUTFmMkVYQjF5TnpKZw?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-06-20T07:00:00.000Z"
+      }
+     ]
+    },
+    "3037": {
+     "name": "欣興",
+     "strong": 4,
+     "weak": 11,
+     "items": [
+      {
+       "title": "PCB苦陷低潮！欣興開盤秒跌停失守千金、景碩慘摔8% 「FCCL大廠」切輝達供應鏈也挫半根",
+       "link": "https://news.google.com/rss/articles/CBMi3wNBVV95cUxOdHdzOFFsM1Z2SU8zOG5McmhwZ0ZvZjE0aGlmVWE2aE9hVk82cGFpY0ZUazB4WVpLQUV5b3libF9aMTBtTnc5T3J4UFdjS0k0Nm1tb3lqamhpbm5Cd05EWUV5SExxQjBSSUlIR0ZUY2NVa2gwOTlSOUo2Y1Q4VUtieGUyOTBVT2R5Qk5hcEIwVWNrU3d1MEJMRzJxdy1JTERuQ1AzMzJJVXVmeF9zRE1iR0lUMUdYWXJ6cjVIZnp4UTBCeUVTWUJRTE90bGNydEdkNFh1ZFZaa213RERXUU5xN3ZzcExiM2xoWnpUVTNFaVdKRVl0QWNQSjNvZHRKM0RwYzRBcF9GSl83b1pWSjl2SkoyX1E3eFB4c0M2RWQxaVh3Q0lOaEYyOHJ3YmJackVYVXpxN3ZtQUZ1Mkthd1NpdXhRWWVTYXNWbkdkNGlnWjQwMURaU2FZUzZmdlBfUU1oTEdHUTRsM0gzM0doTGh6clIwenFWOEVEaEprYUhkNm1MWmpKWWNmLU91ejBHSmNHVWxfNTZqT3NsWlBCdU9wMVZUSnV0SHhHUnFwTUFiQlVDdkM5eHhKQUVValhmZjRldHA0TExRQjVnUHdCM0NnVTJkS0xrRkNGc3JVSHdhMA?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-30T07:00:00.000Z"
+      },
+      {
+       "title": "輝達Vera Rubin載板台灣雙供應商！欣興 vs 景碩 Q2 財報、財務指標與 2026 年股價展望全解析",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5sNXpFdElMUzAya3RrVEZWUDdoYm1TSzU1TUZTYXRxN0ZvZWkweW1tNkpOQ0dGQ3Rwc3pDaDlWdnhTS25kY2U0M2dMdG5SVGVtWTZVa2M0WmNaRmQ5NkNqYVZqNXhnT2JqbE9Mbk9uYw?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-07-27T07:00:00.000Z"
+      },
+      {
+       "title": "聯發科、緯穎、台達電、欣興…輝達財報報喜，背板概念股歡慶！黃仁勳喊AI工廠擴張引爆，55家受惠一表看",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxORE5ZdTRsT2hzOTV2Mm1kUFNYSkJfeHRwLXlzaUN5QmJwa0U2YzlaUFpLellYN0lsMnVKWnpLQTBTZUctaDRjM0s4a2w1aDFXZi1YbWpocEo3UjFrY25CdGtXdDJDSEswRUJYdGFZcHdsMUVmbWxSTnJ0RHpHS05Qaw?oc=5",
+       "source": "今周刊",
+       "time": "2026-05-21T07:00:00.000Z"
+      },
+      {
+       "title": "不是欣興、南電！市場傳輝達、超微大咖瘋搶ABF產能領股價狂揚但只有「這檔」目標價被上修站穩半根",
+       "link": "https://news.google.com/rss/articles/CBMiqANBVV95cUxOYzlobXpiREhyTWhIdVhCdEFUTkVfd24wbUo3X3lZZnZEOEdxQ2FRbDMzZ3NLNzIzbzl1SjhPSUZ5NWVpeWNwNDV1YU1BTjU0Uk5Ia0l5NkhxWlVZdDNjNjhxMlBadmE1STE2enA1LXp5YzAtX1dVOV9iMFlBRC1aSExZOUl0Rk9QbHFaN0piSWR6akVtR2ZnTVdlcHJmOUNFSzFnSVkzSTdtZi1nX2pncm15dy0xTnB2bm44UklTM1p6TGJNU0NxeEFsV2tNNFZLczVIWnhhdm5lRFJGY2dxMUNjNi0wVDhuZWFoeFZrZ0RDUWM5S2U3SUVaOVhsVHU4bFNzd2hwM183dmx0T2NsUmdGUnZreHN1aW56UWUxaDRxaTc4YVpmY0lOMFY2alR6TGJnUEZxcXFzSlFoWkFQOXpsaFlfNDdUTGxlRXZDMkxuUWVKOWFQdnRIeUtKWkxyVnNIb3Z4VklTeFdXSTV6bHh1eUFlV0xlWk93YjFmSWktUWpEX2VEYXFBalpfbWp1Ql9jakoyQmZhOVduVWp2R2RDVmFTLWVN?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-05T07:00:00.000Z"
+      }
+     ]
+    },
+    "3042": {
+     "name": "晶技",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3044": {
+     "name": "健鼎",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3131": {
+     "name": "弘塑",
+     "strong": 1,
+     "weak": 0,
+     "items": [
+      {
+       "title": "迎輝達新晶片台積SoIC備戰法人點名弘塑、均華等業者受惠- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA5R3MySlB4U2FZMnNTMnN2VFp4SGtNQTB5bmZYQWxtUHVKTVIxLXNMN2NPTG5vWlNsRlM4aE5RN1FyR3ZEQjh4WHE1Y1A3Mkp0NFZXdW96UEl1YTJaVlI4?oc=5",
+       "source": "工商時報",
+       "time": "2026-03-18T07:00:00.000Z"
+      }
+     ]
+    },
+    "3169": {
+     "name": "亞信",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "輝達財報揭牌倒數！AI族群承壓「39檔走弱」台積電、鴻海領頭跌 亞信逆勢摸漲停",
+       "link": "https://news.google.com/rss/articles/CBMi-gJBVV95cUxPUVR4NW8yWTFXalBFcFVDYkhNU0s2NWNZd0cyT1FVNEFGWUdRLVdaM0VYdXZGM0xqMlZ3eVNlRm1ZT3JYZFFQM2NBVGQtdzZ3TGtYQzROQ1p4NlJqaGZ0eDhBeXF5Qm5WT0FWYVpZVFlKVnIxY3hOM0xzdnpTdGFycUN6a0J6TnNhMTlXeUd3SnRSeWFJUkNHV2x2d1RRVmQ2YW9FSmMwQnZIQy1YZEFLV0xOemNYNzFYRXc4TlZETS1SMEtvazU2WnQ1RE9qYzhPRjRfY2E3SE12MlZEQVNvamFySVUxcTNjblBVX2NZcHBjXy1QeldGRDIzVlk4WmdsXzFCSkFjak1KZ0ljYUk2U2VoMEJDSUk1NFBUeFdoallkdDBxNEUzNVJMdHhRR052cHNMZ0JqZlZONnYtRE1Gam9uVkFzb0loUi1DODdpVElQZHNkV2xGanYyR0VkZXg3WDFvWDd6Z0NndFIyaGNuMVN3V2FuZE5NSEE?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-05-19T07:00:00.000Z"
+      }
+     ]
+    },
+    "3189": {
+     "name": "景碩",
+     "strong": 12,
+     "weak": 7,
+     "items": [
+      {
+       "title": "景碩接獲輝達訂單 明年加大資本支出",
+       "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE04WE9QUUxKeW45Y05XdXJ1YTNESmUwM0dTVnZJNHpyMkE3OHpvRTRhNlNmVEwzeF9UMklwR3ZOZHJCODN6NlBmQi1XNE1tTXBi0gFWQVVfeXFMTmhsMG1KQURublhaRmNWbFFySk1JSjM0cFUySzlacC15cE5nZlI2Y1htc1hoTm52RXhaSWExX2RTbzBYOFllQ3gwVmJVYlZDNm43UkVzUlE?oc=5",
+       "source": "UDN",
+       "time": "2026-01-04T08:00:00.000Z"
+      },
+      {
+       "title": "焦點股》景碩：打入輝達最新Vera平台 股價漲不停",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5RSlVJRng5dGkzNGh4dFVsV0ZMekI3OENvVHZhWlVZbWtqUWc2ZDdrMWU0MGkzWFJWODYwLWtMNVROX1dLVXNRZXltYXdjZXVfYWgzQy1NVGcyNjllZ3VB0gFkQVVfeXFMTkF6S1pjeVZHWUpMOXdqQk9oV0FlVU9reGowOVNDTUNXX3dPREdOQk5RazU3aHMtNzlUR1FOQk5sSy1ZOUsweU40SEwxQXVCcmExdGJFU1lUUFozTmN5X2dIbDBOWg?oc=5",
+       "source": "自由財經",
+       "time": "2025-10-16T07:00:00.000Z"
+      },
+      {
+       "title": "輝達Vera Rubin載板台灣雙供應商！欣興 vs 景碩 Q2 財報、財務指標與 2026 年股價展望全解析",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5sNXpFdElMUzAya3RrVEZWUDdoYm1TSzU1TUZTYXRxN0ZvZWkweW1tNkpOQ0dGQ3Rwc3pDaDlWdnhTS25kY2U0M2dMdG5SVGVtWTZVa2M0WmNaRmQ5NkNqYVZqNXhnT2JqbE9Mbk9uYw?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-07-27T07:00:00.000Z"
+      },
+      {
+       "title": "台積CPO大進擊！輝達恐「長約鎖產能」？ABF載板供需告急 景碩、欣興、南電大單來了？",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBORXZFMTFsZ29oYlQteFdaNGZmQTBMYnM4eTBOZlRGazdJZlA4SndSOWlWSWhEVGdEdE5QQTdTNFVDcm5EajZKZksxS0JBT0pWSDZMOU1hbzRTSWd2enhJ?oc=5",
+       "source": "工商時報",
+       "time": "2026-05-18T07:00:00.000Z"
+      }
+     ]
+    },
+    "3211": {
+     "name": "順達",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "GB300成主流，順達BBU今明年扮成長引擎- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQbG5VOFpZT1VyMUh2NDMxSHhqQ2M1N3RpVGJuVHNBR1NUVjZONHV0ZHdLMTNWZFlfRlVkeFZsYjNVb2ZkbURrWFQyZmR1emdwVGdlMDhSSkpwTzRwT01vYndZNTZ3X3VqbTBLVllBWE8zNjJGV2N4aU1wbjNtVEVtN05FZzQ0M21UX1VuOE9Kb2RLZw?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-03-24T07:00:00.000Z"
+      }
+     ]
+    },
+    "3231": {
+     "name": "緯創",
+     "strong": 12,
+     "weak": 54,
+     "items": [
+      {
+       "title": "下半年輝達伺服器大量出貨 鴻海、技嘉、緯創大啖商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE43TURYd2FDQ0RXaXQ1cXIxVVE3Y0JpMDhEOFY4MDQ3VWhIOGlzanUzM2JOSlpfcW1VZGNONXU1Tm0xREpKYXoxTUJWYnpnRUhBcVMxODgzSVBYd9IBX0FVX3lxTE44am1PSjAzblVfU2dMYkNMYS1MVEtzSlBlcmJEaWtpMWhlNm1uVVFwY2l3dmV0Ynd2OWtJSW1SRkdHcHMzV2xnc1ViUmtNWWs1dWdYdG4zbmNKYmV6Mnhn?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-30T07:00:00.000Z"
+      },
+      {
+       "title": "輝達AI Factory製造藍圖全公開除了緯創GB300美國落地合作台廠大曝光- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9uMWpISVVXRmRmTjJBbEpLYlhJRFVWUEVpM2RJNE1WYVY4cTFrZl85Q1ItTWwyVHBaaWpIUGxJNVB3UFhLelNiSlpFR0JRQ1R3T1V3M2FCa0FfMXpNTXVB?oc=5",
+       "source": "工商時報",
+       "time": "2026-07-23T07:00:00.000Z"
+      },
+      {
+       "title": "緯創林建勳不怕AI伺服器換代空窗！幾乎參與輝達全平台 訂單能見度看到2027上半年",
+       "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9FdmxUNjdHUGFpRHB1c0lTOHlQQl9pb0Eyd3AtUEthTE1EYUZIdFR1NjdyUGVLVURWT01keXl4Y0kyd3ZfQkV5aUpTOGtjdElmWHc?oc=5",
+       "source": "放言Fount Media",
+       "time": "2026-08-24T07:00:00.000Z"
+      },
+      {
+       "title": "緯創豪擲7億美元德州廠投產輝達GB300，明年資本支出將再擴增",
+       "link": "https://news.google.com/rss/articles/CBMihANBVV95cUxNQW1wRTJ1ejVNeEFiekxVcEpRQl9GTTBVdVVrejhPaXdNZ2l2Q3pvc3MxX3J4THd6TS1tS3dYR0ZqdkRreUplNDJHVFN2eHBISWlDNFZ5VS1wc2Q5NU1xTWk0X0s0cTVueWcyRVVQSUVjVHhjbmloQ19COS1najE4ekxNRXpnNXNHaUVNQ1B4b09wdjJyY0xWVnlPa3B5NURvNTlqUmwwMkl1SnhrS01GRzZIQTFPSEdHNlg4Q2RoOHJnaWROT1I0blh4Z0Rxd0pOLVAxVlFHb2xZRDJERjFzbkd5VHlLRlFENmROOHFTNThxUDRXUF8xX2lvV3NmRGJpQWdWLTJhSFVUb1h3N0hzT0owZUNRaU9lU21UQnVtQWx2M1VCei1Dcm5ZRXA1MlhfenB5ZHhlLXNVQWRmT2F6RHBoU3hEZVl4a1hyMWx2azY2X3QtTDJzeXRQQ25JY1J0dWpheGhWa09ZanNuMTNwRlpZX1JscHJBN2F3cWJFdlZNekpo?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-07-23T07:00:00.000Z"
+      }
+     ]
+    },
+    "3260": {
+     "name": "威剛",
+     "strong": 3,
+     "weak": 4,
+     "items": [
+      {
+       "title": "切輝達Rubin供應鏈毛利率噴70%！南亞科攜旺宏、威剛等5檔漲停 群聯、晶豪科漲破8%",
+       "link": "https://news.google.com/rss/articles/CBMiyANBVV95cUxNVnZIVUZ5ZE9razZxME1hV2pwa2NkdWd0UVdkRW8yUFg3b1lDMkYtaDlYWlFIcjd0LU9LNjU2R3FHOThDV1R3ZmItQ29xbGp3dHZJWV9JVnozQnVvWDFlOUx0aV8wbHRGbXpqUm05WGVMTjRxSnAyZ0wwVllyT0QydXBQY2tBUV9sWEFSUUJmYU9ta2w5UGRhTXJ4LUx0SHUtelJyRGtUREdadXJMbXpoMmtCWkRScEpMeUF3Y2ZOdjZlSWxxbGwyQnpzX0RJM3lCamF5OHZHRXVFSVp4OHhPbk5zMFVCUXZDUmk5Y3hSOGF3QllQT3VzSzdBSTJnYkNYaC1uNC13aWtodkJtbmFtaUpKcnVKdGhaQkRnYVNtdDQ3R1A4a2RPX2pQUVFWM3FPSWN0WURfRzF0OE5VT1M4YWVudHJFMzZyVGZzbUJaajhaYmJOdlYzTUk1eFBvT2NTdzVhNUtmelpjV3RLT3A1Qmd3Zmhtd0tQaEotZ2U4eXhSLVJGNE9FUDhBX1RUZkp5Q1pWeHVDNmcwaGE0SnFDVnN0d3VKRXVoTFNUTzUzT0xqR0tXY0JqTEhHeHJkSmZibDZ0RWxhUUI?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-04-27T07:00:00.000Z"
+      },
+      {
+       "title": "記憶體最狂時代來了！黃仁勳喊「產能全包」、三星釀罷工加劇缺貨，群聯、威剛、南亞科…台廠卡位戰略曝光",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQV0pxS3c1dERnZzlZXy01MjVCbVFWMHpqRVdEVExYNHYzVWp2V2FQSjJORFdyRjhjZ0loTFNMaDBUZUZUcnVhSFRBRE9oeEpTX0ZZTUhaUWtQS0J2OEdjWXI3ZVdBcGw5UDVPY293Zkl6ZmtkSkVUemRhdTNsRUo3Yg?oc=5",
+       "source": "今周刊",
+       "time": "2026-03-18T07:00:00.000Z"
+      },
+      {
+       "title": "缺貨潮輝達也沒轍！Rubin Ultra傳「降HBM規格」 南亞科、威剛等27檔記憶體供應鏈一次看",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE0xLXpiVjloTC1XV3V0RzJiM1JYRTc0a0dfM3Z5c0pKNWlRTFRCcmpidTMtSW00WlhmeW0yTkJpRDI5Y184eU1vOGh6WQ?oc=5",
+       "source": "FTNN",
+       "time": "2026-08-05T07:00:00.000Z"
+      },
+      {
+       "title": "輝達改用低功耗記憶體LPDDR 台積電技術優化南亞科製程 宜鼎 威剛 十銓持續看旺",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBOSnpBUV96VHZZR2RSdXNaUU9HOXRlbXB0UkNXaHlUdWtobF9hUTc2VDJ3S1lMNjUzdU5FU3hCSlJmd0diZ2JIeWRqR1VRYndIUk1nVWRteFRqUdIBX0FVX3lxTE9Nb1F4MnBvUFlzQ0xDbjlBcFFPOEYyQy1Qa0FLWWZkOE1WQ2k5aGVidXhUV0lmSEVDZi1sSHJnYVhlNk5RQ2RSSTFUVVhzQmltTTVCZ1ljSHhNNjdLYmNj?oc=5",
+       "source": "經濟日報",
+       "time": "2026-05-11T07:00:00.000Z"
+      }
+     ]
+    },
+    "3264": {
+     "name": "欣銓",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3324": {
+     "name": "雙鴻",
+     "strong": 12,
+     "weak": 15,
+     "items": [
+      {
+       "title": "雙鴻報喜 打入輝達VR 鏈 最快9月底出貨",
+       "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE8wSUhiQkJURjFqNnlkdFR4c1FDUzB5Z1JKZGdSQmt2QXlUaS1OSzhJVDBwMGd6bVZRVjk2ZzkxbERrdndQRWVxcFdxT3ZZdmlH0gFWQVVfeXFMTVVLekNLU0pRcVdOaF8zR3VBZDhxNndQSmRsWTlqMlNrd2J4Q0dubDgzMnFQM1NJV1hQM0tPUnp2YkgzenNvbWZTVlBEUWVuSlBWT0tEOFE?oc=5",
+       "source": "UDN",
+       "time": "2026-09-02T07:00:00.000Z"
+      },
+      {
+       "title": "熱門股／雙鴻切入輝達水冷板供應鏈！突破1400元再寫新高| 產經",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5DVGJGZjdRLWMzb1VJS2hHam01cHk1R1lZTTNnWVBhQWd1UV9KVFVmMk1rRF9lTk5wbDZDWEF0Wk1QR2hPa2dQX1F6cVRuZ3I5bjhnRHpoNkw0bDNMaU9v?oc=5",
+       "source": "非凡新聞台",
+       "time": "2026-09-02T07:00:00.000Z"
+      },
+      {
+       "title": "雙鴻擴建均熱片產能，SP7/GB300出貨放量",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPbmFya1NCanVQZHJpODVaZGV5ZlFMeEFpelQwVEZoTEVLZGdYRW5zRFEwM2dCN1lCTk1JZEs2Ql9DV2tacXdEeVNYRU82cWFwTjk0V1gtcWhWWEdhdUkzZ0VURFYyNUFRNXNzOGh2SFJKS19uU3NWYVBDUzVDVXlVRjJqQmlaN1BkRjdLdHRvNlo0Zw?oc=5",
+       "source": "台視全球資訊網",
+       "time": "2026-08-05T07:00:00.000Z"
+      },
+      {
+       "title": "缺席輝達Rubin水冷板？雙鴻董座揭「狠心取捨」內幕",
+       "link": "https://news.google.com/rss/articles/CBMitgJBVV95cUxOY1RadE5jTGJ0SVB6RDFwbHdhNG1Yc1U0NndfV1RmazM4RzhSZDFLa2FXSHN0bThPaHpIY3NJaWhMd3BXMXRHWWlrYi10NHZaeUxqcmZHYnR6V0p5N3ZvRktpU3ZiMFk0ZE5EUTVQLWZZaUcyQU4zN0JzOHRjSjl4OXBjYnFoVTdtYlNnQWt5RGRwOFU2MEVsLWJWUXc4T3pfZ3k2T1pDUzhweUZIekx2Ymo1TEY1MWh3NDA4Vm94dVRPZHp6UDF3bEhIMTV4X2VEQXc0TzYtZnRxZjV1REwzQW04cHptWDZOdF8xcFA4STVMV3RiSGdnbkVDc1o1N2JqSUVmMlJpRndZYmVBRU84emNHRlVWeTlGQmdQU2Y1X1Rua2xnc0FreHVJTEw5YWZ5NTQ3ZUJ3?oc=5",
+       "source": "Yahoo新聞",
+       "time": "2026-05-21T07:00:00.000Z"
+      }
+     ]
+    },
+    "3338": {
+     "name": "泰碩",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "首列輝達背板，泰碩明年AI應用拚破五成- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOWWhMLUpLSG5tZUJIY3dHellIWURRN3luREFybnNpNi02WUJid0NDdG8yRkdRR1hwa19sX3Q2azVOV21QbEdvQXhpclFySDRaUmg1U3lEdWZtLVRkMzUzWTBIX2FmbGpnUEVDbHpNbTdSMzRUb1NUd3h2Q3lnUVlTbWV0SGF1SlFEMWVjMEVRQ1J2Zw?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-06-01T07:00:00.000Z"
+      }
+     ]
+    },
+    "3357": {
+     "name": "臺慶科",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "輝達、台達電帶飛國巨、鈺邦、臺慶科等被動元件廠營收飆高音- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE15N1JIOTkzNzJjZ2JiZjgtLXN3LVZDeGd2dE9MenBJMU1SU20wZTZ0akJvazVLdEZoeC1QLTVJcXQtRXo2YlJMb0VyZ3lRaFIxOG5fWGRHQnlKcExTRFk0?oc=5",
+       "source": "工商時報",
+       "time": "2026-01-12T08:00:00.000Z"
+      }
+     ]
+    },
+    "3374": {
+     "name": "精材",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3413": {
+     "name": "京鼎",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3443": {
+     "name": "創意",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3483": {
+     "name": "力致",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3529": {
+     "name": "力旺",
+     "strong": 5,
+     "weak": 1,
+     "items": [
+      {
+       "title": "力旺PUFrt導入輝達Rubin平台，將推升下半年動能",
+       "link": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxPOUp4RVI5cDVXT3ppY1hBam5odm83aUQ2M09ERG56TFp0NUN5blo5MFNsUEZhaTZSQi1Gd1lDY0dCRGs4d1VQWGVzOV9tdVpFb21GaGNEeXBkTWVrRjBDb1YzVHZ6UUIzdHg2enlFYjhScDdXbll1N2ZsS29Qbndid3FaZnhlbWo5blB2SFJQQVpXRWk1VVNIelZzMjFIRklaSmlZWkZtaVVWQzVTQUd2ZUs5Vmh0ek9HVTlTRTBnN01xYWI1dC1qYXJOVHFyUnhoNHhwaW8zOWU1bmE2T1J0WkxLV1JwSldPbjRqT21KZHFkN0RPSEZkNnVlbHNQbFZtOW5ZbHpfQ3ZLdzVoY3pCWktBWWdjQ3pYaUlUZm4xVDRCQVZCZ1ExRDZB?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-02-11T08:00:00.000Z"
+      },
+      {
+       "title": "力旺：IP導入Vera Rubin架構 下半年權利金顯著成長",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9OMVJlME54TEVIS1I5ZWh5cGx1QVAtd3p1b1BtYUFJWE5ncW9EbG1HTk1HYXdKS2JwNWNFNnV0VE5ZMFhoaS1SS1ZkeUVWb3Y0dmFkQWdoTkZDQdIBX0FVX3lxTFB5ZjJhN19MUWJpLVh2Wm5wS3JXNnRDeTAtdld3Z29na2tPNEE3VDZESFhHc0JPclAteElGY2ItTl9fWC1JZzhzLUxNS1ZRTjZRQzBaQUhSQWpPa01DeWRn?oc=5",
+       "source": "經濟日報",
+       "time": "2026-02-11T08:00:00.000Z"
+      },
+      {
+       "title": "力旺PUF報捷 打入輝達新一代平台 下半年權利金顯著增",
+       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1xYkxBNGVQZVg1SVN3ekw3LUtTMkZ1SWtvM2V4bE52SHlydXMxVFMyNHZHUjFNczl5enhOLUpQWlJ6X0M3c2NyaXZ2VE0yQnVCWllOOEJR?oc=5",
+       "source": "優分析UAnalyze",
+       "time": "2026-02-11T08:00:00.000Z"
+      },
+      {
+       "title": "輝達再出招發表開源量子AI模型台廠力旺、光通訊迎契機- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1uYjYyVVdjUUdHLVYyaE8tWGdNZFpmYmlTclZ3cmZsSGtMSEx2WXAxMEhWU1Etb1FJTzJONzFkWkdHeWl0U3NTdjk0VWpZV1E4WF91bUZfc09YUlkybVhN?oc=5",
+       "source": "工商時報",
+       "time": "2026-04-15T07:00:00.000Z"
+      }
+     ]
+    },
+    "3532": {
+     "name": "台勝科",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3533": {
+     "name": "嘉澤",
+     "strong": 1,
+     "weak": 2,
+     "items": [
+      {
+       "title": "嘉澤入列輝達MGX鏈，新平台帶動ASP增15%",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQaXNFbWJPenEzU0R4NUtXcjRPbVBaRUR6XzZKOUd6Y2R0a3B5Ty1wYjBRWkxsM1U1S1FJWDA3MG9rYVMtOGVnNlUxX1EtVnRZd0JPYW9scjFlLUc0b3hJOHlkRk9yemV6bF9EbFRWSGRMekx4aHIxd3dzNldmV1B0N2d2UTZoTVlvRFhDQ2hUOEZIZw?oc=5",
+       "source": "台視全球資訊網",
+       "time": "2026-06-24T07:00:00.000Z"
+      },
+      {
+       "title": "嘉澤獲輝達新品商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9mMGh2Yi1IVTY0WkVBNFZzNHIyQkl4VlIzWGV5UG54LXA1dVlYVGkwU0dsMHF2YnhzRjZybHVoVHBQajRiTEJMdGVCajhTUTBkWlB4ZjVELXQ0QdIBX0FVX3lxTE02Z1AzYlZSNk5GRTFmMkdMaXYyeGFFak82NUdnQld5Uk53Um1hdW50dnNLM3htXzVrQS1tTENCQ2xWbmhENXpIUFNDVS1TSFFGeTdad2pPWnlPNFNrMHBz?oc=5",
+       "source": "經濟日報",
+       "time": "2025-11-12T08:00:00.000Z"
+      }
+     ]
+    },
+    "3563": {
+     "name": "牧德",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3583": {
+     "name": "辛耘",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3587": {
+     "name": "閎康",
+     "strong": 1,
+     "weak": 0,
+     "items": [
+      {
+       "title": "光進銅退！輝達CPO交換器引爆光電整合潮，閎康營收連四月創高、卡位矽光子檢測商機| 魏鑫陽 | 財經",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1OVE9fRWVmVFJhN3dIR2xoTURnVm0xZzU0QW9GdjBBaHNpWDA5Zk9XLTI3bHp6VEFvTXY2emhXZnpWNWxpaVF6Vlk4WFhFZw?oc=5",
+       "source": "Storm.mg",
+       "time": "2026-07-08T07:00:00.000Z"
+      }
+     ]
+    },
+    "3617": {
+     "name": "碩天",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3653": {
+     "name": "健策",
+     "strong": 4,
+     "weak": 16,
+     "items": [
+      {
+       "title": "新架構革命未停 健策扛非戰之罪、奇鋐遭錯殺 輝達降規趕出貨 散熱族群前景解析",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPM0JYUTV4R3hETXRncWdJbWYxQ2FtZlJxVVdKTVRNSk1wSXpkeExjbjVxWXBMWmxGdVl4dWlDWHU2OUduV3pkc0QzZmdIOThkSFVxenI3VldKU3d5ZlV1cmYyV2c5T1lqRERpU0hHZkMwTTlkQ2F6aXJpMWdCVXNKOQ?oc=5",
+       "source": "今周刊",
+       "time": "2026-05-13T07:00:00.000Z"
+      },
+      {
+       "title": "不是高力、奇鋐、健策 這檔AI散熱進入「印鈔模式」拿下輝達認證2026獲利翻倍迎水冷爆發元年",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9RamJpS2sxXzU0eF9TbXFJY1lsWnZIZmJFNjJvd0lSUnROclNwbjRsb01ya0g4TW5TU1FYeDBtUGZxSHNTb2d1bkxIMjZYRms?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-02-11T08:00:00.000Z"
+      },
+      {
+       "title": "奇鋐、雙鴻、健策...輝達散熱夥伴台廠缺席！這2檔跌半根、它反創新高，最新目標價「還有3成甜頭」",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQZVV5eWdBR1ZBUUVtNi15WDc2aElJcVJvRWVCU29LTU1Yc25tLUxGT2FrWVFDRmpkNjdjTmUwSUEtWm1iRmN5Wnh6dFpPM3VURXNmYVNXZnFBU1NESTI3NXFrMERaRWpHNlQ3WVFMbHhkeHNyeF9aNHpRNnVuOE0tQw?oc=5",
+       "source": "今周刊",
+       "time": "2026-09-29T08:04:00.000Z"
+      },
+      {
+       "title": "一詮有喜 傳輝達有意扶植為「小健策」 擴大釋單",
+       "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBYa2RfOHhfd1F3QUVyLVBVblJXZWduNzcxY01TMXpqWUNrZ2E4VnVXc3JMb0stTTBwVzJuOVZkWGFyMHJzYXRaaWlFcUV0dWlGX2NxZklqR202UUnSAWBBVV95cUxNQ25qbDU1emRFMzFfN2FoN3dmdEVvYVZTb2w4TVgxZW9XZ2s4VjZOV1Y0d1dXT05DSkRDbEV2cy1TWDFTZnhULW1EeURNWFZLaEpMTjVaWm1qd1VDTVROWXA?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-09T07:00:00.000Z"
+      }
+     ]
+    },
+    "3661": {
+     "name": "世芯-KY",
+     "strong": 2,
+     "weak": 7,
+     "items": [
+      {
+       "title": "輝達NVHBM是什麼？搶攻ASIC商機超狂效能一次看台積電、聯發科、世芯-KY受惠- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9SdFhKSUNXSS16YlhjMHhQcndWdlp2Ny1Ha25vd3F0bUV6eHRlS0xPQmltYWVSM0RzMkgzbnpVNzFzUVIwQkdzQXRFS0JEREl0bEdFbG5JenNNMXpXaWhz?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-28T07:00:00.000Z"
+      },
+      {
+       "title": "亞馬遜AI晶片逆襲輝達！世芯股價飆、緯穎吃大單，台廠還有誰受惠？",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBPRDFiSnhEaHJLbGE3bVpYcHRJUlNtRUNvUFlIQ0JzMzZ2QnlfYTBxRmtmY1Etb1QzYUJtSi1lVUZMWDl4N0JvZ2paUUlRdw?oc=5",
+       "source": "天下雜誌",
+       "time": "2025-11-25T08:00:00.000Z"
+      },
+      {
+       "title": "世芯-KY啟動人才布局，攬NVIDIA前高層任商務長- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxONVJMdnhKUEpsYklCMkFOaEFUTGJMWXpOeDNUZC1McFhyb0ROXzRQbzhKenp1WUh2cGR0eFdmbWU0SmpmMWZVVC12NFRhX0tXdHlHek9kVEYyYmh4anU5VkpJVnU4ZmN0UUNCQmdmZUcxU3dYV2ZIOG1iZE9RUS00ZzlNcl9KUTBheVZhSXpvUjZTZw?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-03-09T07:00:00.000Z"
+      }
+     ]
+    },
+    "3665": {
+     "name": "貿聯-KY",
+     "strong": 7,
+     "weak": 9,
+     "items": [
+      {
+       "title": "輝達電力大革命 聯發科、貿聯入列夥伴 躋身800VDC 供應鏈",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5WYXZvdl9lRFFQTFpkY0pLa19uMW8wZzNYQV9mazE2WXphX1Q3ZnVfNE5POFVpVlZKQ295TkFEQXpjZWIyN3l3QXNzMWVGTmdCa0thTm9tZDhmQdIBX0FVX3lxTE5mM1ZJZkNFUExMMlo2V1lYcHRfTFVzRUcyOGZaV1RmUV9JR2JYdjdadmhMSTZNRkt6UUw0R1drZWNnUTkzem1DWjB1YjE2ejc4aXFlZl9hdWtzdzFUbTdV?oc=5",
+       "source": "經濟日報",
+       "time": "2025-10-15T07:00:00.000Z"
+      },
+      {
+       "title": "黃仁勳說話了！輝達啟動800伏電力革命聯發科、貿聯入列核心夥伴...「這些台廠」罕見同登全球舞台",
+       "link": "https://news.google.com/rss/articles/CBMizANBVV95cUxNTC11aFNFTlQ3UllIS3kteVkxaDRGRU5WUmJmTzNmaG9OQzMwNlpYYXp5X0Z5U2dvbmRNUlo1MThhR0xHbldaSUlxYlAtMnQzbDJsX1JFTnV5aF9oNUh5d3d5UmZkZHl2QVBfX3NlZ2NjSWtNcGxMNDU4anJhclRYd29jX3JBeWYtSzdrVU5HNzFVRGpBdGxUWjBZbVF4NzQwVUhrM1UyQWJ3TnI0emxUa2lCQ3lXV0lpVHF6aFM5SkhQaXZibjhiZFBZSktUVmNQajd4N0FTQ19CWmFiS2ttaUQ1UmlfRHV4WlBHT21CMThoUlFwSFlRVTZQbC04SGQ4SU9GNElNdlJLWWdpbENUeVhxRUFxbWloLTgta0tVc0h6emo3UFl0R1FiVENCRk9uSlBHa1BnMUVaNFVkYXVaUUpfa0Z3d0JlY0kxeGNYdE9VdXY1RWcxdDZWR0R1d2hpU1psWEN0aGFlZm9aLUEweXJwZ3FfZmRpc05RbTIxSF9ZWHpZcUZiZ0VTLXJlcHdCSTMycl9vem9WZUdianhhNkMzeWRqZGJmMUhFeUNpOW1WVzE2cy1BVUowV2RSMk5XZVV0ZzgtWFpfOWlf?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-10-14T07:00:00.000Z"
+      },
+      {
+       "title": "下一波倍數行情啟動！輝達800VDC電力大革命受惠股 台達電、光寶科、貿聯之外還有誰",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBGQ3FnRWY5aDA4UVZuNkRzUG9DeHhXU055MFhjU2FyNlViRTJzVDZZbVFrT1phZGZtZzVycjFqY1V5aHVRVFZ1N2JjYnN5ektKSTJXQ0dVX0xqODZNeTl4NlNvTW1fX3NNRDJhTUJyRQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-09-01T07:00:00.000Z"
+      },
+      {
+       "title": "〈輝達GTC大會〉貿聯布局Vera Rubin平台與800 VDC架構 展出高效電源與互連方案",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1DaUoyU0FwMjJWRzZ1Rk12WnBxTmlrdml5VGVIV0NpNXRkV1JOOWJRS2p6cXY2Mmp4WDdYNExUQXVCM0Q2bkVWQ29nUVFxZ0U?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-03-17T07:00:00.000Z"
+      }
+     ]
+    },
+    "3680": {
+     "name": "家登",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "10／27盤前｜輝達GTC大會亮點、與會台廠一次看4家登鑽石級贊助商沒有台積電- 證券",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9jM2tNaE1MajdpWkNtWFYza3Z2M3VtSWQ2RTVVb2hSUndZbElZcmZhVkJBNklKeHpEOHltWEY5d2puMENwQ3pSbGRpUTNIaW1CaHRxdkc1Zzd3RkNHa3BZ?oc=5",
+       "source": "工商時報",
+       "time": "2025-10-27T07:00:00.000Z"
+      }
+     ]
+    },
+    "3693": {
+     "name": "營邦",
+     "strong": 10,
+     "weak": 15,
+     "items": [
+      {
+       "title": "輝達、超微訂單加持，營邦下半年營運可期",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdDA0MnROMllKaDB0NjJlV1dCTWUtcnBCOUN3QjBkdGYtc0M0NmYxNm1IazZXVnZfY0JreEVQYWdTR0R3ck5KYzJGUHZxOGQzWHJid18xYnB0X3h3RkNaWEl2OXBwc2FsMEJ3VnBzRFg5ckRVS0Jxa3JQQ1dTbEZweEF3TGFJSWh1dXphdmVUS2VTdw?oc=5",
+       "source": "台視全球資訊網",
+       "time": "2026-06-26T07:00:00.000Z"
+      },
+      {
+       "title": "營邦通吃輝達、超微訂單 敲開最新 VR 平台大門",
+       "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBzakEyU3kzX3ZsYXcxSTgwelFvRWhRdlNYcHBxVFJWUjRrWGcyZFdmc2RMcEY2Y1RpZTNJM3o0aEFtYmxuZ2t4Qy1HTll2dTRIOTJVOVdnY3RmeTDSAWBBVV95cUxPR1ZrUElQdG9ZVGo4UXZ1Njl1M3Fwa0hvTmQ5LWw3bm04RjhMWFdqNVRuNmtVQW82MUlIWXBzV1RwczFsc19iOHl0NVRZNjBIdjh4T2MtU1ItYmVveGQzUXg?oc=5",
+       "source": "經濟日報",
+       "time": "2026-06-02T07:00:00.000Z"
+      },
+      {
+       "title": "營邦結盟輝達再邁新里程 搶進 NV VR 硬碟機殼與儲存架構新領域",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFAxcEMwSklxQ3lhWW16RnRVdTlxMjFxYnI4RHJ6SGFpcWdyNzhVTGY4WmJjQUJRSHExdFkyN0xRX0ItbGtINGp1LWxySGY0NHdMLWdub1dCaF9vQdIBX0FVX3lxTE1mQlg0cjZJMk1pc253MFMtSE5jOGhBLVdFNHNTSGVsa0NTVmI0UGo1d2xVY1c3dDg2UWtQdk5wdTNfbHBhdl9pV3NPcUFsbDMtQ2RDU3BTb2hWdHNKY2g4?oc=5",
+       "source": "經濟日報",
+       "time": "2026-06-01T07:00:00.000Z"
+      },
+      {
+       "title": "營邦喜獲 NVIDIA 欽點 強攻 AI 儲存市場商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBGaF9xb3htTF8zMmVvXzhNRUoyVXJTX3RJamRpQXpfaGtQYlNlZ25RRURPWUZ1UmtVVzBhb3N2OExwNG5pam14dlA5Wlp2Mk0ycnFiQmVsbWREd9IBX0FVX3lxTE1iS09lbWIycWRVZ3Q2NnNIQ0p3WERuZ0xQZC1NZzNnSmI0eGZvbFh6Y1psY0FaaFNlb2dKcHY0bDRXeGdNMXU2ZFhfb3RaR3hmRjVUaTMtUF9FQXkzdm1n?oc=5",
+       "source": "經濟日報",
+       "time": "2026-01-06T08:00:00.000Z"
+      }
+     ]
+    },
+    "3706": {
+     "name": "神達",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "神達旗下神雲 於 GTC 2026展示一站式解決方案與彈性 NVIDIA MGX 平台",
+       "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9JZXJNbW1zQ005cGtKSXlKbjdIb3o2aGd5enc5Y2ZIdFlfaW9xU0dQWC0wVVMyTndNblhSRThGMl9BY2o4SS1NZVpJUDY1RkFH0gFWQVVfeXFMTmQ0dWdLZFppUk5PNGhWNW9TQ2JHR0FPamhZSGE1TGhMRC1ZbEJUckxWc002c0xUUjZiUzhXa0Y0WlRnbGlDUmlCZWl2Y3pRRUM0RlZubVE?oc=5",
+       "source": "UDN",
+       "time": "2026-03-17T07:00:00.000Z"
+      }
+     ]
+    },
+    "3711": {
+     "name": "日月光投控",
+     "strong": 8,
+     "weak": 11,
+     "items": [
+      {
+       "title": "Marvell、NVIDIA訂單在握 封測大廠日月光、京元電迎結構性成長",
+       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPRmxka2JVdnFMUTA3TVNTdWkzYmd4emM5R3RXLXU3VnF4SjByc3JBNGdQa2l3ei1OQkxOZDI3dE91Sld2eEd4QzVPUEpPRG1uNTlfOWttLUF0dTEwdDczTmEwcjJwSDc5QXNaWEtrOXJJTVdGSHMzdEU0SUlnd19ROUpCM0dRcy0yaFU0MThn?oc=5",
+       "source": "DIGITIMES",
+       "time": "2026-06-12T07:00:00.000Z"
+      },
+      {
+       "title": "輝達點火開啟 AI 矽光時代 台積、日月光、波若威等入列夥伴名單",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE96TENIZVBELXZPVk9hLWkteUI4VktKUW1FbVktem5fM1pWNktvZXd2X21wY3EyMUtxNGhiMFMtTlp3aXFrRlJHMXdPUnh2aEZPWlB3d0lyN08xQdIBX0FVX3lxTE9qeV81Tkx2b3lEZktIM2RwMG9hR1FzNHN6UWQwcUJjcGJNVkcxVS13NE1za0Q5MTdfV1hvVlhmWkctT09jY2RiZF9DOUVoTk50VW1mWllKaHNGbmZjVXNz?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-18T07:00:00.000Z"
+      },
+      {
+       "title": "聯發科取得輝達千億元投資！ 蔡力行急向台積電、日月光、欣興預約3年產能",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5nZkhodGU5ZFpwOFZLSDE0WmMtZUt2WHIyRWFQV2ZiUmtZZ3ktanhPVmtSUm9UY3ZkZGtMMi1EdDlqYU9pamxCZVNpbm9Ta1VhNDVka0tlb3puZnRUeHg00gFkQVVfeXFMUGdCZlRBUmExS2ZIY2VHUWpxaGxyY3VLLTV1MnJ0T01pOHBoZFp5Wm51Vm5PVTdBcnk4ZXNsaUNuOVVUZ1lFOXpjd1hQbExMQTd4WnM5NDlnOHFEYlpLZlpkZU9WWA?oc=5",
+       "source": "自由財經",
+       "time": "2026-09-02T07:00:00.000Z"
+      },
+      {
+       "title": "先進封裝需求有多旺？日月光小金雞200億連買4廠房原來是輝達鏈關鍵要角- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1MSGJJTk9DaVhSVk9Ma1NvRTFzaGdVcmtPTlpxZmJMcWRvczRHVTZ5ZWV5LVZNYm5kTjBHSzdlZlVrVThaekpoM3U4cW00dGxQM0p2UUNNZFVqaVgtem1v?oc=5",
+       "source": "工商時報",
+       "time": "2026-05-01T07:00:00.000Z"
+      }
+     ]
+    },
+    "3715": {
+     "name": "定穎投控",
+     "strong": 2,
+     "weak": 0,
+     "items": [
+      {
+       "title": "輝達Rubin升級台鏈嗨散熱、電源成班底定穎、臻鼎靠它首入列- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE44ak1XTFd1UzMxR2FRbFVTRGZ1TTEyOVJVeThvV2dZcmI5a1lOWlFNWFVRWElwQ1puc2MxTjZ4TmMyZlNMMWNfUV8zWWpfelVTS1hBS2NRSkM2XzNDckdR?oc=5",
+       "source": "工商時報",
+       "time": "2026-03-23T07:00:00.000Z"
+      },
+      {
+       "title": "砍成本、拚CP值！輝達Rubin CPX正面狙擊ASIC，為何台廠欣興、定穎最受惠？ | 下班經濟學 | 財經",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBOOHZzcE44N2ZZUU5oR3lBMHFHUEU4NnhZX3NtX2NUYUpqNVEwV1NobnU0ZEtBX2M1VjBpZ3lKR1ppTkdpcE9MTTlBWFBzZw?oc=5",
+       "source": "Storm.mg",
+       "time": "2025-11-14T08:00:00.000Z"
+      }
+     ]
+    },
+    "4958": {
+     "name": "臻鼎-KY",
+     "strong": 13,
+     "weak": 11,
+     "items": [
+      {
+       "title": "臻鼎法說會前夕股價回神 法人緊盯輝達Rubin板供應進度",
+       "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5VTTVaSEdqWlVtYUdEUi1mamtYNUNILUl5dEllVGkxWmlhQUxkOG1ZSEJ2Y0pGekFaaThEQU1RSGFNSUNJOWwtNE90WE5YTDhraHhMdUk0RUNscjNZMEloaWxsVEhaWFhiaElTVnNrdHJpMU5aU1VCMzVn?oc=5",
+       "source": "BigGo 財經",
+       "time": "2026-08-09T07:00:00.000Z"
+      },
+      {
+       "title": "輝達Rubin升級台鏈嗨散熱、電源成班底定穎、臻鼎靠它首入列- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE44ak1XTFd1UzMxR2FRbFVTRGZ1TTEyOVJVeThvV2dZcmI5a1lOWlFNWFVRWElwQ1puc2MxTjZ4TmMyZlNMMWNfUV8zWWpfelVTS1hBS2NRSkM2XzNDckdR?oc=5",
+       "source": "工商時報",
+       "time": "2026-03-23T07:00:00.000Z"
+      },
+      {
+       "title": "臻鼎入列輝達核心供應鏈 法人看好有利評價進一步提升",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1XOC1yZkYxSHdnOEpZSGROYVNBUlRIanlDR09WSjNPdTVMa3JYaTI3OGloYTZIRjJoUUxkZUVKdGw2Y1MzWXRkNWV3MjlPRGRzZGpfdzBZYVNqZ9IBX0FVX3lxTE5KejZXeU54UHYwRExnU1pST2dsRDR6Skw4SXNtRWkyLXJqbGhOM0p5eEl5V2dSdldva3JfU2p2d3pWRXpxem5DMFByeEFCUkltRmVMQnhOeU9OMFg4ajJv?oc=5",
+       "source": "經濟日報",
+       "time": "2026-06-05T07:00:00.000Z"
+      },
+      {
+       "title": "臻鼎駁斥 Vera Rubin PCB 異常傳聞：客戶產品進程如預期",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9Od2s1Wmc1czZxUy0tT2FrS1hQMFZLbmJFZ1hkSWRidmVoeWt4aWw0YXM5enY0SUo3cTNKOVNuQ2t5bUNGVlktZHZKZjlWMkVTVHF2YTlZZ2FOQdIBX0FVX3lxTE96T2hNZ21MM2V2ckp2cG53TkFfQ042TTRLcElTX3BmTzFod3V5c25tOWlNLXEtSDRWeHc5cWZ3bmdCRXc2b2hieTBUT2RCU3hXSmZmLXVjZGdBVGtpb3U0?oc=5",
+       "source": "經濟日報",
+       "time": "2026-07-23T07:00:00.000Z"
+      }
+     ]
+    },
+    "4966": {
+     "name": "譜瑞-KY",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "5269": {
+     "name": "祥碩",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "5274": {
+     "name": "信驊",
+     "strong": 1,
+     "weak": 7,
+     "items": [
+      {
+       "title": "股價飆上8,130元新高！「股王信驊」打入輝達供應鏈 盤中強漲逾半根停板",
+       "link": "https://news.google.com/rss/articles/CBMiqgNBVV95cUxNOTBRcEd5RXhXYzhRMW9GT2dDNTJ4VmZLd1BmZzJwNndwUmUyWnc1eUNXVVc4TjlDYlREZWhqQXNTNDhZd1RYLVFOaUd5LW4waU44UUdRaTMyWVNOLUY2RmJGVUN2amNNUFY3WnM3dzU3SENVSk9DTEFNV1dVanV4UHN1ZS1qcks0U0NsUTRZdmtralIwVnNUT2hDTkg0Wk40ZFMxc3J2T1cyYV9JQURFNlhnQUhTQmtncjJmeHU1NlF1M0QtcldELWtoU1J5Z2tqdlpLSTd6MDRKUlI3ZkNNN3AweTl1NGZiVXA5ZHhIS19CN2pGNjF1cWUtUDNCODM3alR2aWl1QjdOX1A4d2w5a01JS1pxeWFjbFcwc0N4b0lhM01OZFNRZzNrUEM0RjJacXd2ZVQwU2FOQnRWSXVxSWx2RDd1enlNbWRsWmVnT1NQcTFZVk5ndTV1UU9keUlJQTNIcnJZb2x4RFp4N2kyRGFnQTdtSmJKUW9VQWRxaG4xRmgxdnRLSl9qN0Z0YlltRFk5R2xGVGpVNHV6VFM5Y1RLaVhlQ2VXNHc?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-01-11T08:00:00.000Z"
+      },
+      {
+       "title": "信驊衝破8,200元 奪輝達 Rubin 大單、代理 AI 引爆「股王之王」行情",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1LRVYzdjFmUFlLVllnTnQ4NGs5REVaV0pRbTgxRTBoVUpXa2pISUhtQk5fQ1lOcTlEYTBISmVqeUU2cm9haXg1RWdONHNxWldkbmtEeWw3QVhLZ9IBX0FVX3lxTE0xR1NRdWJ3OU9TbXhzazNkaDZ0LTRnZVI5WTJrbWhVeVFLT3JMekhBMUtxbmVyZlJhWnlVTm9zNzhxWWJLMnBzRVlza09WTVJmM2lIRXplbW9GeG5mWFlV?oc=5",
+       "source": "經濟日報",
+       "time": "2026-01-12T08:00:00.000Z"
+      }
+     ]
+    },
+    "5289": {
+     "name": "宜鼎",
+     "strong": 3,
+     "weak": 5,
+     "items": [
+      {
+       "title": "NVIDIA、高通、英特爾等國際大廠齊聚宜鼎論壇！共探邊緣 AI 新趨勢與生態系協作",
+       "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1oUlZMb0MyeExXS2ZEbUpicTdxM29sQlZKUm1jTWw1bjNMUGpDTkpHWE1ja1N1S1o0Slk4QzVzamZMbmFIdTNPeTYyeE16MjB5NFRDTkhZVmN6LWhyM2xqeVF1LVVTM1NEWlo0?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2025-11-19T08:00:00.000Z"
+      },
+      {
+       "title": "宜鼎攜手英特爾、輝達、高通等夥伴 攻AI落地商機",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBzU0gtRlVWOHJxUU9rVmZYNEpWYWNXSUxFQXpEMzV6bjFIUVU0X29UYkZ1Wk44Q1NKbGZZdExtb09Pb0JZR1JXTTh5ZnJ1RExKUG5UbmNaR0VPSXdqZzBV0gFkQVVfeXFMTmp2ZFFJQzFkamdGODVlSEY3WU5pTVJSbFp1VmdLVHRndG5DbWRsWTRsWElzZ0xPMEFrSjRya093RHdQbnJhcTBCTXI5aFcxWEEycVlxbmFiV0lqekJLRDl2QVE2cA?oc=5",
+       "source": "自由財經",
+       "time": "2025-10-15T07:00:00.000Z"
+      },
+      {
+       "title": "影／宜鼎攜手英特爾、輝達等夥伴 揭曉全新 Edge AI 策略",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1PZjhkN3pGanQ1RGRTQlo5S19KeVpTSXg2ZXE0QU1ETmhOWmJoNzNRaDVWWWR1X2FoOUFZekI5M2duSXV1U29McDdvZUhHVUN2ZDFDWnhEVFZqd9IBX0FVX3lxTFBpaEFrUGNmdFpFN3VaREpJZkFJX3NzQUF5ZHhrczhUU1lMcTFETjAtYWJIbkJtTktUR3dobzlQajVtTks4MUFFZjFyNU8tNVBTWG9SV0RONWY3UGRZLXU0?oc=5",
+       "source": "經濟日報",
+       "time": "2025-10-15T07:00:00.000Z"
+      },
+      {
+       "title": "「所有AI最終都要落地！」宜鼎攻邊緣AI大商機，秘訣是把輝達、英特爾拉進來「組團打怪」",
+       "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5jRDY5R1dXUFQ2dzROZzlBTVFlRFhNWkVzZWRoWVU4LUgwclF3RTJjSHVwdXhNU0g2RVVVeXFrcmJveUtlRGtGV0Y5eEhTbmpyQzlaOHdtejhtX0VHZTdCUmZOSDFPUQ?oc=5",
+       "source": "數位時代",
+       "time": "2025-10-27T07:00:00.000Z"
+      }
+     ]
+    },
+    "5347": {
+     "name": "世界",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "5469": {
+     "name": "瀚宇博",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "5483": {
+     "name": "中美晶",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "輝達 GPU 挑戰首度上月球 盟立、元晶、中美晶跟著旺",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE44OFRhTUdGOFBFMDlKcm1iUElnMGpFYWMyc2xYNXZuYUg1Ujd2cy0wZ011alo1RVI3ZWJ4Qlo4QS1KcGhfcEZZQ205NVdnZkhpREJKUXZMMlo4QdIBX0FVX3lxTE1sRkxySVozWjQ1THZjY1RCNEhsSG9fMFlGY0xiaGdTZ2pvWEJORGIyTFNidDhpS2RmZWN0dWtySkhfVzh3cTZHcG95MnVDUHhFZDY3VnlvWHZwTEh4eldV?oc=5",
+       "source": "經濟日報",
+       "time": "2026-07-27T07:00:00.000Z"
+      }
+     ]
+    },
+    "6121": {
+     "name": "新普",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "6173": {
+     "name": "信昌電",
+     "strong": 0,
+     "weak": 2,
+     "items": [
+      {
+       "title": "輝達新架構催生需求 3台廠搶先布局！國巨、禾伸堂、信昌電新目標價曝",
+       "link": "https://news.google.com/rss/articles/CBMiqgNBVV95cUxORDRWVnc2aXBOV3hCRGFOTXFqalc1WS1nNlJOS3Q2NFIxUUtMNmR3N0wtalB5ZzN3eHJTX21mLWFMWUZzcWRFMmF6TExYelJmODhuTEdtLVVPUmJvNmswWEdBX1hILUExWGNMQ1dXZ2s0d3llUXp6UDJodVg5SWNfcWpwdmM4WkNDMUtQZVM5ZTN2dHpQblhXc1VkRjNMQlpTLUpiVFVndkpTUTAzMV91QzM4aVhZNGhsWEhjOHR5TWs1M3ZFUzh6Ry1kQ1JFNXVacGh3b25WaHZ3WVJ4eWx1YWJkYXpkODF3X1k4eWNhaDU0UUY5TWdKSkVhOXktSFVLOXg1RVJxVUU4bEhqNG9FdEdZSUF4dFpIU0dxRHp3M0VGWnNMQmwzRWgzdVJNNzM4Vzk0R3A2djdYbGJPQTJFOEgzdmpjTmYyT0MtdkZ5M0xTbHVBMkhmV3lsZDZpdElhZzd6b3ZiT1E2NVI1c2tWX3Z6WlJ2aGN2ZUpJNjB0Y01lNk1WTnY4OFFXblV0dUx2TENyclRyMmpkV3JBb2RkTmxKQXptV09DYlE?oc=5",
+       "source": "Yahoo新聞",
+       "time": "2026-09-24T07:00:00.000Z"
+      }
+     ]
+    },
+    "6187": {
+     "name": "萬潤",
+     "strong": 1,
+     "weak": 3,
+     "items": [
+      {
+       "title": "輝達CPO交換器量產設備廠準備發光法人點名萬潤、均豪等有望受惠- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBQRzgwMmR6LUpDdDhDek04YXBqNWY0dTlnVFh3LU9JT2Fna3ZnN1RUVjJ5alE4UG03VjhUY0s2VDEyb3p5WFhYUVl2dzdqOEE3clRaR0JpTzFlbjVEMWNV?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-20T07:00:00.000Z"
+      },
+      {
+       "title": "輝達CPO正式量產點火！設備、測試鏈價值暴增 萬潤、旺矽、穎崴、中華精測迎大單想像",
+       "link": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxNLVFMTUZxVGh3TTgyREdldURZR0k5MUlUbjlZdDE3SWI4dkFjdHhyLWx3d2NyLTV5aTRWQkNSeW5mZ3YwekJYdHM5SVFnS3NnOGp2cENVU3lfczV3X2lHMUNaUVJzd213UUwwTUN3bXZ0WE4wX2pMcXI5YXVHbmthc3BRTi1TTVA3Znpmd2psVnBDNlRCVThNaWgwVGw5UlFJazJSb21DNXBKTm4yZFM4bTdHN1pXV2dmWkxHbERZUTVMdHBNV3c2SjB0V1VIdGxXZzJGQ0xxUnhpRko1RHppZGJZV25oTXZxSUUtODRSQkhfWEtrNlNjUTdBV29qcWk0alFnbTBZeWhZRjFYelh0M0ZmcTdkRnJsRTk0ME9mTWo3MHVHRzFPc2k1c3REaWE4MlRKOUFjZVBYRXVjMGl4cXhkTzFiejdrMHg2VDVodk5FdnZoXzdXVklrVFJ6RTdL?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-19T07:00:00.000Z"
+      }
+     ]
+    },
+    "6196": {
+     "name": "帆宣",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "6213": {
+     "name": "聯茂",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "輝達概念股點火新行情 緯創、聯茂等有望評價重估",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE4xSk1OanZfQUFlRXRKUVZDa0pXTHJKY2FuczNuOXM2TWFQamlZcWp5NEdKX3g0ckFwQi1aamN3R1hEVFJ5MDdZdjA3RTZwWHl6VmI3WktfdHBGd9IBX0FVX3lxTE8xS1c0Z0hCZGFHREtKYVZpWm1faEdLOTZyd0NzS3BwRV81Ty03dHJ1MlVyNUNTc0lzcHl0d0dpeS1JQjd1ajFCVXhxX2I1aURJMlBlYlBNeWk4Nk9HOERj?oc=5",
+       "source": "經濟日報",
+       "time": "2026-03-15T07:00:00.000Z"
+      }
+     ]
+    },
+    "6230": {
+     "name": "尼得科超眾",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "6239": {
+     "name": "力成",
+     "strong": 1,
+     "weak": 7,
+     "items": [
+      {
+       "title": "AMD砸3200億深耕台灣！聯手台廠突圍輝達 台積電、力成受惠名單一次看",
+       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5ja0g3Mk91WHJkM1RnaTU3cnZQQ0JEQ2FXbUJRMUpWenRSRDgtbXhOWWRxUmlrekRPNE82eHFZbjRCVUNQZlFmRGpSMGJIY3lPWm9KZEhhU05BOTh1RkE?oc=5",
+       "source": "民報",
+       "time": "2026-05-21T07:00:00.000Z"
+      },
+      {
+       "title": "封測大爆發！日月光、力成股價紛紛翻倍創高「這檔」手握輝達、台積電、Google大單補漲空間超大",
+       "link": "https://news.google.com/rss/articles/CBMigANBVV95cUxQRk1Wa3lCRkVVZGRvbFRKS3hBRmkzU1U1cmM2S21MdkpKN2xyZUxOQ1RwLWh6VnlDQlFVS0ltblF2elRQMkJYMm9fLXRScU9UcmNQM29xX0VFMjV6NXAtUGxXUGNYeTBPanRndlJyb043alhONUtQeFJIbEN1U2gxU1Y1TDYtRzRDa0xhXzROYmNma2M5c0o1QVFrREpaemVXTlBrTnlvZm1HNW1naXpfX2hkaGJYTUtPQXFabUQybDdOc0ZMUFd3WU1LVWpWQnBlMlZYSGZTS3JQTmtMb2s4UFRWT2FuX3ozVWViRVB2QmJoRGdkQ3VEQVdoODJtWFU5UnZaaUFJUi1vT0FOUUhsYjRUd0hFeTFBZ1VtYWU0d1VKOS1JRlp2ZW4xemQzMmFaOVlGbzZOckRGX3g3TWl1dXRNX0xncm1ISXR2ZzlWQjlsMW0tQUpGYkFOQU5iV1lVenZDUlBCVlVOM3oxMTlRejl4VXRlX01Cdk1FcFR2X3g?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-07-11T07:00:00.000Z"
+      }
+     ]
+    },
+    "6245": {
+     "name": "立端",
+     "strong": 2,
+     "weak": 0,
+     "items": [
+      {
+       "title": "立端科技與NVIDIA合作，於COMPUTEX 2026展示生成式AI機器人、自主代理AI 與電信AI-RAN等邊緣運算應用",
+       "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBBdG1pbV9qZER2SzE2eGtOR21lNkNBX1pSVk1VdEFGak5KYzRqSUxBLVU4MDZkZC1iSG9HRmJoUmdYVDZJR25FV2hJY3Y1OVQ5cjFPRUlGQjhsSmFyWDZaNV9iZHhlN3VGX3c?oc=5",
+       "source": "compotechasia.com",
+       "time": "2026-06-02T07:00:00.000Z"
+      },
+      {
+       "title": "財經週日趴(影)／陳建全：立端科技軟硬整合卡位輝達供應鏈 本益比僅15倍",
+       "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5oNjNvYmVVRlNIVk9mOElDTHJSXzF4Y1BYR2xzYjBCTVZRY1VKMDZuVkF0STRWUl9jMS1UYU5tS0UzUmFMc2R1UGxVbjhqUk42cnRxS1YxT2tBMm52c0NiMQ?oc=5",
+       "source": "民視新聞網",
+       "time": "2026-03-21T07:00:00.000Z"
+      }
+     ]
+    },
+    "6274": {
+     "name": "台燿",
+     "strong": 2,
+     "weak": 1,
+     "items": [
+      {
+       "title": "台光電、台燿後市旺輝達Rubin平台採用率低？外資直言高階CCL終成主流- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE53Z3Boak5oUlBybDJVLXBhcUxoYkI3OGpnMjF5WFowRDZBa255aHhwS0hzb1diTGtkZ0FKWnZBWUNoVWQ0ZkFOUHFhUVhCcG5vUVJtb3RkNVUtekZvVnVZ?oc=5",
+       "source": "工商時報",
+       "time": "2026-01-14T08:00:00.000Z"
+      },
+      {
+       "title": "蘇姿丰、黃仁勳接連來台搶供應鏈！波段起飛，台燿第二！？",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5aaEJiSmRBNUhMMDhpX1poV05GTFFQeGlXamtFdFVxTkhGSTB4TkZxQ21uajV1Sk9oV3Y2ZVh5dHZDUWZfcnZFR3ByVHlwckE?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-05-25T07:00:00.000Z"
+      },
+      {
+       "title": "誰在割韭菜？輝達鬼故事反彈破功 台光電、台燿、南電慘遭殺戮",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE14RmJyVVlBUWtudjFGYnF0aDVRQ3FvLVR0WWMtMEZkN1dLbFRxMzRMQU1BYzVFeGc4NnIzMGlfVGRtRHpTcEMwa1VTNA?oc=5",
+       "source": "三立新聞網SETN.com",
+       "time": "2026-07-07T07:00:00.000Z"
+      }
+     ]
+    },
+    "6282": {
+     "name": "康舒",
+     "strong": 3,
+     "weak": 5,
+     "items": [
+      {
+       "title": "康舒切入GB200供應鏈 股價隱藏漲幅40%",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBwbUNwdFhjdFBMRXo1aUI5cnlRbl9LOUwwa0xiSVgxcmVnN3NoNTREZTVzY0JjUmlHMnpVMWtLY05yTVVsZm9tUFZ6VUw1NnNTUC1OSkZ2R2stRFIzclUzbUw3c3ZMOEhIMkJEYjZhTQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-03-17T07:00:00.000Z"
+      },
+      {
+       "title": "ABB 與輝達展開合作 康舒收購案有望發酵",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9NNUhjSGRmaVhtRHJFSGZuODFmZG9yR3d1cVJocGY1dnRaNFE3T3M3Rm1IMnoya3hPUEhKUW5IVV9wT1JSdjJLQjJRX0RJWExzTDU4TExDamF1QdIBX0FVX3lxTE5fRm1hc2FhUTNIVnVERDVnYU1jZGI4dTlITFFMOTZ0RjN2MEZLdDJtaFlrbWx0ekQ2Wk91dHZZM1JyOUNyUjhMaGtsdjAzT2NyV2RwX1g5RUR6S2VEQzJn?oc=5",
+       "source": "經濟日報",
+       "time": "2025-10-14T07:00:00.000Z"
+      },
+      {
+       "title": "輝達擬在台導入氫燃料電池 台達電、中興電、康舒迎商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA5SEIyX0phdVZQeXJrV09RbVJuMERaem12UWRTazVlVTVkWWZGa3VZUGVEZ0daNldPSHhpUk9IUFF1U0x4eWlDcTY2d2FScE1fRy1KZUVVOXIwd9IBX0FVX3lxTE9kOGl5QlJZbXMwYWJuWXNWT1BtUUpTYnFDb01vaFh2bXBkMUVvY3RETzU0M2JUVnJBY0JZb0pRY3pBMHZOUjFjRkMwUnZoWmdCb0dBWXhZQXNTR29RMEVv?oc=5",
+       "source": "經濟日報",
+       "time": "2025-11-18T08:00:00.000Z"
+      },
+      {
+       "title": "輝達800V電力革命來了，康舒將秀AI實力？",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE84eGpIa2xqLVFfWlFub2xhWkNvNk1EcVpTYnFHd3dkNjJpZFJMTVBfTG1IX0R3bjViX3BHeE5jVFpNQk5zajRFZ2VDMVBtUQ?oc=5",
+       "source": "遠見雜誌",
+       "time": "2025-11-14T08:00:00.000Z"
+      }
+     ]
+    },
+    "6409": {
+     "name": "旭隼",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "6412": {
+     "name": "群電",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "6449": {
+     "name": "鈺邦",
+     "strong": 1,
+     "weak": 1,
+     "items": [
+      {
+       "title": "黃仁勳新平台發威！機櫃成本倍增、被動元件翻身，鈺邦毛利率創新高，呂宗耀：AI供應鏈外溢，台廠迎質變",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNZkh0UnRqcERmMF9hajhpd2NkdnlzREtXeTJkaVk0OElvR0FWSUZ2NWU5OUE3UmpOaTQwTmUxdUMyVTJNcGI1c1NpZ0FWX1hUVy01SXhPdEVVQU4tWGR6ZHpVYlhuNm05djJLdjV6WTJtZk5tbVpOSmVmLVJoOTl3Ng?oc=5",
+       "source": "今周刊",
+       "time": "2026-06-03T07:00:00.000Z"
+      },
+      {
+       "title": "輝達、台達電帶飛國巨、鈺邦、臺慶科等被動元件廠營收飆高音- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE15N1JIOTkzNzJjZ2JiZjgtLXN3LVZDeGd2dE9MenBJMU1SU20wZTZ0akJvazVLdEZoeC1QLTVJcXQtRXo2YlJMb0VyZ3lRaFIxOG5fWGRHQnlKcExTRFk0?oc=5",
+       "source": "工商時報",
+       "time": "2026-01-12T08:00:00.000Z"
+      }
+     ]
+    },
+    "6488": {
+     "name": "環球晶",
+     "strong": 1,
+     "weak": 1,
+     "items": [
+      {
+       "title": "反攻3萬點！輝達供應鏈利多連擊？「13檔個股亮燈漲停」友達、環球晶、凌巨全回春",
+       "link": "https://news.google.com/rss/articles/CBMikANBVV95cUxPUUt3UVNDakIySi12czVQOTdyR3UtTlc3ekxfMnNRdkh4UzlQRWFaaVZMVEZRMWNEd2l0b0luU015SnZMTWtOUjdoTm5LUUtkeVFBbG0yaENQYnN0NVgtemNReWJTb2hBM0p4VHc1T3ZWU25qamdfU3p2dlNwMC1TZ3dZVHJ4eFJfa0FaY1IxTnpUNUpLRVQ3M05nRkhPU0E3R2VyREFuZVk5ZUZlRDBlTDEwMkFfMTNjanFaYWE4QW9ScnB3WXJnTE5yQWcxWlZjX2xQZnZITDhSeUhtbDV5OF8xNF9XakRIYzZrekhnM29jN2hyTjVINzhQY2J4TXNEanFSalBjd3VnREtWc3YzaUgxbm1faWUzSTF2c3NhSXR6R203UDNGZkJXQmZ3NHBEVDctQVJuSl9YRWtja1NaN2FkYjF3NVM4RXN1azRGUlM2dmUyQW5pekloTFY5REZHNmM5eUstc3kwRVpWMDJMZGFmMnZOazZNSzNJZEUxc2R6S2F6dFZpbTEzRjkxM2hh?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-01-05T08:00:00.000Z"
+      },
+      {
+       "title": "不只台積電 緯創、環球晶、台達電也赴美！北德州如何接棒亞利桑那 成為輝達5千億美元AI基礎設施大本營？",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1pdmgwTzJFWlJxcmdTT0k2MElmbEVKVkZRSEVIWC15Ym1KcmcwbzhMaHQ1QjZ6dlF4aWltRlh0Mjh5ZHV1aVBBcEZUNnJrVWFDUjRZZHBzMkZJNFZabzA0?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-09T07:00:00.000Z"
+      }
+     ]
+    },
+    "6510": {
+     "name": "精測",
+     "strong": 0,
+     "weak": 3,
+     "items": [
+      {
+       "title": "輝達前景亮台積電、精測沾光- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB6d1BDRjBlZUdqLXJmdlhqSmltWlNuV1Etall6NXIzeEEwYlRWRENuM2dCQUlTZTNDWTlzbXA2VXpTd3kxRWlJN2kyc0FvSGVoYVJWTzZMYkoxZVYyZC1R?oc=5",
+       "source": "工商時報",
+       "time": "2026-01-09T08:00:00.000Z"
+      }
+     ]
+    },
+    "6515": {
+     "name": "穎崴",
+     "strong": 1,
+     "weak": 2,
+     "items": [
+      {
+       "title": "商周-穎崴從「客戶的客戶」找訂單，當晶片健檢站變輝達AI戰隊 - 第1987期",
+       "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1qc1h1OFF1Z3E3a2JwX18xY01lX1ctYkZkWDF1blB2d0t6MlJoU3JtdndPamh4N2daX2tRM3JTM1Q3d2xHbUdKaDg2cWROYS1YNEVrZDdrRGhILU1YTUNESHk4VUVIU3NVOVZwSGh4dDU?oc=5",
+       "source": "watsaldhahabi.com",
+       "time": "2025-12-11T08:00:00.000Z"
+      },
+      {
+       "title": "輝達CPO正式量產點火！設備、測試鏈價值暴增 萬潤、旺矽、穎崴、中華精測迎大單想像",
+       "link": "https://news.google.com/rss/articles/CBMi4AJBVV95cUxNLVFMTUZxVGh3TTgyREdldURZR0k5MUlUbjlZdDE3SWI4dkFjdHhyLWx3d2NyLTV5aTRWQkNSeW5mZ3YwekJYdHM5SVFnS3NnOGp2cENVU3lfczV3X2lHMUNaUVJzd213UUwwTUN3bXZ0WE4wX2pMcXI5YXVHbmthc3BRTi1TTVA3Znpmd2psVnBDNlRCVThNaWgwVGw5UlFJazJSb21DNXBKTm4yZFM4bTdHN1pXV2dmWkxHbERZUTVMdHBNV3c2SjB0V1VIdGxXZzJGQ0xxUnhpRko1RHppZGJZV25oTXZxSUUtODRSQkhfWEtrNlNjUTdBV29qcWk0alFnbTBZeWhZRjFYelh0M0ZmcTdkRnJsRTk0ME9mTWo3MHVHRzFPc2k1c3REaWE4MlRKOUFjZVBYRXVjMGl4cXhkTzFiejdrMHg2VDVodk5FdnZoXzdXVklrVFJ6RTdL?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-19T07:00:00.000Z"
+      }
+     ]
+    },
+    "6531": {
+     "name": "愛普*",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "6533": {
+     "name": "晶心科",
+     "strong": 0,
+     "weak": 1,
+     "items": [
+      {
+       "title": "輝達35億美元認購聯發科ECB AI生態圈升級！達發、晶心科、九暘營收動能同步升溫",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBrM29XeElhU2IxRmhSbmtHSzBXNlREV1JBRVlvbHVITjcyS183LV96WTFTV3c2NEhJSXNLRmx6YXVrdHItNkh6SnR3WVk2ZGp2N3hubmZ0bGFmX2dRX0c4bFd0TkNFU3poLThNeTFPUQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-09-07T07:00:00.000Z"
+      }
+     ]
+    },
+    "6640": {
+     "name": "均華",
+     "strong": 1,
+     "weak": 0,
+     "items": [
+      {
+       "title": "迎輝達新晶片台積SoIC備戰法人點名弘塑、均華等業者受惠- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA5R3MySlB4U2FZMnNTMnN2VFp4SGtNQTB5bmZYQWxtUHVKTVIxLXNMN2NPTG5vWlNsRlM4aE5RN1FyR3ZEQjh4WHE1Y1A3Mkp0NFZXdW96UEl1YTJaVlI4?oc=5",
+       "source": "工商時報",
+       "time": "2026-03-18T07:00:00.000Z"
+      }
+     ]
+    },
+    "6669": {
+     "name": "緯穎",
+     "strong": 5,
+     "weak": 21,
+     "items": [
+      {
+       "title": "輝達伺服器製造商緯穎預計 AI 領域的供應瓶頸將不止於記憶體 | 產業熱點 | 產業",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0tYndzMEpFQ0pYLVF0bEZlV0ZRZ1BycEtCSEdnZ1JPTTJTblM1MU9ZSnBOZVJmNHhNRVFmV1gycmxralMwdXJzSmRVSnhQbF85Q0ZnSDVLMkdYZw?oc=5",
+       "source": "經濟日報",
+       "time": "2026-05-28T07:00:00.000Z"
+      },
+      {
+       "title": "聯發科、緯穎、台達電、欣興…輝達財報報喜，背板概念股歡慶！黃仁勳喊AI工廠擴張引爆，55家受惠一表看",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxORE5ZdTRsT2hzOTV2Mm1kUFNYSkJfeHRwLXlzaUN5QmJwa0U2YzlaUFpLellYN0lsMnVKWnpLQTBTZUctaDRjM0s4a2w1aDFXZi1YbWpocEo3UjFrY25CdGtXdDJDSEswRUJYdGFZcHdsMUVmbWxSTnJ0RHpHS05Qaw?oc=5",
+       "source": "今周刊",
+       "time": "2026-05-21T07:00:00.000Z"
+      },
+      {
+       "title": "輝達財報看多 分析師看好釋出強勁展望 緯創、緯穎等有望受惠 | 產業熱點 | 產業",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBGWFdNMFlnRUg5b283UUQzbkVaZkZHeVZJRGFUbTljYlhTblNjUkN4X2s2bGVhUVA0ZXlnYzFhMXdVQ0RLS0xXYnRnWFlVbkZDZy1zUC1kRUlldw?oc=5",
+       "source": "經濟日報",
+       "time": "2026-05-18T07:00:00.000Z"
+      },
+      {
+       "title": "輝達雙引擎發動 新一代產品價格翻倍 廣達、緯穎等業績將起飛",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9ibk5sWWZ1R0x3NEtnTUNIMndwVmlsQjNmcGNtWjJqdERuTzY0NVN0cE1zRXM5X29NZEt2NTVfamR5U01XMWttMU5OVTNLS1ozeFhHdGlKNktDZ9IBX0FVX3lxTE41cEI5VXFRVEdqWTVGZTJmdE9zWkFzUnloQzlyNUdQVlJrNFpLdkMxUWJESmJMRDFlVURoOExKWUFIeHRYRnB0anlzSXJESUNUcUJHYmJORmdTaDJ1ZHUw?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-30T07:00:00.000Z"
+      }
+     ]
+    },
+    "6683": {
+     "name": "雍智科技",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "6770": {
+     "name": "力積電",
+     "strong": 10,
+     "weak": 9,
+     "items": [
+      {
+       "title": "AI電力革命掀暗潮！力積電意外躍升輝達供應鏈「隱藏王牌」 網狂刷：相信黃董就對了！",
+       "link": "https://news.google.com/rss/articles/CBMi7wNBVV95cUxPTGUyYXZrcUpweUcwLV9vWU12OHRHaTJwN05FbXNqSFd4MEE1WkluME1zb2lQeWdlTGoyS0dKSnI4ZDBnWHVrNWZiVVRBNVUyRHBtWVJ1UlBtLXFVUnIydGtQaDNJWVp6dGYybkdFUU9HUnFCLXR0U0VrX2ZEWE1sdTB5VW1kdk9sZDZkZExBYk5PZHVRODY3bktsZTJkbFYwcy1Id0UxOVgxNFZybmxhbGRjS3F6eUtvLTRxX3Q3U1Bsem5TYTVhenlfeTlzRHllT2ZVX0VUV21Pd0hXU0VWZ1VZLVRxZWJWTElpUVpsZXpOQng5aUlFMU1oMFVxN2NoYTZoRThibm92VzczMjRld0NtVE5IdG9HdU9wV3RFaVN2RmZuTkJNd3B0OS1HUFNFUVIxT29lVFZjVE94ZFBmNzZIQnpnaEJjbVdNY0NhNVhncXFuYV84YnpEWVZHRVM2VGZCRy1QSnBxRWNrNWdrWXJidlYzb1lYTVltRDRoWmdIckdPTXAtcm5UcEFwUlB2TlQ4bVRhb0pMUFBzX2lUdHB1SUoyaUFfcU9VQll0czRDekNRajlVMGN4b3hUT3BWb3duUVVaVEtNNjIzYmxHT2JxaVFyZzVYcklKUTl5SWV4ZVo5bUR3Yktfb2VTLVk?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-10-16T07:00:00.000Z"
+      },
+      {
+       "title": "輝達結盟 AI 新創 Groq 掀記憶體革命 力積電、華邦等可望受惠",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE95ZDFJajA3LTZOcXk5MXl6SWJ3LWpEckdhNXhYeXYyUl9nZk9wenRQUFNfRFFkUWZJY1c3Mm5HbEpWbTZDMWMzeUZxUnBBanlRRnhmOFMxUFZnQdIBX0FVX3lxTE1aMFZvSzlzMS1Sc0FkbG02QzRUWS1xNnM2LXVlYzBZRmlLVmZiZGVnX0ZuRE1qbGJmN2luN1oza0Q3T3JCZ251TmlobHBHTFdRVk5VaGg4eUFXeUpvem5Z?oc=5",
+       "source": "經濟日報",
+       "time": "2025-12-29T08:00:00.000Z"
+      },
+      {
+       "title": "力積電法說報喜！大幅調高代工價又打入英特爾及輝達供應鏈 今股價急攻漲停",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5sWWs0UXRzdl9VZzJLMkFFUzlIV2FLSWIzX2dnU1pBY0w0MlY4VDlIck1yTFdBRzdmOGlHV1VPc3B3OVR2OGpMeE5ZUkxtRW9vVU56b2t3cHdyYUhla2k0QUpUX0lORS0wOHVrdktFMA?oc=5",
+       "source": "知新聞",
+       "time": "2026-07-15T07:00:00.000Z"
+      },
+      {
+       "title": "記憶體遭輝達點名缺貨卡AI！台廠概念股帶量攻　力積電填息",
+       "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9zZ3dxVzJyS2FBbl9Db1MwdlFWVU14NWlfd2xLLVRXYjBuYXdpelRnRmZqN1ROTjFzY2ZybGd0N2tWTlcxTWhqT2Zad1Q4LXJkZ2fSAVBBVV95cUxNcVRudUc2VTJBaFQ4RHMyM2ZmeFJmS0FERzdJY1M1TjZUYVh6aXdEdUJOTURqMkUwVHBaT05PT0lobUhUcDdKZjZ5V0lsRXNQTw?oc=5",
+       "source": "finance.ettoday.net",
+       "time": "2026-08-27T07:00:00.000Z"
+      }
+     ]
+    },
+    "8042": {
+     "name": "金山電",
+     "strong": 2,
+     "weak": 0,
+     "items": [
+      {
+       "title": "金山電打進GB300、BBU供應鏈- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1VbHpQdkphaldIclcxaG5kc0ZQODhUSFJEMWlJX2RCeUFCQnRLbFcwVk8tMXpXdmZTWDhCVEpSUFhBXzktLUdLaDRUeXF0dmJnT2ZFV1dOb29zcEVneG9Z?oc=5",
+       "source": "工商時報",
+       "time": "2025-12-23T08:00:00.000Z"
+      },
+      {
+       "title": "金山電切入GB300供應鏈，估明年AI應用將年增3成",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOeXNiTlE2N2Zac184amMweDZGQlpGYWtSdWhaMUJmQnVndGZBY0dROTBoTFE2NmwyaHVuUzVSZVJJeU5jNHNxczJ0b1BVc0x5N0ZFSDc1cGIzMUtaNk8wRXJoZ05udUJrS3N6RjNMczVrUjRxYWZNenZZRFZyMzRwSFlJMEtTUG9kSHZmTGJUR3NuUQ?oc=5",
+       "source": "MoneyDJ",
+       "time": "2025-12-23T08:00:00.000Z"
+      }
+     ]
+    },
+    "8046": {
+     "name": "南電",
+     "strong": 5,
+     "weak": 11,
+     "items": [
+      {
+       "title": "打入輝達供應鏈！外資上調「這檔ABF」2025獲利預估…股價飆漲停 南電、欣興齊齊噴",
+       "link": "https://news.google.com/rss/articles/CBMi8gJBVV95cUxPVWpwSS1ENXk1eE1hc1JmOWE0MURqVUlwVTJOM01jZ21hYXRHVmFpX25COUZuaWpsZndLQmNGRW1mcm9rakd6WXJkR3lLVW9JYjJtTU5IOXdxZ2tvRkVndF95VVg4eWZZXzFGeENMTnY3SEFYVGtHRUxEVXhqel9TU0JGbEJkSUc1dmNwWEtUQW5SMHVIQlVNcEVNdzRPcWhod2RyTW5aVUJoNXFWbnRXQTZ0d29UNnVFLTA5MEMwR0V2TGZJTFVvVXJkUEhZVlJvUVhXQWkweFZEV2tyd2JSczdBaloxSV9tcTYyWnBSalh2Z3lLMUE2bVBsa2dPc0RTVEZQVC1rM2dDM1ZhYW83eGI3bElWOXVvS0JzRzc4YUIyVlpqZ3NxV3lOMzRaMVZUZXNEelQ1bkx2TkoyYWhLV3JxbDhNUW1iZkIxYWw5NVlSZmFvMnhBclh4VXRxZVR6RlFmZVVOQ0xFbVVxdU13cTVB?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-10-15T07:00:00.000Z"
+      },
+      {
+       "title": "打入輝達供應鏈？景碩衝146元漲逾7.8% 欣興、南電強勢上攻",
+       "link": "https://news.google.com/rss/articles/CBMi4wJBVV95cUxOalhpQVAxbExqbG1DQ0xkRk8weHU1a2s4d1Z1N3F0VjJFa0FqcC1iLWZZY0NId1NaM3hPTXNTblFiSUVQQWVsVldwVVpET0Zha2JSLTNrcU5DaEM2OWl4blpYa243VGluRnFVOXI4WnVfN0VFcGdITDREM2UyVW5jUDIzcUtYZVIxdEwycnEwZ24wRy1Nb1Njb1VieFgtc1J2Y3N1eTdpMXU2bWdGN0tELXpTMmh3MmNEM0drbkE1MGdpN1RKVUY0WU8xWHdYdlRUTmRmbGpacExwcDBxU3dvMExmTkJOMWZ6b3pvNXhqWE5Pa09Eak9mNlh2RE1lT2hyYWg3bHhrODJYWU1GT3poWmpsSDB0aFdLdzVtSENwZVAwekVHT1JmQWFiZzVlN1FvdmhxZ013UTFLZmlyeFc0YV9UM2loemdhUV9MamRVZTg0QkRNZDNBQXUwSFJEeFdFMDlz?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-10-15T07:00:00.000Z"
+      },
+      {
+       "title": "PCB族群狂飆不止！這「IC載板」搶進輝達供應鏈...攜手南電攻漲停 領軍多檔漲破半根",
+       "link": "https://news.google.com/rss/articles/CBMi-wJBVV95cUxNeHlfVU5vVGZ4SmVyU3Z3ODhrMmFieW1rU2lMRzQtMkU5VjlfTE04cFJNRW1ZS3dEYWE3NXFkb25mdHU2TVFSTDRpbmVPYnppOUNsWkV3TGNCdGdscno4NUdYYWZLckI4MDhLYmhuOVF4ZVRFdEJUWi1EUEV0ZHc4R3B1NEQyUmtPNHZOSTVxWGk1X3JPUEdPQjNtRWpfYnh2blVBd1ZVaWU1aXllSThETlRQS3lpWkhtTU1KRklFUVdpdUFIWjU4MFBubzY1anFUY3BtM1VtZU9nV2tNVDhMSlN1cEZyZENZaDE4bk9VV2E0bUJOOHNXRlJ2ODhnUHhZU2lrQ1NuemhBWG5kR2NQdkxWblpzSDZ4NUFNbWpJQzVta3N5WjBGVUgyWGI0SWs4OFU2dWFYSGVDYVJSMUFoaUJTT25CZkVKWlYycUtFZUVHQkZPS1RBblZIVC1JTjZoRWs0TnZEc1VkblFjUUpnZENHYjFHWkoycnJV?oc=5",
+       "source": "Yahoo股市",
+       "time": "2025-10-14T07:00:00.000Z"
+      },
+      {
+       "title": "不是欣興、南電！市場傳輝達、超微大咖瘋搶ABF產能領股價狂揚但只有「這檔」目標價被上修站穩半根",
+       "link": "https://news.google.com/rss/articles/CBMiqANBVV95cUxOYzlobXpiREhyTWhIdVhCdEFUTkVfd24wbUo3X3lZZnZEOEdxQ2FRbDMzZ3NLNzIzbzl1SjhPSUZ5NWVpeWNwNDV1YU1BTjU0Uk5Ia0l5NkhxWlVZdDNjNjhxMlBadmE1STE2enA1LXp5YzAtX1dVOV9iMFlBRC1aSExZOUl0Rk9QbHFaN0piSWR6akVtR2ZnTVdlcHJmOUNFSzFnSVkzSTdtZi1nX2pncm15dy0xTnB2bm44UklTM1p6TGJNU0NxeEFsV2tNNFZLczVIWnhhdm5lRFJGY2dxMUNjNi0wVDhuZWFoeFZrZ0RDUWM5S2U3SUVaOVhsVHU4bFNzd2hwM183dmx0T2NsUmdGUnZreHN1aW56UWUxaDRxaTc4YVpmY0lOMFY2alR6TGJnUEZxcXFzSlFoWkFQOXpsaFlfNDdUTGxlRXZDMkxuUWVKOWFQdnRIeUtKWkxyVnNIb3Z4VklTeFdXSTV6bHh1eUFlV0xlWk93YjFmSWktUWpEX2VEYXFBalpfbWp1Ql9jakoyQmZhOVduVWp2R2RDVmFTLWVN?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-05T07:00:00.000Z"
+      }
+     ]
+    },
+    "8210": {
+     "name": "勤誠",
+     "strong": 1,
+     "weak": 5,
+     "items": [
+      {
+       "title": "GB300出貨爆發！奇鋐、台達電、勤誠攜手「9檔供應鏈股」搶食需求紅利 目標價一次看",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9nWkhzZW9iQ3hoWGRTUUw1ZE5yN05lOXFnX2g1MWU4YWVXTWNBRnhDMk00RVlNeFFuY0ZGaEFkeFFUcmJVYU1VV0xTNA?oc=5",
+       "source": "FTNN",
+       "time": "2026-02-14T08:00:00.000Z"
+      },
+      {
+       "title": "輝達MGX生態鏈受關注，勤誠下半年營運具亮點- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNTGhGb0E5QWcwdGNad3FXQW9lb1VPYkh3bFhDQTJSNlBRX2VvR3hFZUpEY0hYQ0J2Mk51eDRGaWRUWlBoOWx3WkpVRlROSmdyZURjSWRuYjh4MGlNRkVSNVZwLU03MFpIQ1JPTzRaTzRhVnBWZHo3cGZlY1NoZ1NGeEloeVhYc2hqM0gxamE3bFM2dw?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-06-01T07:00:00.000Z"
+      }
+     ]
+    },
+    "8299": {
+     "name": "群聯",
+     "strong": 12,
+     "weak": 14,
+     "items": [
+      {
+       "title": "群聯現身Rubin！打入輝達次世代AI伺服器關鍵層級 雙方合作還有更多「暫時不能說」",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE53RkRER3JFc09TM1lBOUxhdFhxUmRuMU9wYm5PUnI1MjNjQWJKYTNWR1JGYXRJU1BtdVNGbjJ2NHFiMTRuc1ZNdGw0UWxBZVQ2ZHo1MWpTcDd4TFNjTk9J?oc=5",
+       "source": "工商時報",
+       "time": "2026-01-08T08:00:00.000Z"
+      },
+      {
+       "title": "《獨家專訪4》殺進輝達鏈、7個月吃下美國CSP大單！隨身碟之王變身AI新霸主，群聯如何辦到「不可能的任務」？潘董不藏私全說了！",
+       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5sRzJmbmNFaVFENkRiTEVUNDliLVBUcjQ0QV9ibWNXNV9tX0pKVGdoLWR3TzhwdzZVb01WM1RTa3dGY216UTJXVzROR2hoRm5qVEdVYk13?oc=5",
+       "source": "優分析UAnalyze",
+       "time": "2026-08-22T07:00:00.000Z"
+      },
+      {
+       "title": "輝達點火儲能商機! 釋認證名單群聯首波入列| 科技",
+       "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9lWnBfdHE0TnFwRGhNRDVOOWJYanI1N2NtOUtpQjhQbDRjMDI0cWNpOEMzU29yY1JKakh5RzROUFN5ajhWRW03Q3ZOSkt2MzNzblBFUDFjWVhyaTg?oc=5",
+       "source": "非凡新聞台",
+       "time": "2026-09-29T06:50:00.000Z"
+      },
+      {
+       "title": "AI引爆記憶體周期？ 輝達拉貨潮快來了，群聯潘健成透露關鍵月份？",
+       "link": "https://news.google.com/rss/articles/CBMikANBVV95cUxPVDVaeVgwZFJLWWlWRlB4WUxFbFJ2TGxCNzBlTkZUT08yRUJsLWZEY0dhdExUSG9Ba1VQdDVHUFlPN25wTE9fWFV4M0dXbVpnSGwxNXFZSjg5YWRGVnFXZUlLMXMxd1V5eVhXWndyMGZONmpGc1daYWpZNXY4aE9mS0stWWU1Z3RNZHFCOTlzc2RjY1M2QmFvNE9HalVub1hCOF9STmI5b2tGeFNvdGxfNnBzdkEteHZ1ZUJMVkZ0TUhFMGIxM0R6c21IZGt2X2pBYXFsS3lWWi11bjB1aXJwOXBjMzMyd2ZmNnAtUlY4Q25USmFjSzNiWl9TM3FyQ0Q4eFJSVFpSeFNjMnZxT0xxQXZOYzBuZUQ4S0hJX3pudnU2cFdjeDFVNU1neW81U1JyTnlxa2FySXJVM0hVWXZkUFhiXzhsWVBycTE5bUk5V0h0bXpqd2wzbUE1UUdFa3pnMjhUbkdtS1p2YmNkdnN1a1ZtbXgxZDMydHo4cTFyYV8tR2MwZjQ0ZjN6d2tJNjVO?oc=5",
+       "source": "Yahoo新聞",
+       "time": "2026-04-29T07:00:00.000Z"
+      }
+     ]
+    },
+    "8358": {
+     "name": "金居",
+     "strong": 4,
+     "weak": 3,
+     "items": [
+      {
+       "title": "輝達下一波AI商機爆發！台光電、金居等供應鏈迎高階材料大單 需求上看1.3萬櫃",
+       "link": "https://news.google.com/rss/articles/CBMitANBVV95cUxPNEJkVEU3NXJ2eUJWQmU2TkY4ZC11b1NqYk9oNmhyUFB6Y1dxLXhzRlFRYm1NS0dIWEo5MkIxOURyb3Ntc29XMzc3X3gwVUU4Ym90Y0N5cGlMelNjeTloQUxtQUMzNkl0MVNSejc3LW5uMElJV2U2MUdSamxvbzE5ZGdlZWE0UERYcm92NUthVXE5SkZwOTZOckwxTEFPTEZjYVR1cTJUMzdpdURNNHFJbVRIUnlYdlhFSFFZZHdNQmtkaW1lNHF3YlBTeWRmbXVYRVdIRDRib1BDYlF5VUNST3AzS05uZ0hEOGtFQV9BeHlmUXlvTnM5Q0lUbXR3R29zaTRMTWNiei00QW9jR3pTb05rZWdGUEsyVXg4bkR0SXMyY2psaVJpWDJfbUdSNHA1OHBGTXFJaUF1Ulh3QkFpUkcyX2pnZ2hMR1NmekdLTjJZbDY3WEdRZjctb0tEUWJrWEVjY2xMYUwyT3RGY093czM0YmE5V3NCcmpoOXdmWGdsd2UyTEYxX2ZlVF9oSWV2Wlg3ZlN3anc2OGNicVpHcmlGYXUzVlNqRmdNLUdVN0N3MHZa?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-07-16T07:00:00.000Z"
+      },
+      {
+       "title": "HVLP4銅箔產能卡位戰升溫 NVIDIA跳過CCL廠招手金居",
+       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQRWtRcnZ2eFlOUFZfbHlCejhSS1lpYi14TWoxSlBoTGJlMnlNU2xmUTIzOVNfNWxPTmZRUFVOOHRmWTA0VUhYZXVhVzBWN1pZZjJ5cWtuVWdzdWtJaVIybEhjaXBNODlUTFZiNlZjV1J4QjNaMTlUd1hMT0Y1bmg2SlVld3NLN3hpZ3JVTmRn?oc=5",
+       "source": "DIGITIMES",
+       "time": "2026-06-09T07:00:00.000Z"
+      },
+      {
+       "title": "輝達Groq 3機櫃H2出貨台光電、金居等台鏈受惠| 產經",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9zWHRILUhjMzJVZXJneFdKZnM2N0p5YWsxRkppU0VMN0lxX3JOVlUxblg1ZzBaSDJ2alN4bnZHbG95MlZDZ0l3ZFdmM1dmOTVMTVR0dldjZ2QtZDBvblJF?oc=5",
+       "source": "非凡新聞台",
+       "time": "2026-07-16T07:00:00.000Z"
+      },
+      {
+       "title": "打破慣例！輝達直接找上門「固料」 AI銅箔下半年爆缺口 金居代工費看漲、全年挑戰賺逾一個股本",
+       "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9UcUpodnQtUDgwb1lTUWJnQkdCX2d5SDhGdE90Vk1YUEdjZE15aWhJc2kxYnJNa1c5c1VkMEkzYnJ4SEs0bmJXQm5jZk1LN29uaDh0TV9Sd01Nb3JZdGg5UnQ1REZTT2toTGNwOURUUWJyblBXSmxJSXYwQQ?oc=5",
+       "source": "財訊",
+       "time": "2026-06-07T07:00:00.000Z"
+      }
+     ]
+    },
+    "8996": {
+     "name": "高力",
+     "strong": 1,
+     "weak": 2,
+     "items": [
+      {
+       "title": "不是高力、奇鋐、健策 這檔AI散熱進入「印鈔模式」拿下輝達認證2026獲利翻倍迎水冷爆發元年",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9RamJpS2sxXzU0eF9TbXFJY1lsWnZIZmJFNjJvd0lSUnROclNwbjRsb01ya0g4TW5TU1FYeDBtUGZxSHNTb2d1bkxIMjZYRms?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-02-11T08:00:00.000Z"
+      },
+      {
+       "title": "美超微涉走私輝達晶片至中 股價慘崩33%！ 散熱大廠高力(8996)陷「斷鏈」危機？",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBRWXJRYVhPZGJFaEQxMGlaamJldUMyWnhVM0xzM0hWU2lTR3BsZkNta25rZlQ2bXV4VmZfcnNpRV9rbkQ2VGZwaW1VNlM0eUNJYVBKcUkxb05aRHVoQ3dkdGNYQ1RmTTBTaWI2OHlIUQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-03-23T07:00:00.000Z"
+      }
+     ]
+    }
+   }
+  },
+  "optical": {
+   "query": "CPO OR 矽光子 OR 光通訊 OR 光收發 OR 800G OR 1.6T",
+   "anchor": "CPO|矽光子|共同封裝光學|光通訊|光收發|光模組|800G|1\\.6T|輝達|NVIDIA",
+   "companies": {
+    "2330": {
+     "name": "台積電",
+     "strong": 20,
+     "weak": 51,
+     "items": [
+      {
+       "title": "台積電一句「為什麼不出貨？」讓林恩平下定決心！大立光300天急行軍搶攻CPO幕後",
+       "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBqZXZSMXgwa2pxeXlfMXdPMGo2T18yOWhlVEFXQmJqT0dIY2VPakwwYzgtZmNXM2ZiRWpldjlwZ1pkTjRrejZ3WUFtaXgyRHFZeXIwTFI2bFRqcWxQMGhjMlJIakI4cEJ1V2JHaDhzSm9tV3pnMmxLSEQ2NA?oc=5",
+       "source": "財訊",
+       "time": "2026-08-12T07:00:00.000Z"
+      },
+      {
+       "title": "《DJ Insight》台積電CPO今年量產，半導體供應鏈新一波震盪",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVFphMXAyREgxUGNVdHpJcTUwbUthMDNVQ1FBNGgwN0JxQXQyQnlvXzB6U1NzSk0zZDdPcVJmSVhtSjJuTEkwTzQ0SkV0TEVxR0hDNTNLRHVySmdTdVRKbVB6NEEtYkNhaE9uSlJNbGNGaWJ3SHZ3dVl5Z3pCalVZWHVKZWhWeVRrT3hPdV9kUFdBZw?oc=5",
+       "source": "台視全球資訊網",
+       "time": "2026-07-28T07:00:00.000Z"
+      },
+      {
+       "title": "1.6T CPO第四季出貨！「這矽光子」週漲17%炸2.7萬張 合作台積電、日月光營運看旺",
+       "link": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNWEszOGZCVzlpN2FsaGNsem9Kd1NzQTlUTjBtT1FCOXNFU1ZvaWpZOWZqOUlnakcxUWE3RzJlMF9RaW0xVjJKcVplem1WX0NURXd2MFFtalB0Z3hyZ0VhWmdMMVJvcHp1Vm95WU8tSG8xay1DMWZ0Z3NLSmhGZjh3WlM0bHNlLVIyTUhRWWstUTM3UkxDYm5zcF8xU2tKaHpnS2FMU0VLYmYxb0VXMUJnTTI4YWFDMkhDNFlFeFhoYmFLX0ZhSkZvaWNvZXhtYURxcGNHUnhKNFVNcXlLVzB1TUx0ZUhGQjlYbW1KR05zdw?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-22T07:00:00.000Z"
+      },
+      {
+       "title": "台積電：矽光子成光收發器主流 2027年市占估逾50%",
+       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9PZHJlbFpibXhuQ29iTWFtSld4ZGxWQ1ZPV1NWaHN6ZHVzTkUxbFJfU1ptTXhkSmVnYVJITTIyRVVNQ2tsUGhrdFFCTXdfVzVQNGNvODduUXl2TlpHbFE?oc=5",
+       "source": "中央社 CNA",
+       "time": "2026-08-31T07:00:00.000Z"
+      }
+     ]
+    },
+    "2345": {
+     "name": "智邦",
+     "strong": 8,
+     "weak": 29,
+     "items": [
+      {
+       "title": "智邦800G出貨擴大，1.6T交換器接續量產",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQMlhSVjZTMkcxVUJ1cGFYSlhLMkNVZ0FGeVh3R3BhS2VPcV8zc3YwT0lMT2ZQRF96c3JoMGVIWXpDZTJPS1BqckZjc0hST0tTWFV2bFdmLWlqYUR3d21WY090TDNsNjNwMDZjVmZib3FuYnlreWNoVWZjeG9vTXR2czZHVXlZbkFXa0NWZEhWZFlpdw?oc=5",
+       "source": "台視全球資訊網",
+       "time": "2026-07-31T07:00:00.000Z"
+      },
+      {
+       "title": "智邦衝破2,000元成網通首家！800G 出貨加持 光交換器下半年蓄勢待發",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB2NWY1RlBjNHFYWDgwZUluaURCRFhKX2J0UXZvRW9QUE1hcldqOGRTQ2R4WUxucjdOR09LSm91TUN6YXFfUzktdk1RNzVCWFJDU0NTX3F5RExPZ9IBX0FVX3lxTE9IZ3M3c1VTSllJbU1raXh4QjVmRjJNQW56QjZ2djBsOXNhVzh6R0p0VHJiUXRhMWpqdk9Yb01yYTYzdzBoUnhHMXlEU2l2bFpudDZoelhEMDl6RldVVmQw?oc=5",
+       "source": "經濟日報",
+       "time": "2026-04-15T07:00:00.000Z"
+      },
+      {
+       "title": "智邦營收／800G出貨亮眼！3月250億元 創同期新高",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5FbnhBRnlsUE5QcklZc18wRmtyTzBDWXBYc3dPVENiMkVtOHNCT0llQjQ3YnhXY2gzNUNITlU3UUZzVU5neGZya2VUY1lnLWFxNEJpejljdHlyQdIBX0FVX3lxTE5aRktuZTdPTHNPaXozYTRlclFjVllUTXBDYVNLbHcyTmZtTXVSdU5rX2pvUEl0TXhmVGVPVF83SWN2TV9td3pTR0NDNDk3c3hHOFRsTjB4UG0xMmVBVXZN?oc=5",
+       "source": "經濟日報",
+       "time": "2026-04-07T07:00:00.000Z"
+      },
+      {
+       "title": "智邦強攻光通訊 戰力增",
+       "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9YeU1tb1NVQThvdkVXVUVFUk5kaVl4RFdGMnFyYUxyd0JoYmdkVVljRkxDNzNpaTFQakk4YUhrekI1YVJveTBDdFZnblRwMzR00gFWQVVfeXFMTmVYMVBLaVV2NTJwRzFTNkNVQVBXeHNETGdyMldzN0JEZjBScTFsZ0xfaVhqeGtQbXpQNVpwa3o1Rl81VTdsN1NqNHh2Mkh0bzlnS0hXblE?oc=5",
+       "source": "UDN",
+       "time": "2026-03-19T07:00:00.000Z"
+      }
+     ]
+    },
+    "2360": {
+     "name": "致茂",
+     "strong": 6,
+     "weak": 19,
+     "items": [
+      {
+       "title": "致茂CPO測試設備取得訂單，2027年迎量產- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNbHpEdnNObk90QXN5Uk1rYVNTRjBqSnl6cGtWVXc5T3VadzJLSDBxQmJXa1dlM0EyUlU5YjVrS01rUmQycVp5WVF2Ni1BelV4U3pZb3lNYkFsVmc0Y1NBZERJQk9IOEw2WktObjMxWTRiLThKekc1SG9DZHF0RklVQlJlcWxoZ3NVTnpjZDlsdGZRZw?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-06-01T07:00:00.000Z"
+      },
+      {
+       "title": "矽光子商機爆發！致茂、高明鐵強攻CPO設備切入台積電生態系- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9waVNfSmtTbVNodllzTzRUeWtoU2ZFXzB3RndWQ1JLTlF5VVNHZ2pZYUpIQ2xKcnF1aHZISXZ3NjZ5RXpqU2hyTFhUMnF5RnFoa0syTjFqVllzU2xLd3hF?oc=5",
+       "source": "工商時報",
+       "time": "2026-01-28T08:00:00.000Z"
+      },
+      {
+       "title": "CPO量產卡關測試 鴻勁、致茂成受惠焦點",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFByRnhiZWZvZDhqckVhanZLbTJyY3l1SzVXWDd5QnF4d2NRZE1qcjBLNzFyLXhBelZFd3ZiYkc2WVB1c0RTZU5rVkVuVnJUWXRRUl93NGZiQ0M1QVdkalQ00gFkQVVfeXFMT2FjRWVBVnJ4b1BpOVZkS3NfYWhSMkFHMnEzUWw2OU5hNk51UXNxQWVqTmdEcTMyTFh2RE9RRWh0cENYeGJsOTdmc09XbTk0c3oxaFVFOFcyM1hSYnZsaE5FTmNnUg?oc=5",
+       "source": "自由財經",
+       "time": "2026-09-13T07:00:00.000Z"
+      },
+      {
+       "title": "致茂(2360)法說揭2027三大引擎！CPO試產啟動、Inference與Die Burn-in接棒",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1ZcGhCV0hLbXN5UlJrZngyOVYxOUhwTVRLenBzeEU0dHlpdjlhdXRYVEpxSkZobVVUODNGSGZQQklQZ0xNV3I4Q2ZUYnd6cVE?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-09-17T07:00:00.000Z"
+      }
+     ]
+    },
+    "2455": {
+     "name": "全新",
+     "strong": 1,
+     "weak": 2,
+     "items": [
+      {
+       "title": "全新光電6月二度漲價、AI光通訊訂單爆發，外資喊465元目標價",
+       "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE4tOGtzRUpfOXF2TmhoSDlHQW1pM3ZkY25zVjRKQWtkMUFEb19LZDlvSkRqVFJiSUlkTEM2dDBidXl1R2UxLVB4bjRmYWY4a1cwZWgwQWhTRVp3bHhibDBNdmpVVVJ2bEkyY2ttZEZlWEx2OHhsMXBheFJR?oc=5",
+       "source": "BigGo 財經",
+       "time": "2026-06-17T07:00:00.000Z"
+      },
+      {
+       "title": "全新光電(2455) 1月營收創高只是開始？1.6T放量前的關鍵變數",
+       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE14VGhTYUs2ZXJ0WVlyQl92LW1NdWZlSy1yazRWZWlrNWhuZEdZZWllRDNlYXBsMDVOdUtEMmRyYVpfanlxTG5TTERNNjlZZ0p0TkRvcEZR?oc=5",
+       "source": "優分析UAnalyze",
+       "time": "2026-03-02T08:00:00.000Z"
+      }
+     ]
+    },
+    "3081": {
+     "name": "聯亞",
+     "strong": 2,
+     "weak": 11,
+     "items": [
+      {
+       "title": "明日之星光通訊！大摩升評聯亞目標價翻倍盤點受惠供應鏈- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBNdnUtNEEyQzhqNEh5T0dud3p0SG5fZHFOTmV0dFhocTNHUW11VUhxekM3N0taaXViUk05VlRxUG1fTnlfRXFmVi1obHhCYmFQUXNhQkhWR2RVNGpIR1JB?oc=5",
+       "source": "工商時報",
+       "time": "2026-01-21T08:00:00.000Z"
+      },
+      {
+       "title": "聯亞、上詮、智邦...從上游磊晶到CPO封裝，光通訊族趁勢崛起：Gemini 3破解AI泡沫化疑慮，TPU最受惠9台廠出列",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPTjF3bzQzWmJ0NzN5aFN5ZFZSTjZqTUUwUGg1OThGSENoVHd3cENiVzdicUM0NFBZenpZSlFuZ1RQZE01MjAtZkxjUUJmaXFxclZHS20wcUpMUlk5c2toNDVab1UzTk90N2Q2QUlIODZPQmVhM3ktdHFteE1GOTdHaA?oc=5",
+       "source": "今周刊",
+       "time": "2025-12-03T08:00:00.000Z"
+      },
+      {
+       "title": "「活下來就是你的」聯亞迎量產、華星光翻身、全新吃外包紅利…光通訊光源家族技術含金量盤點",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNc0loZTk2cXJDblV1RzIyN1NxT2NpRzJLbWVYRXlvZHZleEZHUVNhTk41dXFpVDdEYTRVeWNVNS1TRU5JMGZyZEEtZmdSUUlWRi1ybUlIMklXSWpjaF92THNWQy1EUVJVNTNTRG5ualJjQWJ1d0gtNWd1VUVPWV9JTQ?oc=5",
+       "source": "今周刊",
+       "time": "2025-10-29T07:00:00.000Z"
+      }
+     ]
+    },
+    "3163": {
+     "name": "波若威",
+     "strong": 9,
+     "weak": 17,
+     "items": [
+      {
+       "title": "波若威：CPO產品H2量產出貨 光被動元件三大產品應用拚發光",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9ic1NZaXpRS0ZxVmlwdVd5dmJpWEk0ZU0yS3NWVVRBdjlPOC0zbk8zdzlWbzJoS01xLWE3UTgwVGY1Rm9fQXBMLTFZR2xodEE?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-06-21T07:00:00.000Z"
+      },
+      {
+       "title": "聯亞、華星光、波若威…9檔光通訊股全面跌停！CPO出貨延宕，矽光子概念股修正，後市如何操作？",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNRG95MWRYdUpGR2l3TEQ4cm5uS3VmLUtnQ21rRDB6SjNvejVRREMwY1BXQzdqODBGamUxYmk5Q1hlZmFBQ2pmNlg1Y3dUSENxWVlHRXJFaGFGZTVWNG1jWFd4SU1QVTRFT1VScVVsbWdxUmRSeWgyeFlPTkIwUHQtcQ?oc=5",
+       "source": "今周刊",
+       "time": "2026-06-10T07:00:00.000Z"
+      },
+      {
+       "title": "輝達CPO進度超前！2027年出貨拚10萬台 外資按讚波若威、貿聯-KY",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE0wTkhNR2tWQWl3MkhsbFhDQlNycUltaTBfWDd6XzNRMG5vcW9LbzhucVMtWXZfQUlMSTRFS1ptc3kwWXVwTm9zUlpBWGI0TzlaS1Z5NWtTQm02VVRQOWtF?oc=5",
+       "source": "工商時報",
+       "time": "2026-09-30T19:00:00.000Z"
+      },
+      {
+       "title": "CPO 高點回檔三成，波若威、上詮成績單將 Show hand，誰值得等下半年？",
+       "link": "https://news.google.com/rss/articles/CBMingJBVV95cUxPNndGbzl5N2hCNXMwbWZaeE9ZSVRLN0dabHlEYnhkRmhXbllDakFJVy1TWjJCRU4xTG8zREMtQU1DcjlWZXdteTVMMzZNOW5WWmFLN2VmaExheUx0XzVjR05yNmd2RGZBVUtad1Y5bnIwWjhJRFdVUzFJc0VlNkZJbzJuaTdmMlJBeWNyS3BnTXNLYnIydTRsUUQxU29BbkJTME5iWnZPWmhMUTJYU3JjTnhqY0M4SmdHVTVEa3AwTU1LTHlhQ2hsdVJIdTNkZngtbXdlX3JER0JGS0Y0M01YeVFOZng4WDRtUy1yMWFweFF4LTk2TVhWQTVkbWs1bWI1TGMwRGVhdF9YQkxUUXo1MnFteU1LUTZoSUI3eXVB?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-22T07:00:00.000Z"
+      }
+     ]
+    },
+    "3234": {
+     "name": "光環",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3363": {
+     "name": "上詮",
+     "strong": 10,
+     "weak": 27,
+     "items": [
+      {
+       "title": "台積電點火CPO元年！光通訊廠上詮「砸重金擴產搶商機」 3.2T產品下半年出貨、6.4T明年接棒",
+       "link": "https://news.google.com/rss/articles/CBMiuANBVV95cUxORE5LX1RxS0UyTGVnaUdSamtnbzkxNUhDVTZneWhYQ0tUR29la2MwN25tRHdubldYWTg4RHF1MzM0dVJIa20ybk9aMEl6RkREV2ZhcS14T1VDZUk2Ym9RdWFjYWpzYlBJd2xnUlZEdDRTNzRqcXFSVjYwYXRyS1QzWDRoYjdFT3RLdWhDa1c0eGxRcmhRREJzc1N3S0VTRU53Yk96ZjFCdzRnb0hycDVoeFRBemNLMG9oVExSZGhWQVpsenJOTTN3clJ6Zk5mXzNNU29QUTJCdl8tdGFiWEpoYjlHb2drY0MzeUtESGpndURlejdleTdhOWw4Rjg1RFdpendza2NHcXFPdEIyemk2dnRRYmZNNlFNc25Ld2xLVEtIeVA5eFNaWGtINURVSWN3eTdHWEkwaUFRcnJpRGJTWkRLX0NaS1BqaUJTcWxoSHRMVUNXbjV1T0pmUDJxSXlFajVsU0xNT2dacmVINEtKZG8zYW91OWw0NW5OQlRSOXRtdDgwQUE4dmN2OVItOFZmSE8wem9MaG1Dc20zaDdnRnVVS3dKYnNDMkc0dk8tQV9KZ20yODRoSQ?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-05-28T07:00:00.000Z"
+      },
+      {
+       "title": "光通訊收割期來了！上詮搶進「百年機遇」 交貨進度、技術優勢一次看- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFAtczdkN3M2dXhheW5YVGJEbnNXWDkyb3ZVUjIxejNodUhYc1VzUEczMm1UWkVfejF4WmtUd1NNT0pNWjNPcFJaU0RNbXRTRGZVc0duUE1IN0RodDlyeV93?oc=5",
+       "source": "工商時報",
+       "time": "2026-07-03T07:00:00.000Z"
+      },
+      {
+       "title": "上詮股價5年飆30倍！光纖老兵如何擠進台積電COUPE矽光子供應鏈？",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE94dnNfTnNySFlDd0lPb0t6UjRkd2dBMWZrZ2ozY1dITTFZeWJaNmY3MlpZNFFSNEtkZnViQXlPUVc2Rk5VeDcyMEQ3bWlDQQ?oc=5",
+       "source": "天下雜誌",
+       "time": "2026-08-18T07:00:00.000Z"
+      },
+      {
+       "title": "上詮(3363)第三季起CPO FAU量產交貨！董事長林松福：百年機遇就在眼前，擁抱它",
+       "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1SbnBfRVJPREZjV2JXY0dEWExKcWl5bWpIbldBU09ZWlVENG9LcHZMN0RqaWxYa1lvbnRFcTdfTVFidFJMazNMZmNvdTJ6TklaRGFPZkExQl8tOFFyc2o1UkhjZkxCVGJLS0hWM3VFYUZJS0xYRzBOTXZiN0c?oc=5",
+       "source": "數位時代",
+       "time": "2026-08-14T07:00:00.000Z"
+      }
+     ]
+    },
+    "3374": {
+     "name": "精材",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3450": {
+     "name": "聯鈞",
+     "strong": 7,
+     "weak": 31,
+     "items": [
+      {
+       "title": "聯鈞800G放量時程再往後延？一項關鍵數據透露出貨節奏真相",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1WNHQtSFNXdHBkUWZacnEwNWRWSHlOUWhDYnRrY3dPUkRxYlJZUU5LVkYtWGdFeWFLSE1hRWtTYk1FUk5XellONVFmaDBQUzA?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-08-18T07:00:00.000Z"
+      },
+      {
+       "title": "輝達不只賣GPU！聯亞、聯鈞、光聖等AI光通訊受惠股一次看 暗光纖戰略曝光",
+       "link": "https://news.google.com/rss/articles/CBMi1wJBVV95cUxQUDRhcnNyS0RiYUR3cWhUWTEzOWYtaExIdWZGSnZhOXd4WTZhZUY4bHZZRURFWWtsWW5pWjJWUVpMMEVSTGc1OVBnZ24wRDJTTl9rU1hzTzQxX19HSDlzaFljVVVzUl93OVFNUkc0cDB6aHZoc1A0b0VuSWRQcTJOTFRHbVFVTjVueVNUUFNKWTF6VHl3QmUtWDh2Mm05UVlMNlhiTWZBckxHS1V3NjdYcDhKYm5SZmhwWUh0N3JUb1RiWTdWa1M2SzFUMzl1R1pKbERiUjAtTElzcVBQTXhqbWJQTTA3X09neWZwOTZKaE9BMVlJT0I1RXBiZklLNktWLTI1a01TODB1QVBTYVhIaFpDUHpzVVU3SWhpVFlTa2NzSURfTzhJWmp3b2NVbVhwcUp1eEFCRkFIandMY21WbGx5RG1Ua3pEUXRLR1JRN2RBUGVCSnNj?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-07-31T07:00:00.000Z"
+      },
+      {
+       "title": "聯鈞ELSFP卡位CPO/NPO商機，攜大廠開發邁試產- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNTlVfc1lWaTNBVGlOYlM5UDhHa09pTTFSWmpwZEdjd3ZRcmtFcm1aRFNSRDFPUFQzaEQ2emVCRXBIcGxCRjJUUDZnTjRrTDRobkplelJPZ3BYd3pVcTFxTGVLMnM3Q3RydF9ZQmozS3BjSkIzQzFjeUpZcHRmTDZQMVJJNldpRFI4WW1TWDBfQUhZZw?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-08-19T07:00:00.000Z"
+      },
+      {
+       "title": "〈聯鈞法說〉AI光通訊未來幾年關鍵字「缺」 COSA產線滿載將持續擴產",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5NRGU1Uko3WjN1eGJSYVNETy1obXh1UF9KZUFnUlVNeTh4alFiRWFmS2Y5bkFzc0dwbEZUV0Z5bmpwd3k2Ym1fR18tZThmRGM?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-08-18T07:00:00.000Z"
+      }
+     ]
+    },
+    "3711": {
+     "name": "日月光投控",
+     "strong": 11,
+     "weak": 25,
+     "items": [
+      {
+       "title": "矽光子商轉元年：台積電、日月光領軍台灣供應鏈突圍",
+       "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNVzI3VjlkdFY1MDliSWppemZvZFFXVW9DanhkMEV4a0lHVkkydjBUcDF2RE11M2hwX1FTaXY4YjUxQXlXU00yWWtZQWh3aXNMcXVWOEd5a0M4Y1l3QjhRckUwOWF6WGthcTdoUHQ4SlJva0N4U1RqM3pOZUl0cTItMm01aVVCTjFmRVJYWmpxZWhYQm5MQjkxSkhPUTN6Y0pjazZ1QXhBOElYSlNIVWVISA?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2026-03-17T07:00:00.000Z"
+      },
+      {
+       "title": "1.6T CPO第四季出貨！「這矽光子」週漲17%炸2.7萬張 合作台積電、日月光營運看旺",
+       "link": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNWEszOGZCVzlpN2FsaGNsem9Kd1NzQTlUTjBtT1FCOXNFU1ZvaWpZOWZqOUlnakcxUWE3RzJlMF9RaW0xVjJKcVplem1WX0NURXd2MFFtalB0Z3hyZ0VhWmdMMVJvcHp1Vm95WU8tSG8xay1DMWZ0Z3NLSmhGZjh3WlM0bHNlLVIyTUhRWWstUTM3UkxDYm5zcF8xU2tKaHpnS2FMU0VLYmYxb0VXMUJnTTI4YWFDMkhDNFlFeFhoYmFLX0ZhSkZvaWNvZXhtYURxcGNHUnhKNFVNcXlLVzB1TUx0ZUhGQjlYbW1KR05zdw?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-22T07:00:00.000Z"
+      },
+      {
+       "title": "封測訂單塞爆！「這矽光子大廠」EPS上看9.36元、日月光吃CoWoS紅利法人喊：新一波成長循環來了",
+       "link": "https://news.google.com/rss/articles/CBMi6wJBVV95cUxOeVIwMTZkY2paNzJ3OVJyRWd3Zy1Eem9XNkdldG9TYnRSM21zYjB1cDlmS0l6RXdjSnBMMUJMMVNHaGNJYklNM3YxdE9vSjBhajFad2FMSnpFSWZ0Ty03SzFyNnJMNXlVMTVYU3hHU244a0M4UlE0Mi1LZmxqZTBSSUFiZ1VkOUFsTi1SNlpsdUF1TjUzYXpndWxDTVU0dnhBQWhjTmlKbm8tTUFqY2RSbHRCRHU5YncxTlZHX2FvdnY1QjBfQWx6N3lxXzV1bjEzWXUwYUJRNWdUY3Z1VGNyU3NYeTc3MVJDQ1cwQU5wNWh6aWt6d0s2a0JjVTltRGVhTDEzVDgxQS1xd1paY3VmUmZ5bUYwa0lDR2g0bW80WTBfbDE2VW53QTZyck5td2x5MXVLdGlJZUFrek90cF80WG9fUG5lT1U0VXg5REtKZk9fd085ZXJsanBUVDdEcE84ZXBPNXRKTkticHc?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-07-03T07:00:00.000Z"
+      },
+      {
+       "title": "先進封裝CPO前景？日月光吳田玉：絕非炒作，用10年耕耘",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9BbnN5eHdfelprZW83RVdDN0ZsQ3ZoUWlDOXFYTXR0dl9landsdlZJSWttNGh0NHhWZE14Y1dqYkFubnVqaWtGQkVuWkpMMXFhR1NlVWZrQ0FDUdIBX0FVX3lxTE1Jb1k4VFB5TFpSRW92SHp5djV3SF8xaFV2TDJ2SUxpU01sYW01UTJqTUxGS042ZVhLR3V4S2M2VFFEbWpnS29vaUlEcnVBRkVCdlNaTXkzQ3hYM2JmWTF3?oc=5",
+       "source": "經濟日報",
+       "time": "2026-04-16T07:00:00.000Z"
+      }
+     ]
+    },
+    "4908": {
+     "name": "前鼎",
+     "strong": 3,
+     "weak": 28,
+     "items": [
+      {
+       "title": "前鼎搶攻CPO ELSFP，今年小量出貨- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxONDU1ZXdFdEU5a0NFMnhSZUFjcHByVFJMM0ZweHFCcGtuMjY4NUVYMF9fZ0dRM1ljQTZ1YndLXzU0N3hudi0yd2ttdTBGLXhhMHNjTlRya3M4ZlZKZFhpTkhFZkRNR0JjMkY1WkVERFZOXzhHYVpVVWVVeXA4ZlIyTFFDMVp4a3AtSWdPYkp3blJnQQ?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-04-17T07:00:00.000Z"
+      },
+      {
+       "title": "〈焦點股〉Coherent光通訊訂單強勁唱高調 波若威、前鼎漲停領族群發光",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFB6cEp5NHZvNEt2NHdKa0MybnRoNzJDWUtld0xtOFNfRGJLNlM3NUxFUjVzVTR2c0V3TEw0QU5BWElOT2RZQ3QwQjNGdFRKaE0?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-05-22T07:00:00.000Z"
+      },
+      {
+       "title": "前鼎搶卡位CPO ELSFP小量出貨、CW雷射COC自建產線3Q26完成",
+       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNd1NZRTRnZVRvUXR3R05sVDYwZHM1WWRsMWFfU3B3Y0I2czkyVHhCdWUzRXUzV1VrRVJ1THUzUkZkS3Jvd2dYMGRFVm10ZFRoTFNjV3Rrdy16aFY4NmlfaUtXRHhOc0lIM2h0ZVFRYnpfcUUzdDd3ME1Eal9lTmgwX3lNMy1NbFpoU1hvZ3B3?oc=5",
+       "source": "DIGITIMES",
+       "time": "2026-04-20T07:00:00.000Z"
+      },
+      {
+       "title": "前鼎(4908)輝達Spectrum-X量產+7月獲利飆140%！CPO爆發前夕!？",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9yOEJhbXJ2SzZwQjRpVW9fc2hiMFRfVmdGQ0pudEw1R1Z4cTF2WXl0aUx3UVZDbFI5VUlULW83ZDhSTGFNNTZmaUgyUUZzVW8?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-09-10T07:00:00.000Z"
+      }
+     ]
+    },
+    "4977": {
+     "name": "眾達-KY",
+     "strong": 2,
+     "weak": 19,
+     "items": [
+      {
+       "title": "美國出手封鎖中國CPO！台廠轉單行情點火 華星光、眾達-KY、聯亞誰最受惠？",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE4yLVd4VlJDb1NvMWlpWEVSQzZQd2pPc01Ydkx0LTg1SVk0UkdsNE10aUZjakdkdlRjMXdEY3BPZVBtZm5RQWM2TDdybzZFOVJ6VlFUVEZVaTRadVZvVEc4?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-15T07:00:00.000Z"
+      },
+      {
+       "title": "CPO族群點火！眾達-KY、創威飆漲停「破千張排隊搶進」 華星光、上詮開高噴3%",
+       "link": "https://news.google.com/rss/articles/CBMivwJBVV95cUxNRS1TWDdDS2pQakxqdmxKTXNScFdYd0Jxb0JBbV94QmhkbmY5N29rWG5TajNOb1ZGQi12cHJLZ0lmbWZzTDREZWlCcW5oaWk4NF80WVhjTC1DQ1VxMjdsZnc2d3hKUThUQTZXRUxfNERIWWxHT1l1US00SWV2Szg4T29VVmViMUVoVzN4TmhiSDRfNTliZUNUSDJHbUpnbkM1bFZDSVdtOXVHekg0RzdaY2Rlc2lIUnI4VlNPNVNXWF9XUHotZWxxVUptalgxLXV1SDdYdzM0c0JNNXUzQ1FDQWNEMFU5TFVwOGUzYnpCMVl4cDVacEVINzNWWW11OXp3eXNTVmNXTDZuVzg4NGo2RUJBUEd3YlZDaXd4YTFCd1RXSFp6ZnBCaGlVWXJPc0N3QWszY3NTRE1fY3dYLUNn?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-04-15T07:00:00.000Z"
+      },
+      {
+       "title": "矽光子黑馬強襲！眾達-KY(4977)併購品固鎖漲停",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBJSHNDOGFPNGJCc2VRNGp3NEFqaWRKS0dhSkZXYlNrdGt5X0JqcVdEblNiTG1zeVFILThJeUJRVkdGeWpMSnZ2Y1MyRm1BbW53YTRuYWxHaDVnV1RkTzk4ODdwTDNnVkpoVzczN0J1QQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-05-12T07:00:00.000Z"
+      }
+     ]
+    },
+    "4979": {
+     "name": "華星光",
+     "strong": 5,
+     "weak": 31,
+     "items": [
+      {
+       "title": "美國出手封鎖中國CPO！台廠轉單行情點火 華星光、眾達-KY、聯亞誰最受惠？",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE4yLVd4VlJDb1NvMWlpWEVSQzZQd2pPc01Ydkx0LTg1SVk0UkdsNE10aUZjakdkdlRjMXdEY3BPZVBtZm5RQWM2TDdybzZFOVJ6VlFUVEZVaTRadVZvVEc4?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-15T07:00:00.000Z"
+      },
+      {
+       "title": "《價值型投資最新產業研究報告》華星光(4979-TW) 美國光通訊大廠財報報喜，三條供應線開始接棒",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE0yaEFVZllvVmxuWS1mUTN6ZUlPaHNEcy1xWHdfcEpEeXUtVW43Rmw4UTNqS1Jzd191QkFpY056eGV3aUZtaUwwWC05QjNFckU?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-08-13T07:00:00.000Z"
+      },
+      {
+       "title": "Lumentum 預告 CPO 量產時程，光通訊族群受惠，華星光亮燈漲停",
+       "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9oNlZuMGlxdHhHZnE4WF9mN3dtaF9NSmhQMTIwdEVrWkFYamRWT1NoaDVFRFo3VzM4ODhYNm0xNmpDMzhCWGNCalJYbVNIeFBzaGVUNGtFVmFDb0lSTHl1OEtYMkVKbXM?oc=5",
+       "source": "鏈新聞 ABMedia",
+       "time": "2026-08-12T07:00:00.000Z"
+      },
+      {
+       "title": "華星光、上詮迎 CPO 商機",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1kN0drUkVTY3RRdXVMMjBXSUFXTUd4S21KVmtaWnMtWHBlR25zNFgydjRzYzhzTFMwdTJ2SXBpNmY1M2szSS1HQ2xWZE0xaVNpOHR5NG53MjlnZ9IBX0FVX3lxTFByc1RjcXlJXzdKd19PNWZCM3pPb2F1OFZHR0hhd2l6dVBBV3VPb0o5Z0NUZHUxNzQ5UmRuaW1HQ05odUhNZm5kMlZkOWxlOGI2bG9Oc2JLVElzdHdYSE5F?oc=5",
+       "source": "經濟日報",
+       "time": "2026-07-27T07:00:00.000Z"
+      }
+     ]
+    },
+    "6442": {
+     "name": "光聖",
+     "strong": 4,
+     "weak": 37,
+     "items": [
+      {
+       "title": "光通訊大爆衝！聯鈞、光聖遭打入27檔注意股 「CCL大廠」狂飆200.61%也被盯",
+       "link": "https://news.google.com/rss/articles/CBMi5wJBVV95cUxQRzZBbjFiYk53MllRcHQwX29jcHdGVFRpbHN4SGM4UUZteEVkbFFEZzdiQ2FCd1hDQ1FhVkkwRTJaUUJKcmNpSmxOWFlBbTdLY2dYWGRFUUtVWm93alN4Nk9OS2lOWWNNYTN1dWJVSDRFaFRXVktDazZmMGZYWlR5djNTei0yUWprUVkwRW44NEI3Y2Jla3RKTVNlNFIzSENfWGVwS0VKNVIxeVZIZ09HTHEzVGRNMnhKd08tVGhPeTQwdnlDVXZNR2pUZU1JY2lMNVJUYVpCNzd0T2VBdWowT0tCUmZGaEViZC1MYzJhRWF6V1JNNUM5aW8yOEY0UUotV09QcnlDNGtPTTJHcTNqbXdZTmd0RGlYeEJWS3JPYVRPSzl1T1c4RHI0c3Y5UzlUV0pBZmV0Zzh4NXVtSE43ZGltV1ZqQUNvX2F3d2lsQXRGVG5TQTFZT0tJbjVKZkpnYzU0Z2RKWQ?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-07T07:00:00.000Z"
+      },
+      {
+       "title": "輝達頻傳布局暗光纖四大網路基建大公開！聯亞、光聖、聯鈞… 受惠飆股全名單曝光- 產業",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1XbE5xVV8yYWl5NlR1T29lbThyLUFnQkI2Z3N6V1JSQ1E5SFJTZGlGUVl1TU5HZkdJb3hwWlA4UkpqRnpwd0JPM2hLd2lVb2JfSHVNUmZ1STFfc29PWHZ3?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-01T07:00:00.000Z"
+      },
+      {
+       "title": "單月EPS衝破4元還只是開始！光聖獲利暴增200%全面爆發AI資料中心訂單看到2026、光通訊轉型狂飆寫新紀錄",
+       "link": "https://news.google.com/rss/articles/CBMixgRBVV95cUxOLVJkcm9HVFR4Wkg4SnFjQXRyM2pHZGc3cWlMaEpTTURKOU5KNWFZQTc4cVR4Umc0cllPMGFSSG16MDRNNkttR2hURC1iWXU4NkVfM0staDFxY3VMXzE5MERmRW02YUxrQ1l5d2pQM1ZXLVB1MVZUanI3dk1EUldLUm9GVVpiUzJLLWdkRnFPUGxHZzFxYUF3QnJJcFZLSk1RdllYdFRucms2N2JJNVQwb19yUTdFYXo0ZWd0MnRKSzdXN2hYY0xlUVBBTU9VWUk1cHhPd3ZBVW44eTlQVEZ3a0xUMng0UmNDTkluUHJndkdXR2Nia3dBUGtzcjN3Y0V5RmtuSVpmME1TbmNYTUZYMU1GLVRBNUVxZ3d6Mm53Z25Ka0NFX0JXa3pZLXl6YXBzeXo1bVUzWXhyZlRWMGl2UEpLS3RONThUNjQxbVYxM21SSEVqWVM4UFBYTmNzTnlzVmFWNnJlZm5MV2tvdTlIN2JrTklfUE9pTlEzVjcxc2JpaGlIOWJvSDJZaFFYUm83TmYzQ3c2em95bDVYUjUxQnR6WFhfVnE1MHBOVFV0TEtDTzhPY3BSTUJYSUlRVmx3Y3Q1c21kNGt4OWhaNzdKS0NlazFmM2hZdGszczZRUXhzRld1RkFhQ3BfOHF5TkRMTHFLcnNTb3lHWDYycm1jMzNwOVp0LUlwX2pnUHF2Rkh4WkVaZUQ5bnFDWE5qNFVhQ1lmQVFEeUhWbW5EcS10YkJHendncEl6OEJyRnZGTHdFMWV5S2c?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-04-14T07:00:00.000Z"
+      },
+      {
+       "title": "強力發展CPO與矽光子領域！「光聖小金雞」砸2億設廠竹南 興櫃首日股價飆650元",
+       "link": "https://news.google.com/rss/articles/CBMixANBVV95cUxPVWdiZTFUdndQZEVwQWF1V3hxcy03TXlqYXdZRVp5UDdqRmpIX1FJVjhxVzJIbERsd2k5NW5NSnFyZUZBdWJqbFVsaE5JdjNUZDhYcEZnaXNmQkhJYzU2dUJyRVRCUEFMRVF5bk9ZYndLREJRdGdkUGdxSmRsNWhKdFVtYVVlTG02ZTl2ZnJiaHVqekpydFBubjhOZGp1NVdxTC14eENlQURjeURrSzY4bE1xZzF0VXRlb1lzRzdqUTVlSDVxQ2xTa2xrRVpqQVNhUkVsSE9iZnlJZU5xRlYxNF9OU2xXVEt3NmFzSmxXcFdmdmdYS3l5eTB3YjlvdFBicDQ0dE54NnNjSks4SUs3ajFwOXdZd0dDYUJORENDWG1LOUJoUWctUWswbE41blhhZjlXb28tNENGT0lxQmY1MmQ5VGtkeHpHMERyWk12cnVRdW9nUWJCYnY3R2lXYlFTMWl4dm9UOUVuandFYXY4SXAyZlpiaFN1LXdSanFSUE1zYkxPQXZsSkRwVENKdG1lb1l4RGx3Zm1VMUxmMUdfVnpUMzlBVDNKbGRLTmVKWEZVQk5wMGF1d2UwdVpkaXhnZ3dQYw?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-26T07:00:00.000Z"
+      }
+     ]
+    },
+    "6451": {
+     "name": "訊芯-KY",
+     "strong": 6,
+     "weak": 27,
+     "items": [
+      {
+       "title": "不只卡位CPO! 訊芯：正與台積電合作\"COUPE\"",
+       "link": "https://news.google.com/rss/articles/CBMihgJBVV95cUxQQVpMV3N3Um5TUXc4VnNGRll3dmFEN1Rfc000OFh0cFJ4Q0RVQ1N2TkxVMEY4SHpsZWFfeHEybE5mQWU3QkVUbHIxRHdkTFdlVWVXTVVveGNzeHQtQW9wMkJjZFhLZC1FVDF4c3lHTVlYbnRYR2NjU2RXSVl5TDJIY2sycU02cW1WdXNXOFhrWkNNV3FaN2NtbVpkWlN0M09OaV9yQzF6VmdBOFBVenE0NU9tZWpWaUpaX19ZY1c2R2NlRkZmUlhySDlBSmY3eFNGSW9NMVVQRzZJNEhHbDMyVUhTZXhTZVhHX01yeWlGTnZvT3hvRVRRVE9RRGd2aVFmWVlqYy1R?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-06-26T07:00:00.000Z"
+      },
+      {
+       "title": "蔣尚義引台積老將入董事會、合作COUPE！訊芯深化鴻海「出海口」，砸50億衝刺CPO、OCS事業",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNWlJYSXdkYi11UVEzaWc3UkRVWXBZcjNmZFB1Q3pOcEV3SjJMdE5VS0xBcGNTUHFEeDFFNjUweXRNSDB4SWxkb013RmswOHVsS2JoSVpLa3hzU3dFYWpqazMwLU55V21McUJhc2VNTzdmMmdCNHQ5Q2otRks4dlZWRg?oc=5",
+       "source": "今周刊",
+       "time": "2026-06-26T07:00:00.000Z"
+      },
+      {
+       "title": "CPO大商機要爆了！「這矽光子大廠」卡位輝達、訊芯砸50億擴產 2027拚放量",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5pdlBjZVd4NnlrRDhvbTluSVVlWXhieVdrbnJFNGJzV2VsTWlCRDl5TFVJQ3pqVVlSU2RmRzJzV2txcmtTNWM1dU01QQ?oc=5",
+       "source": "FTNN",
+       "time": "2026-08-27T07:00:00.000Z"
+      },
+      {
+       "title": "輝達高喊「矽光時代」來了 上詮、訊芯是幕後兩大贏家",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9OMVQzckZsTkhteUhFWjgyWkRZMUs3NGhnOEhfZkJiM1NWS3FPRnF6RlBmb2poTmZLUFgtdGhqWXZjd0ZyT182UFowTjd1eTlFSnQ0eWQ1ZFRmd9IBX0FVX3lxTE1pZ05nZjRudkcxQ053bXFqZ01YZGtaMGdJbHRhby12clJ6ZS1MQzRmV1c4d2RzbmxESkVzQnpBUGlIeWlncHVISjJJemVJTlJJM2E0akhmcmZCSlEtMFdB?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-17T07:00:00.000Z"
+      }
+     ]
+    },
+    "6515": {
+     "name": "穎崴",
+     "strong": 11,
+     "weak": 49,
+     "items": [
+      {
+       "title": "穎崴大擴產2／全面卡位矽光子新賽道　王嘉煌：穎崴不缺席CPO",
+       "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBoai1iM0RoNVRMUmlqTjFMSTFZajh1QmZnNkxoZTVoM3Z3b3NuQjRnM0dqYUMxTHJ5RUFDUGdzZThBamFaVkRrek42dWxSTVZNN0k1cGxXRGZyOVXSAWBBVV95cUxPSEd5czRHaG4tSjhheV90eElIUHVlZ2RiSUlnRE1mbnczRTM3NjduZU9FWFdLZzY1dVozNDhTanFZa1JPMEdVUlNwV0wwUDRfd2pEZGZSUi1NS21rRVhOQzI?oc=5",
+       "source": "鏡週刊Mirror Media",
+       "time": "2026-07-15T07:00:00.000Z"
+      },
+      {
+       "title": "穎崴 CPO 測試座市占逾九成 2027下半年小量出貨、2028年拚放量",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE12RkxrLWhndTA2cVZqLWdtRENSeTJYV3JSZHFZeUNJMHpKdmU3M3VoUWR1RHBoRFdSUXhXY2ROMWkzVFFnODhzSVlPZGxGZ1VEeFZBQ2FjeFc0Z9IBX0FVX3lxTE8wYnZGTTg1VDNVenVSQzNVUVd3cjRuSWdvSDNpRmFXUHg2VlVCcnV2QUN6cTJVTzFRYnFGOS1melhySVNRUnBkb3g0SU5rUmVvUWdYV3VvYUkzSTJQSURz?oc=5",
+       "source": "經濟日報",
+       "time": "2026-09-02T07:00:00.000Z"
+      },
+      {
+       "title": "三星矽光子採用台廠! 探針卡3雄飆穎崴漲停| 科技",
+       "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5KalMxOVNvSzR6aUJON3pyeE5BckVDU0kzOHU0V29RNW03UG0ySnRKYnpoNmtrSVllbWVfd3A4dEdIYUg4VnFoZ1ZKRGVwWGU2bHczMm5yQXR2M0k?oc=5",
+       "source": "非凡新聞台",
+       "time": "2026-09-08T07:00:00.000Z"
+      },
+      {
+       "title": "喜迎高速傳輸新世代！穎崴掌握 CPO 測試介面商機",
+       "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBVdFowWTZqeGlSSnBhZ0JSd19WTnhzSzQzUTBmVWRYT1V3U2N0VTNkWHRRM0FBc0lrLW9kMk03NEVyTU5DdnZMamhKck85WUxtY2RydG8wNHBqY1QwX2I4bVFpUUVGcTE0ZXc?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2026-05-14T07:00:00.000Z"
+      }
+     ]
+    }
+   }
+  },
+  "leo": {
+   "query": "低軌衛星 OR SpaceX OR Starlink OR 星鏈 OR OneWeb OR Kuiper",
+   "anchor": "低軌衛星|SpaceX|Starlink|星鏈|OneWeb|Kuiper|衛星",
+   "companies": {
+    "2313": {
+     "name": "華通",
+     "strong": 15,
+     "weak": 43,
+     "items": [
+      {
+       "title": "馬斯克唱旺星鏈 年營收喊衝1兆美元 昇達科、華通等可望受惠",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9VSWlLelc4bTdtWXNMUldpVHpOcTROUjRkcXZuWVE5cjU3ZGcyUm9sZEJJSnFiVzFCX25Ud2ViVFYzN1o5bU9TLWRrQUFDVDg3aU9OWUVjZng4Z9IBX0FVX3lxTE9od05VdENSRm5zQVFuUHdJVjNTYUpiSnJJbUdheWc5MDJzOHJzQkstX0VSbTd2OXkzaEZjZ3JCblpQNlNIVE9mVVlPMDMtZDlvT0JoR0lXWk9odGZhUVBB?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-11T07:00:00.000Z"
+      },
+      {
+       "title": "SpaceX點火衛星 台廠誰受惠？成本驟降用戶暴增 華通、穩懋享紅利！",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBWa0hLY1FvWWpQLTY0enBpYkNUdktEVGFWSVRJbXBMRVktM1kwSjJFMkg0NVdsU3ZLYTNrbzVzbUlHODJUS1doTV8zbV83QQ?oc=5",
+       "source": "Money 錢",
+       "time": "2026-08-06T07:00:00.000Z"
+      },
+      {
+       "title": "受惠SpaceX奪美國防大單 華通衛星營收看增至26%",
+       "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5kc1FqeVVmV3czNFp1MFMtcldib2x1UlB4Vl8zRTBOUURVTTVCdGpaNnNKRGN2N3h5d25UTlFfQUVSNW01cDdVX1FCRzZGZkFQQ3pWTnp3?oc=5",
+       "source": "自由財經",
+       "time": "2026-08-25T07:00:00.000Z"
+      },
+      {
+       "title": "押寶SpaceX財報？衛星概念股昇達科、華通全亮燈 分析師這樣看",
+       "link": "https://news.google.com/rss/articles/CBMikANBVV95cUxOVVZUYUlIMFd1aXBzdklmNU1Ja3V0S0RYUFRXb3VpUkN0cVZaeVN2Y1pLNHFvR3lDUVVxaGdjYW9fekpLTm1JdXhxR2NZbThkT18xdXRsR3owMF9QSWZ2bi1iODFhenIwcEhZSUdPVXRiU2MxMVRKZzJqYlNvWmx5a3VFNDE2Qmt0RXZBSjdvY1RRWjFsWlQ2N3Y2MWJueWQ1cml6REVDdjA1M0dBcUlZTXA3ZnhUMTJWTExnMUN0YTFrNmxGTERiRjVYeDR3elM4MDE1YndmZFZvWmZEY0Q3d1VxQW5aYTgzZHU5eEY5cXpwdFoxb0VmVjJqa2dKRVJVdlZzWmRrNkdrWGtxNndBc1otVmF6Z0tBVU16U3J5RWQ4REFCUGhsYTdFeU5ZLUlfYWFCWVhYQk1UOHdZUkhxSTN6R0dwN2FOV0RXMm1kdzhzWHJvYUNTZF9jTGhTNUVJS1RKQ0p3STN4b1htbTNkbXY2YktVQmFGdXhseERORzU4NXJ6ZlB0dTlJR0x0ODdq?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-08-02T07:00:00.000Z"
+      }
+     ]
+    },
+    "2314": {
+     "name": "台揚",
+     "strong": 0,
+     "weak": 10,
+     "items": [
+      {
+       "title": "SpaceX IPO持續加熱！低軌衛星全面上衝「台燿、台揚」等6檔強攻漲停板群創爆量10.7萬張排隊單",
+       "link": "https://news.google.com/rss/articles/CBMirAJBVV95cUxNd1RUOEVFYm1tcVVSVXAzMGtVWUw0QWtnRjZaYlVTOWFVVXU5TEs3VzI4ZXRfS1RBN3EtTGc2WmN1eVJQRnh4amlodG5Md3JrOWsteTNhOE41ZHUtSXdqQ0tDZmlnTTNqUUx1cWtUaWxFS3kwU0xpS1ZWQjVUUFpWRExqa2drcG80TVhPMlRiM29BeDdHRERnS3BqQ0drSFNlLWJvNFBNNFJEWkY2QjMzUkN2ZXBlLS04TThWWnVpcWd3QVpnMWNITkQyWkdnd0pFTk5ZQWRlbkkxRzM0UWhYM0NES1pOUnR4TjVYZ19oSXpvTTdVNEFUeGhncjdZTTN4c042NF96aEhrNWRkNmt1cFBvVXA4eGxwWkxSVnpicTBDYVQtajJzRHhmRWQ?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-05-20T07:00:00.000Z"
+      }
+     ]
+    },
+    "2367": {
+     "name": "燿華",
+     "strong": 15,
+     "weak": 35,
+     "items": [
+      {
+       "title": "SpaceX 奪美國防大單 零紅鏈要求 華通、燿華、昇達科等受惠",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wSjV4dUdFMTNHa2dNYmptX3poUkFzWnZIeGtiV2h2N3hKMnFVRWdlY2l1cU5xdHBhMXRQQ0hKaXN6MjgyYk1FUHEyNlh6TjFIRlJZSFBBc1lnUdIBX0FVX3lxTE1rS082a3JRc0o4eDBJRTU3QUhUSGY4VWpmTXdCUFBQMVdJVDEzMFVvcEktYXV4b0oyVVlHWTc1WWlSVGRZMkt6S05UWHotT1kteGJzNFlOWDhLM1hoQVBv?oc=5",
+       "source": "經濟日報",
+       "time": "2026-05-28T07:00:00.000Z"
+      },
+      {
+       "title": "全球低軌衛星需求看增 華通與燿華看LEO板出貨高速成長",
+       "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE8xQjR3MnhVMngyTXhkTGZ3TVllUVpXYV9qbzFlV2R3TlJuUXNNSXZ0azZHMWVIWENscFZXNjhQcUVWS3VONVNFNzUyOVp4TVk?oc=5",
+       "source": "news.cnyes.com",
+       "time": "2026-04-19T07:00:00.000Z"
+      },
+      {
+       "title": "低軌衛星概念股燿華開盤漲！SpaceX將上市受惠還有誰？",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5BYm1VQS1ycWJwQndJR0VidklYQmJPdDJxTFJRdkxVYm50WW1TQzFLcUxhcVVQN09mbHZHMENjajhJcVVFQkd6a3Jrc0VwUQ?oc=5",
+       "source": "遠見雜誌",
+       "time": "2026-05-18T07:00:00.000Z"
+      },
+      {
+       "title": "SpaceX引爆太空革命！「這低軌衛星」營收衝破151億 燿華也搭低軌浪潮翻身",
+       "link": "https://news.google.com/rss/articles/CBMiowNBVV95cUxOdEVLallUZG80ZkY5ald4SWFaMEp4Y1Z6dzFpVVNDQkhTNXVXdzVEcEIwSkpTRmp5MGw1Z3JrSlpCSVNtRHhJU284NGxHbDg5QzlIQlpfcF80RkdYVG5oLU1HZjBrWDFCLXZrYWNpZWpEOG8zVk1fV0pKNkg5b2Yxa0E3VDc3eVV6M0FzR3JaYVdaRTlOY2lxZnljTEI1bkdReGFHcmxwbzRfV1VaSVM1THJMMzlkYjZldFI3b1hPdG1ISmI5V0o5QmItT19mYm1NN0E4VFo3Y0k3WmdpTm9xTk1WN0FLcGpkcFVYaGVxcjFKVXlJQlZ4VllHUXlGdjJYMDBUNXBqRGo3Z0VaUWtaVW9rcURWYzYydjZJejEzZ2YxU3ZiY2RhcC1QQmRLWWxtNzJDWFkzNUQtN2F3WVJEUjgxYW13b2tpbC1zUGxkZjYteU9TTkpWcWNJa3AwMzRHaXZMbFBESDBSdjJuamN0Ulk3MTFPUW0wenhfVWFVZmI4dy1HVTFaSGR6ZmhIZEtkUGFWZHpIa2M2TU02YTB1azBiQQ?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-05-12T07:00:00.000Z"
+      }
+     ]
+    },
+    "2412": {
+     "name": "中華電",
+     "strong": 18,
+     "weak": 16,
+     "items": [
+      {
+       "title": "中華電布局低中高軌衛星，持續關注 Kuiper、Starlink 海事合作評估中",
+       "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBFd1pmU0ZKZ21kcWU1NF9RcTZBS3lJX0xtaFc1dEx0YVlWSU0wYnA4alpqWEpWenZaREtVWUtXSkpTN2Y5SVoxa0tpZHVWX2RUdXc4SV90RlY3MFNwTVZSQw?oc=5",
+       "source": "TechNews 科技新報",
+       "time": "2026-03-12T07:00:00.000Z"
+      },
+      {
+       "title": "Starlink來台法規解套中華電：爭取合資獨家代理| 產經",
+       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBpVmpKdEw5djBqQW1JQks2VS1WSkRKVmdWQ0hqVGlxY2RIUkEwbHJDMVpJSUhPdzBfTi1ibllXX0FKMmdMSXZ5TEZfS3NRLUZ0LW5OQnd6QWcxVWVmSUE?oc=5",
+       "source": "中央社 CNA",
+       "time": "2026-07-14T07:00:00.000Z"
+      },
+      {
+       "title": "Starlink來台可望解套 中華電：爭取成立合資公司、獨家代理",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1LdThQaE9IZnNxeU0tX3lwUDQ3VHo1enhBY0FqT3Y1VVZsUE5xekllblpYdnRBbnQxWGpibzFBeWZVc2lBQ09ER2tBeVhaSVdCTnMtSGVXU1JVTDFhQjNF0gFkQVVfeXFMTnkyRmNnQl83aUF4R3hhRkhHMTNmbFU4MTB5cXBXWlI2TEJzczlHZjlFTndqNmJHczhHWTFtT1hFYTFsemh3Zmk2TWI3TXFTTlFKNWtpbjcyZmFRQ05EdlJ0Sk5nNw?oc=5",
+       "source": "自由財經",
+       "time": "2026-07-14T07:00:00.000Z"
+      },
+      {
+       "title": "擴大低軌衛星布局 中華電董座簡志誠：持續與亞馬遜、SpaceX 接觸",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBndlVmbmxCWVphZUFhUWdueGtkU0pQNUdvaDVlVzAyYVMxaERmT05QY3l0VHdmekNEWlFUa3lNZEYySGQ5bE4xVXlrYjRFMGk5bDRMMXo5Y3BPUdIBX0FVX3lxTFBWTW1uLUZybWJtWnJYMTIwS1ZWQ09zbEpzX2xVMThyNEJQRGZ2aHVLam9IQU91bjctRG1NQjVGWVBHZlZoM0t1aGJyTEM3Y19KUmhtTXFuTFhUdHktam04?oc=5",
+       "source": "經濟日報",
+       "time": "2026-01-27T08:00:00.000Z"
+      }
+     ]
+    },
+    "2455": {
+     "name": "全新",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3105": {
+     "name": "穩懋",
+     "strong": 10,
+     "weak": 47,
+     "items": [
+      {
+       "title": "瑞銀：穩懋受惠於 SpaceX 星鏈 V3衛星升級 目標價從500元升到725元",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFA2Slgtc1llZ0lveU96UEUwT3RnTFZMRE5jaDVyYXZZaWRpd05sMFJQRndHVjI1RERXOFU0cm9LZW5FT1RJRHNicmZFVTJ5bFJSOEtUMGV3cWtqUdIBX0FVX3lxTFBzN2E5aGttNXJwTTdIcTRwYThLUHJFMThTS0xhaEZCbl9hcWdXQTR2VEpGYk5xWThLQmJqQlJrNFFZX3gxcVZVN3ZZX0lBSHU3QjlEU2hoRnBsbWJPOWxZ?oc=5",
+       "source": "經濟日報",
+       "time": "2026-10-04T10:58:16.000Z"
+      },
+      {
+       "title": "低軌衛星概念股有哪些？華通、穩懋、燿華、昇達科…SpaceX準備IPO，哪些低軌衛星供應鏈能吃肉？",
+       "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOdDdMVWhtczVNempDWlllWDN1c0NLREVjZjRYcGZpck5BZUNwY3dFMzJ4YVo0dnhPV0dWbjNaTjJZNzZCMWN1Wk1ScXJwa3NUYTJVUEpjM1h2VGxUNnFmZ2hYdF81NTJWc0VIWWRsOW9UNFBmakVyeFlsdWJiNkphOA?oc=5",
+       "source": "今周刊",
+       "time": "2026-03-26T07:00:00.000Z"
+      },
+      {
+       "title": "SpaceX點火衛星 台廠誰受惠？成本驟降用戶暴增 華通、穩懋享紅利！",
+       "link": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBWa0hLY1FvWWpQLTY0enBpYkNUdktEVGFWSVRJbXBMRVktM1kwSjJFMkg0NVdsU3ZLYTNrbzVzbUlHODJUS1doTV8zbV83QQ?oc=5",
+       "source": "Money 錢",
+       "time": "2026-08-06T07:00:00.000Z"
+      },
+      {
+       "title": "穩懋推W-Band搶市，拓低軌衛星商機- 新聞",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOUUlIQjItaWhPNTRwdnlpQV9FVkdYeXFaSld3a2Ewa20tM3B3V0pjazliM1JGU2VjUDhSTmk0S2o0U2lMdkdPajhtTVBxSlpYc1JlZzlEUG5oWnVaNnRselU5OWY3aWxsaVE3SXhiLUxaajVyOVNoTG4xcGhRWjV0UzdqVUx4SzN1SGdzVnlqRVYxQQ?oc=5",
+       "source": "MoneyDJ",
+       "time": "2026-05-27T07:00:00.000Z"
+      }
+     ]
+    },
+    "3419": {
+     "name": "譁裕",
+     "strong": 0,
+     "weak": 0,
+     "items": []
+    },
+    "3491": {
+     "name": "昇達科",
+     "strong": 9,
+     "weak": 44,
+     "items": [
+      {
+       "title": "馬斯克唱旺星鏈 年營收喊衝1兆美元 昇達科、華通等可望受惠",
+       "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9VSWlLelc4bTdtWXNMUldpVHpOcTROUjRkcXZuWVE5cjU3ZGcyUm9sZEJJSnFiVzFCX25Ud2ViVFYzN1o5bU9TLWRrQUFDVDg3aU9OWUVjZng4Z9IBX0FVX3lxTE9od05VdENSRm5zQVFuUHdJVjNTYUpiSnJJbUdheWc5MDJzOHJzQkstX0VSbTd2OXkzaEZjZ3JCblpQNlNIVE9mVVlPMDMtZDlvT0JoR0lXWk9odGZhUVBB?oc=5",
+       "source": "經濟日報",
+       "time": "2026-08-11T07:00:00.000Z"
+      },
+      {
+       "title": "法規鬆綁低軌衛星商機再＋1 昇達科、華通等衛星通訊鏈可望受惠- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBKM3BkeWlnM2k2b082WHI1TnUtb1AtT2w3TVRiX2wwX0NGVDFCUTNVU3A5aXF5LU5VdnVsdmN1NXMyQjR6dkRuVmVGenhIVngtSlJpUkJiV0x6VEhYbTln?oc=5",
+       "source": "工商時報",
+       "time": "2026-07-22T07:00:00.000Z"
+      },
+      {
+       "title": "昇達科併巨頻專家：擴大低軌衛星客戶訂單| 產經",
+       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBzTnI4QzZ3aXZZTEF2WnFqVzdFLTRZM3dhdXgzSlkzR0o0ZndGSVVyTXJVdjJvdjZyTWx2c3VUYndYZkI0bDFuV3R4OVFZbzhsblY2YlJHQVk5Mm82NHc?oc=5",
+       "source": "中央社 CNA",
+       "time": "2026-07-18T07:00:00.000Z"
+      },
+      {
+       "title": "低軌衛星集體併軌：昇達科、華通有感回檔，是太空夢醒、還是長期趨勢甜蜜點？",
+       "link": "https://news.google.com/rss/articles/CBMi1ANBVV95cUxQZUdCVWozNnFHNUZNeFlfd0ZXdFRyU1JIUTJ1UDJuVWhqbjV4UktQUHJSMVlyWW05c3NIR29XNThBZzM5Zmd1UEN3RGhaaUdEMWRCWWlBSnFocktSZ2RfOUUxeU1vaUhLZHctYWFmRzFVdTFETkoyVHVWeVc0WlZnUm5IWFdmSDJYWl8yNzIwVnBaZk8wTEEyMEsxdTJacVY3YW43YVJ6ODJBOHZfMHBMSzk3a3ZDQW9ITkxFN29DajhBZTJwa0lsZVk1MUJyQ2xaT0NSU2JLMHNncnpGZGNqeWdDWlJHd1FiVWMtT0c5bHNiMXFrcnVwbFlibGhTcElEMmxkR1lDTzRHWWtsX0pNSXdONkN2YmdiN2xaWHFMOGNTYVF5UXhUYkFCaklhal9lRlJrTFdjR2dtWUdYMWl6YzY4S092TnZuTnV6WnZaaGI5YWE3WEpuTS1SNnZTaXA1OC1tQnVxNjBqLTVVN09hWTdTTzcxS3BCTkp2TzVDcEFSQTVvc3Zpb0h6UHhKMGRoMUJEdm5RYmlNRzlmZGRPdDEyeF8xb3h4QjNPai1lUGlQb0J1ZkFZelR1Q3NrQ0VwZlRUdDRUenBiN3ZBU0QxV19QN0o?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-07-06T07:00:00.000Z"
+      }
+     ]
+    },
+    "6271": {
+     "name": "同欣電",
+     "strong": 3,
+     "weak": 9,
+     "items": [
+      {
+       "title": "同欣電受惠光通訊、HVDC、低軌衛星",
+       "link": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxPcGpQRmFBdXVGMGc2ckpTbTg0RHRXTml2LWczY3VYSzFra3ZsdE00bEs4cUdJZmU2ZEg3WDloaFVxMHJTMVNCa1NReW9vMXdhR042UG9fZ0w3bzZudERCaFc4d1AyOTcyQlZEYW9DNlREV2VkeVpuZ2xIaEtqdWx0QVRDSW5uZkJZN1NWbGtoN0dkdGhqVE1MSkh5NUEyMWZOZ0U1OGI5bUNqUzA1M1plOG53aDNESU9SSnFFQmc4bUptaEt5dnJaU3hObFZfQm15WlYyRkhJSjdjOU15YW5TM1pEWjZOY1dPSnY0dGp1dGt5WkhnOExOQTFXNzdaVmI3a2pfeDNvZ2wzYWd1dXUza2s3VTNVZFJjUnZDRmd5SS1ya2RSdXVxdXBrYXJ5TTFXeUlkR29objEyVG8?oc=5",
+       "source": "taiwanhot.net",
+       "time": "2026-07-01T07:00:00.000Z"
+      },
+      {
+       "title": "低軌衛星飛不動！「航太大廠」收穫220億元訂單股價下滑5% 群創、同欣電疲軟「這檔」猛噴4%",
+       "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE82RHh3RFdPRHJWcU5VQThFX3pZNUtfQjRpOFBkNXB6Mzd2eEczdEdOc3E5T3gza3FkbmhuUVNIUEVpVXQyRmxJelZubw?oc=5",
+       "source": "FTNN",
+       "time": "2026-07-27T07:00:00.000Z"
+      },
+      {
+       "title": "同欣電受惠光通訊、HVDC、 低軌衛星",
+       "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQQmNrYmtRWDV0SkpNYWRSMktIWXByYUVrYlVGaWg4N2paUkM1dkpsN1J6N0YtVFZVc0pNRXhLTEgyWmNOSWdjbTNfQ2NuX21hbHhEaE8tbVJRRW92V1dfWDNsaXpjQXhRY0c5M0lnR3M3N21iTnJDSEVuMEV3TU9vWEp6OHZoU1A1c3NrTjMxc3JRQQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-07-01T07:00:00.000Z"
+      },
+      {
+       "title": "光通訊、HVDC、低軌衛星應用升級同欣電三引擎熱轉重返榮耀- 日報",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1VNzZQUElOQ3RjdUUyeVFBeUFfTGVMTzhsVnZVSl8xYnV6Y1NHOTQwdVdSLUhHNk81czBIWVpFdXZoOU1zclJtTW1CVGg5UFVqdkNMNTNMT3FrSHNqVlI0?oc=5",
+       "source": "工商時報",
+       "time": "2026-02-26T08:00:00.000Z"
+      }
+     ]
+    },
+    "6285": {
+     "name": "啟碁",
+     "strong": 11,
+     "weak": 31,
+     "items": [
+      {
+       "title": "【SpaceX密查全球供應鏈】「非中非台」NCNT趨勢發酵！啟碁、敬鵬等11檔低軌衛星概念股大分化",
+       "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBMcGowMTJEZUg1eDVtOG5ORkRVVjlFVFFqY2Vjd29LYmYxMVBod1ZSaXRYQ0hyczNuNG9rRXRPLTNBeDZUNjBYd0s4eVVpUHRWeUd6RVd4X3FRT3RGYklwT0JWbmx5cVF3RjlPdVBSUQ?oc=5",
+       "source": "moneyweekly.com.tw",
+       "time": "2026-07-30T07:00:00.000Z"
+      },
+      {
+       "title": "獨家／星鏈「大爆單」掀供應鏈洗牌！鴻海打破啟碁路由器獨家 台達電進入電源供應鏈",
+       "link": "https://news.google.com/rss/articles/CBMi2ANBVV95cUxOaF9mNFJFc1BRbTVYQ0ZQU1JHSXJPTW82Z0FUc2VjT0tGd2x4b01FazlVUGNFSGppZC1qWkowMTVlUGlSQ3ZuRUdLU2NRckdrMllwS1BBZHlQU05jVU8zV0t5T1ZLdEs3Q3p5OG51YVRCbXpYNFFjTVdJZkZjc3F0bEVYdERLQU9ibWp1cWw1YmZQZEZfVm1Ldm15MUJ6eW1GVXUzTllqa2tHTGJtRHR2aHlVR3g4R2IxVzNZYzl4MnFpRk9pM3NZbWpvand5NGJ5dG5KRnZCQ25ZUExqTkM0am1YY255TEVrSXFoXzY2eTN0R3R5NUdHQkdwNFZVbFdRbVlvcXQ1cXB3SWloQ3RlWmxJOU5KX1NaVEkxUnRpTGRZWWh5VlVUQ0xsTk9SNEJaZjVyMnZEdkp3bkoyWWdhTk8yVk1SOFpocHZjR1FucTU2eEZxNEJIN0VpN1VUbHBscmxaYnIxVVUtNjNjdGFGVVRJdzA4VHhBYU1ReDhKTVZ0Qzl0N1h4emRmV25ydjlfd1pZMWZ6UmJOdWwxQ2pUcldFSTFkZGk3SkFNZVRxRDRqSkt4dnZwbEdFVjBSeF95NFN2NGUxOEhpZEhGcmZOSFJYSE9PU201?oc=5",
+       "source": "Yahoo新聞",
+       "time": "2026-08-23T07:00:00.000Z"
+      },
+      {
+       "title": "SpaceX帶飛低軌衛星股！啟碁突破史高、華通高掛1.8萬張買單搶進 燿華、兆赫齊噴半根",
+       "link": "https://news.google.com/rss/articles/CBMilwNBVV95cUxPUFUtNWpNU05oOFBvMHRaUUkwQ3JIMGo3bldJYmZEbU12TGd6UkZiQlBteGdqZm9jSXRiR09BUl84ZjRnSUc4M281TURkaldoSU5sbWVmOWlKTmFvaHh1RFpqV3hTczRyOFJvV0FyR2c0Sm5MTE5VWVY0N3lRV0Q4YmpJSl9nLVJabkU1YnhMVVVpT3JySW9ncHRFTDZ1dWludU1DVDExbHFNSzRaSUliMFpJNFlrQzRESGVXbzIzaFg3NEk1VVN5UEZLNG4yRHBiOGlrUDZveHBGZXpOME1SZmZFNTJ0OVUydlZ6OVhwVU50VDRmakVXVFE4MXVka2V0eFBTaXhpQzZ2VC1JT3Q3c2pDZDdDUHdDU184dGlyWGVxcDVSZTNtQW5Sa1dQbEtDMzR1VUo2c3pxcnVrZC12YkFsM1Y0ZGZpZGp2U3c0REJWUjZKMzhQcHNkeHJjUUdSZEdlWWw1OENiM19uYWVDUkxrN2hvUERXdkFYQ2t4LXVBWHpvNUhqZEZqajltQmQ0MGVyVFR1VQ?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-05-17T07:00:00.000Z"
+      },
+      {
+       "title": "不只Starlink V3升空就位 低軌衛星三箭齊發 昇達科、耀登、鐳洋、啟碁台鏈誰最香？",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5uMDh5bVVyTmdDY3ZtdG9ESXBUX0M5Szg1bVVKQW1RQ0xDcjNiVmVMNXoteGZNakVHX3YtVWptbTVCZnhvaE56NmpDbUMwOXdVSGZubDdBbDRfQWNIeFZJ?oc=5",
+       "source": "工商時報",
+       "time": "2026-08-17T07:00:00.000Z"
+      }
+     ]
+    },
+    "8086": {
+     "name": "宏捷科",
+     "strong": 2,
+     "weak": 5,
+     "items": [
+      {
+       "title": "光通訊＋低軌衛星雙引擎暴衝！「這PA大廠」全面缺貨掀漲價潮穩懋、宏捷科、全新訂單滿手...後市迎爆發力",
+       "link": "https://news.google.com/rss/articles/CBMijwNBVV95cUxQbnRSWk9pOWNpWXBtT2NoaXVOaE0yYnNmRDJ3NEtRaVFyUUxkNVhDMFpwOHNkYUNxZHNTWkhSSzREY3pHZ3lWTW1QaFVRckw0STNHMnhwZmo4THNqeEVmVFE2THAzak5HdHpUQjhDeHlSM3c5TkxCWEtFQzhGcWVnZllzRUJLYXN6SlhaUFcwUHJVbUlpUW43RjV2dHF1VjVRanUwX0UzZkJFaUdTVGpLRUw3WTdNUHlCUVg1RU5KVHNxRzFNRFg0Rkhyb2tKQXJNWWRnM0pOM25vWmhRY0xRSWxvMmpsc1BiTzJCMG5UUms4dldHcVN0ZmxheDVzVWoyT2E0MFVkeFNrTk5uaXJoTmhuWDZFVkhYRjdVMTFWa3B3SFA1Qk01MVBwSXJpX2tFZnNEX1FLVFZHbDR0UTBoS2loVlpISGNldTJ4Uk9sc0RmVmIyR3hCQ3Flb2F4Q2NGNmJSUlQ3SFFPcC1MT2tXUzlaeDlRRzkzR3pEb0dRbUtsLTR0RzdFSlQ4Nm85UU0?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-04-12T07:00:00.000Z"
+      },
+      {
+       "title": "低軌衛星、800G助攻！宏捷科「訂單動能續強」2月營收年增43% Q2拚重回成長軌道",
+       "link": "https://news.google.com/rss/articles/CBMi2gJBVV95cUxOZTViRF9SdHlVa1AwMVdUbDZvQ05UbXpNMzMxOWxCTDh6dEY0dG93VVFIMGFlbkpTZEZZN2M1eE5SbU5Qb0ZXbmJwZmx6WTBxN2ZiZjViUTZZZnlTVXRERXJBNkgzN0ZfTGl3TzZQZE40cEMtQW9sMV8yaUJRYm45cW5OaU5tbmc5bHcxd0lkZ1VwUWtlOHh5ZWRJRnJUOFZCNXU5S2wwUXE1RnlGRHAtRGtiUjh3VzhGQk9ENHBZcmZsdE9QQ2FpUk1vbGVoMXpCYl9YYXo4VmpnaWFjZTZWTksteVBfeUJrdDJJblZMZ2NVTnI1ZVp5YnJydGE0S0pNWFZrd2llSkdHMUtxMFVqa1hwcGYycnJZTm5oMFBtMVpyODcweUV0WlhrWWdyVnhZV0hUU3RzR0dKWWZEbllldkVBM0lFQkp2NEYzTnVGM24ybEszQVhpUkhR?oc=5",
+       "source": "Yahoo股市",
+       "time": "2026-03-03T08:00:00.000Z"
+      },
+      {
+       "title": "衛星發射量5年增10倍 全新、宏捷科...太陽能電池為何在低軌衛星時代大翻身？",
+       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBTUWFhdzRyN2hkNGRZWXVOelZ5NFRNMEVkZ1N6T0JzV2w0V0I2MF9McFMwbUFmbHBCU2kwb19hblVGT0hQQy1sMGQ0Q0Y0X0V2ZWZ4cHdZMmpnc1MwR0Nv?oc=5",
+       "source": "工商時報",
+       "time": "2026-02-08T08:00:00.000Z"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

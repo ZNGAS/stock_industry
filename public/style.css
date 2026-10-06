@@ -585,3 +585,7 @@ body.modal-open { overflow: hidden; }
 .sc-co.extra { background-color: var(--panel2); }
 
 .sc-co .auto { font-style: normal; font-size: 10.5px; line-height: 1; padding: 2px 4px; border-radius: 4px; border: 1px solid var(--line2); color: var(--text3); white-space: nowrap; }
+
+.sc-co .ev { font-style: normal; font-size: 10.5px; line-height: 1; padding: 2px 5px; border-radius: 4px; white-space: nowrap; cursor: help; }
+.sc-co .ev.ok { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
+.sc-co .ev.th { color: var(--text2); border: 1px solid var(--line2); }
