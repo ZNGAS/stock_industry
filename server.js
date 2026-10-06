@@ -1039,23 +1039,34 @@ function trackConcepts(groups) {
 const avgPct = (list) => { const v = list.filter((s) => s && s.pct !== null).map((s) => s.pct); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
 
 async function supplyList() {
-  const { stocks } = await loadUniverse();
+  const [{ stocks }, chainData] = await Promise.all([loadUniverse(), loadChains().catch(() => null)]);
   const cfg = readSupply();
   const curated = cfg.themes.map((t) => {
     const codes = [...new Set(t.branches.flatMap((b) => b.companies.map((c) => c.code)))];
     return { id: t.id, name: t.name, anchor: t.anchor, desc: t.desc, count: codes.length, branches: t.branches.length, pct: avgPct(codes.map((c) => stocks.get(c))) };
   });
-  let concepts = [];
+  // 櫃買官方產業鏈(上中下游的環節)與環節索引,供搜尋(例如「銅箔」)使用
+  const chains = [], nodes = [];
+  if (chainData) {
+    for (const c of chainData.chains) {
+      if (c.kind !== 'chain') continue;
+      const codes = chainCodes(c);
+      chains.push({ id: c.ic, name: c.name, count: codes.length, nodes: c.streams.reduce((n, st) => n + st.nodes.length, 0), pct: avgPct(codes.map((x) => stocks.get(x))) });
+      for (const st of c.streams) for (const n of st.nodes) if (n.codes.length) nodes.push({ chain: c.ic, chainName: c.name, stream: st.name, id: n.id, name: n.name, count: n.codes.length });
+    }
+  }
+  let concepts = [], ey = [], groups = [];
   try {
-    const groups = (await loadYahooGroups()).filter((g) => g.kind === 'concept');
-    const { seen, today } = trackConcepts(groups);
-    const days = (a, b) => (new Date(b) - new Date(a)) / 86400000;
-    concepts = groups.map((g) => ({
-      id: g.id, name: g.name, count: g.codes.length, pct: avgPct(g.codes.map((c) => stocks.get(c))),
-      isNew: !!seen[g.name] && days(seen[g.name], today) <= NEW_DAYS, firstSeen: seen[g.name] || null,
-    })).sort((a, b) => (b.isNew - a.isNew) || (b.count - a.count));
+    const all = await loadYahooGroups();
+    const { seen, today } = trackConcepts(all.filter((g) => g.kind === 'concept'));
+    const days = (x, y) => (new Date(y) - new Date(x)) / 86400000;
+    const item = (g) => ({ id: g.id, name: g.name, count: g.codes.length, pct: avgPct(g.codes.map((c) => stocks.get(c))), isNew: g.kind === 'concept' && !!seen[g.name] && days(seen[g.name], today) <= NEW_DAYS, firstSeen: g.kind === 'concept' ? seen[g.name] || null : null });
+    concepts = all.filter((g) => g.kind === 'concept').map(item).sort((x, y) => (y.isNew - x.isNew) || (y.count - x.count));
+    ey = all.filter((g) => g.kind === 'ey').map(item).sort((x, y) => y.count - x.count);
+    groups = all.filter((g) => g.kind === 'group').map(item).sort((x, y) => y.count - x.count);
   } catch (e) { console.warn('[supply concepts]', e.message); }
-  return { updated: cfg.updated, note: cfg.note, curated, concepts };
+  const uncategorized = chainData ? [...stocks.values()].filter((s) => isCompany(s) && !(chainData.memberOf.get(s.code) || []).length).length : 0;
+  return { updated: cfg.updated, note: cfg.note, curated, chains, nodes, ey, concepts, groups, uncategorized };
 }
 
 async function supplyDetail(id) {
@@ -1076,14 +1087,48 @@ async function supplyDetail(id) {
       name: b.name, desc: b.desc,
       companies: b.companies.map((c) => { const r = row(c.code); if (!r) return null; used.add(c.code); return { ...r, role: c.role, y: cross.has(c.code) }; }).filter(Boolean),
     })).filter((b) => b.companies.length);
-    const others = [...cross].filter((c) => !used.has(c)).map(row).filter(Boolean)
-      .sort((a, b) => (b.mcap || 0) - (a.mcap || 0)).map((r) => ({ ...r, role: chainHint(r.code) || r.industry, y: true }));
+    // 其他相關:Yahoo 概念股有列入、但還沒整理角色的公司,依所屬產業鏈分組(收合)
+    const otherMap = new Map();
+    for (const code of [...cross].filter((c) => !used.has(c))) {
+      const r = row(code); if (!r) continue;
+      const m = (memberOf.get(code) || []).find((e) => e.kind === 'chain');
+      const key = m ? m.name : r.industry;
+      const arr = otherMap.get(key) || [];
+      arr.push({ ...r, role: m ? `${m.stream}・${m.node}` : `官方產業別:${r.industry}`, y: true });
+      otherMap.set(key, arr);
+    }
+    const otherBranches = [...otherMap.entries()].map(([name, companies]) => ({ name: `其他相關・${name}`, desc: 'Yahoo 概念股有列入,尚未整理角色(說明是所屬產業鏈環節)', others: true, companies: companies.sort((a, b) => (b.mcap || 0) - (a.mcap || 0)) }))
+      .sort((a, b) => b.companies.length - a.companies.length);
     return {
       kind: 'curated', id, name: t.name, anchor: t.anchor, desc: t.desc, updated: cfg.updated, note: cfg.note, date: quoteDate,
-      crossCheck: t.crossCheck || [], branches, others, coverage: { total: used.size, inYahoo: [...used].filter((c) => cross.has(c)).length },
+      crossCheck: t.crossCheck || [], branches, otherBranches, coverage: { total: used.size, inYahoo: [...used].filter((c) => cross.has(c)).length },
     };
   }
-  const g = yahoo.find((x) => x.id === id && x.kind === 'concept');
+  // 櫃買官方產業鏈:直接用官方的上游、中游、下游與環節
+  const oc = chainData && chainData.chains.find((x) => x.ic === id && x.kind === 'chain');
+  if (oc) {
+    const branches = [];
+    for (const st of oc.streams) for (const n of st.nodes) {
+      const companies = n.codes.map(row).filter(Boolean).sort((a, b) => (b.mcap || 0) - (a.mcap || 0)).map((r) => ({ ...r, role: n.desc || `${st.name}・${n.name}`, y: true }));
+      if (companies.length) branches.push({ id: n.id, name: n.name, desc: `${st.name}${n.desc ? `・${n.desc}` : ''}`, stream: st.name, companies });
+    }
+    return {
+      kind: 'chain', id, name: oc.name, anchor: oc.name, desc: `櫃買中心「產業價值鏈資訊平台」(官方)的${oc.name}產業鏈,依上游、中游、下游的環節列出相關公司;同一家公司可能出現在多個環節。`,
+      source: '櫃買中心產業價值鏈資訊平台', date: quoteDate, branches, otherBranches: [], coverage: null,
+    };
+  }
+  // 尚未歸類:沒有出現在任何產業鏈、產業細分、概念股、集團股的上市櫃公司,依官方產業別分組
+  if (id === 'none') {
+    const by = new Map();
+    for (const s of stocks.values()) {
+      if (!isCompany(s) || (memberOf.get(s.code) || []).length) continue;
+      const r = row(s.code); const arr = by.get(r.industry) || [];
+      arr.push({ ...r, role: `官方產業別:${r.industry}`, y: false }); by.set(r.industry, arr);
+    }
+    const branches = [...by.entries()].map(([name, companies]) => ({ name, desc: '', companies: companies.sort((a, b) => (b.mcap || 0) - (a.mcap || 0)) })).sort((a, b) => b.companies.length - a.companies.length);
+    return { kind: 'none', id, name: '尚未歸類的公司', anchor: '尚未歸類', desc: '沒有出現在任何產業鏈、電子產業細分、概念股或集團股的上市櫃公司,依官方產業別列出。', date: quoteDate, branches, otherBranches: [], coverage: null };
+  }
+  const g = yahoo.find((x) => x.id === id);
   if (!g) return null;
   const by = new Map();
   for (const code of g.codes) {
@@ -1097,8 +1142,8 @@ async function supplyDetail(id) {
   const branches = [...by.entries()].map(([name, companies]) => ({ name, desc: '', companies: companies.sort((a, b) => (b.mcap || 0) - (a.mcap || 0)) }))
     .sort((a, b) => b.companies.length - a.companies.length);
   return {
-    kind: 'auto', id, name: g.name, anchor: g.name, desc: 'Yahoo 奇摩股市的概念股清單,依各公司所屬的櫃買中心產業鏈自動分組(沒有人工整理角色)。', date: quoteDate,
-    branches, others: [], coverage: null,
+    kind: 'auto', id, name: g.name, anchor: g.name, desc: `Yahoo 奇摩股市的${KIND_NAME[g.kind] || '分類'}清單,依各公司所屬的櫃買中心產業鏈自動分組(沒有人工整理角色)。`, date: quoteDate,
+    branches, otherBranches: [], coverage: null,
   };
 }
 
@@ -1110,7 +1155,7 @@ async function supplyNews(id, code) {
   const t = cfg.themes.find((x) => x.id === id);
   let kw = t ? t.newsKey : null;
   if (!kw) { const g = (await loadYahooGroups().catch(() => [])).find((x) => x.id === id); kw = g ? g.name : null; }
-  if (!kw) return null;
+  if (!kw) { const cd = await loadChains().catch(() => null); const c = cd && cd.chains.find((x) => x.ic === id); kw = c ? c.name : ''; }
   const terms = String(kw).trim().split(/\s+/);
   const q = `${s.name} ${terms.length > 1 ? `(${terms.join(' OR ')})` : terms[0]} when:90d`;
   const data = await diskCached(`supnews_${id}_${code}`, 30 * MIN, async () => ({ items: await googleNews(q, 10) }));

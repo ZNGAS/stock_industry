@@ -939,21 +939,51 @@ async function renderSupply(main, tid, id) {
   try { d = await api('/api/supply'); }
   catch (e) { if (id !== S.renderId) return; main.innerHTML = errBox('供應鏈資料暫時無法取得:' + e.message, true); main.querySelector('[data-retry]').onclick = () => { apiCache.clear(); route(); }; return; }
   if (id !== S.renderId) return;
-  const chip = (c) => `<a class="sc-chip" href="#/supply/${esc(c.id)}" data-name="${esc(c.name)}"><span class="n">${esc(c.name)}</span><small>${c.count}</small>${c.isNew ? '<span class="new" title="Yahoo 近期新增的題材">新</span>' : ''}${isNum(c.pct) ? `<span class="p ${dir(c.pct)}">${fpct(c.pct, 1)}</span>` : ''}</a>`;
-  const nNew = d.concepts.filter((c) => c.isNew).length;
+  const nz = (v) => String(v || '').replace(/[\s　]/g, '').replace(/臺/g, '台').toLowerCase();
+  const TABS = [['theme', '整理的題材'], ['chain', '產業鏈(官方)'], ['ey', '電子產業細分'], ['concept', '概念股'], ['group', '集團股']];
+  const LISTS = { chain: d.chains, ey: d.ey, concept: d.concepts, group: d.groups };
+  const HINT = {
+    chain: '櫃買中心產業價值鏈資訊平台(官方),每一條都分上游、中游、下游的環節,例如被動元件、印刷電路板(含銅箔、銅箔基板)。',
+    ey: 'Yahoo 奇摩股市的電子產業細分,依各公司所屬產業鏈自動分組。',
+    concept: 'Yahoo 奇摩股市的概念股(AI、蘋果供應鏈、低軌衛星…),Yahoo 新增題材時會自動出現並標示「新」。',
+    group: 'Yahoo 奇摩股市的集團股(鴻海、台塑、國巨…)。',
+  };
+  const chip = (c, sub) => `<a class="sc-chip" href="#/supply/${esc(c.id)}"><span class="n">${esc(c.name)}</span><small>${sub || c.count}</small>${c.isNew ? '<span class="new" title="Yahoo 近期新增的題材">新</span>' : ''}${isNum(c.pct) ? `<span class="p ${dir(c.pct)}">${fpct(c.pct, 1)}</span>` : ''}</a>`;
+  const card = (c) => `<a class="sc-card" href="#/supply/${esc(c.id)}"><b>${esc(c.name)}</b><span class="d">${esc(c.desc)}</span><span class="m">${c.branches} 個環節 · ${c.count} 家 · 平均 ${pctSpan(c.pct)}</span></a>`;
+  const none = d.uncategorized ? `<p class="note">另外有 ${d.uncategorized} 檔上市櫃公司沒有出現在任何產業鏈、細分、概念股或集團股,<a href="#/supply/none">查看這些公司</a>。</p>` : '';
+  const draw = () => {
+    const q = nz($('#sc-filter').value), body = $('#sc-body');
+    if (q) {
+      const hit = (arr) => arr.filter((c) => nz(c.name).includes(q));
+      const th = d.curated.filter((c) => nz(c.name + c.desc).includes(q));
+      const nodes = d.nodes.filter((n) => nz(n.name).includes(q) || nz(n.chainName).includes(q) && q.length >= 2).slice(0, 80);
+      const sec = (title, html) => (html ? `<section class="panel"><h3>${title}</h3>${html}</section>` : '');
+      const chipsOf = (arr) => (arr.length ? `<div class="sc-chips">${arr.map((c) => chip(c)).join('')}</div>` : '');
+      const html = sec('整理的題材', th.length ? `<div class="sc-cards">${th.map(card).join('')}</div>` : '')
+        + sec(`產業鏈的環節(${nodes.length})`, nodes.length ? `<div class="sc-chips">${nodes.map((n) => `<a class="sc-chip" href="#/supply/${esc(n.chain)}/${esc(n.id)}"><span class="n">${esc(n.name)}</span><small>${esc(n.chainName)}・${esc(n.stream)}・${n.count} 家</small></a>`).join('')}</div>` : '')
+        + sec('產業鏈', chipsOf(hit(d.chains))) + sec('電子產業細分', chipsOf(hit(d.ey))) + sec('概念股', chipsOf(hit(d.concepts))) + sec('集團股', chipsOf(hit(d.groups)));
+      body.innerHTML = html || `<section class="panel"><p class="note">找不到「${esc($('#sc-filter').value)}」。試試別的關鍵字,例如 銅箔、電容、AI、衛星。</p></section>`;
+      return;
+    }
+    const tab = S.supTab || 'theme';
+    if (tab === 'theme') {
+      body.innerHTML = `<section class="panel"><h3>整理的題材<small>有環節與角色說明 · 整理資料、僅供參考(${esc(d.updated || '')})</small></h3>
+        <div class="sc-cards">${d.curated.map(card).join('') || '<p class="note">沒有整理的題材。</p>'}</div></section>${none}
+        <p class="note">${esc(d.note || '')}</p>`;
+    } else {
+      const list = LISTS[tab] || [];
+      body.innerHTML = `<section class="panel"><h3>${TABS.find((t) => t[0] === tab)[1]}<small>共 ${list.length} 個 · ${HINT[tab]}</small></h3>
+        <div class="sc-chips">${list.map((c) => chip(c, tab === 'chain' ? `${c.nodes} 環節・${c.count} 家` : c.count)).join('') || '<p class="note">暫時取不到清單。</p>'}</div></section>${tab === 'chain' ? none : ''}`;
+    }
+  };
   main.innerHTML = `
     <div class="page-head"><div><h1>供應鏈</h1><div class="sub">看哪些公司打進哪條供應鏈、在哪個環節、做什麼。點題材看樹狀圖,點公司看角色說明和最新新聞。</div></div></div>
-    <section class="panel"><h3>整理的題材<small>有環節與角色說明 · 整理資料、僅供參考(${esc(d.updated || '')})</small></h3>
-      <div class="sc-cards">${d.curated.map((c) => `<a class="sc-card" href="#/supply/${esc(c.id)}"><b>${esc(c.name)}</b><span class="d">${esc(c.desc)}</span><span class="m">${c.branches} 個環節 · ${c.count} 家 · 平均 ${pctSpan(c.pct)}</span></a>`).join('') || '<p class="note">沒有整理的題材。</p>'}</div></section>
-    <section class="panel"><h3>Yahoo 概念股<small>共 ${d.concepts.length} 個題材,依各公司所屬產業鏈自動分組 · Yahoo 新增題材時會自動出現並標示「新」${nNew ? `(目前 ${nNew} 個)` : ''}</small></h3>
-      <input id="sc-filter" class="sc-filter" type="search" placeholder="搜尋題材,例如 AI、衛星、機器人" aria-label="搜尋題材" autocomplete="off">
-      <div class="sc-chips" id="sc-chips">${d.concepts.map(chip).join('') || '<p class="note">暫時取不到概念股清單。</p>'}</div></section>
-    <p class="note">${esc(d.note || '')} 概念股清單取自 Yahoo 奇摩股市;新聞取自 Google 新聞。</p>`;
-  $('#sc-filter').oninput = (e) => {
-    const nz = (v) => String(v || '').replace(/[\s　]/g, '').replace(/臺/g, '台').toLowerCase();
-    const q = nz(e.target.value);
-    $$('#sc-chips .sc-chip').forEach((a) => { a.hidden = !!q && !nz(a.dataset.name).includes(q); });
-  };
+    <div class="controls" style="margin:0 0 12px"><span class="grp">${segHtml('sv', TABS, S.supTab || 'theme')}</span>
+      <input id="sc-filter" class="sc-filter" type="search" placeholder="搜尋題材或環節,例如 銅箔、電容、AI、衛星" aria-label="搜尋題材或環節" autocomplete="off"></div>
+    <div id="sc-body"></div>`;
+  bindSeg(main, (k, v) => { if (k === 'sv') { S.supTab = v; $('#sc-filter').value = ''; draw(); } });
+  $('#sc-filter').oninput = draw;
+  draw();
 }
 
 async function renderSupplyTheme(main, tid, id) {
@@ -965,7 +995,7 @@ async function renderSupplyTheme(main, tid, id) {
   if (S.scRO) { S.scRO.disconnect(); S.scRO = null; }
   const focus = S.route.focus || null;
   const branches = d.branches.map((b) => ({ ...b }));
-  if (d.others && d.others.length) branches.push({ name: '其他相關', desc: 'Yahoo 概念股有列入,尚未整理角色(角色欄是所屬產業鏈環節)', companies: d.others, others: true });
+  for (const ob of d.otherBranches || []) branches.push(ob);
   const main7 = d.branches.flatMap((b) => b.companies);
   const uniq = [...new Map(main7.map((c) => [c.code, c])).values()];
   const traded = uniq.filter((c) => isNum(c.pct));
@@ -978,15 +1008,15 @@ async function renderSupplyTheme(main, tid, id) {
   const brHtml = (b, i) => {
     const t = b.companies.filter((c) => isNum(c.pct)); const a = t.length ? t.reduce((s, c) => s + c.pct, 0) / t.length : null;
     const open = !b.others;
-    return `<section class="sc-branch${b.others ? ' others' : ''}" data-i="${i}">
-      <button type="button" class="sc-node branch" aria-expanded="${open}"><span class="bn"><b>${esc(b.name)}</b>${b.desc ? `<small>${esc(b.desc)}</small>` : ''}</span><span class="bm">${b.companies.length} 家 · 平均 ${pctSpan(a)}</span><i class="chev" aria-hidden="true"></i></button>
+    return `<section class="sc-branch${b.others ? ' others' : ''}" data-i="${i}" data-bid="${esc(b.id || '')}">
+      <button type="button" class="sc-node branch" aria-expanded="${open}"><span class="bn">${b.stream ? `<em class="stp">${esc(b.stream)}</em>` : ''}<b>${esc(b.name)}</b>${b.desc ? `<small>${esc(b.desc)}</small>` : ''}</span><span class="bm">${b.companies.length} 家 · 平均 ${pctSpan(a)}</span><i class="chev" aria-hidden="true"></i></button>
       <div class="sc-leaves"${open ? '' : ' hidden'}>${b.companies.map(coHtml).join('')}</div></section>`;
   };
   main.innerHTML = `
     <div class="crumb"><a href="#/supply">供應鏈</a><span>›</span><span>${esc(d.name)}</span></div>
-    <div class="page-head"><div><h1>${esc(d.name)}</h1><div class="sub">${esc(d.desc)}</div></div><div class="asof">收盤資料 <b>${esc(dateLabel(d.date))}</b></div></div>
+    <div class="page-head"><div><h1>${esc(d.name)}</h1><div class="sub">${esc(d.desc)}</div></div><div class="asof">收盤資料 <b>${esc(dateLabel(d.date))}</b>${d.kind === 'chain' || d.kind === 'auto' ? `<br><a href="#/chain/${esc(d.id)}" class="chip accent">看熱力圖與明細</a>` : ''}</div></div>
     <section class="panel"><div class="tiles divided">
-      <div class="tile"><span class="k">${d.kind === 'curated' ? '整理的公司' : '概念股'}</span><span class="v">${uniq.length}<small> 家</small></span><span class="s">${d.branches.length} 個${d.kind === 'curated' ? '環節' : '分類'}</span></div>
+      <div class="tile"><span class="k">${{ curated: '整理的公司', chain: '產業鏈公司', none: '公司' }[d.kind] || '分類成員'}</span><span class="v">${uniq.length}<small> 家</small></span><span class="s">${d.branches.length} 個${d.kind === 'curated' || d.kind === 'chain' ? '環節' : '分類'}</span></div>
       <div class="tile"><span class="k">平均漲跌</span><span class="v ${dir(avg)}">${fpct(avg)}</span><span class="s">每檔權重相同</span></div>
       <div class="tile"><span class="k">漲 / 跌家數</span><span class="v"><span class="up">${upN}</span> / <span class="down">${dnN}</span></span><span class="s">共 ${traded.length} 檔有行情</span></div>
       ${d.coverage ? `<div class="tile"><span class="k">Yahoo 概念股也列入</span><span class="v">${d.coverage.inYahoo}<small> / ${d.coverage.total}</small></span><span class="s">${esc((d.crossCheck || []).join('、'))}</span></div>` : ''}
@@ -1072,6 +1102,8 @@ async function renderSupplyTheme(main, tid, id) {
     if (hd) toggleCo(hd.closest('.sc-co'));
   });
   if (focus) {
+    const br = [...sc.querySelectorAll('.sc-branch')].find((x) => x.dataset.bid && x.dataset.bid === focus);
+    if (br) { br.classList.add('flash'); br.scrollIntoView({ block: 'start' }); window.scrollBy(0, -80); setTimeout(() => br.classList.remove('flash'), 2400); }
     const co = sc.querySelector(`.sc-co[data-code="${CSS.escape(focus)}"]`);
     if (co) { const lv = co.closest('.sc-leaves'); if (lv.hidden) { lv.hidden = false; lv.parentElement.querySelector('.sc-node.branch').setAttribute('aria-expanded', 'true'); } toggleCo(co); co.scrollIntoView({ block: 'center' }); }
   }
