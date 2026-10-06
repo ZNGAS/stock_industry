@@ -570,7 +570,7 @@ async function stockSummary(code) {
   await applyYahooVolume([row]);
   return {
     ...row, full: s.full, profile: s.profile, announcementList: myAnn, quoteDate, instiDate: s.market === 'TWSE' ? ins.twseDate : ins.otcDate,
-    marginDate: mg.date, valDate: s.valDate || null, officialEps: eps.get(code) || null, chains: await loadChains().then((c) => c.memberOf.get(code) || []).catch(() => []),
+    marginDate: mg.date, valDate: s.valDate || null, officialEps: eps.get(code) || null, supply: supplyOf(code), chains: await loadChains().then((c) => c.memberOf.get(code) || []).catch(() => []),
     stats: { shares: s.profile ? s.profile.shares : null },
   };
 }
@@ -1015,6 +1015,116 @@ function loadMarket() {
   });
 }
 
+/* ───────── 供應鏈圖 ─────────
+ * 兩種來源:
+ *  1. 整理的題材(assets/supply/themes.json):人工整理「哪些公司在哪個環節、做什麼」,可自行編輯。
+ *  2. Yahoo 概念股(自動):Yahoo 有的概念股都會自動產生一張圖,依各公司所屬的櫃買產業鏈分組;
+ *     Yahoo 新增的概念股第一次被看到時標示「新」,所以新題材不需要改程式。 */
+const SUPPLY_FILE = path.join(__dirname, 'assets', 'supply', 'themes.json');
+function readSupply() {
+  try { return JSON.parse(fs.readFileSync(SUPPLY_FILE, 'utf8')); } catch (e) { console.warn('[supply]', e.message); return { themes: [], updated: null }; }
+}
+const SEEN_FILE = path.join(CACHE_DIR, 'themes_seen.json');
+const NEW_DAYS = 21;
+/** 記錄每個概念股題材第一次被看到的日期(附檔的是基準,不算新);之後 Yahoo 新增的題材會被記下來 */
+function trackConcepts(groups) {
+  let seen = {}, baseline = false;
+  try { seen = JSON.parse(fs.readFileSync(SEEN_FILE, 'utf8')); } catch { baseline = true; }
+  const today = isoDate(new Date(Date.now() + 8 * 3600e3));
+  let changed = false;
+  for (const g of groups) if (!(g.name in seen)) { seen[g.name] = baseline ? null : today; changed = true; }
+  if (changed) { try { fs.writeFileSync(SEEN_FILE, JSON.stringify(seen)); } catch { /* ignore */ } }
+  return { seen, today };
+}
+const avgPct = (list) => { const v = list.filter((s) => s && s.pct !== null).map((s) => s.pct); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+
+async function supplyList() {
+  const { stocks } = await loadUniverse();
+  const cfg = readSupply();
+  const curated = cfg.themes.map((t) => {
+    const codes = [...new Set(t.branches.flatMap((b) => b.companies.map((c) => c.code)))];
+    return { id: t.id, name: t.name, anchor: t.anchor, desc: t.desc, count: codes.length, branches: t.branches.length, pct: avgPct(codes.map((c) => stocks.get(c))) };
+  });
+  let concepts = [];
+  try {
+    const groups = (await loadYahooGroups()).filter((g) => g.kind === 'concept');
+    const { seen, today } = trackConcepts(groups);
+    const days = (a, b) => (new Date(b) - new Date(a)) / 86400000;
+    concepts = groups.map((g) => ({
+      id: g.id, name: g.name, count: g.codes.length, pct: avgPct(g.codes.map((c) => stocks.get(c))),
+      isNew: !!seen[g.name] && days(seen[g.name], today) <= NEW_DAYS, firstSeen: seen[g.name] || null,
+    })).sort((a, b) => (b.isNew - a.isNew) || (b.count - a.count));
+  } catch (e) { console.warn('[supply concepts]', e.message); }
+  return { updated: cfg.updated, note: cfg.note, curated, concepts };
+}
+
+async function supplyDetail(id) {
+  const [{ stocks, quoteDate }, chainData, yahoo] = await Promise.all([loadUniverse(), loadChains().catch(() => null), loadYahooGroups().catch(() => [])]);
+  const memberOf = chainData ? chainData.memberOf : new Map();
+  const row = (code) => {
+    const s = stocks.get(code);
+    return s ? { code, name: s.name, market: s.market, close: s.close, pct: s.pct, limit: s.limit || null, mcap: s.mcap, value: s.value, industry: s.industry } : null;
+  };
+  const chainHint = (code) => { const m = (memberOf.get(code) || []).find((e) => e.kind === 'chain'); return m ? `${m.name}・${m.node}` : null; };
+  const cfg = readSupply();
+  const t = cfg.themes.find((x) => x.id === id);
+  if (t) {
+    const cross = new Set();
+    for (const g of yahoo) if (g.kind === 'concept' && (t.crossCheck || []).includes(g.name)) g.codes.forEach((c) => cross.add(c));
+    const used = new Set();
+    const branches = t.branches.map((b) => ({
+      name: b.name, desc: b.desc,
+      companies: b.companies.map((c) => { const r = row(c.code); if (!r) return null; used.add(c.code); return { ...r, role: c.role, y: cross.has(c.code) }; }).filter(Boolean),
+    })).filter((b) => b.companies.length);
+    const others = [...cross].filter((c) => !used.has(c)).map(row).filter(Boolean)
+      .sort((a, b) => (b.mcap || 0) - (a.mcap || 0)).map((r) => ({ ...r, role: chainHint(r.code) || r.industry, y: true }));
+    return {
+      kind: 'curated', id, name: t.name, anchor: t.anchor, desc: t.desc, updated: cfg.updated, note: cfg.note, date: quoteDate,
+      crossCheck: t.crossCheck || [], branches, others, coverage: { total: used.size, inYahoo: [...used].filter((c) => cross.has(c)).length },
+    };
+  }
+  const g = yahoo.find((x) => x.id === id && x.kind === 'concept');
+  if (!g) return null;
+  const by = new Map();
+  for (const code of g.codes) {
+    const r = row(code); if (!r) continue;
+    const m = (memberOf.get(code) || []).find((e) => e.kind === 'chain');
+    const key = m ? m.name : r.industry;
+    const arr = by.get(key) || [];
+    arr.push({ ...r, role: m ? `${m.stream}・${m.node}` : `官方產業別:${r.industry}`, y: true });
+    by.set(key, arr);
+  }
+  const branches = [...by.entries()].map(([name, companies]) => ({ name, desc: '', companies: companies.sort((a, b) => (b.mcap || 0) - (a.mcap || 0)) }))
+    .sort((a, b) => b.companies.length - a.companies.length);
+  return {
+    kind: 'auto', id, name: g.name, anchor: g.name, desc: 'Yahoo 奇摩股市的概念股清單,依各公司所屬的櫃買中心產業鏈自動分組(沒有人工整理角色)。', date: quoteDate,
+    branches, others: [], coverage: null,
+  };
+}
+
+async function supplyNews(id, code) {
+  const { stocks } = await loadUniverse();
+  const s = stocks.get(code);
+  if (!s) return null;
+  const cfg = readSupply();
+  const t = cfg.themes.find((x) => x.id === id);
+  let kw = t ? t.newsKey : null;
+  if (!kw) { const g = (await loadYahooGroups().catch(() => [])).find((x) => x.id === id); kw = g ? g.name : null; }
+  if (!kw) return null;
+  const terms = String(kw).trim().split(/\s+/);
+  const q = `${s.name} ${terms.length > 1 ? `(${terms.join(' OR ')})` : terms[0]} when:90d`;
+  const data = await diskCached(`supnews_${id}_${code}`, 30 * MIN, async () => ({ items: await googleNews(q, 10) }));
+  // 標題有提到這家公司的排前面(搜尋會比對內文,有些新聞只是順帶提到)
+  const items = [...data.items.filter((i) => i.title.includes(s.name)), ...data.items.filter((i) => !i.title.includes(s.name))].slice(0, 4);
+  return { items, keyword: kw, stale: !!data._stale };
+}
+/** 這檔股票在整理的供應鏈題材裡的位置(個股頁的分類區用) */
+function supplyOf(code) {
+  const out = [];
+  for (const t of readSupply().themes) for (const b of t.branches) { const c = b.companies.find((x) => x.code === code); if (c) { out.push({ id: t.id, name: t.name, branch: b.name, role: c.role }); break; } }
+  return out;
+}
+
 /** 全部個股的漲跌幅與成交值(不含 ETF),台股總覽「展開看全部」用 */
 function movers() {
   return cached('movers', 5 * MIN, async () => {
@@ -1317,6 +1427,9 @@ const routes = [
   [/^\/api\/stock\/([\w]+)\/news$/, async (u, m) => ({ stock: await stockNews(m[1].toUpperCase()), industry: await industryNews(m[1].toUpperCase()).catch(() => null) })],
   [/^\/api\/market$/, () => loadMarket()],
   [/^\/api\/movers$/, () => movers()],
+  [/^\/api\/supply$/, () => supplyList()],
+  [/^\/api\/supply\/(\w+)$/, (u, m) => supplyDetail(m[1])],
+  [/^\/api\/supply\/(\w+)\/news\/(\w+)$/, (u, m) => supplyNews(m[1], m[2].toUpperCase())],
   [/^\/api\/heatmap$/, (u) => heatmap(u.searchParams.get('scope') || 'all', Number(u.searchParams.get('n')) || 200, u.searchParams.get('by') === 'value' ? 'value' : 'mcap')],
   [/^\/api\/chains$/, async (u) => { const kind = u.searchParams.get('kind'); const all = await chainTable(); return { chains: kind ? all.filter((c) => c.kind === kind) : all, date: (await loadUniverse()).quoteDate }; }],
   [/^\/api\/chain\/(\w+)$/, (u, m) => chainDetail(m[1])],
