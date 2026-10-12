@@ -1,5 +1,5 @@
 'use strict';
-/* 台股產業分析 — 前端。資料全部由本機 server.js 提供(官方 OpenAPI + FinMind + Google News)。 */
+/* 盤後分析 — 前端。資料全部由本機 server.js 提供(官方 OpenAPI + FinMind + Google News)。 */
 
 /* ───────── 小工具 ───────── */
 const $ = (s, el = document) => el.querySelector(s);

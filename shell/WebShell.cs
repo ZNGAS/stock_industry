@@ -1,4 +1,4 @@
-// 台股產業分析的視窗外殼:用 Windows 內建的 WebView2 引擎顯示本機網頁,沒有網址列、分頁或 Edge 的介面。
+// 盤後分析的視窗外殼:用 Windows 內建的 WebView2 引擎顯示本機網頁,沒有網址列、分頁或 Edge 的介面。
 // 以 Windows 內建的 csc.exe 編譯(C# 5,不需要安裝 SDK),見 scripts/build-shell.js。
 // 參數:--url <網址> --title <視窗標題> --icon <ico 檔> --data <WebView2 暫存資料夾>
 // 結束碼:0 正常關閉;2 缺少網址;3 WebView2 無法啟動(沒有安裝執行環境等),啟動器會改用 Edge 視窗。
@@ -64,7 +64,7 @@ static class Program
     [STAThread]
     static int Main(string[] args)
     {
-        string url = null, title = "台股產業分析", icon = null, data = null;
+        string url = null, title = "盤後分析", icon = null, data = null;
         for (int i = 0; i < args.Length; i++)
         {
             string a = args[i];

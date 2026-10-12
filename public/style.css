@@ -1,4 +1,4 @@
-/* 台股產業分析 — 台股慣例:紅漲、綠跌 */
+/* 盤後分析 — 台股慣例:紅漲、綠跌 */
 :root {
   --bg: #0d1117;
   --rail: #11161e;
@@ -79,8 +79,6 @@ button { font: inherit; color: inherit; }
   grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; padding: 10px 20px;
   background: var(--bg); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 30;
 }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; font-size: 15px; white-space: nowrap; }
-.brand-bg { fill: var(--panel2); stroke: var(--line2); }
 .search {
   position: relative; display: flex; align-items: center; gap: 8px; flex: 1; max-width: 520px;
   background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; color: var(--text3);

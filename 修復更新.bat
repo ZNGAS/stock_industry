@@ -2,7 +2,7 @@
 chcp 65001 >nul
 cd /d "%~dp0"
 echo.
-echo   台股產業分析 - 修復更新
+echo   盤後分析 - 修復更新
 echo   會從 GitHub 重新下載最新版,覆蓋這個資料夾裡的程式檔(包含 stock-industry.exe)。
 echo   你的自選股與設定放在 data 資料夾,不會被動到。
 echo.

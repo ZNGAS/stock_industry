@@ -1,6 +1,6 @@
 'use strict';
 /**
- * 台股產業分析 啟動器
+ * 盤後分析 啟動器
  *
  * 每次打開都會先到 GitHub 檢查有沒有新版,有就自動下載並更新這個資料夾裡的程式檔(包含這支 exe 本身),
  * 然後在獨立視窗中啟動。
@@ -23,7 +23,7 @@ const execFileSync = (f, a, o = {}) => execRaw(f, a, { windowsHide: true, ...o }
 
 const REPO = process.env.SI_REPO || 'ZNGAS/stock_industry';
 const BRANCH = process.env.SI_BRANCH || 'main';
-const NAME = '台股產業分析';
+const NAME = '盤後分析';
 const UPDATE_ITEMS = ['server.js', 'public', 'assets', 'shell', 'package.json', 'README.md'];
 
 // 打包成 exe 時,資料夾就是 exe 所在位置;直接用 node 跑(開發測試)則是倉庫根目錄(可用 SI_ROOT 指定別的資料夾)
@@ -242,12 +242,12 @@ function openWindow(url) {
   return openEdge(url);
 }
 
-const SPLASH = `<!doctype html><meta charset="utf-8"><title>台股產業分析</title><style>
+const SPLASH = `<!doctype html><meta charset="utf-8"><title>盤後分析</title><style>
 html,body{height:100%;margin:0;background:#0d1117;color:#e6edf3;font:15px "Microsoft JhengHei",system-ui,sans-serif}
 body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
 h1{font-size:22px;margin:0;font-weight:600}.sp{width:30px;height:30px;border:3px solid #2d3949;border-top-color:#ff5d5d;border-radius:50%;animation:r 0.9s linear infinite}
 @keyframes r{to{transform:rotate(360deg)}}#m{color:#8b98a9;max-width:80vw;text-align:center;line-height:1.6}.err .sp{display:none}.err #m{color:#ff7b72}</style>
-<h1>台股產業分析</h1><div class="sp"></div><div id="m">啟動中…</div>
+<h1>盤後分析</h1><div class="sp"></div><div id="m">啟動中…</div>
 <script>setInterval(async()=>{try{const s=await(await fetch('/status')).json();document.getElementById('m').textContent=s.msg;
 document.body.className=s.state==='error'?'err':'';if(s.url)location.replace(s.url)}catch{}},400)</script>`;
 let appActivity = () => 0; // 載入 server.js 後換成它的 lastActivity

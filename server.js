@@ -1,6 +1,6 @@
 'use strict';
 /**
- * 台股產業分析 — 本機伺服器(零相依,Node 18+)
+ * 盤後分析 — 本機伺服器(零相依,Node 18+)
  *
  * 資料來源
  *   官方:證交所 OpenAPI / 證交所 rwd / 櫃買中心 OpenAPI(行情、本益比、月營收、法人、融資券、重大訊息、財報 EPS、除權息)
@@ -1636,7 +1636,7 @@ module.exports = { startServer, lastActivity: () => lastActivity };
 if ((require.main === module || PACKED) && process.env.SI_EMBEDDED !== '1') {
   if (PACKED && process.platform === 'win32') { try { require('child_process').execSync('chcp 65001', { stdio: 'ignore' }); } catch { /* 主控台編碼維持預設 */ } }
   startServer({ port: PORT }).then(({ port }) => {
-    console.log(`\n  台股產業分析已啟動 → http://localhost:${port}\n  (關閉這個視窗就會停止)\n`);
+    console.log(`\n  盤後分析已啟動 → http://localhost:${port}\n  (關閉這個視窗就會停止)\n`);
     openBrowser(port);
   }).catch((e) => {
     if (e.code === 'EADDRINUSE') {

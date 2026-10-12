@@ -1,7 +1,7 @@
 {
   "name": "stock-industry",
   "version": "1.0.0",
-  "description": "台股產業分析",
+  "description": "盤後分析",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
