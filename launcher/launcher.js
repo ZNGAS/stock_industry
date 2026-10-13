@@ -100,7 +100,29 @@ const loadState = () => { try { return JSON.parse(readText(STATE) || '{}'); } ca
 const saveState = (o) => { try { fs.writeFileSync(STATE, JSON.stringify(o)); } catch { /* ignore */ } };
 const sha256 = (f) => require('crypto').createHash('sha256').update(fs.readFileSync(f)).digest('hex');
 
-/** 用下載到的新版替換資料夾裡的程式檔(目錄先備份,失敗就還原) */
+/** 逐檔覆蓋;檔案正在被使用(例如視窗外殼 webshell.exe)就先改名讓開再複製,舊檔下次啟動時清掉 */
+function copyMerge(src, dst) {
+  fs.mkdirSync(dst, { recursive: true });
+  for (const n of fs.readdirSync(src)) {
+    const s = path.join(src, n), d = path.join(dst, n);
+    if (fs.statSync(s).isDirectory()) { copyMerge(s, d); continue; }
+    try { fs.copyFileSync(s, d); } catch {
+      rmrf(`${d}.old`);
+      fs.renameSync(d, `${d}.old`);
+      fs.copyFileSync(s, d);
+    }
+  }
+}
+function cleanOld(dir) {
+  try {
+    for (const n of fs.readdirSync(dir)) {
+      const p = path.join(dir, n);
+      if (fs.statSync(p).isDirectory()) cleanOld(p); else if (n.endsWith('.old')) rmrf(p);
+    }
+  } catch { /* ignore */ }
+}
+
+/** 用下載到的新版替換資料夾裡的程式檔(目錄先備份,失敗就還原;目錄被占用無法改名時改成逐檔覆蓋) */
 function applyFiles(top) {
   for (const it of UPDATE_ITEMS) {
     const src = path.join(top, it), dst = path.join(APP, it);
@@ -108,7 +130,7 @@ function applyFiles(top) {
     if (!fs.statSync(src).isDirectory()) { fs.copyFileSync(src, dst); continue; }
     const bak = `${dst}.old`;
     rmrf(bak);
-    if (fs.existsSync(dst)) fs.renameSync(dst, bak);
+    try { if (fs.existsSync(dst)) fs.renameSync(dst, bak); } catch { copyMerge(src, dst); continue; }
     try { fs.cpSync(src, dst, { recursive: true }); rmrf(bak); } catch (e) { rmrf(dst); if (fs.existsSync(bak)) fs.renameSync(bak, dst); throw e; }
   }
 }
@@ -126,6 +148,7 @@ function applyExe(top) {
 
 async function update() {
   if (process.pkg) rmrf(`${process.execPath}.old`); // 上次更新留下的舊啟動器
+  cleanOld(path.join(APP, 'shell')); // 上次更新時被占用而改名的舊檔(視窗外殼還沒開,此時沒有占用)
   if (args.includes('--no-update') || process.env.NO_UPDATE === '1') { log('略過檢查更新'); return; }
   const local = loadState().version || '';
   log('檢查更新…');
