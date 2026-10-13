@@ -250,6 +250,9 @@ tbody tr.row:hover .sticky-col { background: var(--panel2); }
 .chart .grid-line { stroke: var(--line); stroke-width: 1; }
 .chart .zero-line { stroke: var(--line2); stroke-width: 1; }
 .chart text { fill: var(--table-text); opacity: .92; font-size: 11px; font-family: var(--font); font-variant-numeric: tabular-nums; }
+.chart .base-line { stroke: var(--text3); stroke-width: 1; stroke-dasharray: 4 3; }
+.chart text.up { fill: var(--up); }
+.chart text.down { fill: var(--down); }
 .chart .guide { stroke: var(--text3); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; }
 .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--text2); margin-bottom: 8px; }
 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }

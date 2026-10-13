@@ -237,6 +237,60 @@ function mountChart(host, cfg) {
     ro.observe(host);
   }
 }
+/**
+ * 當日走勢(像 Yahoo 的大盤分時圖):昨收畫在正中間,線在昨收之上紅色、之下綠色。
+ * cfg: { pts:[{t:'09:00',i:價位}], prev:昨收, nm:名稱, dec:提示框價位小數, tickDec:座標小數 }
+ */
+function drawIntraday(host, cfg) {
+  const { pts, prev, nm = '加權指數' } = cfg, dec = cfg.dec ?? 2;
+  host.classList.add('chart');
+  const W = Math.max(300, host.clientWidth || 600), H = 290, m = { t: 12, r: 58, b: 22, l: 58 };
+  const T0 = 9 * 60, T1 = 13 * 60 + 30, span = T1 - T0;
+  const mins = (t) => { const [h, mi] = t.split(':').map(Number); return h * 60 + mi; };
+  const pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const X = (t) => m.l + (pw * (Math.min(Math.max(mins(t), T0), T1) - T0)) / span;
+  const lo = Math.min(prev, ...pts.map((p) => p.i)), hi = Math.max(prev, ...pts.map((p) => p.i));
+  const ext = Math.max((Math.max(hi - prev, prev - lo)) * 1.12, prev * 0.002);
+  const Y = (v) => m.t + ph * (1 - (v - (prev - ext)) / (2 * ext)), yb = Y(prev);
+  const line = pts.map((p, k) => `${k ? 'L' : 'M'}${X(p.t).toFixed(1)} ${Y(p.i).toFixed(1)}`).join('');
+  const x0 = X(pts[0].t).toFixed(1), x1 = X(pts[pts.length - 1].t).toFixed(1);
+  const area = `${line}L${x1} ${yb.toFixed(1)}L${x0} ${yb.toFixed(1)}Z`;
+  const pctOf = (v) => ((v - prev) / prev) * 100;
+  let g = '';
+  for (const [v, cls] of [[prev + ext, 'up'], [prev, ''], [prev - ext, 'down']]) {
+    const y = Y(v).toFixed(1);
+    g += `<line class="${v === prev ? 'base-line' : 'grid-line'}" x1="${m.l}" x2="${W - m.r}" y1="${y}" y2="${y}"/><text x="${m.l - 8}" y="${+y + 4}" text-anchor="end">${esc(fnum(v, cfg.tickDec ?? 0))}</text><text class="${cls}" x="${W - m.r + 8}" y="${+y + 4}">${esc(v === prev ? '0.00%' : fpct(pctOf(v), 2))}</text>`;
+  }
+  for (const t of ['09:00', '10:00', '11:00', '12:00', '13:00', '13:30']) g += `<text x="${X(t)}" y="${H - 6}" text-anchor="${t === '13:30' ? 'end' : t === '09:00' ? 'start' : 'middle'}">${t}</text>`;
+  const id = `ic${Math.random().toString(36).slice(2, 8)}`;
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cfg.label || '加權指數當日走勢')}" preserveAspectRatio="none" style="height:${H}px">
+    <defs><clipPath id="${id}u"><rect x="0" y="0" width="${W}" height="${yb.toFixed(1)}"/></clipPath><clipPath id="${id}d"><rect x="0" y="${yb.toFixed(1)}" width="${W}" height="${H}"/></clipPath></defs>
+    ${g}
+    <g clip-path="url(#${id}u)"><path d="${area}" fill="${UPC}" opacity=".16"/><path d="${line}" fill="none" stroke="${UPC}" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <g clip-path="url(#${id}d)"><path d="${area}" fill="${DNC}" opacity=".16"/><path d="${line}" fill="none" stroke="${DNC}" stroke-width="1.6" stroke-linejoin="round"/></g>
+    <line class="guide" y1="${m.t}" y2="${m.t + ph}"/><rect class="hit" x="${m.l}" y="0" width="${pw}" height="${H}" fill="transparent"/></svg>`;
+  const svg = $('svg', host), guide = $('.guide', svg), hit = $('.hit', svg);
+  const move = (e) => {
+    const r = svg.getBoundingClientRect(), x = ((e.clientX - r.left) / r.width) * W;
+    const tm = T0 + ((x - m.l) / pw) * span;
+    let k = 0, best = Infinity;
+    pts.forEach((p, j) => { const dd = Math.abs(mins(p.t) - tm); if (dd < best) { best = dd; k = j; } });
+    const p = pts[k], ch = p.i - prev;
+    guide.setAttribute('x1', X(p.t)); guide.setAttribute('x2', X(p.t)); guide.style.opacity = 1;
+    showTip(`<b>${p.t}</b><div class="r"><span>${esc(nm)}</span><span class="${dir(ch)}">${fnum(p.i, dec)}</span></div><div class="r"><span>較昨收</span><span class="${dir(ch)}">${fsign(ch, dec)} (${fpct(pctOf(p.i))})</span></div>`, e.clientX, e.clientY);
+  };
+  hit.addEventListener('pointermove', move);
+  hit.addEventListener('pointerdown', move);
+  hit.addEventListener('pointerleave', () => { guide.style.opacity = 0; hideTip(); });
+}
+function mountIntraday(host, cfg) {
+  drawIntraday(host, cfg);
+  if (window.ResizeObserver) {
+    let w = host.clientWidth;
+    const ro = new ResizeObserver(() => { if (!host.isConnected) { ro.disconnect(); return; } if (Math.abs(host.clientWidth - w) > 2) { w = host.clientWidth; drawIntraday(host, cfg); } });
+    ro.observe(host);
+  }
+}
 const legend = (items) => `<div class="legend">${items.map(([c, t, ln]) => `<span><i class="${ln ? 'ln' : ''}" style="background:${c}"></i>${esc(t)}</span>`).join('')}</div>`;
 const UPC = 'var(--up)', DNC = 'var(--down)', ACC = 'var(--accent)', WARN = 'var(--warn)';
 const signColor = (v) => (v >= 0 ? UPC : DNC);
@@ -439,10 +493,9 @@ async function tabSummary(code, sum, host, id) {
   host.innerHTML = `
     <div class="grid two">
       <div class="stack">
-        <section class="panel"><h3>股價走勢<small>未還原股價</small><span class="seg" id="range-seg"><button data-n="22" aria-pressed="false">1月</button><button data-n="66" aria-pressed="true">3月</button><button data-n="130" aria-pressed="false">6月</button><button data-n="252" aria-pressed="false">1年</button></span></h3>
-          <div id="price-chart" style="height:250px">${skeleton(5)}</div>
-          <div class="vol-cap">成交量<small>張(證交所口徑,含零股、盤後定價、鉅額)</small></div>
-          <div id="vol-chart" style="height:96px"></div>
+        <section class="panel"><h3>今日走勢<small>昨收在中間,紅漲綠跌</small></h3>
+          <div class="muted" style="font-size:13px;margin-bottom:6px" id="price-ohlc">&nbsp;</div>
+          <div id="price-chart" style="height:290px">${skeleton(5)}</div>
           <div id="price-extra"></div></section>
         <section class="panel" id="div-panel"><h3>股利</h3>${skeleton(3)}</section>
         ${sum.announcementList.length ? `<section class="panel"><h3>今日重大訊息<small>${sum.announcementList.length} 則</small></h3>${sum.announcementList.map(annHtml).join('')}</section>` : ''}
@@ -471,45 +524,26 @@ async function tabSummary(code, sum, host, id) {
       </div>
     </div>`;
   // 股價
+  // 今日走勢:昨收在中間,紅漲綠跌(像 Yahoo)
+  api(`/api/stock/${code}/intraday`, { fresh: true }).then((it) => {
+    if (id !== S.renderId) return;
+    const pts = (it && it.points) || [], host2 = $('#price-chart');
+    const prev = it && it.prev;
+    if (!pts.length || !isNum(prev)) { host2.innerHTML = '<div class="note">這檔沒有當日分時資料(興櫃或尚未開盤)。</div>'; return; }
+    const hi = Math.max(...pts.map((p) => p.i)), lo = Math.min(...pts.map((p) => p.i));
+    $('#price-ohlc').innerHTML = `昨收 <b>${price(prev)}</b> · 開 <b class="${dir(pts[0].i - prev)}">${price(pts[0].i)}</b> · 高 <b class="${dir(hi - prev)}">${price(hi)}</b> · 低 <b class="${dir(lo - prev)}">${price(lo)}</b>`;
+    mountIntraday(host2, { pts, prev, nm: sum.name, dec: prev >= 100 ? 1 : 2, tickDec: prev >= 100 ? 1 : 2, label: `${sum.name} 當日走勢` });
+  }).catch((e) => { if (id === S.renderId) $('#price-chart').innerHTML = errBox('當日走勢暫時無法取得:' + e.message); });
+  // 各期間報酬率(用日線資料)
   api(`/api/stock/${code}/price`).then((pr) => {
     if (id !== S.renderId) return;
     const rows = pr.rows;
-    if (!rows.length) { $('#price-chart').innerHTML = '<div class="note">沒有股價資料</div>'; return; }
-    const avg = (a) => a.reduce((x, y) => x + y, 0) / a.length;
-    const ma = (nn) => rows.map((_, i) => (i >= nn - 1 ? avg(rows.slice(i - nn + 1, i + 1).map((r) => r.c)) : null));
-    const ma20 = ma(20), ma60 = ma(60);
-    const vma20 = rows.map((_, i) => (i >= 19 ? avg(rows.slice(i - 19, i + 1).map((r) => r.v || 0)) : null));
-    let range = 66;
-    const draw = () => {
-      const st = Math.max(0, rows.length - range), sl = rows.slice(st);
-      const up = sl[sl.length - 1].c >= sl[0].c;
-      const dayTip = (i) => { const r = sl[i], prev = i ? sl[i - 1].c : (rows[st - 1] || {}).c; const ch = prev ? r.c - prev : null; const va = vma20[st + i];
-        return `<b>${esc(r.d)}</b><div class="r"><span>收盤</span><span class="${dir(ch)}">${price(r.c)}${ch !== null ? ` (${fsign(ch, 2)}, ${fpct((ch / prev) * 100)})` : ''}</span></div><div class="r"><span>開 / 高 / 低</span><span>${price(r.o)} / ${price(r.h)} / ${price(r.l)}</span></div><div class="r"><span>成交量</span><span>${fint(r.v)} 張</span></div>${isNum(va) ? `<div class="r"><span>20日均量</span><span>${fint(va)} 張 · 量比 ${fnum(r.v / va, 2)}</span></div>` : ''}${isNum(ma20[st + i]) ? `<div class="r"><span>20日均價</span><span>${fnum(ma20[st + i], 1)}</span></div>` : ''}${isNum(ma60[st + i]) ? `<div class="r"><span>60日均價</span><span>${fnum(ma60[st + i], 1)}</span></div>` : ''}`; };
-      const common = { labels: sl.map((r) => r.d), xTicks: 6, tip: dayTip, xFmt: (d, i, full) => (full ? d : range <= 66 ? d.slice(5).replace('-', '/') : d.slice(2, 7).replace('-', '/')) };
-      mountChart($('#price-chart'), { ...common, label: `${sum.name} 近 ${range} 個交易日股價`, height: 250, noX: true,
-        fmtL: (v) => (v >= 1000 ? fint(v) : fnum(v, v >= 100 ? 0 : 1)),
-        series: [
-          { type: 'area', data: sl.map((r) => r.c), color: up ? UPC : DNC, width: 2, noDots: true, noTip: true },
-          { type: 'line', data: ma20.slice(st), color: WARN, width: 1.2, dash: '4 3', noDots: true, noTip: true },
-          { type: 'line', data: ma60.slice(st), color: ACC, width: 1.2, dash: '4 3', noDots: true, noTip: true },
-        ] });
-      mountChart($('#vol-chart'), { ...common, label: `${sum.name} 成交量`, height: 96, fmtL: fmtLots,
-        series: [
-          { type: 'bar', data: sl.map((r) => r.v), color: (v, i) => (i && sl[i].c < sl[i - 1].c ? DNC : i && sl[i].c > sl[i - 1].c ? UPC : 'var(--text3)'), noTip: true },
-          { type: 'line', data: vma20.slice(st), color: WARN, width: 1.2, dash: '4 3', noDots: true, noTip: true },
-        ] });
-    };
-    draw();
-    $$('#range-seg button').forEach((b) => (b.onclick = () => { range = +b.dataset.n; $$('#range-seg button').forEach((x) => x.setAttribute('aria-pressed', x === b)); draw(); }));
-    const r = pr.returns, last = rows[rows.length - 1].c;
-    const pos = pr.high52 > pr.low52 ? ((last - pr.low52) / (pr.high52 - pr.low52)) * 100 : 50;
+    if (!rows.length) return;
+    const r = pr.returns;
     $('#price-extra').innerHTML = `
-      ${legend([[WARN, '20日均價(量)', 1], [ACC, '60日均價', 1]])}
       <div class="rets">${[['w1', '1 週'], ['m1', '1 個月'], ['m3', '3 個月'], ['m6', '6 個月'], ['ytd', '今年以來'], ['y1', '1 年']].map(([k, t]) => `<div><span class="k">${t}</span><span class="v ${dir(r[k])}">${fpct(r[k], 1)}</span></div>`).join('')}</div>
-      <div class="range" aria-label="52週區間"><div class="fill" style="width:${pos}%"></div><div class="pin" style="left:${pos}%"><span>${price(last)}</span></div></div>
-      <div class="range-lab"><span>52週低 ${price(pr.low52)}</span><span>52週高 ${price(pr.high52)}</span></div>
       ${staleNote(pr)}`;
-  }).catch((e) => { if (id === S.renderId) $('#price-chart').innerHTML = errBox('股價歷史暫時無法取得:' + e.message); });
+  }).catch((e) => { if (id === S.renderId) $('#price-extra').innerHTML = errBox('股價歷史暫時無法取得:' + e.message); });
   // 股利 + 財務摘要
   api(`/api/stock/${code}/financials`).then((f) => {
     if (id !== S.renderId) return;
@@ -1189,12 +1223,12 @@ async function renderMarket(main, id) {
     <div class="page-head"><div><h1>台股總覽</h1><div class="sub">上市、上櫃的大盤、市場廣度、法人與強弱產業</div></div>
       <div class="asof">收盤資料 <b>${esc(dateLabel(d.date))}</b><br><a href="#/heatmap" class="chip accent">市值熱力圖</a> <a href="#/sectors" class="chip accent">產業熱力圖</a></div></div>
     <div class="grid two" style="margin-top:0">
-      <section class="panel"><h3>加權指數<small>近 ${tw.length} 個交易日</small></h3>
+      <section class="panel"><h3>加權指數<small>${esc(dateLabel(tl.date))} 當日走勢</small></h3>
         <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:6px"><span class="idx-big ${dir(tl.change)}">${fnum(tl.index, 2)}</span><span class="chg ${dir(tl.change)}">${tl.change > 0 ? '▲' : tl.change < 0 ? '▼' : ''} ${fnum(Math.abs(tl.change), 2)} (${fpct(twPct)})</span></div>
         <div class="muted" style="font-size:13px;margin-bottom:8px">上市成交值 ${yi(tl.value, 0)}${isNum(valChg) ? `,較前一日 ${span(valChg, fpct(valChg, 1))}` : ''} · 成交量 ${fnum(tl.volume / 1e8, 1)} 億股 · ${fnum(tl.trades / 1e4, 0)} 萬筆</div>
-        <div id="mk-idx" style="height:230px"></div>
-        <div class="vol-cap">上市成交值<small>億元</small></div>
-        <div id="mk-val" style="height:90px"></div></section>
+        <div class="muted" style="font-size:13px;margin-bottom:6px" id="mk-ohlc">&nbsp;</div>
+        <div id="mk-idx" style="height:290px">${skeleton(5)}</div>
+        </section>
       <div class="stack">
         <section class="panel"><h3>櫃買指數</h3>${ol ? `<div style="display:flex;align-items:baseline;gap:12px"><span class="idx-big ${dir(ol.change)}">${fnum(ol.index, 2)}</span><span class="chg ${dir(ol.change)}">${ol.change > 0 ? '▲' : '▼'} ${fnum(Math.abs(ol.change), 2)} (${fpct(otPct)})</span></div><div class="muted" style="font-size:13px;margin-top:6px">上櫃成交值 ${isNum(ol.value) ? yi(ol.value, 0) : '—'}</div>` : '<p class="note">沒有資料</p>'}</section>
         <section class="panel"><h3>漲跌家數<small>個股,不含 ETF</small></h3><div class="idx-tiles"><div><div class="muted" style="font-size:12.5px;margin-bottom:4px">上市</div>${br(d.breadth.twse)}</div><div><div class="muted" style="font-size:12.5px;margin-bottom:4px">上櫃</div>${br(d.breadth.tpex)}</div></div></section>
@@ -1249,14 +1283,16 @@ async function renderMarket(main, id) {
   };
   bindSeg(main, (k, v) => { if (k === 'rk') { S.rankMode = v; drawRank(); } });
   drawRank();
-  const lab = tw.map((r) => r.date);
-  const common = { labels: lab, xTicks: 6, xFmt: (x, i, full) => (full ? x : x.slice(5).replace('-', '/')) };
-  mountChart($('#mk-idx'), { ...common, label: '加權指數', height: 230, noX: true, fmtL: (v) => fint(v),
-    tip: (i) => `<b>${esc(lab[i])}</b><div class="r"><span>加權指數</span><span class="${dir(tw[i].change)}">${fnum(tw[i].index, 2)} (${fsign(tw[i].change, 2)})</span></div><div class="r"><span>成交值</span><span>${yi(tw[i].value, 0)}</span></div>`,
-    series: [{ type: 'area', data: tw.map((r) => r.index), color: tl.change >= 0 ? UPC : DNC, width: 2, noDots: true, noTip: true }] });
-  mountChart($('#mk-val'), { ...common, label: '上市成交值', height: 90, fmtL: (v) => fint(v / 1e8),
-    tip: (i) => `<b>${esc(lab[i])}</b><div class="r"><span>成交值</span><span>${yi(tw[i].value, 0)}</span></div><div class="r"><span>加權指數</span><span class="${dir(tw[i].change)}">${fnum(tw[i].index, 2)} (${fsign(tw[i].change, 2)})</span></div>`,
-    series: [{ type: 'bar', data: tw.map((r) => r.value), color: (v, i) => (tw[i].change > 0 ? UPC : tw[i].change < 0 ? DNC : 'var(--text3)'), noTip: true }] });
+  // 當日走勢:昨收在中間,紅漲綠跌(像 Yahoo)
+  const prevClose = tl.index - (tl.change || 0), idxHost = $('#mk-idx');
+  api(`/api/market/intraday?date=${tl.date}`).then((it) => {
+    if (id !== S.renderId) return;
+    const pts = (it && it.points) || [];
+    if (!pts.length) { idxHost.innerHTML = '<div class="note">當日走勢資料暫時無法取得(證交所收盤後才會提供完整資料)。</div>'; return; }
+    const hi = Math.max(...pts.map((p) => p.i)), lo = Math.min(...pts.map((p) => p.i));
+    $('#mk-ohlc').innerHTML = `昨收 <b>${fnum(prevClose, 2)}</b> · 開 <b class="${dir(pts[0].i - prevClose)}">${fnum(pts[0].i, 2)}</b> · 高 <b class="${dir(hi - prevClose)}">${fnum(hi, 2)}</b> · 低 <b class="${dir(lo - prevClose)}">${fnum(lo, 2)}</b>`;
+    mountIntraday(idxHost, { pts, prev: prevClose, label: '加權指數當日走勢' });
+  }).catch((e) => { if (id === S.renderId) idxHost.innerHTML = errBox('當日走勢暫時無法取得:' + e.message); });
 }
 
 /* ───────── 市值熱力圖 ───────── */

@@ -998,6 +998,43 @@ async function twseHistory() {
   return [...out.values()].sort((a, b) => a.date.localeCompare(b.date));
 }
 
+/** 加權指數當日走勢(證交所每 5 秒指數統計,取每分鐘最後一筆)+ 累積成交金額 */
+function marketIntraday(date) {
+  const d = String(date || '').replace(/-/g, '');
+  if (!/^\d{8}$/.test(d)) return Promise.resolve(null);
+  return cached('intraday:' + d, 2 * MIN, async () => {
+    const ix = await fetchJson(`https://www.twse.com.tw/rwd/zh/TAIEX/MI_5MINS_INDEX?date=${d}&response=json`);
+    if (!ix || ix.stat !== 'OK' || !Array.isArray(ix.data)) return { date: d, points: [] };
+    const byMin = new Map();
+    for (const r of ix.data) { const v = num(r[1]); if (v !== null) byMin.set(r[0].slice(0, 5), { t: r[0].slice(0, 5), i: v }); }
+    const pts = [...byMin.values()];
+    return { date: d, points: pts };
+  });
+}
+
+/** 個股當日走勢(Yahoo 分鐘資料,上市 .TW、上櫃 .TWO) */
+async function stockIntraday(code) {
+  const { stocks } = await loadUniverse();
+  const s = stocks.get(code);
+  if (!s) return null;
+  const suffix = s.market === 'TPEx' ? 'TWO' : s.market === 'TWSE' ? 'TW' : null;
+  if (!suffix) return { code, prev: null, points: [] };
+  return cached(`sintraday:${code}`, 2 * MIN, async () => {
+    const j = await fetchJson(`https://query1.finance.yahoo.com/v8/finance/chart/${code}.${suffix}?interval=1m&range=1d`, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const r = j && j.chart && j.chart.result && j.chart.result[0];
+    if (!r || !Array.isArray(r.timestamp)) return { code, prev: null, points: [] };
+    const q = r.indicators.quote[0], byMin = new Map();
+    r.timestamp.forEach((ts, k) => {
+      const v = q.close[k];
+      if (v === null || v === undefined) return;
+      const d = new Date((ts + 8 * 3600) * 1000), t = `${String(d.getUTCHours()).padStart(2, '0')}:${String(d.getUTCMinutes()).padStart(2, '0')}`;
+      byMin.set(t, { t, i: v });
+    });
+    const prev = r.meta.chartPreviousClose ?? r.meta.previousClose ?? null;
+    return { code, prev, points: [...byMin.values()] };
+  });
+}
+
 function loadMarket() {
   return cached('market', 10 * MIN, async () => {
     const [twHist, otcIdx, otcTrade, { stocks, quoteDate }, , table] = await Promise.all([
@@ -1540,6 +1577,7 @@ const routes = [
   [/^\/api\/overview$/, async (u) => overview((u.searchParams.get('codes') || '').split(',').map((x) => x.trim()).filter(Boolean).slice(0, 300))],
   [/^\/api\/stock\/([\w]+)$/, (u, m) => stockSummary(m[1].toUpperCase())],
   [/^\/api\/stock\/([\w]+)\/price$/, (u, m) => stockPrice(m[1].toUpperCase())],
+  [/^\/api\/stock\/([\w]+)\/intraday$/, (u, m) => stockIntraday(m[1].toUpperCase())],
   [/^\/api\/stock\/([\w]+)\/revenue$/, (u, m) => stockRevenue(m[1].toUpperCase())],
   [/^\/api\/stock\/([\w]+)\/financials$/, (u, m) => stockFinancials(m[1].toUpperCase())],
   [/^\/api\/stock\/([\w]+)\/chips$/, (u, m) => stockChips(m[1].toUpperCase())],
@@ -1547,6 +1585,7 @@ const routes = [
   [/^\/api\/stock\/([\w]+)\/industry$/, (u, m) => stockIndustry(m[1].toUpperCase())],
   [/^\/api\/stock\/([\w]+)\/news$/, async (u, m) => ({ stock: await stockNews(m[1].toUpperCase()), industry: await industryNews(m[1].toUpperCase()).catch(() => null) })],
   [/^\/api\/market$/, () => loadMarket()],
+  [/^\/api\/market\/intraday$/, (u) => marketIntraday(u.searchParams.get('date'))],
   [/^\/api\/movers$/, () => movers()],
   [/^\/api\/supply$/, () => supplyList()],
   [/^\/api\/supply\/(\w+)$/, (u, m) => supplyDetail(m[1])],
