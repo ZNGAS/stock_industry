@@ -1196,7 +1196,7 @@ async function openMovers(kind) {
 function openStrength(up) {
   const f = S.rankFull;
   if (!f) return;
-  const list = up ? f.sorted : [...f.sorted].reverse();
+  const list = up ? f.strong : f.weak;
   openModal(`${up ? '強勢' : '弱勢'}${f.label}`, `共 ${list.length} 個,成分股平均漲跌`, f.bars(list, up));
 }
 
@@ -1275,11 +1275,12 @@ async function renderMarket(main, id) {
     try { list = await rankList(mode); } catch (e) { grid.innerHTML = `<section class="panel">${errBox('分類資料暫時無法取得:' + e.message)}</section>`; return; }
     if (id !== S.renderId) return;
     const sorted = list.sort((a, b) => b.pct - a.pct);
+    const strong = sorted.filter((x) => x.pct > 0), weak = sorted.filter((x) => x.pct < 0).reverse(); // 強勢只列上漲的,弱勢只列下跌的
     const mx = Math.max(1, ...sorted.map((x) => Math.abs(x.pct)));
     const bars = (arr, up) => `<div class="bars">${arr.map((g) => `<a class="bar-row" href="${g.href}"><span class="nm">${esc(g.name)}<small>${g.count}檔</small></span><span class="track"><i class="fillb" style="left:0;width:${(Math.abs(g.pct) / mx) * 100}%;background:${up ? 'var(--up)' : 'var(--down)'};opacity:.8"></i></span><span class="val ${dir(g.pct)}">${fpct(g.pct)}</span></a>`).join('')}</div>`;
-    S.rankFull = { sorted, bars, label: LABEL[mode] };
-    grid.innerHTML = `<section class="panel has-expand">${expandBtn('strong')}<h3>強勢${LABEL[mode]}<small>成分股平均漲跌,至少 ${mode === 'group' ? 3 : mode === 'industry' ? 3 : 4} 檔</small></h3>${bars(sorted.slice(0, 10), true)}</section>
-      <section class="panel has-expand">${expandBtn('weak')}<h3>弱勢${LABEL[mode]}<small>成分股平均漲跌</small></h3>${bars(sorted.slice(-10).reverse(), false)}</section>`;
+    S.rankFull = { strong, weak, bars, label: LABEL[mode] };
+    grid.innerHTML = `<section class="panel has-expand">${expandBtn('strong')}<h3>強勢${LABEL[mode]}<small>成分股平均漲跌,至少 ${mode === 'group' ? 3 : mode === 'industry' ? 3 : 4} 檔</small></h3>${bars(strong.slice(0, 10), true)}</section>
+      <section class="panel has-expand">${expandBtn('weak')}<h3>弱勢${LABEL[mode]}<small>成分股平均漲跌</small></h3>${bars(weak.slice(0, 10), false)}</section>`;
   };
   bindSeg(main, (k, v) => { if (k === 'rk') { S.rankMode = v; drawRank(); } });
   drawRank();
