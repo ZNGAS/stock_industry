@@ -294,7 +294,14 @@ function startSplash() {
       if (req.url === '/status') { splashSeen = Date.now(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(status)); return; }
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); res.end(SPLASH);
     });
-    srv.listen(0, '127.0.0.1', () => resolve(srv.address().port));
+    // 系統隨機挑到瀏覽器不肯連的連接埠(6666、6000、10080…)會顯示 ERR_UNSAFE_PORT,挑到就重挑
+    const UNSAFE = new Set([1, 7, 9, 11, 13, 15, 17, 19, 20, 21, 22, 23, 25, 37, 42, 43, 53, 69, 77, 79, 87, 95, 101, 102, 103, 104, 109, 110, 111, 113, 115, 117, 119, 123, 135, 137, 139, 143, 161, 179, 389, 427, 465, 512, 513, 514, 515, 526, 530, 531, 532, 540, 548, 554, 556, 563, 587, 601, 636, 989, 990, 993, 995, 1719, 1720, 1723, 2049, 3659, 4045, 4190, 5060, 5061, 6000, 6566, 6665, 6666, 6667, 6668, 6669, 6679, 6697, 10080]);
+    let tries = 0;
+    const go = () => srv.listen(0, '127.0.0.1', () => {
+      if (UNSAFE.has(srv.address().port) && ++tries < 30) { srv.close(() => go()); return; }
+      resolve(srv.address().port);
+    });
+    go();
   });
 }
 const fail = (m) => { status.state = 'error'; status.msg = m; try { fs.appendFileSync(LOG, `${new Date().toISOString()} ERROR ${m}\n`); } catch { /* ignore */ } };
