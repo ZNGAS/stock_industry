@@ -273,8 +273,128 @@ async function twseLatestDaily() {
   return null;
 }
 
+/* ───────── 盤中即時行情(證交所 MIS) ─────────
+ * 官方的收盤行情要收盤後才有。盤中改用證交所「基本市況報導網站」的即時報價(上市櫃都有,一次可查上百檔,約 5~10 秒更新一次),
+ * 覆蓋在收盤行情上;官方當天收盤資料出來後就自動換回官方的。 */
+const MIS = 'https://mis.twse.com.tw/stock';
+const taipeiNow = () => new Date(Date.now() + 8 * 3600e3);
+/** 台北時間平日 09:00~16:00(14:00 後官方收盤行情陸續公布,沒公布前仍用即時報價的最後價格) */
+function marketHours() {
+  const n = taipeiNow(), wd = n.getUTCDay(), m = n.getUTCHours() * 60 + n.getUTCMinutes();
+  return wd >= 1 && wd <= 5 && m >= 9 * 60 && m < 16 * 60;
+}
+/** 盤中縮短快取時間,畫面才會跟著動 */
+const liveTtl = (ttl) => (marketHours() ? Math.min(ttl, 45 * 1000) : ttl);
+
+let misSess = { cookie: '', t: 0 };
+async function misCookie() {
+  if (misSess.cookie && Date.now() - misSess.t < 20 * MIN) return misSess.cookie;
+  const r = await fetch(`${MIS}/index.jsp`, { headers: { 'User-Agent': 'Mozilla/5.0' }, signal: AbortSignal.timeout(10000) });
+  const set = typeof r.headers.getSetCookie === 'function' ? r.headers.getSetCookie() : [];
+  misSess = { cookie: set.map((x) => x.split(';')[0]).join('; '), t: Date.now() };
+  return misSess.cookie;
+}
+async function misBatch(items) {
+  const ex = items.map(([m, c]) => `${m}_${c}.tw`).join('|');
+  const j = await fetchJson(`${MIS}/api/getStockInfo.jsp?ex_ch=${encodeURIComponent(ex)}&json=1&delay=0&_=${Date.now()}`, {
+    timeout: 15000, headers: { 'User-Agent': 'Mozilla/5.0', Referer: `${MIS}/index.jsp`, Cookie: await misCookie().catch(() => '') },
+  });
+  return Array.isArray(j.msgArray) ? j.msgArray : [];
+}
+
+/** 全市場即時報價:{ map: code -> {price, prev, open, high, low, lots, t}, time, count } */
+function loadLive(base) {
+  return cached('live', 40 * 1000, async () => {
+    const today = isoToCompact(isoDate(taipeiNow()));
+    const items = [];
+    for (const s of base.stocks.values()) if ((s.market === 'TWSE' || s.market === 'TPEx') && s.close !== null) items.push([s.market === 'TWSE' ? 'tse' : 'otc', s.code]);
+    const batches = [];
+    for (let i = 0; i < items.length; i += 100) batches.push(items.slice(i, i + 100));
+    const map = new Map();
+    let time = '', ok = 0, next = 0;
+    await Promise.all(Array.from({ length: 4 }, async () => {
+      while (next < batches.length) {
+        const b = batches[next++];
+        try {
+          for (const r of await misBatch(b)) {
+            ok++;
+            if (r.d !== today) continue; // 假日或還沒開盤時,這裡會是前一個交易日
+            const trade = r.trade && typeof r.trade === 'object' ? num(r.trade.z) : null;
+            const price = num(r.z) ?? trade ?? null;
+            map.set(r.c, { price, prev: num(r.y), open: num(r.o), high: num(r.h), low: num(r.l), lots: num(r.v) || 0, t: r.t || '' });
+            if (r.t && r.t > time) time = r.t;
+          }
+        } catch (e) { console.warn('[live]', e.message); }
+      }
+    }));
+    if (!ok) throw new Error('即時報價沒有回應');
+    let priced = 0; for (const v of map.values()) if (v.price !== null) priced++;
+    return { map, time, priced, fetchedAt: Date.now() };
+  });
+}
+
+/** 加權指數、櫃買指數的即時值 */
+function loadLiveIndex() {
+  return cached('liveIndex', 40 * 1000, async () => {
+    const today = isoToCompact(isoDate(taipeiNow()));
+    const out = {};
+    for (const r of await misBatch([['tse', 't00'], ['otc', 'o00']])) {
+      if (r.d !== today || num(r.z) === null || num(r.y) === null) continue;
+      out[r.c === 't00' ? 'twse' : 'tpex'] = { index: num(r.z), prev: num(r.y), t: r.t };
+    }
+    return out;
+  });
+}
+
+let overlayMemo = { key: '', val: null };
+function overlayLive(base, live) {
+  const key = `${base.fetchedAt}:${live.fetchedAt}`;
+  if (overlayMemo.key === key) return overlayMemo.val;
+  const today = isoDate(taipeiNow());
+  const stocks = new Map();
+  for (const [code, s0] of base.stocks) {
+    const L = live.map.get(code);
+    if ((s0.market === 'TWSE' || s0.market === 'TPEx') && s0.close !== null && (!L || L.prev === null || L.price === null)) {
+      // 今天還沒有成交(或查不到報價)就不放,不要拿昨天的收盤價充數
+      stocks.set(code, { ...s0, close: null, change: null, pct: null, open: null, high: null, low: null, volume: null, value: null, trades: null, mcap: null, limit: null, date: null });
+      continue;
+    }
+    if (!L) { stocks.set(code, s0); continue; }
+    const s = { ...s0 };
+    const price = L.price;
+    s.prevClose = L.prev; s.close = price;
+    s.change = Math.round((price - L.prev) * 100) / 100;
+    s.pct = L.prev ? (s.change / L.prev) * 100 : null;
+    s.open = L.open; s.high = L.high; s.low = L.low;
+    s.volume = L.lots * 1000;
+    // 即時報價沒有成交金額:用「(最高+最低+現價)/3 × 成交股數」估算,只用在熱力圖與排行的相對大小
+    const avg = L.high !== null && L.low !== null ? (L.high + L.low + price) / 3 : price;
+    s.value = s.volume * avg; s.valueEst = true; s.trades = null;
+    s.date = today; s.live = true; s.liveT = L.t;
+    s.limit = limitOf(price, L.prev, s.market, !s.profile);
+    s.mcap = s.profile && s.profile.shares ? s.profile.shares * price : s0.mcap;
+    stocks.set(code, s);
+  }
+  const val = { ...base, stocks, quoteDate: today, live: { time: live.time, count: live.priced } };
+  overlayMemo = { key, val };
+  return val;
+}
+
+/** 全市場個股(盤中會是即時報價,收盤後是官方收盤行情) */
+async function loadUniverse() {
+  const base = await loadUniverseBase();
+  const today = isoDate(taipeiNow());
+  if (!marketHours() || (base.quoteDate && base.quoteDate >= today)) return base;
+  try {
+    const live = await loadLive(base);
+    // 大部分股票都還沒有成交價(開盤前、假日)就不當成盤中
+    if (live.priced < 300) return base;
+    return overlayLive(base, live);
+  } catch (e) { console.warn('[live] 改用收盤行情:', e.message); return base; }
+}
+
 /** 全市場個股:基本資料 + 收盤行情 + 本益比/淨值比/殖利率 */
-function loadUniverse() {
+function loadUniverseBase() {
   return snapshotCached('universe', 5 * MIN, async () => {
     // 公司基本資料(名稱、產業別、股本…)很少變動,但證交所這支 API 常要 5~7 秒:存磁碟,3 小時內直接用,過期先用舊的、背景更新
     const basicRaw = () => diskCached('basic_v1', 3 * HOUR, async () => {
@@ -941,7 +1061,7 @@ async function industryTable() {
 }
 
 async function heatmap(scope, n, by) {
-  const { stocks, quoteDate } = await loadUniverse();
+  const { stocks, quoteDate, live } = await loadUniverse();
   let list = [...stocks.values()].filter((s) => isCompany(s) && s.close !== null && s.pct !== null && s.mcap);
   if (scope === 'twse') list = list.filter((s) => s.market === 'TWSE');
   else if (scope === 'tpex') list = list.filter((s) => s.market === 'TPEx');
@@ -950,13 +1070,13 @@ async function heatmap(scope, n, by) {
   const total = list.length;
   list = list.slice(0, Math.max(20, Math.min(n || 200, 1200)));
   return {
-    date: quoteDate, total, by,
+    date: quoteDate, live: live || null, total, by,
     stocks: list.map((s) => ({ c: s.code, n: s.name, i: s.industry, m: s.mcap, v: s.value, p: s.pct, x: s.close, k: s.market })),
   };
 }
 
 async function industryDetail(name) {
-  const [{ stocks, quoteDate }, revenue, ins, table, ex] = await Promise.all([loadUniverse(), loadRevenue(), loadInsti(), industryTable(), loadExDiv()]);
+  const [{ stocks, quoteDate, live }, revenue, ins, table, ex] = await Promise.all([loadUniverse(), loadRevenue(), loadInsti(), industryTable(), loadExDiv()]);
   const agg = table.find((g) => g.name === name);
   if (!agg) return null;
   const rows = [...stocks.values()].filter((s) => isCompany(s) && s.industry === name).map((s) => {
@@ -977,7 +1097,7 @@ async function industryDetail(name) {
       return { ic: c.ic, name: c.name, kind: c.kind, src: c.kind === 'ey' ? 'Yahoo電子產業' : '櫃買產業鏈', inIndustry: inHere.length, total: all.length, main: inHere.length / all.length >= 0.25 };
     }).filter((c) => c.inIndustry >= 3 && (c.main || c.inIndustry / c.total >= 0.15 || c.inIndustry / rows.length >= 0.1)).sort((a, b) => Number(b.main) - Number(a.main) || b.inIndustry - a.inIndustry);
   } catch (e) { console.warn('[chains]', e.message); }
-  return { date: quoteDate, industry: agg, stocks: rows, chains: chainsHere, rank: { byMcap: table.findIndex((g) => g.name === name) + 1, of: table.length } };
+  return { date: quoteDate, live: live || null, industry: agg, stocks: rows, chains: chainsHere, rank: { byMcap: table.findIndex((g) => g.name === name) + 1, of: table.length } };
 }
 
 async function twseHistory() {
@@ -1002,7 +1122,27 @@ async function twseHistory() {
 function marketIntraday(date) {
   const d = String(date || '').replace(/-/g, '');
   if (!/^\d{8}$/.test(d)) return Promise.resolve(null);
-  return cached('intraday:' + d, 2 * MIN, async () => {
+  return cached('intraday:' + d, liveTtl(2 * MIN), async () => {
+    if (d === isoToCompact(isoDate(taipeiNow())) && marketHours()) {
+      // 證交所的指數統計收盤後才有,盤中改用 Yahoo 的 1 分鐘資料
+      const j = await fetchJson('https://query1.finance.yahoo.com/v8/finance/chart/%5ETWII?interval=1m&range=1d', { headers: { 'User-Agent': 'Mozilla/5.0' } });
+      const r = j && j.chart && j.chart.result && j.chart.result[0];
+      if (r && Array.isArray(r.timestamp)) {
+        const q = r.indicators.quote[0], byMin = new Map();
+        r.timestamp.forEach((ts, k) => {
+          const v = q.close[k]; if (v === null || v === undefined) return;
+          const dt = new Date((ts + 8 * 3600) * 1000), t = `${String(dt.getUTCHours()).padStart(2, '0')}:${String(dt.getUTCMinutes()).padStart(2, '0')}`;
+          byMin.set(t, { t, i: v });
+        });
+        if (byMin.size) {
+          // Yahoo 的分鐘資料會慢十幾分鐘:最後再接上證交所的最新指數
+          const li = await loadLiveIndex().catch(() => ({}));
+          const t = li.twse && li.twse.t ? li.twse.t.slice(0, 5) : '';
+          if (t && t > [...byMin.keys()].pop()) byMin.set(t, { t, i: li.twse.index });
+          return { date: d, points: [...byMin.values()] };
+        }
+      }
+    }
     const ix = await fetchJson(`https://www.twse.com.tw/rwd/zh/TAIEX/MI_5MINS_INDEX?date=${d}&response=json`);
     if (!ix || ix.stat !== 'OK' || !Array.isArray(ix.data)) return { date: d, points: [] };
     const byMin = new Map();
@@ -1019,7 +1159,7 @@ async function stockIntraday(code) {
   if (!s) return null;
   const suffix = s.market === 'TPEx' ? 'TWO' : s.market === 'TWSE' ? 'TW' : null;
   if (!suffix) return { code, prev: null, points: [] };
-  return cached(`sintraday:${code}`, 2 * MIN, async () => {
+  return cached(`sintraday:${code}`, liveTtl(2 * MIN), async () => {
     const j = await fetchJson(`https://query1.finance.yahoo.com/v8/finance/chart/${code}.${suffix}?interval=1m&range=1d`, { headers: { 'User-Agent': 'Mozilla/5.0' } });
     const r = j && j.chart && j.chart.result && j.chart.result[0];
     if (!r || !Array.isArray(r.timestamp)) return { code, prev: null, points: [] };
@@ -1031,13 +1171,15 @@ async function stockIntraday(code) {
       byMin.set(t, { t, i: v });
     });
     const prev = r.meta.chartPreviousClose ?? r.meta.previousClose ?? null;
+    // Yahoo 的分鐘資料會慢十幾分鐘:盤中最後再接上證交所的最新成交價
+    if (s.live && s.date === isoDate(taipeiNow()) && s.close !== null && s.liveT && s.liveT.slice(0, 5) > ([...byMin.keys()].pop() || '')) byMin.set(s.liveT.slice(0, 5), { t: s.liveT.slice(0, 5), i: s.close });
     return { code, prev, points: [...byMin.values()] };
   });
 }
 
 function loadMarket() {
-  return cached('market', 10 * MIN, async () => {
-    const [twHist, otcIdx, otcTrade, { stocks, quoteDate }, , table] = await Promise.all([
+  return cached('market', liveTtl(10 * MIN), async () => {
+    const [twHist, otcIdx, otcTrade, { stocks, quoteDate, live }, , table] = await Promise.all([
       twseHistory().catch(() => []),
       fetchJson(`${OT}/tpex_index`).catch(() => []),
       fetchJson(`${OT}/tpex_daily_trading_index`).catch(() => []),
@@ -1069,7 +1211,7 @@ function loadMarket() {
     const liquid = co.filter((s) => (s.value || 0) >= 5e7);
     const allTraded = [...stocks.values()].filter((s) => s.close !== null && s.volume);
     const out = {
-      date: quoteDate,
+      date: quoteDate, live: live || null,
       twse: { history: twHist.slice(-70), inst: twseInst },
       tpex: { history: otc, inst: otcInst },
       breadth: { twse: breadth(co.filter((s) => s.market === 'TWSE')), tpex: breadth(co.filter((s) => s.market === 'TPEx')) },
@@ -1079,6 +1221,18 @@ function loadMarket() {
       byVolume: allTraded.sort((a, b) => b.volume - a.volume).slice(0, 10).map(rk),
       industries: table.map((g) => ({ name: g.name, pct: g.pct, mcap: g.mcap, value: g.value, up: g.up, down: g.down, foreign: g.foreign, count: g.count })),
     };
+    if (live) {
+      // 盤中:官方的大盤成交資料收盤後才有,今天這一列用即時指數 + 個股成交量/值加總(成交值是估算)
+      const li = await loadLiveIndex().catch(() => ({}));
+      const sum = (mk, k) => [...stocks.values()].filter((x) => x.market === mk).reduce((a, x) => a + (x[k] || 0), 0);
+      const put = (hist, mk, L) => {
+        if (!L || hist.some((h) => h.date === quoteDate)) return;
+        const last = hist[hist.length - 1];
+        hist.push({ date: quoteDate, index: L.index, change: Math.round((L.index - L.prev) * 100) / 100, value: sum(mk, 'value'), volume: sum(mk, 'volume'), trades: null, live: true });
+        if (last && last.index !== L.prev) console.warn('[live] 指數昨收與歷史不一致', last.index, L.prev);
+      };
+      put(out.twse.history, 'TWSE', li.twse); put(out.tpex.history, 'TPEx', li.tpex);
+    }
     await applyYahooVolume([...out.gainers, ...out.losers, ...out.byValue, ...out.byVolume]);
     return out;
   });
@@ -1285,12 +1439,12 @@ function supplyOf(code) {
 
 /** 全部個股的漲跌幅與成交值(不含 ETF),台股總覽「展開看全部」用 */
 function movers() {
-  return cached('movers', 5 * MIN, async () => {
-    const { stocks, quoteDate } = await loadUniverse();
+  return cached('movers', liveTtl(5 * MIN), async () => {
+    const { stocks, quoteDate, live } = await loadUniverse();
     const rows = [...stocks.values()].filter((s) => isCompany(s) && s.close !== null && s.pct !== null)
       .sort((a, b) => b.pct - a.pct)
       .map((s) => ({ code: s.code, name: s.name, market: s.market, close: s.close, limit: s.limit || null, pct: s.pct, value: s.value, industry: s.industry }));
-    return { date: quoteDate, rows };
+    return { date: quoteDate, live: live || null, rows };
   });
 }
 
@@ -1503,7 +1657,7 @@ async function chainTable() {
 }
 
 async function chainDetail(ic) {
-  const [{ chains }, { stocks, quoteDate }, revenue, ins, table] = await Promise.all([loadChains(), loadUniverse(), loadRevenue(), loadInsti(), chainTable()]);
+  const [{ chains }, { stocks, quoteDate, live }, revenue, ins, table] = await Promise.all([loadChains(), loadUniverse(), loadRevenue(), loadInsti(), chainTable()]);
   const c = chains.find((x) => x.ic === ic);
   if (!c) return null;
   const mini = (code) => { const s = stocks.get(code); return s ? { ...brief(s), mcap: s.mcap } : null; };
@@ -1524,7 +1678,7 @@ async function chainDetail(ic) {
     };
   }).filter(Boolean).sort((a, b) => (b.mcap || 0) - (a.mcap || 0));
   await applyYahooVolume(rows);
-  return { date: quoteDate, chain: { ic: c.ic, name: c.name, kind: c.kind || 'chain', kindName: KIND_NAME[c.kind || 'chain'], source: c.source || (c.ic === 'OPTO' ? '櫃買中心產業價值鏈資訊平台(合併)' : '櫃買中心產業價值鏈資訊平台') }, agg: table.find((x) => x.ic === ic) || null, streams, stocks: rows };
+  return { date: quoteDate, live: live || null, chain: { ic: c.ic, name: c.name, kind: c.kind || 'chain', kindName: KIND_NAME[c.kind || 'chain'], source: c.source || (c.ic === 'OPTO' ? '櫃買中心產業價值鏈資訊平台(合併)' : '櫃買中心產業價值鏈資訊平台') }, agg: table.find((x) => x.ic === ic) || null, streams, stocks: rows };
 }
 
 /** 公司「主要經營業務」「所屬集團」(Yahoo 奇摩股市公司資料,來源為公開資訊觀測站申報) */
@@ -1591,11 +1745,11 @@ const routes = [
   [/^\/api\/supply\/(\w+)$/, (u, m) => supplyDetail(m[1])],
   [/^\/api\/supply\/(\w+)\/news\/(\w+)$/, (u, m) => supplyNews(m[1], m[2].toUpperCase())],
   [/^\/api\/heatmap$/, (u) => heatmap(u.searchParams.get('scope') || 'all', Number(u.searchParams.get('n')) || 200, u.searchParams.get('by') === 'value' ? 'value' : 'mcap')],
-  [/^\/api\/chains$/, async (u) => { const kind = u.searchParams.get('kind'); const all = await chainTable(); return { chains: kind ? all.filter((c) => c.kind === kind) : all, date: (await loadUniverse()).quoteDate }; }],
+  [/^\/api\/chains$/, async (u) => { const kind = u.searchParams.get('kind'); const all = await chainTable(); const uni = await loadUniverse(); return { chains: kind ? all.filter((c) => c.kind === kind) : all, date: uni.quoteDate, live: uni.live || null }; }],
   [/^\/api\/chain\/(\w+)$/, (u, m) => chainDetail(m[1])],
-  [/^\/api\/industries$/, async () => ({ industries: await industryTable(), date: (await loadUniverse()).quoteDate })],
+  [/^\/api\/industries$/, async () => { const u = await loadUniverse(); return { industries: await industryTable(), date: u.quoteDate, live: u.live || null }; }],
   [/^\/api\/industry\/(.+)$/, (u, m) => industryDetail(decodeURIComponent(m[1]))],
-  [/^\/api\/status$/, async () => { const u = await loadUniverse(); return { quoteDate: u.quoteDate, count: u.stocks.size, finmindToken: !!FINMIND_TOKEN }; }],
+  [/^\/api\/status$/, async () => { const u = await loadUniverse(); return { quoteDate: u.quoteDate, live: u.live || null, count: u.stocks.size, finmindToken: !!FINMIND_TOKEN }; }],
 ];
 
 let lastActivity = Date.now(); // 最近一次收到請求的時間(桌面版啟動器靠它判斷視窗還開著)
